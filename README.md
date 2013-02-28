@@ -17,4 +17,6 @@ With LINQKit, you can:
 * Leverage AsExpandable to add your own extensions.
 * AsExpandable is based on a very clever project by Tomas Petricek. ExpressionVisitor comes from a sample by Matt Warren.
 
-LINQKit includes full source code, and is released under a permissive free license.
+License
+=======
+LINQKit is released under a permissive free license.
