@@ -15,7 +15,11 @@ With LINQKit, you can:
 * Combine expressions (have one expression call another)
 * Dynamically build predicates
 * Leverage AsExpandable to add your own extensions.
-* AsExpandable is based on a very clever project by Tomas Petricek. ExpressionVisitor comes from a sample by Matt Warren.
+
+Documentation and examples
+=======
+
+http://www.albahari.com/nutshell/linqkit.aspx
 
 License
 =======
