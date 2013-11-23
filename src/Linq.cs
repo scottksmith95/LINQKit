@@ -12,16 +12,52 @@ namespace LinqKit
 	/// </summary>
 	public static class Linq
 	{
-		// Returns the given anonymous method as a lambda expression
-		public static Expression<Func<T, TResult>> Expr<T, TResult> (Expression<Func<T, TResult>> expr)
-		{
-			return expr;
-		}
+        /// <summary>
+        /// Returns the given anonymous method as a lambda expression
+        /// </summary>
+        public static Expression<Func<TResult>> Expr<TResult>(Expression<Func<TResult>> expr)
+        {
+            return expr;
+        }
 
-		// Returns the given anonymous function as a Func delegate
+        /// <summary>
+        /// Returns the given anonymous method as a lambda expression
+        /// </summary>
+        public static Expression<Func<T, TResult>> Expr<T, TResult>(Expression<Func<T, TResult>> expr)
+        {
+            return expr;
+        }
+
+        /// <summary>
+        /// Returns the given anonymous method as a lambda expression
+        /// </summary>
+        public static Expression<Func<T1, T2, TResult>> Expr<T1, T2, TResult>(Expression<Func<T1, T2, TResult>> expr)
+        {
+            return expr;
+        }
+
+        /// <summary>
+        /// Returns the given anonymous function as a Func delegate
+        /// </summary>
+        public static Func<TResult> Func<TResult>(Func<TResult> expr)
+        {
+            return expr;
+        }
+
+        /// <summary>
+        /// Returns the given anonymous function as a Func delegate
+        /// </summary>
 		public static Func<T, TResult> Func<T, TResult> (Func<T, TResult> expr)
 		{
 			return expr;
 		}
+
+        /// <summary>
+        /// Returns the given anonymous function as a Func delegate
+        /// </summary>
+        public static Func<T1, T2, TResult> Func<T1, T2, TResult>(Func<T1, T2, TResult> expr)
+        {
+            return expr;
+        }
 	}
 }
