@@ -118,24 +118,16 @@ namespace LinqKit
 
 		Expression TransformExpr (MemberExpression input)
 		{
-			// Collapse captured outer variables
-			if (input == null
-				|| !(input.Member is FieldInfo)
-				|| !input.Member.ReflectedType.IsNestedPrivate
-				|| !input.Member.ReflectedType.Name.StartsWith ("<>"))	// captured outer variable
-				return input;
+            if (input == null)
+                return input;
 
-			if (input.Expression is ConstantExpression)
-			{
-				object obj = ((ConstantExpression)input.Expression).Value;
-				if (obj == null) return input;
-				Type t = obj.GetType ();
-				if (!t.IsNestedPrivate || !t.Name.StartsWith ("<>")) return input;
-				FieldInfo fi = (FieldInfo)input.Member;
-				object result = fi.GetValue (obj);
-				if (result is Expression) return Visit ((Expression)result);
-			}
-			return input;
+            var field = input.Member as FieldInfo;
+            var prope = input.Member as PropertyInfo;
+            if ((field != null && field.FieldType.IsSubclassOf(typeof(Expression))) ||
+                (prope != null && prope.PropertyType.IsSubclassOf(typeof(Expression))))
+                return Visit(Expression.Lambda<Func<Expression>>(input).Compile()());
+
+            return input;
 		}
 	}
 }
