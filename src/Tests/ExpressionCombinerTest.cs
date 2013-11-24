@@ -89,6 +89,21 @@ namespace LinqKit.Tests
             return criteria.Expand().ToString();
         }
 
+        [Fact]
+        public void NestingMemberAccess()
+        {
+            Expression<Func<Tuple<Tuple<int, DateTime>, string>, Tuple<int, DateTime>>> memberExpr1 = x => x.Item1;
+            Expression<Func<Tuple<int, DateTime>, DateTime>> memberExpr2 = x => x.Item2;
+
+            Expression<Func<Tuple<Tuple<int, DateTime>, string>, DateTime>> criteria =
+                x => memberExpr2.Invoke(memberExpr1.Invoke(x));
+
+            Assert.Equal(
+                "x => x.Item1.Item2",
+                criteria.Expand().Expand().ToString());
+        }
+
+
         private string ConstExpressionString<TResult>(Expression<Func<TResult>> expr)
         {
             return expr.ToString().Substring(6);
