@@ -7,11 +7,15 @@ using System.Collections;
 
 namespace LinqKit
 {
-	/// <summary>
+    using System.Data.Entity.Infrastructure;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    /// <summary>
 	/// An IQueryable wrapper that allows us to visit the query's expression tree just before LINQ to SQL gets to it.
 	/// This is based on the excellent work of Tomas Petricek: http://tomasp.net/blog/linq-expand.aspx
 	/// </summary>
-	public class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable
+	public class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IDbAsyncEnumerable<T>
 	{
 		ExpandableQueryProvider<T> _provider;
 		IQueryable<T> _inner;
@@ -29,10 +33,20 @@ namespace LinqKit
 		IQueryProvider IQueryable.Provider { get { return _provider; } }
 		public IEnumerator<T> GetEnumerator () { return _inner.GetEnumerator (); }
 		IEnumerator IEnumerable.GetEnumerator () { return _inner.GetEnumerator (); }
-		public override string ToString () { return _inner.ToString (); }
+        public override string ToString() { return _inner.ToString(); }
+
+        public IDbAsyncEnumerator<T> GetAsyncEnumerator()
+        {
+            return new ExpandableDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
+        }
+
+        IDbAsyncEnumerator IDbAsyncEnumerable.GetAsyncEnumerator()
+        {
+            return this.GetAsyncEnumerator();
+        }
 	}
 
-	class ExpandableQueryProvider<T> : IQueryProvider
+	class ExpandableQueryProvider<T> : IDbAsyncQueryProvider
 	{
 		ExpandableQuery<T> _query;
 
@@ -63,5 +77,15 @@ namespace LinqKit
 		{
 			return _query.InnerQuery.Provider.Execute (expression.Expand());
 		}
+
+	    public Task<object> ExecuteAsync(Expression expression, CancellationToken cancellationToken)
+	    {
+            return Task.FromResult(_query.InnerQuery.Provider.Execute(expression.Expand()));
+	    }
+
+	    public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+	    {
+            return Task.FromResult(_query.InnerQuery.Provider.Execute<TResult>(expression.Expand()));
+	    }
 	}
 }
