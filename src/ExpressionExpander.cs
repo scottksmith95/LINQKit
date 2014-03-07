@@ -110,25 +110,44 @@ namespace LinqKit
 
 		Expression TransformExpr (MemberExpression input)
 		{
+			if (input == null)
+				return null;
+
+			var field = input.Member as FieldInfo;
+
+			if (field == null) return input;
+
 			// Collapse captured outer variables
-			if (input == null
-				|| !(input.Member is FieldInfo)
-				|| !input.Member.ReflectedType.IsNestedPrivate
-				|| !input.Member.ReflectedType.Name.StartsWith ("<>"))	// captured outer variable
-				return input;
+			if (!input.Member.ReflectedType.IsNestedPrivate
+				|| !input.Member.ReflectedType.Name.StartsWith("<>")) // captured outer variable
+			{
+				return TryVisitExpressionFunc(input, field);
+			}
 
 			var expression = input.Expression as ConstantExpression;
 			if (expression != null)
 			{
 				var obj = expression.Value;
 				if (obj == null) return input;
-				var t = obj.GetType ();
-				if (!t.IsNestedPrivate || !t.Name.StartsWith ("<>")) return input;
+				var t = obj.GetType();
+				if (!t.IsNestedPrivate || !t.Name.StartsWith("<>")) return input;
 				var fi = (FieldInfo)input.Member;
-				var result = fi.GetValue (obj);
+				var result = fi.GetValue(obj);
 				var exp = result as Expression;
-				if (exp != null) return Visit (exp);
+				if (exp != null) return Visit(exp);
 			}
+
+			return TryVisitExpressionFunc(input, field);
+
+		}
+
+		private Expression TryVisitExpressionFunc(MemberExpression input, FieldInfo field)
+		{
+			var prope = input.Member as PropertyInfo;
+			if ((field.FieldType.IsSubclassOf(typeof (Expression))) ||
+				(prope != null && prope.PropertyType.IsSubclassOf(typeof (Expression))))
+				return Visit(Expression.Lambda<Func<Expression>>(input).Compile()());
+
 			return input;
 		}
 	}
