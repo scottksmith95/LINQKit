@@ -15,7 +15,7 @@ namespace LinqKit
 	class ExpressionExpander : ExpressionVisitor
 	{
 		// Replacement parameters - for when invoking a lambda expression.
-		Dictionary<ParameterExpression, Expression> _replaceVars = null;
+		readonly Dictionary<ParameterExpression, Expression> _replaceVars = null;
 
 		internal ExpressionExpander () { }
 
@@ -26,10 +26,7 @@ namespace LinqKit
 
 		protected override Expression VisitParameter (ParameterExpression p)
 		{
-			if ((_replaceVars != null) && (_replaceVars.ContainsKey (p)))
-				return _replaceVars[p];
-			else
-				return base.VisitParameter (p);
+			return (_replaceVars != null) && (_replaceVars.ContainsKey(p)) ? _replaceVars[p] : base.VisitParameter(p);
 		}
 
 		/// <summary>
@@ -38,17 +35,15 @@ namespace LinqKit
 		/// </summary>
 		protected override Expression VisitInvocation (InvocationExpression iv)
 		{
-			Expression target = iv.Expression;
+			var target = iv.Expression;
 			if (target is MemberExpression) target = TransformExpr ((MemberExpression)target);
 			if (target is ConstantExpression) target = ((ConstantExpression)target).Value as Expression;
 
-			LambdaExpression lambda = (LambdaExpression)target;
+			var lambda = (LambdaExpression)target;
 
-			Dictionary<ParameterExpression, Expression> replaceVars;
-			if (_replaceVars == null)
-				replaceVars = new Dictionary<ParameterExpression, Expression> ();
-			else
-				replaceVars = new Dictionary<ParameterExpression, Expression> (_replaceVars);
+			var replaceVars = _replaceVars == null ? 
+				new Dictionary<ParameterExpression, Expression> () 
+				: new Dictionary<ParameterExpression, Expression> (_replaceVars);
 
 			try
 			{
@@ -67,17 +62,15 @@ namespace LinqKit
 		{
 			if (m.Method.Name == "Invoke" && m.Method.DeclaringType == typeof (Extensions))
 			{
-				Expression target = m.Arguments[0];
+				var target = m.Arguments[0];
 				if (target is MemberExpression) target = TransformExpr ((MemberExpression)target);
 				if (target is ConstantExpression) target = ((ConstantExpression) target).Value as Expression;
 
-				LambdaExpression lambda = (LambdaExpression)target;
+				var lambda = (LambdaExpression)target;
 
-				Dictionary<ParameterExpression, Expression> replaceVars;
-				if (_replaceVars == null)
-					replaceVars = new Dictionary<ParameterExpression, Expression> ();
-				else
-					replaceVars = new Dictionary<ParameterExpression, Expression> (_replaceVars);
+				var replaceVars = _replaceVars == null ? 
+					new Dictionary<ParameterExpression, Expression> () 
+					: new Dictionary<ParameterExpression, Expression> (_replaceVars);
 
 				try
 				{
@@ -96,7 +89,7 @@ namespace LinqKit
 			if (m.Method.Name == "Compile" && m.Object is MemberExpression)
 			{
 				var me = (MemberExpression)m.Object;
-				Expression newExpr = TransformExpr (me);
+				var newExpr = TransformExpr (me);
 				if (newExpr != me) return newExpr;
 			}
 
@@ -110,10 +103,9 @@ namespace LinqKit
 		protected override Expression VisitMemberAccess (MemberExpression m)
 		{
 			// Strip out any references to expressions captured by outer variables - LINQ to SQL can't handle these:
-			if (m.Member.DeclaringType.Name.StartsWith ("<>"))
-				return TransformExpr (m);
-
-			return base.VisitMemberAccess (m);
+			return m.Member.DeclaringType.Name.StartsWith ("<>") ? 
+				TransformExpr (m) 
+				: base.VisitMemberAccess (m);
 		}
 
 		Expression TransformExpr (MemberExpression input)
@@ -125,15 +117,17 @@ namespace LinqKit
 				|| !input.Member.ReflectedType.Name.StartsWith ("<>"))	// captured outer variable
 				return input;
 
-			if (input.Expression is ConstantExpression)
+			var expression = input.Expression as ConstantExpression;
+			if (expression != null)
 			{
-				object obj = ((ConstantExpression)input.Expression).Value;
+				var obj = expression.Value;
 				if (obj == null) return input;
-				Type t = obj.GetType ();
+				var t = obj.GetType ();
 				if (!t.IsNestedPrivate || !t.Name.StartsWith ("<>")) return input;
-				FieldInfo fi = (FieldInfo)input.Member;
-				object result = fi.GetValue (obj);
-				if (result is Expression) return Visit ((Expression)result);
+				var fi = (FieldInfo)input.Member;
+				var result = fi.GetValue (obj);
+				var exp = result as Expression;
+				if (exp != null) return Visit (exp);
 			}
 			return input;
 		}

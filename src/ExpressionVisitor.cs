@@ -18,7 +18,7 @@ namespace LinqKit
 		public virtual Expression Visit (Expression exp)
 		{
 			if (exp == null)
-				return exp;
+				return null;
 
 			switch (exp.NodeType)
 			{
@@ -290,82 +290,54 @@ namespace LinqKit
 					list.Add (init);
 				}
 			}
-			if (list != null)
-				return list;
-			return original;
+		    return list != null ? (IEnumerable<ElementInit>) list : original;
 		}
 
 		protected virtual Expression VisitLambda (LambdaExpression lambda)
 		{
 			Expression body = this.Visit (lambda.Body);
-			if (body != lambda.Body)
-			{
-				return Expression.Lambda (lambda.Type, body, lambda.Parameters);
-			}
-			return lambda;
+			return body != lambda.Body ? Expression.Lambda (lambda.Type, body, lambda.Parameters) : lambda;
 		}
 
 		protected virtual NewExpression VisitNew (NewExpression nex)
 		{
-			IEnumerable<Expression> args = this.VisitExpressionList (nex.Arguments);
-			if (args != nex.Arguments)
-			{
-				if (nex.Members != null)
-					return Expression.New (nex.Constructor, args, nex.Members);
-				else
-					return Expression.New (nex.Constructor, args);
-			}
-			return nex;
+		    IEnumerable<Expression> args = this.VisitExpressionList (nex.Arguments);
+		    return args != nex.Arguments
+		               ? (nex.Members != null
+		                      ? Expression.New(nex.Constructor, args, nex.Members)
+		                      : Expression.New(nex.Constructor, args))
+		               : nex;
 		}
 
-		protected virtual Expression VisitMemberInit (MemberInitExpression init)
+	    protected virtual Expression VisitMemberInit (MemberInitExpression init)
 		{
 			NewExpression n = this.VisitNew (init.NewExpression);
 			IEnumerable<MemberBinding> bindings = this.VisitBindingList (init.Bindings);
-			if (n != init.NewExpression || bindings != init.Bindings)
-			{
-				return Expression.MemberInit (n, bindings);
-			}
-			return init;
+	        return n != init.NewExpression || bindings != init.Bindings ? Expression.MemberInit(n, bindings) : init;
 		}
 
 		protected virtual Expression VisitListInit (ListInitExpression init)
 		{
 			NewExpression n = this.VisitNew (init.NewExpression);
 			IEnumerable<ElementInit> initializers = this.VisitElementInitializerList (init.Initializers);
-			if (n != init.NewExpression || initializers != init.Initializers)
-			{
-				return Expression.ListInit (n, initializers);
-			}
-			return init;
+		    return n != init.NewExpression || initializers != init.Initializers ? Expression.ListInit(n, initializers) : init;
 		}
 
 		protected virtual Expression VisitNewArray (NewArrayExpression na)
 		{
-			IEnumerable<Expression> exprs = this.VisitExpressionList (na.Expressions);
-			if (exprs != na.Expressions)
-			{
-				if (na.NodeType == ExpressionType.NewArrayInit)
-				{
-					return Expression.NewArrayInit (na.Type.GetElementType (), exprs);
-				}
-				else
-				{
-					return Expression.NewArrayBounds (na.Type.GetElementType (), exprs);
-				}
-			}
-			return na;
+		    IEnumerable<Expression> exprs = this.VisitExpressionList (na.Expressions);
+		    return exprs != na.Expressions
+		               ? (na.NodeType == ExpressionType.NewArrayInit
+		                      ? Expression.NewArrayInit(na.Type.GetElementType(), exprs)
+		                      : Expression.NewArrayBounds(na.Type.GetElementType(), exprs))
+		               : na;
 		}
 
-		protected virtual Expression VisitInvocation (InvocationExpression iv)
+	    protected virtual Expression VisitInvocation (InvocationExpression iv)
 		{
 			IEnumerable<Expression> args = this.VisitExpressionList (iv.Arguments);
 			Expression expr = this.Visit (iv.Expression);
-			if (args != iv.Arguments || expr != iv.Expression)
-			{
-				return Expression.Invoke (expr, args);
-			}
-			return iv;
+	        return args != iv.Arguments || expr != iv.Expression ? Expression.Invoke(expr, args) : iv;
 		}
 	}
 }

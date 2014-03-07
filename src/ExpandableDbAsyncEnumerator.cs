@@ -5,7 +5,7 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class ExpandableDbAsyncEnumerator<T> : IDbAsyncEnumerator<T>
+    public sealed class ExpandableDbAsyncEnumerator<T> : IDbAsyncEnumerator<T>
     {
         private readonly IEnumerator<T> _inner;
         public ExpandableDbAsyncEnumerator(IEnumerator<T> inner)
