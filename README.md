@@ -25,31 +25,31 @@ We'll assume two very simple LINQ to SQL entities: Customer and Purchase, in a o
 
 Suppose we wanted to write a method called QueryCustomers that returned the names of all customers who'd made at least one purchase that satisfied a particular criteria.  So, if we wanted all customers who'd made a purchase over $1000, we'd call this hypothetical QueryCustomer method as follows:
 
-````
+```csharp
 string[] bigSpenders = QueryCustomers (p => p.Price > 1000);
-````
+```
 
 Here's what the method's signature might look like:
 
-````
+```csharp
 static string[] QueryCustomers (some-type purchaseCriteria)
 {
    ...
 }
-````
+```
 
 Because we're querying a database, some-type must be Expression<Func<>> rather than just Func<>. This ensures our query will end up as an expression tree that LINQ to SQL or Entity Framework can traverse and convert to a SQL statement. In other words:
 
-````
+```csharp
 static string[] QueryCustomers (Expression<Func<Purchase,bool>> purchaseCriteria)
 {
    ...
 }
-````
+```
 
 We chose Expression<Func<Purchase,bool>> because our pluggable criteria will accept a Purchase object and return true or false, depending on whether or not to include that Purchase object. Here's how we might write the whole method:
 
-````
+```csharp
 static string[] QueryCustomers (Expression<Func<Purchase, bool>> purchaseCriteria)
 {
   var data = new MyDataContext();    // or MyObjectContext()
@@ -61,22 +61,22 @@ static string[] QueryCustomers (Expression<Func<Purchase, bool>> purchaseCriteri
 
   return query.ToArray();
 }
-````
+```
 
 But there's a problem: Customer.Purchases is of type EntitySet<> (or EntityCollection<> with EF) neither of which implements IQueryable<>. This means that we can't call Queryable's Any method (the one that accepts an Expression<Func<>>) and our query won't compile!
 
 It would be a different story if we were querying the Purchases table directly (rather the via the Customer.Purchases association property). The Purchases property is of type Table<Purchase> which implements IQueryable, allowing us to do the following:
 
-````
+```csharp
 bool any = data.Purchases.Any (purchaseCriteria);
-````
+```
 
 Of course, we could rewrite QueryCustomers to accept a Func<Purchase,bool> instead:
 
-````
+```csharp
 static string[] QueryCustomers (Func<Purchase,bool> purchaseCriteria)
 ...
-````
+```
 
 Everything would then compile, but LINQ to SQL or Entity Framework would throw an exception because it wouldn't be able to understand what was inside the Func delegate. And fair enough too: the query pipeline would have to disassemble IL code to work around that!
 
@@ -88,7 +88,7 @@ Here's how to solve the above problem with LINQKit:
 1. Call AsExpandable() on the Table<> object
 2. Call Compile() on the expression variable, when used on an EntitySet or EntityCollection.
  
-````
+```csharp
 static string[] QueryCustomers (Expression<Func<Purchase, bool>> purchaseCriteria)
 {
   var data = new MyDataContext();
@@ -111,7 +111,7 @@ Using Expression Variables in Subqueries
 
 Suppose we want to write our previous example without using the Customer.Purchases association property. (This might happen in real life if querying an ad-hoc relationship.) To recap, our query is to retrieve the names of all customers who have had made at least one purchase satisfying a particular criteria. Here's how we might proceed:
 
-````
+```csharp
 static string[] QueryCustomers (Expression<Func<Purchase, bool>> purchaseCriteria)
 {
   var data = new MyDataContext();
@@ -124,7 +124,7 @@ static string[] QueryCustomers (Expression<Func<Purchase, bool>> purchaseCriteri
 
   return query.ToArray();
 }
-````
+```
 
 Seem reasonable enough? Entity Framework handles this query without error but LINQ to SQL throws an exception:
 
@@ -134,7 +134,7 @@ The problem is that LINQ to SQL cannot handle references to expressions (such as
 
 The solution, with LINQKit, is simply to call AsExpandable() on the first table in the query:
 
-````
+```csharp
 static string[] QueryCustomers (Expression<Func<Purchase, bool>> purchaseCriteria)
 {
   var data = new MyDataContext();
@@ -147,7 +147,7 @@ static string[] QueryCustomers (Expression<Func<Purchase, bool>> purchaseCriteri
 
   return query.ToArray();
 }
-````
+```
 
 Nothing else needs to be changed. The wrapper that AsExpandable generates looks specifically for references to expressions, and substitutes the expression in place of the reference. Voila!
 
@@ -161,39 +161,39 @@ The AsExpandable wrapper also lets you write expressions that call other express
 
 For example:
 
-````
+```csharp
 Expression<Func<Purchase,bool>> criteria1 = p => p.Price > 1000;
 Expression<Func<Purchase,bool>> criteria2 = p => criteria1.Invoke (p) || p.Description.Contains ("a");
 
 Console.WriteLine (criteria2.Expand().ToString());
-````
+```
 
 (Invoke and Expand are extension methods in LINQKit.) Here's the output:
 
-````
+```csharp
 p => ((p.Price > 1000) || p.Description.Contains("a"))
-````
+```
 
 Notice that we have a nice clean expression: the call to Invoke has been stripped away.
 
 If you're using an Invoked expression within a LINQ to SQL or Entity Framework query, and have called AsExpandable on the Table, you can optionally skip step 2. This is because AsExpandable automatically calls Expand on expressions. This means either of the following is valid:
 
-````
+```csharp
 var query = data.Purchases.AsExpandable().Where (criteria2);
-````
+```
 
-````
+```csharp
 var query = data.Purchases.Where (criteria2.Expand());
-````
+```
 
 Be sure to remember that AsExpandable() works on IQueryable<T> and Expand() works on Expression<TDelegate>
 
 The one thing to watch is recursive expressions: these cannot be Expanded! Recursive expressions usually happen by accident when you reuse a variable. It's an easy mistake to make:
 
-````
+```csharp
 Expression<Func<Purchase,bool>> criteria = p => p.Price > 1000;
 criteria = p => criteria.Invoke (p) || p.Description.Contains ("a");
-````
+```
 
 That last line recursively calls itself and the original predicate (p.Price>1000) is lost!
 
