@@ -186,9 +186,7 @@ var query = data.Purchases.AsExpandable().Where (criteria2);
 var query = data.Purchases.Where (criteria2.Expand());
 ````
 
-*AsExpandable() works on IQueryable<T>*
-
-*Expand() works on Expression<TDelegate>*
+Be sure to remember that AsExpandable() works on IQueryable<T> and Expand() works on Expression<TDelegate>
 
 The one thing to watch is recursive expressions: these cannot be Expanded! Recursive expressions usually happen by accident when you reuse a variable. It's an easy mistake to make:
 
