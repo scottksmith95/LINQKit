@@ -83,6 +83,7 @@ namespace System.Linq
             var items = lambdas.Length;
             switch (items)
             {
+                case 0: throw new InvalidOperationException("Sequence contains no elements");
                 case 1: return lambdas[0];
                 case 2: return operationToDo(lambdas[0], lambdas[1]);
                 default:
@@ -106,6 +107,7 @@ namespace System.Linq
             var items = lambdas.Length;
             switch (items)
             {
+                case 0: throw new InvalidOperationException("Sequence contains no elements");
                 case 1: return lambdas[0];
                 case 2: return operationToDo(lambdas[0], lambdas[1]);
                 default:
