@@ -20,5 +20,27 @@ namespace LinqKit.Tests
                 "x => ((x.Item1 > 1000) OrElse x.Item2.Contains(\"a\"))",
                 criteria3.Expand().ToString());
         }
+
+        [Fact]
+        public void ExpressionOrElsePredicate()
+        {
+            Expression<Func<bool, bool, bool, bool>> criteria = (a, b, c) => a || b || c;
+            var exp = criteria.Expand().ToString();
+            Assert.Equal("(a, b, c) => ((a OrElse b) OrElse c)", exp);
+        }
+
+        [Fact]
+        public void ExpressionBalanceTest()
+        {
+            var exp = Expression.Equal(Expression.Constant(1), Expression.Constant(1));
+            var list = Enumerable.Repeat(exp, 50000).ToArray();
+            // Would throw stackoverflow with over 3100 items:
+            //var combined = list.Aggregate(Expression.OrElse);
+            // But this will work:
+            var combined = list.AggregateBalanced(Expression.OrElse);
+            var executed = combined.Expand().ToString();
+            Assert.Contains("(1 == 1)", executed);
+        }
+
     } 
 }
