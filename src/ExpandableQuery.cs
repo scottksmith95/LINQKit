@@ -36,7 +36,10 @@ namespace LinqKit
 
 		public IDbAsyncEnumerator<T> GetAsyncEnumerator()
 		{
-			return new ExpandableDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
+			var asyncEnumerable = _inner as IDbAsyncEnumerable<T>;
+			if (asyncEnumerable != null)
+				return asyncEnumerable.GetAsyncEnumerator();
+			return new ExpandableDbAsyncEnumerator<T>(_inner.GetEnumerator());
 		}
 
 		IDbAsyncEnumerator IDbAsyncEnumerable.GetAsyncEnumerator()
@@ -79,11 +82,17 @@ namespace LinqKit
 
 		public Task<object> ExecuteAsync(Expression expression, CancellationToken cancellationToken)
 		{
+			var asyncProvider = _query.InnerQuery.Provider as IDbAsyncQueryProvider;
+			if (asyncProvider != null)
+				return asyncProvider.ExecuteAsync(expression.Expand(), cancellationToken);
 			return Task.FromResult(_query.InnerQuery.Provider.Execute(expression.Expand()));
 		}
 
 		public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
 		{
+			var asyncProvider = _query.InnerQuery.Provider as IDbAsyncQueryProvider;
+			if (asyncProvider != null)
+				return asyncProvider.ExecuteAsync<TResult>(expression.Expand(), cancellationToken);
 			return Task.FromResult(_query.InnerQuery.Provider.Execute<TResult>(expression.Expand()));
 		}
 	}
