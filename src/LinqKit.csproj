@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregateBalanced.cs" />
     <Compile Include="ExpandableDbAsyncEnumerator.cs" />
     <Compile Include="ExpandableQuery.cs" />
     <Compile Include="ExpressionExpander.cs" />
