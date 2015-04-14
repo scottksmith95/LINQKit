@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
 using System.Collections;
 using System.Threading;
@@ -47,15 +46,21 @@ namespace LinqKit
 		{
 			return this.GetAsyncEnumerator();
 		}
-	}
-    public static class ExpandableQueryIncludeExtension
+    }
+
+    internal class ExpandableQueryOfClass<T> : ExpandableQuery<T>
+        where T: class
     {
-        public static IQueryable<T> Include<T>(this ExpandableQuery<T> ex, string path)
-            where T : class
+        public ExpandableQueryOfClass(IQueryable<T> inner): base(inner)
         {
-            return ex.InnerQuery.Include(path).AsExpandable();
+        }
+
+        public IQueryable<T> Include(string path)
+        {
+            return InnerQuery.Include(path).AsExpandable();
         }
     }
+
     class ExpandableQueryProvider<T> : IQueryProvider, IDbAsyncQueryProvider
 	{
 		readonly ExpandableQuery<T> _query;
@@ -68,12 +73,12 @@ namespace LinqKit
 		// The following four methods first call ExpressionExpander to visit the expression tree, then call
 		// upon the inner query to do the remaining work.
 
-		IQueryable<TElement> IQueryProvider.CreateQuery<TElement> (Expression expression)
-		{
-			return new ExpandableQuery<TElement> (_query.InnerQuery.Provider.CreateQuery<TElement> (expression.Expand()));
-		}
+        IQueryable<TElement> IQueryProvider.CreateQuery<TElement>(Expression expression)
+        {
+            return _query.InnerQuery.Provider.CreateQuery<TElement>(expression.Expand()).AsExpandable();
+        }
 
-		IQueryable IQueryProvider.CreateQuery (Expression expression)
+        IQueryable IQueryProvider.CreateQuery (Expression expression)
 		{
 			return _query.InnerQuery.Provider.CreateQuery (expression.Expand());
 		}
