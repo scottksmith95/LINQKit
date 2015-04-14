@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace LinqKit
 {
@@ -47,8 +48,15 @@ namespace LinqKit
 			return this.GetAsyncEnumerator();
 		}
 	}
-
-	class ExpandableQueryProvider<T> : IQueryProvider, IDbAsyncQueryProvider
+    public static class ExpandableQueryIncludeExtension
+    {
+        public static IQueryable<T> Include<T>(this ExpandableQuery<T> ex, string path)
+            where T : class
+        {
+            return ex.InnerQuery.Include(path).AsExpandable();
+        }
+    }
+    class ExpandableQueryProvider<T> : IQueryProvider, IDbAsyncQueryProvider
 	{
 		readonly ExpandableQuery<T> _query;
 
