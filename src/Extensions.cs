@@ -13,17 +13,20 @@ namespace LinqKit
 	/// http://tomasp.net/blog/linq-expand.aspx for more information.</summary>
 	public static class Extensions
 	{
-		public static IQueryable<T> AsExpandable<T> (this IQueryable<T> query)
+        /// <summary> LinqKit: Returns wrapper that automatically expands expressions </summary>
+        public static IQueryable<T> AsExpandable<T> (this IQueryable<T> query)
 		{
 			if (query is ExpandableQuery<T>) return (ExpandableQuery<T>)query;
 			return new ExpandableQuery<T> (query);
 		}
 
+        /// <summary> LinqKit: Expands expression </summary>
 		public static Expression<TDelegate> Expand<TDelegate> (this Expression<TDelegate> expr)
 		{
 			return (Expression<TDelegate>)new ExpressionExpander ().Visit (expr);
 		}
 
+        /// <summary> LinqKit: Expands expression </summary>
 		public static Expression Expand (this Expression expr)
 		{
 			return new ExpressionExpander ().Visit (expr);
