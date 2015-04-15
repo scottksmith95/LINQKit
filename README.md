@@ -18,6 +18,8 @@ With LINQKit, you can:
 
 AsExpandable is based on a [very clever](http://tomasp.net/blog/linq-expand.aspx) project by Tomas Petricek. ExpressionVisitor comes from a [sample by Matt Warren](http://blogs.msdn.com/mattwar/archive/2007/07/31/linq-building-an-iqueryable-provider-part-ii.aspx).
 
+If you like LINQKit, consider voting for it on the Entity Framework UserVoice page (http://data.uservoice.com/forums/72025-entity-framework-feature-suggestions/suggestions/2390752-add-support-for-dynamically-extended-queries-as-pe). 
+
 Plugging Expressions into EntitySets / EntityCollections: The Problem
 =======
 
