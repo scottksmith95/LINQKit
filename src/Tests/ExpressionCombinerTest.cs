@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using Xunit;
 using LinqKit;
 
@@ -100,7 +101,19 @@ namespace LinqKit.Tests
 
             Assert.Equal(
                 "x => x.Item1.Item2",
-                criteria.Expand().Expand().ToString());
+                criteria.Expand().ToString());
+        }
+
+        [Fact]
+        public void ExpandProcessesArguments()
+        {
+            Expression<Func<Tuple<bool, bool>, bool>> expr1 = x => x.Item1 && x.Item2;
+            Expression<Func<bool, Tuple<bool, bool>>> expr2 = y => new Tuple<bool, bool>(y, y);
+            Expression<Func<bool, bool>> nestedExpression = z => expr1.Invoke(expr2.Invoke(z));
+
+            Assert.Equal(
+                nestedExpression.Expand().ToString(),
+                nestedExpression.Expand().Expand().ToString());
         }
 
 
