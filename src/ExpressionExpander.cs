@@ -65,8 +65,9 @@ namespace LinqKit
 				var target = m.Arguments[0];
 				if (target is MemberExpression) target = TransformExpr ((MemberExpression)target);
 				if (target is ConstantExpression) target = ((ConstantExpression) target).Value as Expression;
+                if (target is UnaryExpression) target = ((UnaryExpression)target).Operand as Expression;
 
-				var lambda = (LambdaExpression)target;
+                var lambda = (LambdaExpression)target;
 
 				var replaceVars = _replaceVars == null ? 
 					new Dictionary<ParameterExpression, Expression> () 
@@ -114,11 +115,21 @@ namespace LinqKit
 				return null;
 
 			var field = input.Member as FieldInfo;
+            
+            if (field == null)
+            {
+                if ((_replaceVars != null) && (input.Expression is ParameterExpression) && (_replaceVars.ContainsKey(input.Expression as ParameterExpression)))
+                {
+                    return base.VisitMemberAccess(input);
+                }
+                else
+                {
+                    return input;
+                }
+            }
 
-			if (field == null) return input;
-
-			// Collapse captured outer variables
-			if (!input.Member.ReflectedType.IsNestedPrivate
+            // Collapse captured outer variables
+            if (!input.Member.ReflectedType.IsNestedPrivate
 				|| !input.Member.ReflectedType.Name.StartsWith("<>")) // captured outer variable
 			{
 				return TryVisitExpressionFunc(input, field);
