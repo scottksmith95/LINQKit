@@ -1,3 +1,5 @@
+![Build status](https://ci.appveyor.com/api/projects/status/github/scottksmith95/LINQKit)
+
 What is LINQKit?
 =======
 
