@@ -48,7 +48,7 @@ namespace LinqKit
 			try
 			{
 				for (int i = 0; i < lambda.Parameters.Count; i++)
-					replaceVars.Add (lambda.Parameters[i], iv.Arguments[i]);
+					replaceVars.Add (lambda.Parameters[i], this.Visit(iv.Arguments[i]));
 			}
 			catch (ArgumentException ex)
 			{
@@ -75,7 +75,7 @@ namespace LinqKit
 				try
 				{
 					for (int i = 0; i < lambda.Parameters.Count; i++)
-						replaceVars.Add (lambda.Parameters[i], m.Arguments[i + 1]);
+						replaceVars.Add (lambda.Parameters[i], this.Visit(m.Arguments[i + 1]));
 				}
 				catch (ArgumentException ex)
 				{
