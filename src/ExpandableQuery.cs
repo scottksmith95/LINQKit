@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
 using System.Collections;
 using System.Threading;
@@ -56,14 +55,20 @@ namespace LinqKit
         }
 #endif
     }
-    public static class ExpandableQueryIncludeExtension
+
+    internal class ExpandableQueryOfClass<T> : ExpandableQuery<T>
+        where T: class
     {
-        public static IQueryable<T> Include<T>(this ExpandableQuery<T> ex, string path)
-            where T : class
+        public ExpandableQueryOfClass(IQueryable<T> inner): base(inner)
         {
-            return ex.InnerQuery.Include(path).AsExpandable();
+        }
+
+        public IQueryable<T> Include(string path)
+        {
+            return InnerQuery.Include(path).AsExpandable();
         }
     }
+
 #if NET35
     class ExpandableQueryProvider<T> : IQueryProvider
 #else
@@ -82,7 +87,7 @@ namespace LinqKit
 
         IQueryable<TElement> IQueryProvider.CreateQuery<TElement>(Expression expression)
         {
-            return new ExpandableQuery<TElement>(_query.InnerQuery.Provider.CreateQuery<TElement>(expression.Expand()));
+            return _query.InnerQuery.Provider.CreateQuery<TElement>(expression.Expand()).AsExpandable();
         }
 
         IQueryable IQueryProvider.CreateQuery(Expression expression)
