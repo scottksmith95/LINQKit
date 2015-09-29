@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -47,6 +49,29 @@ namespace LinqKit.Tests
             Assert.Equal(194.48m, result, 2);
             Assert.NotEqual(TaskStatus.RanToCompletion, before);
         }
+
+        [Fact]
+        public async Task ExpressionInvokeTest()
+        {
+            var eParam = Expression.Parameter(typeof(Entity), "e");
+            var eProp = Expression.PropertyOrField(eParam, "Value");
+
+            var conditions =
+                (from item in new List<decimal> { 1m, 2m, 3m, 4m }
+                 select Expression.LessThan(eProp, Expression.Constant(item))).Aggregate(Expression.OrElse);
+
+            var combined = Expression.Lambda<Func<Entity, bool>>(conditions, eParam);
+
+            var q = from e in db.Entities.AsExpandable()
+                    where combined.Invoke(e)
+                    select new { e.Value };
+
+            var res = await q.ToListAsync();
+
+            Assert.Equal(1, res.Count);
+            Assert.Equal(3.14m, res.First().Value);
+        }
+
 
         public class TestContext : DbContext
         {
