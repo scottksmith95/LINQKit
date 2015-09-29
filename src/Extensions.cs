@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Reflection;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Runtime.CompilerServices;
 using System.Linq.Expressions;
 using System.Linq;
 
@@ -14,14 +10,14 @@ namespace LinqKit
 	public static class Extensions
 	{
         /// <summary> LinqKit: Returns wrapper that automatically expands expressions </summary>
-        public static IQueryable<T> AsExpandable<T> (this IQueryable<T> query)
-		{
-			if (query is ExpandableQuery<T>) return (ExpandableQuery<T>)query;
-			return new ExpandableQuery<T> (query);
-		}
+        public static IQueryable<T> AsExpandable<T>(this IQueryable<T> query)
+        {
+            if (query is ExpandableQuery<T>) return query;
+            return ExpandableQueryFactory<T>.Create(query);
+        }
 
         /// <summary> LinqKit: Expands expression </summary>
-		public static Expression<TDelegate> Expand<TDelegate> (this Expression<TDelegate> expr)
+	    public static Expression<TDelegate> Expand<TDelegate>(this Expression<TDelegate> expr)
 		{
 			return (Expression<TDelegate>)new ExpressionExpander ().Visit (expr);
 		}
@@ -116,7 +112,6 @@ namespace LinqKit
 		{
 			return expr.Compile ().Invoke (arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
 		}
-
 		public static TResult Invoke<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> (
 			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, 
         T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14)
@@ -139,11 +134,31 @@ namespace LinqKit
 		}
 
   #endif
-
 		public static void ForEach<T> (this IEnumerable<T> source, Action<T> action)
 		{
 			foreach (var element in source)
 				action (element);
 		}
-	}
+
+        private static class ExpandableQueryFactory<T>
+        {
+            public static readonly Func<IQueryable<T>, ExpandableQuery<T>> Create;
+
+            static ExpandableQueryFactory()
+            {
+                if (!typeof(T).IsClass)
+                {
+                    Create = query => new ExpandableQuery<T>(query);
+                    return;
+                }
+
+                var queryType = typeof(IQueryable<T>);
+                var ctorInfo = typeof(ExpandableQueryOfClass<>).MakeGenericType(typeof(T)).GetConstructor(new[] { queryType });
+                var queryParam = Expression.Parameter(queryType);
+                var newExpr = Expression.New(ctorInfo, queryParam);
+                var createExpr = Expression.Lambda<Func<IQueryable<T>, ExpandableQuery<T>>>(newExpr, queryParam);
+                Create = createExpr.Compile();
+            }
+        }
+    }
 }
