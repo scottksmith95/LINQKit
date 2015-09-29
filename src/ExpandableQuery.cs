@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Collections;
+#if !NET35
 using System.Threading;
 using System.Data.Entity;
-#if !NET35
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 #endif
@@ -56,6 +56,7 @@ namespace LinqKit
 #endif
     }
 
+#if !NET35
     internal class ExpandableQueryOfClass<T> : ExpandableQuery<T>
         where T: class
     {
@@ -69,10 +70,9 @@ namespace LinqKit
         }
     }
 
-#if NET35
-    class ExpandableQueryProvider<T> : IQueryProvider
-#else
     class ExpandableQueryProvider<T> : IQueryProvider, IDbAsyncQueryProvider
+#else
+    class ExpandableQueryProvider<T> : IQueryProvider
 #endif
     {
         readonly ExpandableQuery<T> _query;
