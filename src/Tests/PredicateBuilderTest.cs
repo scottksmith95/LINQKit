@@ -42,5 +42,21 @@ namespace LinqKit.Tests
             Assert.Contains("(1 == 1)", executed);
         }
 
+        public class Foo { public Bar bar; }
+        public class Bar { public bool baz; }
+
+        [Fact]
+        public void UnboundedVariableInExpandedPredicateTest()
+        {
+            Expression<Func<Foo, Bar>> barGetter = f => f.bar;
+            Expression<Func<Bar, bool>> barPredicate = b => b.baz;
+            Expression<Func<Foo, bool>> fooPredicate = x => barPredicate.Invoke(barGetter.Invoke(x));
+            Expression<Func<Foo, bool>> inception = y => fooPredicate.Invoke(y);
+
+            var expanded = inception.Expand(); // y => x.bar.baz
+            var compiled = expanded.Compile(); // throws an InvalidOperationException
+            var result = compiled.Invoke(new Foo{bar = new Bar()});
+            Assert.False(result);
+        }
     } 
 }
