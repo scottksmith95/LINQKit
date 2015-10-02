@@ -36,11 +36,14 @@ namespace LinqKit
         Expression IQueryable.Expression { get { return _inner.Expression; } }
         Type IQueryable.ElementType { get { return typeof(T); } }
         IQueryProvider IQueryable.Provider { get { return _provider; } }
+        /// <summary> IQueryable enumeration </summary>
         public IEnumerator<T> GetEnumerator() { return _inner.GetEnumerator(); }
         IEnumerator IEnumerable.GetEnumerator() { return _inner.GetEnumerator(); }
+        /// <summary> IQueryable string presentation.  </summary>
         public override string ToString() { return _inner.ToString(); }
 
 #if !NET35
+        /// <summary> Enumerator for async-await </summary>
         public IDbAsyncEnumerator<T> GetAsyncEnumerator()
         {
             var asyncEnumerable = _inner as IDbAsyncEnumerable<T>;

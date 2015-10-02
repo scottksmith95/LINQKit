@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace System.Linq
 {
+    /// <summary> Extension methods for expression tree balancing. </summary>
     public static class AggregateExtensions
     {
         /// <summary>

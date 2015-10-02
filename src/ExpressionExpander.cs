@@ -69,21 +69,25 @@ namespace LinqKit
 
                 var lambda = (LambdaExpression)target;
 
-                var replaceVars = _replaceVars == null ?
+                if (lambda != null)
+                {
+
+                    var replaceVars = _replaceVars == null ?
                     new Dictionary<ParameterExpression, Expression>()
                     : new Dictionary<ParameterExpression, Expression>(_replaceVars);
+                    
+                    try
+                    {
+                        for (int i = 0; i < lambda.Parameters.Count; i++)
+                            replaceVars.Add(lambda.Parameters[i], this.Visit(m.Arguments[i + 1]));
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
+                    }
 
-                try
-                {
-                    for (int i = 0; i < lambda.Parameters.Count; i++)
-                        replaceVars.Add(lambda.Parameters[i], this.Visit(m.Arguments[i + 1]));
+                    return new ExpressionExpander(replaceVars).Visit(lambda.Body);
                 }
-                catch (ArgumentException ex)
-                {
-                    throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
-                }
-
-                return new ExpressionExpander(replaceVars).Visit(lambda.Body);
             }
 
             // Expand calls to an expression's Compile() method:
@@ -104,7 +108,7 @@ namespace LinqKit
         protected override Expression VisitMemberAccess(MemberExpression m)
         {
             // Strip out any references to expressions captured by outer variables - LINQ to SQL can't handle these:
-            return m.Member.DeclaringType.Name.StartsWith("<>") ?
+            return m.Member.DeclaringType != null && m.Member.DeclaringType.Name.StartsWith("<>") ?
                 TransformExpr(m)
                 : base.VisitMemberAccess(m);
         }
@@ -129,8 +133,8 @@ namespace LinqKit
             }
 
             // Collapse captured outer variables
-            if (!input.Member.ReflectedType.IsNestedPrivate
-                || !input.Member.ReflectedType.Name.StartsWith("<>")) // captured outer variable
+            if (input.Member.ReflectedType != null && (!input.Member.ReflectedType.IsNestedPrivate
+                || !input.Member.ReflectedType.Name.StartsWith("<>"))) // captured outer variable
             {
                 return TryVisitExpressionFunc(input, field);
             }

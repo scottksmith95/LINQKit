@@ -10,10 +10,13 @@ namespace LinqKit
 	/// </summary>
 	public static class PredicateBuilder
 	{
-		public static Expression<Func<T, bool>> True<T> () { return f => true; }
+        /// <summary> Always true </summary>
+        public static Expression<Func<T, bool>> True<T> () { return f => true; }
+        /// <summary> Always false </summary>
 		public static Expression<Func<T, bool>> False<T> () { return f => false; }
 
-		public static Expression<Func<T, bool>> Or<T> (this Expression<Func<T, bool>> expr1,
+        /// <summary> OR </summary>
+        public static Expression<Func<T, bool>> Or<T> (this Expression<Func<T, bool>> expr1,
 												  Expression<Func<T, bool>> expr2)
 		{
 			var invokedExpr = Expression.Invoke (expr2.Expand(), expr1.Parameters.Cast<Expression> ());
@@ -21,7 +24,8 @@ namespace LinqKit
 				 (Expression.OrElse (expr1.Body, invokedExpr), expr1.Parameters);
 		}
 
-		public static Expression<Func<T, bool>> And<T> (this Expression<Func<T, bool>> expr1,
+        /// <summary> AND </summary>
+        public static Expression<Func<T, bool>> And<T> (this Expression<Func<T, bool>> expr1,
 												   Expression<Func<T, bool>> expr2)
 		{
 			var invokedExpr = Expression.Invoke (expr2.Expand(), expr1.Parameters.Cast<Expression> ());
