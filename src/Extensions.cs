@@ -68,6 +68,13 @@ namespace LinqKit
 
 #if !NET35
         /// <summary> LinqKit: Compile and invoke </summary>
+        public static TResult Invoke<T1, T2, T3, T4, T5, TResult>(
+            this Expression<Func<T1, T2, T3, T4, T5, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
+        {
+            return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5);
+        }
+
+        /// <summary> LinqKit: Compile and invoke </summary>
 		public static TResult Invoke<T1, T2, T3, T4, T5, T6, TResult> (
 			this Expression<Func<T1, T2, T3, T4, T5, T6, TResult>> expr, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, 
         T6 arg6)
