@@ -1,5 +1,10 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/0c4v2bsvdqd57600?svg=true)](https://ci.appveyor.com/project/StefH/system-linq-dynamic-core)
-[![Version](https://img.shields.io/nuget/v/System.Linq.Dynamic.Core.svg)](https://www.nuget.org/packages/System.Linq.Dynamic.Core)
+
+EntityFramework.LinqKit
+[![Version](https://img.shields.io/nuget/v/EntityFramework.LinqKit.svg)](https://www.nuget.org/packages/EntityFramework.LinqKit)
+
+Microsoft.EntityFrameworkCore.LinqKit
+[![Version](https://img.shields.io/nuget/v/Microsoft.EntityFrameworkCore.LinqKit.svg)](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.LinqKit)
 
 What is LINQKit?
 =======
