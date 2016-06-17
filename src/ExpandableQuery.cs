@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Collections;
 
-#if !NET35
+#if !(NET35 || NET40)
 using System.Threading;
 using System.Threading.Tasks;
 #if EFCORE

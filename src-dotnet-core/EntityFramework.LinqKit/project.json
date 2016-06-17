@@ -31,8 +31,7 @@
         "JetBrains.Annotations": {
             "version": "10.1.4",
             "type": "build"
-        },
-        "EntityFramework": "6.1.3"
+        }
     },
 
     "frameworks": {
@@ -46,22 +45,37 @@
         },
         "net45": {
             "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
             }
         },
         "net451": {
             "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
             }
         },
         "net452": {
             "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
             }
         },
         "net46": {
             "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
             }
         },
         "net461": {
             "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
             }
         }
     }
