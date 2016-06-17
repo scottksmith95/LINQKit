@@ -1,4 +1,5 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/github/scottksmith95/LINQKit)](https://ci.appveyor.com/project/Thorium/linqkit)
+[![Build status](https://ci.appveyor.com/api/projects/status/0c4v2bsvdqd57600?svg=true)](https://ci.appveyor.com/project/StefH/system-linq-dynamic-core)
+[![Version](https://img.shields.io/nuget/v/System.Linq.Dynamic.Core.svg)](https://www.nuget.org/packages/System.Linq.Dynamic.Core)
 
 What is LINQKit?
 =======

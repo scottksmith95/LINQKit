@@ -75,7 +75,7 @@ namespace LinqKit
                     var replaceVars = _replaceVars == null ?
                     new Dictionary<ParameterExpression, Expression>()
                     : new Dictionary<ParameterExpression, Expression>(_replaceVars);
-                    
+
                     try
                     {
                         for (int i = 0; i < lambda.Parameters.Count; i++)
@@ -131,13 +131,21 @@ namespace LinqKit
                     return input;
                 }
             }
-
+#if EFCORE
+            //Collapse captured outer variables
+            if (input.Member.DeclaringType != null && (!input.Member.DeclaringType.GetTypeInfo().IsNestedPrivate
+                || !input.Member.DeclaringType.Name.StartsWith("<>"))) // captured outer variable
+            {
+                return TryVisitExpressionFunc(input, field);
+            }
+#else
             // Collapse captured outer variables
             if (input.Member.ReflectedType != null && (!input.Member.ReflectedType.IsNestedPrivate
                 || !input.Member.ReflectedType.Name.StartsWith("<>"))) // captured outer variable
             {
                 return TryVisitExpressionFunc(input, field);
             }
+#endif
 
             var expression = input.Expression as ConstantExpression;
             if (expression != null)
@@ -145,7 +153,7 @@ namespace LinqKit
                 var obj = expression.Value;
                 if (obj == null) return input;
                 var t = obj.GetType();
-                if (!t.IsNestedPrivate || !t.Name.StartsWith("<>")) return input;
+                if (!t.GetTypeInfo().IsNestedPrivate || !t.Name.StartsWith("<>")) return input;
                 var fi = (FieldInfo)input.Member;
                 var result = fi.GetValue(obj);
                 var exp = result as Expression;
@@ -159,8 +167,8 @@ namespace LinqKit
         private Expression TryVisitExpressionFunc(MemberExpression input, FieldInfo field)
         {
             var prope = input.Member as PropertyInfo;
-            if ((field.FieldType.IsSubclassOf(typeof(Expression))) ||
-                (prope != null && prope.PropertyType.IsSubclassOf(typeof(Expression))))
+            if ((field.FieldType.GetTypeInfo().IsSubclassOf(typeof(Expression))) ||
+                (prope != null && prope.PropertyType.GetTypeInfo().IsSubclassOf(typeof(Expression))))
                 return Visit(Expression.Lambda<Func<Expression>>(input).Compile()());
 
             return input;

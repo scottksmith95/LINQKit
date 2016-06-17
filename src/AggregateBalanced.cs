@@ -1,11 +1,5 @@
-﻿using System;
-using System.Reflection;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.CompilerServices;
+﻿#if !(NET35 || NET40)
 using System.Linq.Expressions;
-using System.Linq;
 
 namespace System.Linq
 {
@@ -107,3 +101,4 @@ namespace System.Linq
         }
     }
 }
+#endif
