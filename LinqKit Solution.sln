@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EntityFramework.LinqKit", "src-dotnet-core\EntityFramework.LinqKit\EntityFramework.LinqKit.xproj", "{CFF0D30F-9AF2-4F3D-8458-167C5CC430FD}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinqKit.EntityFramework", "src-dotnet-core\LinqKit.EntityFramework\LinqKit.EntityFramework.xproj", "{CFF0D30F-9AF2-4F3D-8458-167C5CC430FD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src-original", "src-original", "{BF05142E-19C4-4359-9AAF-7A4EC2F27942}"
 EndProject
@@ -27,7 +27,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "src\Demo\Demo.cspro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqKit.Tests", "src\Tests\LinqKit.Tests.csproj", "{A8A8E0D9-CC31-4B84-9ED2-2B808C9F0B09}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.EntityFrameworkCore.LinqKit", "src-dotnet-core\Microsoft.EntityFrameworkCore.LinqKit\Microsoft.EntityFrameworkCore.LinqKit.xproj", "{F9861A91-C2E4-4D20-B486-89272898FE23}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinqKit.Microsoft.EntityFrameworkCore", "src-dotnet-core\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.xproj", "{F9861A91-C2E4-4D20-B486-89272898FE23}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinqKit", "src-dotnet-core\LinqKit\LinqKit.xproj", "{667345EE-B154-432F-A908-CB6374805C20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{F9861A91-C2E4-4D20-B486-89272898FE23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9861A91-C2E4-4D20-B486-89272898FE23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9861A91-C2E4-4D20-B486-89272898FE23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{667345EE-B154-432F-A908-CB6374805C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{667345EE-B154-432F-A908-CB6374805C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{667345EE-B154-432F-A908-CB6374805C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{667345EE-B154-432F-A908-CB6374805C20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +76,6 @@ Global
 		{AA8FD6A3-D1D1-49B6-8ED4-388E94E4F2F3} = {4521E792-157C-4049-ADF0-CDA31EFC3CC7}
 		{A8A8E0D9-CC31-4B84-9ED2-2B808C9F0B09} = {0BE21A11-8EF0-404B-AFC0-533A62386C4C}
 		{F9861A91-C2E4-4D20-B486-89272898FE23} = {2F7F283D-5576-417F-A467-EC210226AC3B}
+		{667345EE-B154-432F-A908-CB6374805C20} = {2F7F283D-5576-417F-A467-EC210226AC3B}
 	EndGlobalSection
 EndGlobal

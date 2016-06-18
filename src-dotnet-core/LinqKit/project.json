@@ -1,12 +1,12 @@
 {
     "version": "1.0.0.0",
-    "title": "Microsoft.EntityFrameworkCore.LinqKit",
-    "description": "Microsoft.EntityFrameworkCore.LinqKit is a free set of extensions for LINQ to SQL and EntityFrameworkCore power users.",
+    "title": "LinqKit",
+    "description": "LinqKit is a free set of extensions for LINQ to SQL and Entity Framework power users.",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Stef Heyenrath" ],
 
     "packOptions": {
-        "summary": "Microsoft.EntityFrameworkCore.LinqKit is a free set of extensions for LINQ to SQL and EntityFrameworkCore power users.",
-        "tags": [ "linq", "EF", "EntityFramework", "Entity", "Framework", "Core" ],
+        "summary": "EntityFramework.LinqKit is a free set of extensions for LINQ to SQL and Entity Framework power users.",
+        "tags": [ "linq", "EF", "EntityFramework", "Entity", "Framework" ],
         "owners": [ "Stef Heyenrath" ],
         "repository": {
             "type": "git",
@@ -19,7 +19,7 @@
 
     "buildOptions": {
         "xmlDoc": true,
-        "define": [ "EFCORE" ],
+        "define": [ "NOEF" ],
         "compile": {
             "include": [
                 "../../src/*.cs"
@@ -31,29 +31,46 @@
         "JetBrains.Annotations": {
             "version": "10.1.4",
             "type": "build"
-        },
-        "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final"
+        }
     },
 
     "frameworks": {
+        "net35": {
+            "frameworkAssemblies": {
+            }
+        },
+        "net40": {
+            "frameworkAssemblies": {
+            }
+        },
+        "net45": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+            }
+        },
         "net451": {
             "frameworkAssemblies": {
+            },
+            "dependencies": {
             }
         },
         "net452": {
             "frameworkAssemblies": {
+            },
+            "dependencies": {
             }
         },
         "net46": {
             "frameworkAssemblies": {
+            },
+            "dependencies": {
             }
         },
         "net461": {
             "frameworkAssemblies": {
-            }
-        },
-        "dnx451": {
-            "frameworkAssemblies": {
+            },
+            "dependencies": {
             }
         },
         "netcore50": {
@@ -62,6 +79,10 @@
                 "NETStandard.Library": {
                     "version": "1.5.0-rc2-24027"
                 },
+                "System.Reflection.Extensions": "4.0.1-rc2-24027",
+                "System.Reflection.TypeExtensions": "4.1.0-rc2-24027",
+                "System.Linq.Queryable": "4.0.1-rc2-24027",
+                "System.Linq.Expressions": "4.0.11-rc2-24027",
                 "System.Threading.Tasks": "4.0.11-rc2-24027"
             }
         },
@@ -84,6 +105,10 @@
                 "portable-net451+win81+wpa81"
             ],
             "dependencies": {
+                "System.Reflection.Extensions": "4.0.1-rc2-24027",
+                "System.Reflection.TypeExtensions": "4.1.0-rc2-24027",
+                "System.Linq.Queryable": "4.0.1-rc2-24027",
+                "System.Linq.Expressions": "4.0.11-rc2-24027",
                 "System.Threading.Tasks": "4.0.11-rc2-24027"
             }
         }

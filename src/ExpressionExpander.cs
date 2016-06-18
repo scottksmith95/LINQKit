@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
-using System.Collections.ObjectModel;
 using System.Reflection;
 
 namespace LinqKit
@@ -131,7 +128,7 @@ namespace LinqKit
                     return input;
                 }
             }
-#if EFCORE
+#if EFCORE || NETSTANDARD || WINDOWS_APP
             //Collapse captured outer variables
             if (input.Member.DeclaringType != null && (!input.Member.DeclaringType.GetTypeInfo().IsNestedPrivate
                 || !input.Member.DeclaringType.Name.StartsWith("<>"))) // captured outer variable

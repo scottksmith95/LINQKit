@@ -14,7 +14,7 @@ namespace LinqKit
         public static IQueryable<T> AsExpandable<T>(this IQueryable<T> query)
         {
             if (query is ExpandableQuery<T>) return query;
-#if !(NET35 || NET40)
+#if !(NET35 || NET40 || NOEF)
             return ExpandableQueryFactory<T>.Create(query);
 #else
             return new ExpandableQuery<T>(query);
@@ -161,6 +161,7 @@ namespace LinqKit
             return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16);
         }
 
+#if !NOEF
         private static class ExpandableQueryFactory<T>
         {
             public static readonly Func<IQueryable<T>, ExpandableQuery<T>> Create;
@@ -181,6 +182,7 @@ namespace LinqKit
                 Create = createExpr.Compile();
             }
         }
+#endif
 
         /// <summary>
         /// Correlates the elements of two sequences based on matching keys. The default equality comparer is used to compare keys.

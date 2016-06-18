@@ -1,11 +1,11 @@
 {
     "version": "1.0.0.0",
-    "title": "EntityFramework.LinqKit",
-    "description": "EntityFramework.LinqKit is a free set of extensions for LINQ to SQL and Entity Framework power users.",
+    "title": "LinqKit for EntityFramework (with IAsync support)",
+    "description": "LinqKit.EntityFramework is a free set of extensions for LINQ to SQL and Entity Framework power users. (IAsync supported)",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Stef Heyenrath" ],
 
     "packOptions": {
-        "summary": "EntityFramework.LinqKit is a free set of extensions for LINQ to SQL and Entity Framework power users.",
+        "summary": "LinqKit.EntityFramework is a free set of extensions for LINQ to SQL and Entity Framework power users. (IAsync supported)",
         "tags": [ "linq", "EF", "EntityFramework", "Entity", "Framework" ],
         "owners": [ "Stef Heyenrath" ],
         "repository": {

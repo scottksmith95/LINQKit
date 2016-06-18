@@ -1,4 +1,4 @@
-﻿#if !(NET35 || NET40)
+﻿#if !(NET35 || NET40 || NOEF)
 using System;
 using System.Collections.Generic;
 using System.Threading;

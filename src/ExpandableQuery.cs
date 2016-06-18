@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Collections;
 
-#if !(NET35 || NET40)
+#if !(NET35 || NET40 || NOEF)
 using System.Threading;
 using System.Threading.Tasks;
 #if EFCORE
@@ -22,8 +22,8 @@ namespace LinqKit
     /// An IQueryable wrapper that allows us to visit the query's expression tree just before LINQ to SQL gets to it.
     /// This is based on the excellent work of Tomas Petricek: http://tomasp.net/blog/linq-expand.aspx
     /// </summary>
-#if NET35 || NET40
-    public sealed class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable
+#if (NET35 || NET40 || NOEF)
+    public class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable
 #elif EFCORE
     public class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IAsyncEnumerable<T>
 #else
@@ -50,7 +50,7 @@ namespace LinqKit
         /// <summary> IQueryable string presentation.  </summary>
         public override string ToString() { return _inner.ToString(); }
 
-#if !(NET35 || NET40)
+#if !(NET35 || NET40 || NOEF)
 #if EFCORE
         IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
         {
@@ -71,13 +71,13 @@ namespace LinqKit
 
         IDbAsyncEnumerator IDbAsyncEnumerable.GetAsyncEnumerator()
         {
-            return this.GetAsyncEnumerator();
+            return GetAsyncEnumerator();
         }
 #endif
 #endif
     }
 
-#if !(NET35 || NET40)
+#if !(NET35 || NET40 || NOEF)
     internal class ExpandableQueryOfClass<T> : ExpandableQuery<T>
         where T : class
     {
@@ -97,15 +97,14 @@ namespace LinqKit
         }
 #endif
     }
-
-    class ExpandableQueryProvider<T> : IQueryProvider,
-#if EFCORE
-        IAsyncQueryProvider
-#else
-        IDbAsyncQueryProvider
 #endif
-#else
+
     class ExpandableQueryProvider<T> : IQueryProvider
+#if (NET35 || NET40 || NOEF)
+#elif EFCORE
+        , IAsyncQueryProvider
+#else
+        , IDbAsyncQueryProvider
 #endif
     {
         readonly ExpandableQuery<T> _query;
@@ -138,7 +137,7 @@ namespace LinqKit
             return _query.InnerQuery.Provider.Execute(expression.Expand());
         }
 
-#if !(NET35 || NET40)
+#if !(NET35 || NET40 || NOEF)
 #if EFCORE
         public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
         {
