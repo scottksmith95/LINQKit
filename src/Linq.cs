@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
 
 namespace LinqKit
 {
-	/// <summary>
-	/// Another good idea by Tomas Petricek.
-	/// See http://tomasp.net/blog/dynamic-linq-queries.aspx for information on how it's used.
-	/// </summary>
-	public static class Linq
-	{
+    /// <summary>
+    /// Another good idea by Tomas Petricek.
+    /// See http://tomasp.net/blog/dynamic-linq-queries.aspx for information on how it's used.
+    /// </summary>
+    public static class Linq
+    {
         /// <summary>
         /// Returns the given anonymous method as a lambda expression
         /// </summary>
@@ -47,10 +44,10 @@ namespace LinqKit
         /// <summary>
         /// Returns the given anonymous function as a Func delegate
         /// </summary>
-		public static Func<T, TResult> Func<T, TResult> (Func<T, TResult> expr)
-		{
-			return expr;
-		}
+		public static Func<T, TResult> Func<T, TResult>(Func<T, TResult> expr)
+        {
+            return expr;
+        }
 
         /// <summary>
         /// Returns the given anonymous function as a Func delegate
@@ -59,5 +56,5 @@ namespace LinqKit
         {
             return expr;
         }
-	}
+    }
 }
