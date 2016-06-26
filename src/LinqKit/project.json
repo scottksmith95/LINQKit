@@ -1,0 +1,170 @@
+{
+    "version": "1.1.4.0",
+    "title": "LinqKit",
+    "description": "LinqKit is a free set of extensions for LINQ to SQL and Entity Framework power users. Note that IAsync and IDbAsync are not supported.",
+    "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
+
+    "packOptions": {
+        "summary": "EntityFramework.LinqKit is a free set of extensions for LINQ to SQL and Entity Framework power users. Note that IAsync and IDbAsync are not supported. For that you need LinqKit.EntityFramework or LinqKit.Microsoft.EntityFrameworkCore.",
+        "tags": [ "linq", "EF", "EntityFramework", "Entity", "Framework" ],
+        "owners": [ "San Chen", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
+        "repository": {
+            "type": "git",
+            "url": "https://github.com/scottksmith95/LINQKit"
+        },
+        "projectUrl": "https://github.com/scottksmith95/LINQKit",
+        "licenseUrl": "https://github.com/scottksmith95/LINQKit/master/license.txt",
+        "releaseNotes": "Update to dotnet rc2"
+    },
+
+    "buildOptions": {
+        "xmlDoc": true,
+        "define": [ "NOEF" ]
+    },
+
+    "dependencies": {
+        "JetBrains.Annotations": {
+            "version": "10.1.4",
+            "type": "build"
+        }
+    },
+
+    "frameworks": {
+        "net35": {
+            "frameworkAssemblies": {
+            }
+        },
+        "net40": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "Microsoft.Bcl.Async": "1.0.168"
+            }
+        },
+        "net45": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+            }
+        },
+        "net451": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+            }
+        },
+        "net452": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+            }
+        },
+        "net46": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+            }
+        },
+        "net461": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+            }
+        },
+        "netcore50": {
+            "buildOptions": { "define": [ "WINDOWS_APP" ] },
+            "dependencies": {
+                "NETStandard.Library": {
+                    "version": "1.5.0-rc2-24027"
+                },
+                "System.Linq.Expressions": "4.0.11-rc2-24027",
+                "System.Linq.Queryable": "4.0.1-rc2-24027",
+                "System.Reflection.Extensions": "4.0.1-rc2-24027",
+                "System.Reflection.TypeExtensions": "4.1.0-rc2-24027",
+                "System.Threading.Tasks": "4.0.11-rc2-24027"
+            }
+        },
+        ".NETPortable,Version=v4.5,Profile=Profile259": {
+            "buildOptions": {
+                "define": [
+                    "PORTABLE"
+                ]
+            },
+            "frameworkAssemblies": {
+                "Microsoft.CSharp": "",
+                "System": "",
+                "System.Collections": "",
+                "System.Core": "",
+                "System.Linq": "",
+                "System.Linq.Expressions": "",
+                "System.Linq.Queryable": "",
+                "System.ObjectModel": "",
+                "System.Reflection": "",
+                "System.Reflection.Extensions": "",
+                "System.Runtime": "",
+                "System.Runtime.Extensions": "",
+                "System.Threading": "",
+                "System.Threading.Tasks": ""
+            }
+        },
+        ".NETPortable,Version=v4.0,Profile=Profile328": {
+            "buildOptions": {
+                "define": [
+                    "PORTABLE40"
+                ]
+            },
+            "frameworkAssemblies": {
+                "mscorlib": "",
+                "System": "",
+                "System.Core": ""
+            },
+            "dependencies": {
+                "Microsoft.Bcl.Async": "1.0.168"
+            }
+        },
+        "netstandard1.3": {
+            "buildOptions": { "define": [ "NETSTANDARD" ] },
+            "NETStandard.Library": {
+                "version": "1.5.0-rc2-24027"
+            },
+            "imports": [
+                "dnxcore50"
+            ],
+            "dependencies": {
+                "System.Linq.Expressions": "4.0.11-rc2-24027",
+                "System.Linq.Queryable": "4.0.1-rc2-24027",
+                "System.Reflection.Extensions": "4.0.1-rc2-24027",
+                "System.Reflection.TypeExtensions": "4.1.0-rc2-24027",
+                "System.Runtime": "4.1.0-rc2-24027",
+                "System.Threading.Tasks": "4.0.11-rc2-24027"
+            }
+        },
+        "sl5": {
+            "buildOptions": { "define": [ "SILVERLIGHT" ] },
+            "dependencies": {
+                "Microsoft.Bcl.Async": "1.0.168"
+            },
+            "frameworkAssemblies": {
+                "mscorlib": "",
+                "System": "",
+                "System.Core": "",
+                "System.Net": "",
+                "System.Windows": ""
+            }
+        },
+        "uap10.0": {
+            "buildOptions": { "define": [ "UAP" ] },
+            "dependencies": {
+                "NETStandard.Library": {
+                    "version": "1.5.0-rc2-24027"
+                },
+                "System.Linq.Expressions": "4.0.11-rc2-24027",
+                "System.Linq.Queryable": "4.0.1-rc2-24027",
+                "System.Reflection.Extensions": "4.0.1-rc2-24027",
+                "System.Reflection.TypeExtensions": "4.1.0-rc2-24027",
+                "System.Runtime": "4.1.0-rc2-24027",
+                "System.Threading.Tasks": "4.0.11-rc2-24027"
+            }
+        }
+    }
+}

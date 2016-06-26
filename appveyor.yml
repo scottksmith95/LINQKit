@@ -1,0 +1,48 @@
+os: Visual Studio 2015
+
+version: 1.1.4.{build}
+
+configuration:
+- Debug
+- Release
+
+platform: Any CPU
+
+init:
+- ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
+
+
+install:
+- ps: Start-FileDownload 'https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/Latest/dotnet-dev-win-x64.latest.exe'
+- cmd: dotnet-dev-win-x64.latest.exe /quiet
+
+environment:
+  PATH: $(PATH);$(PROGRAMFILES)\dotnet\
+
+
+build_script:
+- appveyor-retry dotnet restore -v Minimal
+
+- dotnet build .\src\LinqKit\project.json -c %CONFIGURATION%
+- dotnet build .\src\LinqKit.EntityFramework\project.json -c %CONFIGURATION%
+- dotnet build .\src\LinqKit.Microsoft.EntityFrameworkCore\project.json -c %CONFIGURATION%
+
+- dotnet build .\tests\LinqKit.Tests\project.json -c %CONFIGURATION%
+- dotnet build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests\project.json -c %CONFIGURATION%
+
+- dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\LinqKit\project.json
+- dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\LinqKit.EntityFramework\project.json
+- dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\LinqKit.Microsoft.EntityFrameworkCore\project.json
+
+
+test_script:
+- dotnet test -c %CONFIGURATION% --no-build .\tests\LinqKit.Tests
+- dotnet test -c %CONFIGURATION% --no-build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests
+
+
+artifacts:
+- path: artifacts\**\*.*
+
+
+cache:
+- '%USERPROFILE%\.nuget\packages'

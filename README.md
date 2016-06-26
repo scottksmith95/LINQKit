@@ -1,13 +1,12 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/0c4v2bsvdqd57600?svg=true)](https://ci.appveyor.com/project/StefH/system-linq-dynamic-core)
+[![Build status](https://ci.appveyor.com/api/projects/status/6rlno6o86lek06tu?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
 
-LinqKit
-[![Version](https://img.shields.io/nuget/v/LinqKit.svg)](https://www.nuget.org/packages/LinqKit)
 
-EntityFramework.LinqKit
-[![Version](https://img.shields.io/nuget/v/EntityFramework.LinqKit.svg)](https://www.nuget.org/packages/EntityFramework.LinqKit)
+| Project | NuGet | Dependency | Frameworks |
+| ------- | ----- | -----------| ---------- | 
+| LinqKit | [![Version](https://img.shields.io/nuget/v/LinqKit.svg)](https://www.nuget.org/packages/LinqKit) | net35, net40, net45, net45x, net46x, netcore5, .NETPortable (Profile259 & Profile328), netstandard1.3, sl5, uap10 | 
+| LinqKit.EntityFramework | [![Version](https://img.shields.io/nuget/v/EntityFramework.LinqKit.svg)](https://www.nuget.org/packages/EntityFramework.LinqKit) | EntityFramework | net45, net45x, net46x |
+| LinqKit.Microsoft.EntityFrameworkCore | [![Version](https://img.shields.io/nuget/v/Microsoft.EntityFrameworkCore.LinqKit.svg)](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.LinqKit) | EntityFrameworkCore | net45x, net46x, netcore5,netstandard1.3 |
 
-Microsoft.EntityFrameworkCore.LinqKit
-[![Version](https://img.shields.io/nuget/v/Microsoft.EntityFrameworkCore.LinqKit.svg)](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.LinqKit)
 
 What is LINQKit?
 =======

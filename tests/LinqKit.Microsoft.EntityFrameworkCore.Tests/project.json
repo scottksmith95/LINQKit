@@ -1,0 +1,46 @@
+﻿{
+    "version": "1.0.0-*",
+    "authors": [ "Stef Heyenrath" ],
+    "dependencies": {
+        "Microsoft.NETCore.App": {
+            "type": "platform",
+            "version": "1.0.0-rc2-3002702"
+        },
+
+        "LinqKit.Microsoft.EntityFrameworkCore": { "target": "project" },
+
+        "dotnet-test-xunit": "1.0.0-rc2-build10025",
+        "xunit": "2.1.0-rc2-build3178"
+    },
+
+    "buildOptions": {
+        "define": [ "EFCORE" ],
+        "compile": {
+            "include": [
+                "../LinqKit.Tests.Net452/*.cs",
+                "../LinqKit.EntityFramework.Tests.Net452/*.cs"
+            ]
+        }
+    },
+
+    "frameworks": {
+        "netcoreapp1.0": {
+            "buildOptions": { "define": [ "NETSTANDARD" ] },
+            "imports": [
+                "dnxcore50",
+                "dotnet5.4",
+                "portable-net451+win8"
+            ],
+            "dependencies": {
+                "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0-rc2-final",
+                "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0-rc2-final",
+                "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0-rc2-final",
+                "System.Linq.Parallel": "4.0.1-rc2-24027",
+                "System.Threading.Tasks": "4.0.11-rc2-24027"
+            }
+        }
+    },
+
+    "testRunner": "xunit"
+}
