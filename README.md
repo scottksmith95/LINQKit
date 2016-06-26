@@ -3,7 +3,7 @@
 
 | Project | NuGet | Dependency | Frameworks |
 | ------- | ----- | -----------| ---------- | 
-| LinqKit | [![Version](https://img.shields.io/nuget/v/LinqKit.svg)](https://www.nuget.org/packages/LinqKit) | net35, net40, net45, net45x, net46x, netcore5, .NETPortable (Profile259 & Profile328), netstandard1.3, sl5, uap10 | 
+| LinqKit | [![Version](https://img.shields.io/nuget/v/LinqKit.svg)](https://www.nuget.org/packages/LinqKit) | | net35, net40, net45, net45x, net46x, netcore5, .NETPortable (Profile259 & Profile328), netstandard1.3, sl5, uap10 |
 | LinqKit.EntityFramework | [![Version](https://img.shields.io/nuget/v/EntityFramework.LinqKit.svg)](https://www.nuget.org/packages/EntityFramework.LinqKit) | EntityFramework | net45, net45x, net46x |
 | LinqKit.Microsoft.EntityFrameworkCore | [![Version](https://img.shields.io/nuget/v/Microsoft.EntityFrameworkCore.LinqKit.svg)](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.LinqKit) | EntityFrameworkCore | net45x, net46x, netcore5,netstandard1.3 |
 
