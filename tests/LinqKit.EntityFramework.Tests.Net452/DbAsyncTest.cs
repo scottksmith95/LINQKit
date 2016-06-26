@@ -70,13 +70,11 @@ namespace LinqKit.EntityFramework.Tests.Net452
         {
             int expected = db.Entities.Sum(e => e.Value);
             var task = db.Entities.AsExpandable().SumAsync(e => e.Value);
-            var before = task.Status;
             var result = await task;
             var after = task.Status;
 
             Assert.Equal(TaskStatus.RanToCompletion, after);
             Assert.Equal(expected, result);
-            Assert.NotEqual(TaskStatus.RanToCompletion, before);
         }
 
         [Fact]
