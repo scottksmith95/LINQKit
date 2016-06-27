@@ -14,7 +14,7 @@
         },
         "projectUrl": "https://github.com/scottksmith95/LINQKit",
         "licenseUrl": "https://github.com/scottksmith95/LINQKit/master/license.txt",
-        "releaseNotes": "Update to dotnet rc2"
+        "releaseNotes": "Update to dotnet rc2 and removed dependency on EntityFramework"
     },
 
     "buildOptions": {
