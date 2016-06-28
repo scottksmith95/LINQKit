@@ -1,5 +1,5 @@
 {
-    "version": "1.1.5.0",
+    "version": "1.1.6.0",
     "title": "LinqKit",
     "description": "LinqKit is a free set of extensions for LINQ to SQL and Entity Framework power users. Note that IAsync and IDbAsync are not supported.",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
@@ -112,35 +112,6 @@
                 "System.Threading.Tasks": "4.0.11"
             }
         },
-        ".NETPortable,Version=v4.5,Profile=Profile259": {
-            "buildOptions": {
-                "define": [
-                    "PORTABLE"
-                ]
-            },
-            "frameworkAssemblies": {
-                "Microsoft.CSharp": "",
-                "System": "",
-                "System.Collections": "",
-                "System.Core": "",
-                "System.Linq": "",
-                "System.Linq.Expressions": "",
-                "System.Linq.Queryable": "",
-                "System.ObjectModel": "",
-                "System.Reflection": "",
-                "System.Reflection.Extensions": "",
-                "System.Runtime": "",
-                "System.Runtime.Extensions": "",
-                "System.Threading": "",
-                "System.Threading.Tasks": ""
-            },
-            "dependencies": {
-                "JetBrains.Annotations": {
-                    "version": "10.1.4",
-                    "type": "build"
-                }
-            }
-        },
         ".NETPortable,Version=v4.0,Profile=Profile328": {
             "buildOptions": {
                 "define": [
@@ -154,7 +125,7 @@
             },
             "dependencies": {
                 "JetBrains.Annotations": {
-                    "version": "10.1.4",
+                    "version": "10.0.0",
                     "type": "build"
                 },
                 "Microsoft.Bcl.Async": "1.0.168"
