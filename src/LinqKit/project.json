@@ -1,5 +1,5 @@
 {
-    "version": "1.1.6.0",
+    "version": "1.1.7.0",
     "title": "LinqKit",
     "description": "LinqKit is a free set of extensions for LINQ to SQL and Entity Framework power users. Note that IAsync and IDbAsync are not supported.",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
@@ -14,12 +14,13 @@
         },
         "projectUrl": "https://github.com/scottksmith95/LINQKit",
         "licenseUrl": "https://github.com/scottksmith95/LINQKit/master/license.txt",
-        "releaseNotes": ".Net Core 1.0 RTM"
+        "releaseNotes": "Added strong name signing for LinqKit.dll"
     },
 
     "buildOptions": {
         "xmlDoc": true,
-        "define": [ "NOEF" ]
+        "define": [ "NOEF" ],
+        "keyFile": "../LinqKit.Net45/LinqKit.snk"
     },
 
     "dependencies": {
@@ -113,11 +114,7 @@
             }
         },
         ".NETPortable,Version=v4.0,Profile=Profile328": {
-            "buildOptions": {
-                "define": [
-                    "PORTABLE40"
-                ]
-            },
+            "buildOptions": { "define": [ "PORTABLE40" ] },
             "frameworkAssemblies": {
                 "mscorlib": "",
                 "System": "",
@@ -146,6 +143,7 @@
                 "System.Reflection.Extensions": "4.0.1",
                 "System.Reflection.TypeExtensions": "4.1.0",
                 "System.Runtime": "4.1.0",
+                "System.Runtime.InteropServices": "4.1.0",
                 "System.Threading.Tasks": "4.0.11"
             }
         },
