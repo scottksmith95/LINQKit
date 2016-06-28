@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1.0",
+    "version": "1.0.2.0",
     "title": "LinqKit for Microsoft.EntityFrameworkCore (with IDbAsync support)",
     "description": "LinqKit.Microsoft.EntityFrameworkCore is a free set of extensions for LINQ to SQL and EntityFrameworkCore power users. (IDbAsync supported)",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
@@ -14,7 +14,7 @@
         },
         "projectUrl": "https://github.com/scottksmith95/LINQKit",
         "licenseUrl": "https://github.com/scottksmith95/LINQKit/master/license.txt",
-        "releaseNotes": "dotnet rc2"
+        "releaseNotes": ".Net Core 1.0 RTM"
     },
 
     "buildOptions": {
@@ -29,38 +29,62 @@
     },
 
     "dependencies": {
-        "JetBrains.Annotations": {
-            "version": "10.1.4",
-            "type": "build"
-        },
         "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final"
     },
 
     "frameworks": {
         "net451": {
+            "dependencies": {
+                "JetBrains.Annotations": {
+                    "version": "10.0.0",
+                    "type": "build"
+                }
+            }
         },
         "net452": {
+            "dependencies": {
+                "JetBrains.Annotations": {
+                    "version": "10.0.0",
+                    "type": "build"
+                }
+            }
         },
         "net46": {
+            "dependencies": {
+                "JetBrains.Annotations": {
+                    "version": "10.0.0",
+                    "type": "build"
+                }
+            }
         },
         "net461": {
+            "dependencies": {
+                "JetBrains.Annotations": {
+                    "version": "10.0.0",
+                    "type": "build"
+                }
+            }
         },
         "dnx451": {
+            "dependencies": {
+                "JetBrains.Annotations": {
+                    "version": "10.1.4",
+                    "type": "build"
+                }
+            }
         },
         "netcore50": {
             "buildOptions": { "define": [ "WINDOWS_APP" ] },
             "dependencies": {
-                "NETStandard.Library": {
-                    "version": "1.5.0-rc2-24027"
+                "JetBrains.Annotations": {
+                    "version": "10.1.4",
+                    "type": "build"
                 },
-                "System.Threading.Tasks": "4.0.11-rc2-24027"
+                "System.Threading.Tasks": "4.0.11"
             }
         },
         "netstandard1.3": {
             "buildOptions": { "define": [ "NETSTANDARD" ] },
-            "NETStandard.Library": {
-                "version": "1.5.0-rc2-24027"
-            },
             "imports": [
                 "dotnet5.4",
                 "portable-win81+wp81",
@@ -76,7 +100,11 @@
                 "portable-net451+win81+wpa81"
             ],
             "dependencies": {
-                "System.Threading.Tasks": "4.0.11-rc2-24027"
+                "JetBrains.Annotations": {
+                    "version": "10.1.4",
+                    "type": "build"
+                },
+                "System.Threading.Tasks": "4.0.11"
             }
         }
     }
