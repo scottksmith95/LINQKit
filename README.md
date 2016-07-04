@@ -5,7 +5,7 @@
 | ------- | ----- | -----------| ---------- | 
 | LinqKit | [![Version](https://img.shields.io/nuget/v/LinqKit.svg)](https://www.nuget.org/packages/LinqKit) | | <ul><li>net35</li><li>net40</li><li>net45 & net45x</li><li>net46x</li><li>netcore5</li><li>.NETPortable Profile 328</li><li>netstandard1.3</li><li>sl5</li><li>uap10</li></ul>|
 | LinqKit.EntityFramework | [![Version](https://img.shields.io/nuget/v/LinqKit.EntityFramework.svg)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework | <ul><li>net45</li><li>net45x</li><li>net46x</li></ul> |
-| LinqKit.Microsoft.EntityFrameworkCore | [![Version](https://img.shields.io/nuget/v/Microsoft.EntityFrameworkCore.LinqKit.svg)](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.LinqKit) | EntityFrameworkCore | <ul><li>net45x</li><li>net46x</li><li>netcore5</li><li>netstandard1.3</li></ul>|
+| LinqKit.Microsoft.EntityFrameworkCore | [![Version](https://img.shields.io/nuget/v/LinqKit.Microsoft.EntityFrameworkCore.svg)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>net45x</li><li>net46x</li><li>netcore5</li><li>netstandard1.3</li></ul>|
 
 
 What is LINQKit?
@@ -455,4 +455,4 @@ Permission has been granted to have this repo be the official source for this pr
 License
 =======
 LINQKit is free. The source code is issued under a permissive free license, which means you can modify it as you please, and incorporate it into your own commercial or non-commercial software.
-...
+.
