@@ -1,5 +1,5 @@
 {
-    "version": "1.0.2.0",
+    "version": "1.0.3.0",
     "title": "LinqKit for EntityFramework (with IAsync support)",
     "description": "LinqKit.EntityFramework is a free set of extensions for LINQ to SQL and Entity Framework power users. (IAsync supported)",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
@@ -14,7 +14,7 @@
         },
         "projectUrl": "https://github.com/scottksmith95/LINQKit",
         "licenseUrl": "https://github.com/scottksmith95/LINQKit/master/license.txt",
-        "releaseNotes": ".Net Core 1.0 RTM"
+        "releaseNotes": "Added strong name signing for library"
     },
 
     "buildOptions": {
@@ -25,7 +25,8 @@
                 "../LinqKit/*.cs",
                 "../LinqKit/*/*.cs"
             ]
-        }
+        },
+        "keyFile": "LinqKit.EntityFramework.snk"
     },
 
     "dependencies": {
