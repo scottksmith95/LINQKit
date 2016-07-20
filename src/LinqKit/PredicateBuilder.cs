@@ -10,33 +10,28 @@ namespace LinqKit
     /// </summary>
     public static class PredicateBuilder
     {
-        /// <summary>
-        /// The Predicate Operator
-        /// </summary>
-        public enum PredicateOperator
-        {
-            /// <summary>
-            /// The "Or"
-            /// </summary>
-            Or,
-
-            /// <summary>
-            /// The "And"
-            /// </summary>
-            And
-        }
+        /// <summary> Start an expression </summary>
+        public static ExpressionStarter<T> New<T>(Expression<Func<T, bool>> expr = null) { return new ExpressionStarter<T>(expr); }
 
         /// <summary> Always true </summary>
+        [Obsolete]
         public static Expression<Func<T, bool>> True<T>() { return f => true; }
 
         /// <summary> Always false </summary>
-		public static Expression<Func<T, bool>> False<T>() { return f => false; }
+        [Obsolete]
+        public static Expression<Func<T, bool>> False<T>() { return f => false; }
 
         /// <summary> OR </summary>
         public static Expression<Func<T, bool>> Or<T>([NotNull] this Expression<Func<T, bool>> expr1, [NotNull] Expression<Func<T, bool>> expr2)
         {
             var invokedExpr = Expression.Invoke(expr2.Expand(), expr1.Parameters.Cast<Expression>());
             return Expression.Lambda<Func<T, bool>>(Expression.OrElse(expr1.Body, invokedExpr), expr1.Parameters);
+        }
+
+        /// <summary> OR </summary>
+        public static Expression<Func<T, bool>> Or<T>([NotNull] this ExpressionStarter<T> starter, [NotNull] Expression<Func<T, bool>> expr2)
+        {
+            return (starter.Predicate == null) ? (starter.Predicate = expr2) : (starter.Predicate = starter.Predicate.Or(expr2));
         }
 
         /// <summary> AND </summary>
@@ -46,28 +41,10 @@ namespace LinqKit
             return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
         }
 
-        /// <summary>
-        /// Creates a Predicate with can be "And" (true) or "Or" (false).
-        /// </summary>
-        /// <typeparam name="T">The generic Type</typeparam>
-        /// <param name="startOperator">The start PredicateOperator (can be "And" or "Or").</param>
-        /// <returns>Expression{Func{T, bool}}</returns>
-        public static Expression<Func<T, bool>> Create<T>(PredicateOperator startOperator = PredicateOperator.Or)
+        /// <summary> OR </summary>
+        public static Expression<Func<T, bool>> And<T>([NotNull] this ExpressionStarter<T> starter, [NotNull] Expression<Func<T, bool>> expr2)
         {
-            return f => startOperator == PredicateOperator.And;
-        }
-
-        /// <summary>
-        /// Extends the specified source Predicate with another Predicate and the specified PredicateOperator.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="first">The source Predicate.</param>
-        /// <param name="second">The second Predicate.</param>
-        /// <param name="operator">The Operator (can be "And" or "Or").</param>
-        /// <returns>Expression{Func{T, bool}}</returns>
-        public static Expression<Func<T, bool>> Extend<T>([NotNull] this Expression<Func<T, bool>> first, [NotNull] Expression<Func<T, bool>> second, PredicateOperator @operator = PredicateOperator.Or)
-        {
-            return @operator == PredicateOperator.Or ? first.Or(second) : first.And(second);
+            return (starter.Predicate == null) ? (starter.Predicate = expr2) : (starter.Predicate = starter.Predicate.And(expr2));
         }
     }
 }

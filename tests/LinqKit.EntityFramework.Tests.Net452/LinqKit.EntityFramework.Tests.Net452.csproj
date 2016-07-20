@@ -76,6 +76,9 @@
     <Compile Include="..\LinqKit.Tests.Net452\ExpressionCombinerTest.cs">
       <Link>ExpressionCombinerTest.cs</Link>
     </Compile>
+    <Compile Include="..\LinqKit.Tests.Net452\ExpressionStarterTest.cs">
+      <Link>ExpressionStarterTest.cs</Link>
+    </Compile>
     <Compile Include="..\LinqKit.Tests.Net452\PredicateBuilderTest.cs">
       <Link>PredicateBuilderTest.cs</Link>
     </Compile>
