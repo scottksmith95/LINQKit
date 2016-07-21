@@ -23,6 +23,13 @@ namespace LinqKit.Tests.Net452
         }
 
         [Fact]
+        public void PredicateNullUseDefaultExpression()
+        {
+            var predicate = PredicateBuilder.New<string>(true);
+            Assert.Equal("f => True", predicate.Expand().ToString());
+        }
+
+        [Fact]
         public void CanBeAssignedToExpression()
         {
             var predicate = PredicateBuilder.New<string>();
@@ -35,7 +42,7 @@ namespace LinqKit.Tests.Net452
         [Fact]
         public void CanBeAssignedFromExpression()
         {
-            ExpressionStarter<string> predicate = (Expression<Func<string,bool>>)((s) => s == "a");
+            ExpressionStarter<string> predicate = (Expression<Func<string, bool>>)((s) => s == "a");
             Assert.Equal("s => (s == \"a\")", predicate.Expand().ToString());
         }
 
@@ -88,7 +95,7 @@ namespace LinqKit.Tests.Net452
             var actual = predicate.Expand().ToString();
             Assert.Equal(expected, actual);
         }
-        
+
         [Fact]
         public void PredicateOrUsage()
         {

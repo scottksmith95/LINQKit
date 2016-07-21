@@ -26,11 +26,11 @@ namespace LinqKit
         {
             return (Expression<TDelegate>)new ExpressionExpander().Visit(expr);
         }
-        
+
         /// <summary> LinqKit: Expands expression </summary>
         public static Expression Expand<TDelegate>(this ExpressionStarter<TDelegate> expr)
         {
-            return (expr == null || expr.Predicate == null) ? null : new ExpressionExpander().Visit(expr);
+            return (expr != null && (expr.IsStarted || expr.UseDefaultExpression)) ? new ExpressionExpander().Visit(expr) : null;
         }
 
         /// <summary> LinqKit: Expands expression </summary>
@@ -38,7 +38,7 @@ namespace LinqKit
         {
             return new ExpressionExpander().Visit(expr);
         }
-        
+
         /// <summary> LinqKit: Compile and invoke </summary>
         public static TResult Invoke<TResult>(this Expression<Func<TResult>> expr)
         {

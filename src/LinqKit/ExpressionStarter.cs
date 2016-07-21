@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
@@ -17,23 +18,60 @@ namespace LinqKit
     {
         internal ExpressionStarter() { }
 
-        internal ExpressionStarter(Expression<Func<T, bool>> exp) : base()
+        internal ExpressionStarter(bool defaultExpression)
         {
-            Predicate = exp;
+            if (defaultExpression)
+                DefaultExpression = f => true;
+            else
+                DefaultExpression = f => false;
         }
-        /// <summary>
-        /// The predicate
-        /// </summary>
-        public Expression<Func<T, bool>> Predicate { get; set; }
 
-        /// <summary>
-        /// Adds the first expression
-        /// </summary>
-        /// <param name="exp">The first expression</param>
-        public void Start(Expression<Func<T, bool>> exp)
+        internal ExpressionStarter(Expression<Func<T, bool>> exp) { _Predicate = exp; }
+
+        /// <summary>The actual Predicate. It can only be set by calling Start.</summary>
+        private Expression<Func<T, bool>> Predicate
         {
-            Predicate = exp;
+            get { return (IsStarted || !UseDefaultExpression) ? _Predicate : DefaultExpression; }
         }
+        private Expression<Func<T, bool>> _Predicate;
+
+        /// <summary>Determines if the predicate is started.</summary>
+        public bool IsStarted { get { return _Predicate != null; } }
+
+        /// <summary> A default expression to use only when the expression is null </summary>
+        public bool UseDefaultExpression { get { return DefaultExpression != null; } }
+
+        /// <summary>The default expression</summary>
+        public Expression<Func<T, bool>> DefaultExpression { get; set; }
+
+        /// <summary>Set the Expression predicate</summary>
+        /// <param name="exp">The first expression</param>
+        public Expression<Func<T, bool>> Start(Expression<Func<T, bool>> exp)
+        {
+            if (IsStarted)
+                throw new Exception("Predicate cannot be started again.");
+            return (_Predicate = exp);
+        }
+
+        /// <summary> OR </summary>
+        public Expression<Func<T, bool>> Or(Expression<Func<T, bool>> expr2)
+        {
+            return (IsStarted) ? _Predicate = Predicate.Or(expr2) : Start(expr2);
+        }
+
+        /// <summary> OR </summary>
+        public Expression<Func<T, bool>> And(Expression<Func<T, bool>> expr2)
+        {
+            return (IsStarted) ? _Predicate = Predicate.And(expr2) : Start(expr2);
+        }
+
+        /// <summary> Show predicate string </summary>
+        public override string ToString()
+        {
+            return Predicate == null ? null : Predicate.ToString();
+        }
+
+        #region Implicit Operators
 
         /// <summary>
         /// Allows this object to be implicitely converted to an Expression{Func{T, bool}}.
@@ -50,7 +88,7 @@ namespace LinqKit
         /// <param name="right"></param>
         public static implicit operator Func<T, bool>(ExpressionStarter<T> right)
         {
-            return right == null ? null : right.Predicate.Compile();
+            return right == null ? null : (right.IsStarted || right.UseDefaultExpression) ? right.Predicate.Compile() : null;
         }
 
         /// <summary>
@@ -61,6 +99,8 @@ namespace LinqKit
         {
             return right == null ? null : new ExpressionStarter<T>(right);
         }
+
+        #endregion
 
         #region Implement Expression<TDelagate> methods and properties
 
