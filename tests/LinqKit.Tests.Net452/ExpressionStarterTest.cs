@@ -19,7 +19,7 @@ namespace LinqKit.Tests.Net452
         public void PredicateNull()
         {
             var predicate = PredicateBuilder.New<string>();
-            Assert.Null(predicate.Expand());
+            Assert.Equal("f => False", predicate.Expand().ToString());
         }
 
         [Fact]

@@ -16,7 +16,7 @@ namespace LinqKit
     /// <typeparam name="T"></typeparam>
     public class ExpressionStarter<T>
     {
-        internal ExpressionStarter() { }
+        internal ExpressionStarter() : this(false) { }
 
         internal ExpressionStarter(bool defaultExpression)
         {
@@ -26,14 +26,13 @@ namespace LinqKit
                 DefaultExpression = f => false;
         }
 
-        internal ExpressionStarter(Expression<Func<T, bool>> exp) { _Predicate = exp; }
+        internal ExpressionStarter(Expression<Func<T, bool>> exp) : this(false) { _Predicate = exp; }
 
         /// <summary>The actual Predicate. It can only be set by calling Start.</summary>
         private Expression<Func<T, bool>> Predicate
         {
             get { return (IsStarted || !UseDefaultExpression) ? _Predicate : DefaultExpression; }
-        }
-        private Expression<Func<T, bool>> _Predicate;
+        } private Expression<Func<T, bool>> _Predicate;
 
         /// <summary>Determines if the predicate is started.</summary>
         public bool IsStarted { get { return _Predicate != null; } }
