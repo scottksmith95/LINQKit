@@ -5,6 +5,16 @@ using System.Linq.Expressions;
 
 namespace LinqKit
 {
+    /// <summary> The Predicate Operator </summary>
+    public enum PredicateOperator
+    {
+        /// <summary> The "Or" </summary>
+        Or,
+
+        /// <summary> The "And" </summary>
+        And
+    }
+
     /// <summary>
     /// See http://www.albahari.com/expressions for information and examples.
     /// </summary>
@@ -36,6 +46,17 @@ namespace LinqKit
         {
             var invokedExpr = Expression.Invoke(expr2.Expand(), expr1.Parameters.Cast<Expression>());
             return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
+        }
+
+        /// <summary> Extends the specified source Predicate with another Predicate and the specified PredicateOperator. </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="first">The source Predicate.</param>
+        /// <param name="second">The second Predicate.</param>
+        /// <param name="operator">The Operator (can be "And" or "Or").</param>
+        /// <returns>Expression{Func{T, bool}}</returns>
+        public static Expression<Func<T, bool>> Extend<T>([NotNull] this Expression<Func<T, bool>> first, [NotNull] Expression<Func<T, bool>> second, PredicateOperator @operator = PredicateOperator.Or)
+        {
+            return @operator == PredicateOperator.Or ? first.Or(second) : first.And(second);
         }
     }
 }
