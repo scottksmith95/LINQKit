@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/t5ppgbn574xojcms?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
+[![Build status](https://ci.appveyor.com/api/projects/status/awc6lltod7frkbv6?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
 
 
 | Project | NuGet | Dependency | Frameworks |
