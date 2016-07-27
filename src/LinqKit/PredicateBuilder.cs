@@ -58,5 +58,16 @@ namespace LinqKit
         {
             return @operator == PredicateOperator.Or ? first.Or(second) : first.And(second);
         }
+
+        /// <summary> Extends the specified source Predicate with another Predicate and the specified PredicateOperator. </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="first">The source Predicate.</param>
+        /// <param name="second">The second Predicate.</param>
+        /// <param name="operator">The Operator (can be "And" or "Or").</param>
+        /// <returns>Expression{Func{T, bool}}</returns>
+        public static Expression<Func<T, bool>> Extend<T>([NotNull] this ExpressionStarter<T> first, [NotNull] Expression<Func<T, bool>> second, PredicateOperator @operator = PredicateOperator.Or)
+        {
+            return @operator == PredicateOperator.Or ? first.Or(second) : first.And(second);
+        }
     }
 }
