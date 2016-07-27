@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+//using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
@@ -18,3 +19,5 @@ using System.Runtime.InteropServices;
 #if !(PORTABLE || PORTABLE40)
 [assembly: Guid("cff0d30f-9af2-4f3d-8458-167c5cc4aaaa")]
 #endif
+
+//[assembly: InternalsVisibleTo("LinqKit.Tests.Net452", AllInternalsVisible = true)]

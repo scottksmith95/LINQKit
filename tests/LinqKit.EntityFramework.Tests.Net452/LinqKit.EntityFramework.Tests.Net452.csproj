@@ -73,18 +73,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\LinqKit.Tests.Net452\ExpressionCombinerTest.cs">
-      <Link>ExpressionCombinerTest.cs</Link>
+    <Compile Include="..\LinqKit.Tests.Net452\ExpressionCombinerTests.cs">
+      <Link>ExpressionCombinerTests.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit.Tests.Net452\ExpressionStarterTest.cs">
-      <Link>ExpressionStarterTest.cs</Link>
+    <Compile Include="..\LinqKit.Tests.Net452\ExpressionStarterTests.cs">
+      <Link>ExpressionStarterTests.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit.Tests.Net452\PredicateBuilderTest.cs">
-      <Link>PredicateBuilderTest.cs</Link>
+    <Compile Include="..\LinqKit.Tests.Net452\PredicateBuilderTests.cs">
+      <Link>PredicateBuilderTests.cs</Link>
     </Compile>
     <Compile Include="Entity.cs" />
     <Compile Include="TestContext.cs" />
-    <Compile Include="DbAsyncTest.cs" />
+    <Compile Include="DbAsyncTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

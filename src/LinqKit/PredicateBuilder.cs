@@ -48,8 +48,10 @@ namespace LinqKit
             return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
         }
 
-        /// <summary> Extends the specified source Predicate with another Predicate and the specified PredicateOperator. </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <summary>
+        /// Extends the specified source Predicate with another Predicate and the specified PredicateOperator.
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
         /// <param name="first">The source Predicate.</param>
         /// <param name="second">The second Predicate.</param>
         /// <param name="operator">The Operator (can be "And" or "Or").</param>
@@ -59,8 +61,10 @@ namespace LinqKit
             return @operator == PredicateOperator.Or ? first.Or(second) : first.And(second);
         }
 
-        /// <summary> Extends the specified source Predicate with another Predicate and the specified PredicateOperator. </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <summary>
+        /// Extends the specified source Predicate with another Predicate and the specified PredicateOperator.
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
         /// <param name="first">The source Predicate.</param>
         /// <param name="second">The second Predicate.</param>
         /// <param name="operator">The Operator (can be "And" or "Or").</param>
