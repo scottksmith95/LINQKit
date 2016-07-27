@@ -4,10 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
-//using LinqKit.EntityFramework.Tests;
 
 #if EFCORE
 using Microsoft.EntityFrameworkCore;
+using LinqKit.EntityFramework.Tests;
 
 namespace LinqKit.Microsoft.EntityFrameworkCore.Tests
 #else
@@ -26,8 +26,8 @@ namespace LinqKit.EntityFramework.Tests.Net452
             var builder = new DbContextOptionsBuilder();
             builder.UseSqlite($"Filename=LinqKit.{Guid.NewGuid()}.db");
 
-            db = new TestContext(builder.Options);
-            db.Database.EnsureCreated();
+            _db = new TestContext(builder.Options);
+            _db.Database.EnsureCreated();
 #else
             _db = new TestContext($"data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename=|DataDirectory|\\LinqKit.{Guid.NewGuid()}.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework");
 #endif
@@ -46,7 +46,7 @@ namespace LinqKit.EntityFramework.Tests.Net452
         public void Dispose()
         {
 #if EFCORE
-            db.Database.EnsureDeleted();
+            _db.Database.EnsureDeleted();
 #else
             _db.Database.Delete();
 #endif
