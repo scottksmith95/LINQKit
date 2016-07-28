@@ -64,8 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PredicateBuilderTest.cs" />
-    <Compile Include="ExpressionCombinerTest.cs" />
+    <Compile Include="PredicateBuilderTests.cs" />
+    <Compile Include="ExpressionStarterTests.cs" />
+    <Compile Include="ExpressionCombinerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

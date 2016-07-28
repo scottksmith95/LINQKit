@@ -85,6 +85,9 @@
     <Compile Include="..\LinqKit\ExpressionExpander.cs">
       <Link>ExpressionExpander.cs</Link>
     </Compile>
+    <Compile Include="..\LinqKit\ExpressionStarter.cs">
+      <Link>ExpressionStarter.cs</Link>
+    </Compile>
     <Compile Include="..\LinqKit\ExpressionVisitor.cs">
       <Link>ExpressionVisitor.cs</Link>
     </Compile>

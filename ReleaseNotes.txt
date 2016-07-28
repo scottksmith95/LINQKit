@@ -1,3 +1,6 @@
+1.1.7.1
+Added ExpressionStarter logic
+
 1.1.7
 Added strong name signing for LinqKit.dll
 
