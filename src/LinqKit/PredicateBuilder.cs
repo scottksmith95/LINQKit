@@ -5,32 +5,34 @@ using System.Linq.Expressions;
 
 namespace LinqKit
 {
+    /// <summary> The Predicate Operator </summary>
+    public enum PredicateOperator
+    {
+        /// <summary> The "Or" </summary>
+        Or,
+
+        /// <summary> The "And" </summary>
+        And
+    }
+
     /// <summary>
     /// See http://www.albahari.com/expressions for information and examples.
     /// </summary>
     public static class PredicateBuilder
     {
-        /// <summary>
-        /// The Predicate Operator
-        /// </summary>
-        public enum PredicateOperator
-        {
-            /// <summary>
-            /// The "Or"
-            /// </summary>
-            Or,
+        /// <summary> Start an expression </summary>
+        public static ExpressionStarter<T> New<T>(Expression<Func<T, bool>> expr = null) { return new ExpressionStarter<T>(expr); }
 
-            /// <summary>
-            /// The "And"
-            /// </summary>
-            And
-        }
+        /// <summary> Create an expression with a stub expression true or false to use when the expression is not yet started. </summary>
+        public static ExpressionStarter<T> New<T>(bool defaultExpression) { return new ExpressionStarter<T>(defaultExpression); }
 
         /// <summary> Always true </summary>
-        public static Expression<Func<T, bool>> True<T>() { return f => true; }
+        [Obsolete("Use PredicateBuilder.New() instead.")]
+        public static Expression<Func<T, bool>> True<T>() { return new ExpressionStarter<T>(true); }
 
         /// <summary> Always false </summary>
-		public static Expression<Func<T, bool>> False<T>() { return f => false; }
+        [Obsolete("Use PredicateBuilder.New() instead.")]
+        public static Expression<Func<T, bool>> False<T>() { return new ExpressionStarter<T>(false); }
 
         /// <summary> OR </summary>
         public static Expression<Func<T, bool>> Or<T>([NotNull] this Expression<Func<T, bool>> expr1, [NotNull] Expression<Func<T, bool>> expr2)
@@ -47,25 +49,27 @@ namespace LinqKit
         }
 
         /// <summary>
-        /// Creates a Predicate with can be "And" (true) or "Or" (false).
-        /// </summary>
-        /// <typeparam name="T">The generic Type</typeparam>
-        /// <param name="startOperator">The start PredicateOperator (can be "And" or "Or").</param>
-        /// <returns>Expression{Func{T, bool}}</returns>
-        public static Expression<Func<T, bool>> Create<T>(PredicateOperator startOperator = PredicateOperator.Or)
-        {
-            return f => startOperator == PredicateOperator.And;
-        }
-
-        /// <summary>
         /// Extends the specified source Predicate with another Predicate and the specified PredicateOperator.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The type</typeparam>
         /// <param name="first">The source Predicate.</param>
         /// <param name="second">The second Predicate.</param>
         /// <param name="operator">The Operator (can be "And" or "Or").</param>
         /// <returns>Expression{Func{T, bool}}</returns>
         public static Expression<Func<T, bool>> Extend<T>([NotNull] this Expression<Func<T, bool>> first, [NotNull] Expression<Func<T, bool>> second, PredicateOperator @operator = PredicateOperator.Or)
+        {
+            return @operator == PredicateOperator.Or ? first.Or(second) : first.And(second);
+        }
+
+        /// <summary>
+        /// Extends the specified source Predicate with another Predicate and the specified PredicateOperator.
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
+        /// <param name="first">The source Predicate.</param>
+        /// <param name="second">The second Predicate.</param>
+        /// <param name="operator">The Operator (can be "And" or "Or").</param>
+        /// <returns>Expression{Func{T, bool}}</returns>
+        public static Expression<Func<T, bool>> Extend<T>([NotNull] this ExpressionStarter<T> first, [NotNull] Expression<Func<T, bool>> second, PredicateOperator @operator = PredicateOperator.Or)
         {
             return @operator == PredicateOperator.Or ? first.Or(second) : first.And(second);
         }

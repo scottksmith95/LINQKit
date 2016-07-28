@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/t5ppgbn574xojcms?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
+[![Build status](https://ci.appveyor.com/api/projects/status/awc6lltod7frkbv6?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
 
 
 | Project | NuGet | Dependency | Frameworks |
@@ -247,7 +247,7 @@ Here's how to solve the preceding example with PredicateBuilder:
 ```csharp
 IQueryable<Product> SearchProducts (params string[] keywords)
 {
-  var predicate = PredicateBuilder.False<Product>();
+  var predicate = PredicateBuilder.New<Product>();
 
   foreach (string keyword in keywords)
   {
@@ -266,19 +266,32 @@ return objectContext.Products.AsExpandable().Where (predicate);
 
 ##How it Works
 
-The True and False methods do nothing special: they are simply convenient shortcuts for creating an Expression<Func<T,bool>> that initially evaluates to true or false. So the following:
+
+~~The True and False methods do nothing special: they are simply convenient shortcuts for creating an Expression<Func<T,bool>> that initially evaluates to true or false.~~
+
+PredicateBuilder.New() creates an object called ExpressionStarter<T>, which acts for all intents and purposes as an Expression<Func<T, bool>> object. 
+
+So the following:
 
 ```csharp
-var predicate = PredicateBuilder.True <Product> ();
+var predicate = PredicateBuilder.New() <Product> ();
 ```
 
-is just a shortcut for this:
+Would be a shortcut for this:
 
 ```csharp
-Expression<Func<Product, bool>> predicate = c => true;
+Expression<Func<Product, bool>> predicate = c => false;
 ```
 
-When you’re building a predicate by repeatedly stacking and/or conditions, it’s useful to have a starting point of either true or false (respectively). Our SearchProducts method still works if no keywords are supplied.
+However, a default we don't want a stub expression. In Entity Framework, this would result in a query having a where statement starting with 1=0, so a if you were checking that value = 'abc', the query's where clause would look as follows;
+
+```
+WHERE 1=0 OR value = 'abc'
+```
+
+ExpressionStarter fixes this. As soon as the first expression is added to ExpressionStarter, the default experssion is removed. You can add the first expression by calling ExpressionStarter's Start method. However, calling Start is not required. If no expression has been added to the ExpressionStarter, then calling And or Or will simply add the first expresion. This is usefull when using loops.
+
+~~When you’re building a predicate by repeatedly stacking and/or conditions, it’s useful to have a starting point of either true or false (respectively). Our SearchProducts method still works if no keywords are supplied.~~
 
 The interesting work takes place inside the And and Or methods. We start by invoking the second expression with the first expression’s parameters. An Invoke expression calls another lambda expression using the given expressions as arguments. We can create the conditional expression from the body of the first expression and the invoked version of the second. The final step is to wrap this in a new lambda expression.
 
@@ -306,7 +319,7 @@ public partial class Product
   public static Expression<Func<Product, bool>> ContainsInDescription (
                                                 params string[] keywords)
   {
-    var predicate = PredicateBuilder.False<Product>();
+    var predicate = PredicateBuilder.New<Product>();
     foreach (string keyword in keywords)
     {
       string temp = keyword;
@@ -317,7 +330,11 @@ public partial class Product
 }
 ```
 
-This offers an excellent balance of simplicity and reusability, as well as separating business logic from expression plumbing logic. To retrieve all products whose description contains “BlackBerry” or “iPhone”, along with the Nokias and Ericssons that are selling, you would do this:
+This offers an excellent balance of simplicity and reusability, as well as separating business logic from expression plumbing logic. 
+
+Notice that in the above query, we didn't have to call Start, as the first call to Or will Start the ExpressionStarter for us. Also, notice that even though 'predicate' is a type ExpressionStarter<Product>, we can return it just fine even though the return method is an Expression<Func<Product, bool>>. ExpressionStarter has an implicit conversion operator that allows it to act like an Expression<Func<T, bool>>.
+
+To retrieve all products whose description contains “BlackBerry” or “iPhone”, along with the Nokias and Ericssons that are selling, you would do this:
 
 ```csharp
 var newKids  = Product.ContainsInDescription ("BlackBerry", "iPhone");
@@ -329,7 +346,8 @@ var query =
   select p;
 ```
 
-The And and Or methods in boldface resolve to extension methods in PredicateBuilder. 
+The And and Or methods in boldface resolve to extension methods in PredicateBuilder.
+
 An expression predicate can perform the equivalent of an SQL subquery by referencing association properties. So, if Product had a child EntitySet called Purchases, we could refine our IsSelling method to return only those products that have sold a minimum number of units as follows:
 
 ```csharp
@@ -357,17 +375,17 @@ Let's say we wanted to build this dynamically. The question is, how do we deal w
 The answer is to build the parenthesised expression first, and then consume it in the outer expression as follows:
 
 ```csharp
-var inner = PredicateBuilder.False<Product>();
-inner = inner.Or (p => p.Description.Contains ("foo"));
+var inner = PredicateBuilder.New<Product>();
+inner = inner.Start(p => p.Description.Contains ("foo"));
 inner = inner.Or (p => p.Description.Contains ("far"));
 
-var outer = PredicateBuilder.True<Product>();
-outer = outer.And (p => p.Price > 100);
+var outer = PredicateBuilder.New<Product>();
+outer = outer.Start(p => p.Price > 100);
 outer = outer.And (p => p.Price < 1000);
 outer = outer.And (inner);
 ```
 
-Notice that with the inner expression, we start with PredicateBuilder.False (because we're using the Or operator). With the outer expression, however, we start with PredicateBuilder.True (because we're using the And operator).
+~~Notice that with the inner expression, we start with PredicateBuilder.False (because we're using the Or operator). With the outer expression, however, we start with PredicateBuilder.True (because we're using the And operator).~~
 
 ##Generic Predicates
 
