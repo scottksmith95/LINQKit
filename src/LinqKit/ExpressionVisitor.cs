@@ -161,6 +161,17 @@ namespace LinqKit
 		protected virtual Expression VisitConditional(ConditionalExpression c)
         {
             Expression test = Visit(c.Test);
+            var checkbool = test as ConstantExpression;
+            if (checkbool != null && checkbool.Value is bool) {
+                if((bool)checkbool.Value)
+                {
+                    return Visit(c.IfTrue);
+                }
+                else
+                {
+                    return Visit(c.IfFalse);
+                }
+            }
             Expression ifTrue = Visit(c.IfTrue);
             Expression ifFalse = Visit(c.IfFalse);
             if (test != c.Test || ifTrue != c.IfTrue || ifFalse != c.IfFalse)
