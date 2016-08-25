@@ -1,4 +1,4 @@
-# LinkKit Release Notes
+# LinqKit Release Notes
 
 #### 1.1.7.1 (28 July 2016)
 * Added ExpressionStarter logic
