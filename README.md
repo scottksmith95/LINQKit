@@ -550,6 +550,9 @@ More optimized queries!
 If you have a lot of logics in your queries, like enterprise applications usually have, let's say for example:
 
 ```csharp
+// simulate some dynamic non-database-parameter
+var t = DateTime.Now.Month % 3; 
+
 var qry1 =
     from o in context.Orders.AsExpandable()
     let myTemp = 
