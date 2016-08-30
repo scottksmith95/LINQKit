@@ -463,6 +463,87 @@ public partial class PriceList : IValidFromTo { }
 public partial class Product   : IValidFromTo { }
 ```
 
+Complete Example, Getting Started...
+=======
+
+Create a database, let's say MyDatabase to your SQL server with script:
+
+```sql
+CREATE TABLE [dbo].[Orders](
+	Id int NOT NULL IDENTITY (1, 1),
+	Amount int NOT NULL,
+	OrderDate smalldatetime NOT NULL
+	) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Orders] ADD CONSTRAINT
+	PK_Table_1 PRIMARY KEY CLUSTERED (Id) 
+	WITH( STATISTICS_NORECOMPUTE = OFF, 
+			IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, 
+			ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+-- Insert some demo data:
+INSERT INTO [dbo].[Orders]([Amount],[OrderDate]) 
+	VALUES (3, '2016-01-01')
+INSERT INTO [dbo].[Orders]([Amount],[OrderDate]) 
+	VALUES (5, '2016-01-01')
+INSERT INTO [dbo].[Orders]([Amount],[OrderDate]) 
+	VALUES (7, '2016-01-02')
+GO
+```
+
+Then create a new C# console application. Add references to nuget packages `EntityFramework` and `LinqKit`.
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using LinqKit;
+
+public class Order
+{
+    [Key] public int Id { get; set; }
+    [Required] public int Amount { get; set; }
+    [Required] public DateTime OrderDate { get; set; }
+}
+
+/// <summary> Some simple EF DBContext item for this example</summary>
+public class MyDbContext : DbContext
+{
+    static MyDbContext() { Database.SetInitializer<MyDbContext>(null); }
+    public MyDbContext() : base(
+		"Server=localhost;Database=MyDatabase;Integrated Security = True;"){}
+    public DbSet<Order> Orders { get; set; }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Expression<Func<IQueryable<Order>, decimal?>> expression = 
+            orders => orders.Average(o => (decimal?)o.Amount);
+
+        using (var context = new MyDbContext())
+        {
+            IQueryable<Order> orders = context.Orders;
+            var q = from o in orders.AsExpandable()
+                    group o by o.OrderDate into g
+                    select new
+                    {
+                        OrderDate = g.Key,
+                        AggregatedAmount = expression.Invoke(g.AsQueryable())
+                    };
+            //ToList or ToListAsync:
+            q.ToList().ForEach(Console.WriteLine);
+            Console.ReadLine();
+        }
+    }
+}
+```
+Run. Observe with SQL profiler that your `expression` is coming outside the EF-context but still executed to the SQL-query.
+
 Original source and author
 =======
 
