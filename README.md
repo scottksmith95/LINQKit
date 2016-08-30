@@ -544,6 +544,71 @@ class Program
 ```
 Run. Observe with SQL profiler that your `expression` is coming outside the EF-context but still executed to the SQL-query.
 
+More optimized queries!
+=======
+
+If you have a lot of logics in your queries, like enterprise applications usually have, let's say for example:
+
+```csharp
+var qry1 =
+    from o in context.Orders.AsExpandable()
+    let myTemp = 
+        t == 1 ? o.Amount + 10 :
+        t == 2 ? o.Amount - 10 :
+        o.Amount
+    select new
+    {
+        OrderDate = o.OrderDate,
+        FixedAmount = myTemp
+    };
+
+var qry2 = 
+    from x in qry1
+    where x.FixedAmount < 100
+    select x;
+
+var res = qry2.ToList();
+```
+
+This creates query:
+
+```sql
+exec sp_executesql N'
+SELECT 
+    [Extent1].[Amount] AS [Amount], 
+    [Extent1].[OrderDate] AS [OrderDate], 
+    CASE WHEN (1 = @p__linq__0) THEN [Extent1].[Amount] + 10 
+         WHEN (2 = @p__linq__1) THEN [Extent1].[Amount] - 10 
+         ELSE [Extent1].[Amount] END AS [C1]
+    FROM [dbo].[Orders] AS [Extent1]
+    WHERE (CASE WHEN (1 = @p__linq__0) 
+         THEN [Extent1].[Amount] + 10 
+         WHEN (2 = @p__linq__1) THEN [Extent1].[Amount] - 10 
+         ELSE [Extent1].[Amount] END) < 100
+',N'@p__linq__0 int,@p__linq__1 int',@p__linq__0=2,@p__linq__1=2
+```
+
+As you noticed, there are lot of dynamic parameters. This is good if the parameters vary a lot, but here they are pretty static so SQL-server will not be able to perform all caching optimizations. We could optimize away these variables by runtime when LinqKit forms the query.
+
+There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit. Install the nuget package (and add reference to F#-core library), and make this static call once before executing your queries:
+
+```csharp
+LinqkitExtension.QueryOptimizer = ExpressionOptimizer.visit;
+```
+
+And run your query as usual. Observe the difference, now the same query is:
+
+```
+SELECT 
+    [Extent1].[Amount] AS [Amount], 
+    [Extent1].[OrderDate] AS [OrderDate], 
+    [Extent1].[Amount] - 10 AS [C1]
+    FROM [dbo].[Orders] AS [Extent1]
+    WHERE ([Extent1].[Amount] - 10) < 100
+```
+
+If your IQueryable has dynamic parameters from other IQueryables, it can still be complex.
+
 Original source and author
 =======
 
