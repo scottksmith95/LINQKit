@@ -8,6 +8,20 @@
 | LinqKit.Microsoft.EntityFrameworkCore | [![Version](https://img.shields.io/nuget/v/LinqKit.Microsoft.EntityFrameworkCore.svg)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>net45x</li><li>net46x</li><li>netcore5</li><li>netstandard1.3</li></ul>|
 
 
+Table of Contents
+=======
+
+* [What is LINQKit?](#what-is-linqkit)
+* [Plugging Expressions into EntitySets / EntityCollections: The Problem](#plugging-expressions-into-entitysets--entitycollections-the-problem)
+* [Plugging Expressions into EntitySets / EntityCollections: The Solution](#plugging-expressions-into-entitysets--entitycollections-the-solution)
+* [Using Expression Variables in Subqueries](#using-expression-variables-in-subqueries)
+* [Combining Expressions](#combining-expressions)
+* [PredicateBuilder](#predicatebuilder)
+* [Complete Example, Getting Started...](#complete-example-getting-started)
+* [More optimized queries!](#more-optimized-queries)
+* [Original source and author](#original-source-and-author)
+
+
 What is LINQKit?
 =======
 
@@ -542,7 +556,7 @@ class Program
     }
 }
 ```
-Run. Observe with SQL profiler that your `expression` is coming outside the EF-context but still executed to the SQL-query.
+Run. Observe with SQL profiler that your `expression` is coming outside the EF-context but still executed to the SQL-query. There are good tutorial videos and materials of SQL profiling in the internet and the profiling is highly recommended. SQL Server Management Studio includes SQL Server Profiler.
 
 More optimized queries!
 =======
@@ -593,7 +607,7 @@ SELECT
 
 As you noticed, there are lot of dynamic parameters. This is good if the parameters vary a lot, but here they are pretty static so SQL-server will not be able to perform all caching optimizations. We could optimize away these variables by runtime when LinqKit forms the query.
 
-There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit. Install the nuget package (and add reference to F#-core library), and make this static call once before executing your queries:
+There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit. Install the nuget package (and add reference to F#-core library), and make this static call once before executing your queries (e.g. to your app startup or static class constructor):
 
 ```csharp
 LinqkitExtension.QueryOptimizer = ExpressionOptimizer.visit;
@@ -618,6 +632,11 @@ Original source and author
 http://www.albahari.com/nutshell/linqkit.aspx
 
 Permission has been granted to have this repo be the official source for this project.
+
+Contributing
+=======
+Just send PullRequests to the this repository.
+To compile the whole solution you may need .NET Core and Silverlight 5 SDK installed.
 
 License
 =======
