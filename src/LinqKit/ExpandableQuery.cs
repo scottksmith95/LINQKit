@@ -19,18 +19,6 @@ using System.Data.Entity.Infrastructure;
 namespace LinqKit
 {
     /// <summary>
-    /// Extensibility point: If you want to modify expanded queries before executing them
-    /// set your own functionality to override empty QueryOptimizer
-    /// </summary>
-    public static class LinqkitExtension
-    {
-        /// <summary>
-        /// Place to optimize your queries. Example: Add a reference to Nuget package Linq.Expression.Optimizer 
-        /// and in your program initializers set LinqkitExtension.QueryOptimizer = ExpressionOptimizer.visit;
-        /// </summary>
-        public static Func<Expression, Expression> QueryOptimizer = e => e;
-    }
-    /// <summary>
     /// An IQueryable wrapper that allows us to visit the query's expression tree just before LINQ to SQL gets to it.
     /// This is based on the excellent work of Tomas Petricek: http://tomasp.net/blog/linq-expand.aspx
     /// </summary>
@@ -136,7 +124,7 @@ namespace LinqKit
         IQueryable<TElement> IQueryProvider.CreateQuery<TElement>(Expression expression)
         {
             var expanded = expression.Expand();
-            var optimized = LinqkitExtension.QueryOptimizer(expanded);
+            var optimized = LinqKitExtension.QueryOptimizer(expanded);
             return _query.InnerQuery.Provider.CreateQuery<TElement>(optimized).AsExpandable();
         }
 
@@ -148,14 +136,14 @@ namespace LinqKit
         TResult IQueryProvider.Execute<TResult>(Expression expression)
         {
             var expanded = expression.Expand();
-            var optimized = LinqkitExtension.QueryOptimizer(expanded);
+            var optimized = LinqKitExtension.QueryOptimizer(expanded);
             return _query.InnerQuery.Provider.Execute<TResult>(optimized);
         }
 
         object IQueryProvider.Execute(Expression expression)
         {
             var expanded = expression.Expand();
-            var optimized = LinqkitExtension.QueryOptimizer(expanded);
+            var optimized = LinqKitExtension.QueryOptimizer(expanded);
             return _query.InnerQuery.Provider.Execute(optimized);
         }
 
@@ -171,7 +159,7 @@ namespace LinqKit
         {
             var asyncProvider = _query.InnerQuery.Provider as IDbAsyncQueryProvider;
             var expanded = expression.Expand();
-            var optimized = LinqkitExtension.QueryOptimizer(expanded);
+            var optimized = LinqKitExtension.QueryOptimizer(expanded);
             if (asyncProvider != null)
                 return asyncProvider.ExecuteAsync(optimized, cancellationToken);
             return Task.FromResult(_query.InnerQuery.Provider.Execute(optimized));
@@ -186,7 +174,7 @@ namespace LinqKit
             var asyncProvider = _query.InnerQuery.Provider as IDbAsyncQueryProvider;
 #endif
             var expanded = expression.Expand();
-            var optimized = LinqkitExtension.QueryOptimizer(expanded);
+            var optimized = LinqKitExtension.QueryOptimizer(expanded);
             if (asyncProvider != null)
                 return asyncProvider.ExecuteAsync<TResult>(optimized, cancellationToken);
 

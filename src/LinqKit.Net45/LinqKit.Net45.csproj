@@ -108,6 +108,9 @@
     <Compile Include="..\LinqKit\Linq.cs">
       <Link>Linq.cs</Link>
     </Compile>
+    <Compile Include="..\LinqKit\LinqKitExtension.cs">
+      <Link>LinqKitExtension.cs</Link>
+    </Compile>
     <Compile Include="..\LinqKit\PredicateBuilder.cs">
       <Link>PredicateBuilder.cs</Link>
     </Compile>
