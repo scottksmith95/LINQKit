@@ -607,7 +607,7 @@ SELECT
 
 As you noticed, there are lot of dynamic parameters. This is good if the parameters vary a lot, but here they are pretty static so SQL-server will not be able to perform all caching optimizations. We could optimize away these variables by runtime when LinqKit forms the query.
 
-There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit. Install the nuget package (and add reference to F#-core library), and make this static call once before executing your queries (e.g. to your app startup or static class constructor):
+There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit. Install the nuget package (and add reference to F#-core library), and make this static call once before executing your queries (e.g. to your app startup or static class constructor or Application_Start):
 
 ```csharp
 LinqkitExtension.QueryOptimizer = ExpressionOptimizer.visit;
