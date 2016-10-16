@@ -2,7 +2,7 @@
     "version": "1.0.0-*",
     "authors": [ "Stef Heyenrath" ],
     "dependencies": {
-        "LinqKit": { "target": "project" },
+        "LinqKit.Core": { "target": "project" },
 
         "dotnet-test-xunit": "1.0.0-rc2-build10025",
         "xunit": "2.1.0-rc2-build3178"

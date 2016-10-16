@@ -1,5 +1,8 @@
 # LinqKit Release Notes
 
+#### 1.2.0.0 (16 Oct 2016)
+* Make LinqKit obsolete and introduce LinqKit.Core
+
 #### 1.1.7.1 (28 July 2016)
 * Added ExpressionStarter logic
 

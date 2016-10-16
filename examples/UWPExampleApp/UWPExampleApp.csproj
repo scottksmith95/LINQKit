@@ -127,8 +127,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="LinqKit">
-      <HintPath>..\..\src\LinqKit\bin\$(Configuration)\uap10.0\LinqKit.dll</HintPath>
+    <Reference Include="LinqKit.Core">
+      <HintPath>..\..\src\LinqKit.Core\bin\$(Configuration)\uap10.0\LinqKit.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

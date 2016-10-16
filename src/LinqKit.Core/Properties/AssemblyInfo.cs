@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 #if !(PORTABLE || PORTABLE40)
-[assembly: Guid("cff0d30f-9af2-4f3d-8458-167c5cc4aaaa")]
+[assembly: Guid("853c4168-22cd-44aa-bfbb-60196bddb66d")]
 #endif
 
 //[assembly: InternalsVisibleTo("LinqKit.Tests.Net452", AllInternalsVisible = true)]

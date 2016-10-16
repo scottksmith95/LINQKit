@@ -25,7 +25,7 @@ namespace System.Linq
                 case 1: return lambdas[0];
                 case 2: return operationToDo(lambdas[0], lambdas[1]);
                 default:
-                    var half = items / 2;
+                    int half = items / 2;
                     var o1 = AggregateBalanced(lambdas.Take(half).ToArray(), operationToDo);
                     var o2 = AggregateBalanced(lambdas.Skip(half).ToArray(), operationToDo);
                     return operationToDo(o1, o2);
@@ -48,7 +48,7 @@ namespace System.Linq
                 case 1: return lambdas[0];
                 case 2: return operationToDo(lambdas[0], lambdas[1]);
                 default:
-                    var half = items / 2;
+                    int half = items / 2;
                     var o1 = AggregateBalanced(lambdas.Take(half).ToArray(), operationToDo);
                     var o2 = AggregateBalanced(lambdas.Skip(half).ToArray(), operationToDo);
                     return operationToDo(o1, o2);
@@ -72,7 +72,7 @@ namespace System.Linq
                 case 1: return lambdas[0];
                 case 2: return operationToDo(lambdas[0], lambdas[1]);
                 default:
-                    var half = items / 2;
+                    int half = items / 2;
                     var op1 = TaskHelper.Run(() => AggregateBalanced(lambdas.Take(half).ToArray(), operationToDo));
                     var op2 = TaskHelper.Run(() => AggregateBalanced(lambdas.Skip(half).ToArray(), operationToDo));
                     return operationToDo(await op1, await op2);
@@ -95,7 +95,7 @@ namespace System.Linq
                 case 1: return lambdas[0];
                 case 2: return operationToDo(lambdas[0], lambdas[1]);
                 default:
-                    var half = items / 2;
+                    int half = items / 2;
                     var op1 = TaskHelper.Run(() => AggregateBalanced(lambdas.Take(half).ToArray(), operationToDo));
                     var op2 = TaskHelper.Run(() => AggregateBalanced(lambdas.Skip(half).ToArray(), operationToDo));
                     return operationToDo(await op1, await op2);
