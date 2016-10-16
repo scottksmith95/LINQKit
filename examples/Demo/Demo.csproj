@@ -53,9 +53,12 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Demo.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LinqKit">
-      <HintPath>..\..\src\LinqKit\bin\$(Configuration)\net452\LinqKit.dll</HintPath>
+    <Reference Include="LinqKit.EntityFramework">
+      <HintPath>..\..\src\LinqKit.EntityFramework\bin\$(Configuration)\net452\LinqKit.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LinqKit">
-      <HintPath>..\..\src\LinqKit\bin\$(Configuration)\net452\LinqKit.dll</HintPath>
+    <Reference Include="LinqKit.Core">
+      <HintPath>..\..\src\LinqKit.Core\bin\$(Configuration)\net452\LinqKit.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

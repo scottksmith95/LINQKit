@@ -22,8 +22,8 @@
         "define": [ "EFCORE" ],
         "compile": {
             "include": [
-                "../LinqKit/*.cs",
-                "../LinqKit/*/*.cs"
+                "../LinqKit.Core/*.cs",
+                "../LinqKit.Core/*/*.cs"
             ]
         },
         "keyFile": "LinqKit.Microsoft.EntityFrameworkCore.snk"

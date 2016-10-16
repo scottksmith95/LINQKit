@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
 using System.Reflection;
+using LinqKit.Core.Utilities;
 
 namespace LinqKit
 {
-    /// <summary>Refer to http://www.albahari.com/nutshell/linqkit.html and
-    /// http://tomasp.net/blog/linq-expand.aspx for more information.</summary>
+    /// <summary>
+    /// Refer to http://www.albahari.com/nutshell/linqkit.html and http://tomasp.net/blog/linq-expand.aspx for more information.
+    /// </summary>
     public static class Extensions
     {
         /// <summary> LinqKit: Returns wrapper that automatically expands expressions </summary>
         public static IQueryable<T> AsExpandable<T>(this IQueryable<T> query)
         {
+            Util.IsSupported();
+
             if (query is ExpandableQuery<T>) return query;
 #if !(NET35 || NOEF)
             return ExpandableQueryFactory<T>.Create(query);
 #else
             return new ExpandableQuery<T>(query);
-#endif
+#endif // !(NET35 || NOEF)
         }
 
         /// <summary> LinqKit: Expands expression </summary>
@@ -188,7 +192,7 @@ namespace LinqKit
                 Create = createExpr.Compile();
             }
         }
-#endif
-#endif
+#endif // !NOEF
+#endif // !(NET35 || NET40)
     }
 }
