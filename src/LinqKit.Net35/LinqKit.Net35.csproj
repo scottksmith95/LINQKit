@@ -76,34 +76,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\LinqKit\AggregateBalanced.cs">
+    <Compile Include="..\LinqKit.Core\AggregateBalanced.cs">
       <Link>AggregateBalanced.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit\ExpandableQuery.cs">
+    <Compile Include="..\LinqKit.Core\ExpandableQuery.cs">
       <Link>ExpandableQuery.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit\ExpressionExpander.cs">
+    <Compile Include="..\LinqKit.Core\ExpressionExpander.cs">
       <Link>ExpressionExpander.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit\ExpressionStarter.cs">
+    <Compile Include="..\LinqKit.Core\ExpressionStarter.cs">
       <Link>ExpressionStarter.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit\ExpressionVisitor.cs">
+    <Compile Include="..\LinqKit.Core\ExpressionVisitor.cs">
       <Link>ExpressionVisitor.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit\Extensions.cs">
+    <Compile Include="..\LinqKit.Core\Extensions.cs">
       <Link>Extensions.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit\Linq.cs">
+    <Compile Include="..\LinqKit.Core\Linq.cs">
       <Link>Linq.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit\LinqKitExtension.cs">
+    <Compile Include="..\LinqKit.Core\LinqKitExtension.cs">
       <Link>LinqKitExtension.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit\PredicateBuilder.cs">
+    <Compile Include="..\LinqKit.Core\PredicateBuilder.cs">
       <Link>PredicateBuilder.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit\Utilities\IntrospectionExtensions.cs">
+    <Compile Include="..\LinqKit.Core\Utilities\IntrospectionExtensions.cs">
       <Link>Utilities\IntrospectionExtensions.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

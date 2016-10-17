@@ -1,11 +1,11 @@
 {
-    "version": "1.0.3.1",
-    "title": "LinqKit for EntityFramework (with IAsync support)",
-    "description": "LinqKit.EntityFramework is a free set of extensions for LINQ to SQL and Entity Framework power users. (IAsync supported)",
+    "version": "1.1.8.0",
+    "title": "LinqKit for EntityFramework with Include(...) and IAsync support",
+    "description": "LinqKit.EntityFramework is a free set of extensions for LINQ to SQL and Entity Framework power users. Include(...) and IAsync are supported.",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
 
     "packOptions": {
-        "summary": "LinqKit.EntityFramework is a free set of extensions for LINQ to SQL and Entity Framework power users. (IAsync supported)",
+        "summary": "LinqKit.EntityFramework is a free set of extensions for LINQ to SQL and Entity Framework power users. Include(...) and IAsync are supported.",
         "tags": [ "linq", "EF", "EntityFramework", "Entity", "Framework" ],
         "owners": [ "Stef Heyenrath" ],
         "repository": {
@@ -14,7 +14,7 @@
         },
         "projectUrl": "https://github.com/scottksmith95/LINQKit",
         "licenseUrl": "https://github.com/scottksmith95/LINQKit/master/license.txt",
-        "releaseNotes": "Fixed UWP Release mode issue."
+        "releaseNotes": "New version"
     },
 
     "buildOptions": {
@@ -22,8 +22,11 @@
         "define": [ "EF" ],
         "compile": {
             "include": [
-                "../LinqKit/*.cs",
-                "../LinqKit/*/*.cs"
+                "../LinqKit.Core/*.cs",
+                "../LinqKit.Core/*/*.cs"
+            ],
+            "exclude": [
+                "../LinqKit.Core/*/AssemblyInfo.cs"
             ]
         },
         "keyFile": "LinqKit.EntityFramework.snk"
