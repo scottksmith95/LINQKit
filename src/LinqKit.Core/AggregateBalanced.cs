@@ -1,5 +1,5 @@
 ﻿#if !(NET35)
-using LinqKit.Utitilies;
+using LinqKit.Utilities;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
