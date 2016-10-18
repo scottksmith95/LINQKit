@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace LinqKit.Utitilies
+namespace LinqKit.Utilities
 {
     internal static class TaskHelper
     {
