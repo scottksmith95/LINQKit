@@ -20,6 +20,28 @@ namespace LinqKit
     /// </summary>
     public static class PredicateBuilder
     {
+        protected class RebindParameterVisitor : ExpressionVisitor
+        {
+            private ParameterExpression _oldParameter;
+            private ParameterExpression _newParameter;
+
+            public RebindParameterVisitor(ParameterExpression oldParameter, ParameterExpression newParameter)
+            {
+                _oldParameter = oldParameter;
+                _newParameter = newParameter;
+            }
+
+            protected override Expression VisitParameter(ParameterExpression node)
+            {
+                if (node == _oldParameter)
+                {
+                    return _newParameter;
+                }
+
+                return base.Visit(node);
+            }
+        }
+
         /// <summary> Start an expression </summary>
         public static ExpressionStarter<T> New<T>(Expression<Func<T, bool>> expr = null) { return new ExpressionStarter<T>(expr); }
 
@@ -37,15 +59,15 @@ namespace LinqKit
         /// <summary> OR </summary>
         public static Expression<Func<T, bool>> Or<T>([NotNull] this Expression<Func<T, bool>> expr1, [NotNull] Expression<Func<T, bool>> expr2)
         {
-            var invokedExpr = Expression.Invoke(expr2.Expand(), expr1.Parameters.Cast<Expression>());
-            return Expression.Lambda<Func<T, bool>>(Expression.OrElse(expr1.Body, invokedExpr), expr1.Parameters);
+            var expr2Body = new RebindParameterVisitor(expr2.Parameters[0], expr1.Parameters[0]).Visit(expr2.Body);
+            return Expression.Lambda<Func<T, bool>>(Expression.OrElse(expr1.Body, expr2Body), expr1.Parameters);
         }
 
         /// <summary> AND </summary>
         public static Expression<Func<T, bool>> And<T>([NotNull] this Expression<Func<T, bool>> expr1, [NotNull] Expression<Func<T, bool>> expr2)
         {
-            var invokedExpr = Expression.Invoke(expr2.Expand(), expr1.Parameters.Cast<Expression>());
-            return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
+            var expr2Body = new RebindParameterVisitor(expr2.Parameters[0], expr1.Parameters[0]).Visit(expr2.Body);
+            return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(expr1.Body, expr2Body), expr1.Parameters);
         }
 
         /// <summary>
