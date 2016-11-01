@@ -38,7 +38,7 @@ namespace LinqKit
                     return _newParameter;
                 }
 
-                return base.Visit(node);
+                return base.VisitParameter(node);
             }
         }
 
