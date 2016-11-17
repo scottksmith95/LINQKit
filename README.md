@@ -3,7 +3,8 @@
 
 | Project | NuGet | Dependency | Frameworks |
 | ------- | ----- | -----------| ---------- | 
-| LinqKit | [![Version](https://img.shields.io/nuget/v/LinqKit.svg)](https://www.nuget.org/packages/LinqKit) | | <ul><li>net35</li><li>net40</li><li>net45 & net45x</li><li>net46x</li><li>netcore5</li><li>.NETPortable Profile 328</li><li>netstandard1.3</li><li>sl5</li><li>uap10</li></ul>|
+| LinqKit | [![Version](https://img.shields.io/nuget/v/LinqKit.svg)](https://www.nuget.org/packages/LinqKit) | EntityFramework | <ul><li>net45</li><li>net45x</li><li>net46x</li></ul> |
+| LinqKit.Core | [![Version](https://img.shields.io/nuget/v/LinqKit.Core.svg)](https://www.nuget.org/packages/LinqKit.Core) | | <ul><li>net35</li><li>net40</li><li>net45 & net45x</li><li>net46x</li><li>netcore5</li><li>.NETPortable Profile 328</li><li>netstandard1.3</li><li>sl5</li><li>uap10</li></ul>|
 | LinqKit.EntityFramework | [![Version](https://img.shields.io/nuget/v/LinqKit.EntityFramework.svg)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework | <ul><li>net45</li><li>net45x</li><li>net46x</li></ul> |
 | LinqKit.Microsoft.EntityFrameworkCore | [![Version](https://img.shields.io/nuget/v/LinqKit.Microsoft.EntityFrameworkCore.svg)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>net45x</li><li>net46x</li><li>netcore5</li><li>netstandard1.3</li></ul>|
 
@@ -607,7 +608,7 @@ SELECT
 
 As you noticed, there are lot of dynamic parameters. This is good if the parameters vary a lot, but here they are pretty static so SQL-server will not be able to perform all caching optimizations. We could optimize away these variables by runtime when LinqKit forms the query.
 
-There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit. Install the nuget package (and add reference to F#-core library), and make this static call once before executing your queries (e.g. to your app startup or static class constructor):
+There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit. Install the nuget package (and add reference to F#-core library), and make this static call once before executing your queries (e.g. to your app startup or static class constructor or Application_Start):
 
 ```csharp
 LinqkitExtension.QueryOptimizer = ExpressionOptimizer.visit;

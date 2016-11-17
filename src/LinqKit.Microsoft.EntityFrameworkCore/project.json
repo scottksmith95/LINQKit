@@ -1,12 +1,10 @@
 {
-    "version": "1.0.4.2",
-    "title": "LinqKit for Microsoft.EntityFrameworkCore (with IDbAsync support)",
-    "description": "LinqKit.Microsoft.EntityFrameworkCore is a free set of extensions for LINQ to SQL and EntityFrameworkCore power users. (IDbAsync supported)",
+    "title": "LinqKit for Microsoft.EntityFrameworkCore with Include(...) and IDbAsync support",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
 
     "packOptions": {
-        "summary": "LinqKit.Microsoft.EntityFrameworkCore is a free set of extensions for LINQ to SQL and EntityFrameworkCore power users. (IDbAsync supported)",
-        "tags": [ "linq", "EF", "EntityFramework", "Entity", "Framework", "Core" ],
+        "summary": "LinqKit.Microsoft.EntityFrameworkCore is a free set of extensions for LINQ to SQL and EntityFrameworkCore power users. With Include(...) and IDbAsync support.",
+        "tags": [ "linq", "EF", "EntityFramework", "Entity", "Framework", "Core", "EntityFrameworkCore" ],
         "owners": [ "Stef Heyenrath" ],
         "repository": {
             "type": "git",
@@ -22,8 +20,11 @@
         "define": [ "EFCORE" ],
         "compile": {
             "include": [
-                "../LinqKit/*.cs",
-                "../LinqKit/*/*.cs"
+                "../LinqKit.Core/*.cs",
+                "../LinqKit.Core/*/*.cs"
+            ],
+            "exclude": [
+                "../LinqKit.Core/*/AssemblyInfo.cs"
             ]
         },
         "keyFile": "LinqKit.Microsoft.EntityFrameworkCore.snk"
