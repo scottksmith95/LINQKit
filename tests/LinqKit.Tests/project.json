@@ -5,7 +5,7 @@
         "LinqKit": { "target": "project" },
 
         "dotnet-test-xunit": "1.0.0-rc2-build10025",
-        "xunit": "2.1.0-rc2-build3178"
+        "xunit": "2.1.0"
     },
 
     "buildOptions": {
