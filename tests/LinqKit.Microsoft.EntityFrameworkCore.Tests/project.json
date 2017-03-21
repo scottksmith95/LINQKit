@@ -10,7 +10,7 @@
         "LinqKit.Microsoft.EntityFrameworkCore": { "target": "project" },
 
         "dotnet-test-xunit": "1.0.0-rc2-build10025",
-        "xunit": "2.1.0-rc2-build3178"
+        "xunit": "2.1.0"
     },
 
     "buildOptions": {
@@ -32,12 +32,12 @@
                 "portable-net451+win8"
             ],
             "dependencies": {
-                "Microsoft.EntityFrameworkCore": "1.0.0",
-                "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-                "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
-                "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
+                "Microsoft.EntityFrameworkCore": "1.1.0",
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
+                "Microsoft.EntityFrameworkCore.Sqlite": "1.1.0",
+                "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
                 "System.Linq.Parallel": "4.0.1",
-                "System.Threading.Tasks": "4.0.11"
+                "System.Threading.Tasks": "4.3.0"
             }
         }
     },
