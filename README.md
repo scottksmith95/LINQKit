@@ -1,5 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/awc6lltod7frkbv6?svg=true)](https://ci.appveyor.com/project/StefH/linqkit-tcg2p)
-
+[![Build status](https://ci.appveyor.com/api/projects/status/srwru0a96rw9v7dn?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
 
 | Project | NuGet | Dependency | Frameworks |
 | ------- | ----- | -----------| ---------- | 

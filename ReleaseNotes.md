@@ -1,6 +1,6 @@
 # LinqKit Release Notes
 
-#### (27 October 2016)
+#### 1.1.8.0 (27 October 2016)
 * LinqKit is now reverted to use dependency on EntityFramework 6.x
 * LinqKit.Core is a new package which does not have any dependency on EntityFramework or EntityFrameworkCore
 * LinqKit.EntityFramework has been updated to a newer version, but no structural changes
