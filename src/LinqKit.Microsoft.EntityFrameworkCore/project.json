@@ -1,5 +1,5 @@
 {
-    "version": "1.1.9",
+    "version": "1.1.10.0",
     "title": "LinqKit for Microsoft.EntityFrameworkCore with Include(...) and IDbAsync support",
     "description": "LinqKit.Microsoft.EntityFrameworkCore is a free set of extensions for LINQ to SQL and EntityFrameworkCore power users. With Include(...) and IDbAsync support.",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
@@ -14,7 +14,7 @@
         },
         "projectUrl": "https://github.com/scottksmith95/LINQKit",
         "licenseUrl": "https://github.com/scottksmith95/LINQKit/master/license.txt",
-        "releaseNotes": "Upgrade Microsoft.EntityFrameworkCore to 1.1.0"
+        "releaseNotes": "Rebind base parameter in PredicateBuilder instead of using Invoke. "
     },
 
     "buildOptions": {
@@ -45,30 +45,6 @@
                 }
             }
         },
-        "net452": {
-            "dependencies": {
-                "JetBrains.Annotations": {
-                    "version": "10.0.0",
-                    "type": "build"
-                }
-            }
-        },
-        "net46": {
-            "dependencies": {
-                "JetBrains.Annotations": {
-                    "version": "10.0.0",
-                    "type": "build"
-                }
-            }
-        },
-        "net461": {
-            "dependencies": {
-                "JetBrains.Annotations": {
-                    "version": "10.0.0",
-                    "type": "build"
-                }
-            }
-        },
         "dnx451": {
             "dependencies": {
                 "JetBrains.Annotations": {
@@ -91,22 +67,11 @@
         "netstandard1.3": {
             "buildOptions": { "define": [ "NETSTANDARD" ] },
             "imports": [
-                "dotnet5.4",
-                "portable-win81+wp81",
-                "portable-net45+wp8",
-                "portable-net45+win8+wp8",
-                "portable-wp81+wpa81",
-                "portable-win81+wp81+wpa81",
-                "portable-net45+win8+wpa81+wp8",
-                "portable-net45+win8",
-                "portable-net45+win8+wpa81",
-                "portable-win81+wpa81",
-                "portable-net451+win81",
-                "portable-net451+win81+wpa81"
+                "dotnet5.4"
             ],
             "dependencies": {
                 "JetBrains.Annotations": {
-                    "version": "10.1.4",
+                    "version": "10.4.0",
                     "type": "build"
                 },
                 "System.Reflection.TypeExtensions": "4.3.0",

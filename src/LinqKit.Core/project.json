@@ -1,5 +1,5 @@
 ﻿{
-    "version": "1.1.8.0",
+    "version": "1.1.9.0",
     "title": "LinqKit.Core",
     "description": "LinqKit.Core is a free set of extensions for LINQ to SQL and Entity Framework power users. Note that Include(...), IAsync and IDbAsync are not supported.",
     "authors": [ "Joseph Albahari", "Tomas Petricek", "Scott Smith", "Tuomas Hietanen", "Stef Heyenrath" ],
@@ -14,7 +14,7 @@
         },
         "projectUrl": "https://github.com/scottksmith95/LINQKit",
         "licenseUrl": "https://github.com/scottksmith95/LINQKit/master/license.txt",
-        "releaseNotes": "Create new NuGet package"
+        "releaseNotes": "Rebind base parameter in PredicateBuilder instead of using Invoke. And upgraded dependencies to 4.3.0 for NETStandard and UAP."
     },
 
     "buildOptions": {
@@ -49,46 +49,6 @@
             }
         },
         "net45": {
-            "frameworkAssemblies": {
-            },
-            "dependencies": {
-                "JetBrains.Annotations": {
-                    "version": "10.0.0",
-                    "type": "build"
-                }
-            }
-        },
-        "net451": {
-            "frameworkAssemblies": {
-            },
-            "dependencies": {
-                "JetBrains.Annotations": {
-                    "version": "10.0.0",
-                    "type": "build"
-                }
-            }
-        },
-        "net452": {
-            "frameworkAssemblies": {
-            },
-            "dependencies": {
-                "JetBrains.Annotations": {
-                    "version": "10.0.0",
-                    "type": "build"
-                }
-            }
-        },
-        "net46": {
-            "frameworkAssemblies": {
-            },
-            "dependencies": {
-                "JetBrains.Annotations": {
-                    "version": "10.0.0",
-                    "type": "build"
-                }
-            }
-        },
-        "net461": {
             "frameworkAssemblies": {
             },
             "dependencies": {
@@ -135,16 +95,16 @@
             ],
             "dependencies": {
                 "JetBrains.Annotations": {
-                    "version": "10.1.5",
+                    "version": "10.4.0",
                     "type": "build"
                 },
-                "System.Linq.Expressions": "4.1.0",
-                "System.Linq.Queryable": "4.0.1",
-                "System.Reflection.Extensions": "4.0.1",
-                "System.Reflection.TypeExtensions": "4.1.0",
-                "System.Runtime": "4.1.0",
-                "System.Runtime.InteropServices": "4.1.0",
-                "System.Threading.Tasks": "4.0.11"
+                "System.Linq.Expressions": "4.3.0",
+                "System.Linq.Queryable": "4.3.0",
+                "System.Reflection.Extensions": "4.3.0",
+                "System.Reflection.TypeExtensions": "4.3.0",
+                "System.Runtime": "4.3.0",
+                "System.Runtime.InteropServices": "4.3.0",
+                "System.Threading.Tasks": "4.3.0"
             }
         },
         "sl5": {
@@ -168,16 +128,16 @@
             "buildOptions": { "define": [ "UAP" ] },
             "dependencies": {
                 "JetBrains.Annotations": {
-                    "version": "10.1.4",
+                    "version": "10.4.0",
                     "type": "build"
                 },
-                "System.Linq.Expressions": "4.1.0",
-                "System.Linq.Queryable": "4.0.1",
-                "System.Reflection.Extensions": "4.0.1",
-                "System.Reflection.TypeExtensions": "4.1.0",
-                "System.Runtime": "4.1.0",
-                "System.Runtime.InteropServices": "4.1.0",
-                "System.Threading.Tasks": "4.0.11"
+                "System.Linq.Expressions": "4.3.0",
+                "System.Linq.Queryable": "4.3.0",
+                "System.Reflection.Extensions": "4.3.0",
+                "System.Reflection.TypeExtensions": "4.3.0",
+                "System.Runtime": "4.3.0",
+                "System.Runtime.InteropServices": "4.3.0",
+                "System.Threading.Tasks": "4.3.0"
             }
         }
     }

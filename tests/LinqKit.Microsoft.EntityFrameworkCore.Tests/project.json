@@ -36,7 +36,7 @@
                 "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
                 "Microsoft.EntityFrameworkCore.Sqlite": "1.1.0",
                 "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
-                "System.Linq.Parallel": "4.0.1",
+                "System.Linq.Parallel": "4.3.0",
                 "System.Threading.Tasks": "4.3.0"
             }
         }

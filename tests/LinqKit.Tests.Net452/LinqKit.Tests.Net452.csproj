@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LinqKit.Core">
-      <HintPath>..\..\src\LinqKit.Core\bin\$(Configuration)\net452\LinqKit.Core.dll</HintPath>
+      <HintPath>..\..\src\LinqKit.Core\bin\$(Configuration)\net45\LinqKit.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

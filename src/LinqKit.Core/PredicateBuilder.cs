@@ -1,6 +1,5 @@
 ﻿using JetBrains.Annotations;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace LinqKit
@@ -20,10 +19,10 @@ namespace LinqKit
     /// </summary>
     public static class PredicateBuilder
     {
-        protected class RebindParameterVisitor : ExpressionVisitor
+        private class RebindParameterVisitor : ExpressionVisitor
         {
-            private ParameterExpression _oldParameter;
-            private ParameterExpression _newParameter;
+            private readonly ParameterExpression _oldParameter;
+            private readonly ParameterExpression _newParameter;
 
             public RebindParameterVisitor(ParameterExpression oldParameter, ParameterExpression newParameter)
             {
