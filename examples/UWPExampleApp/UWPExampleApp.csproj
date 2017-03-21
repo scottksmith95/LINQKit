@@ -127,8 +127,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="LinqKit.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="LinqKit.Core">
       <HintPath>..\..\src\LinqKit.Core\bin\$(Configuration)\uap10.0\LinqKit.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
