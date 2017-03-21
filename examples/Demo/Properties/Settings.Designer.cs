@@ -26,8 +26,8 @@ namespace Demo.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\DemoData.mdf;Integrated" +
-            " Security=True;User Instance=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\DemoData.mdf;" +
+            "Integrated Security=True")]
         public string DemoDataConnectionString {
             get {
                 return ((string)(this["DemoDataConnectionString"]));
