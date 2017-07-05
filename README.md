@@ -228,7 +228,7 @@ PredicateBuilder
 
 When applying expressions built with PredicateBuilder to an Entity Framework query, remember to call AsExpandable on the first table in the query.
 
-##Dynamically Composing Expression Predicates
+## Dynamically Composing Expression Predicates
 
 Suppose you want to write a LINQ to SQL or Entity Framework query that implements a keyword-style search. In other words, a query that returns rows whose description contains some or all of a given set of keywords.
 
@@ -254,7 +254,7 @@ So far, so good. But this only handles the case where you want to match all of t
 
 Of all the things that will drive you to manually constructing expression trees, the need for dynamic predicates is the most common in a typical business application. Fortunately, it’s possible to write a set of simple and reusable extension methods that radically simplify this task. This is the role of our PredicateBuilder class.
 
-##Using PredicateBuilder
+## Using PredicateBuilder
 
 Here's how to solve the preceding example with PredicateBuilder:
 
@@ -278,7 +278,7 @@ If querying with Entity Framework, change the last line to this:
 return objectContext.Products.AsExpandable().Where (predicate);
 ```
 
-##How it Works
+## How it Works
 
 
 ~~The True and False methods do nothing special: they are simply convenient shortcuts for creating an Expression<Func<T,bool>> that initially evaluates to true or false.~~
@@ -311,7 +311,7 @@ The interesting work takes place inside the And and Or methods. We start by invo
 
 Entity Framework's query processing pipeline cannot handle invocation expressions, which is why you need to call AsExpandable on the first object in the query. By calling AsExpandable, you activate LINQKit's expression visitor class which substitutes invocation expressions with simpler constructs that Entity Framework can understand.
 
-##More Examples
+## More Examples
 
 A useful pattern in writing a data access layer is to create a reusable predicate library. Your queries, then, consist largely of select and orderby clauses, the filtering logic farmed out to your library. Here's a simple example:
 
@@ -374,7 +374,7 @@ public static Expression<Func<Product, bool>> IsSelling (int minPurchases)
 }
 ```
 
-##Nesting Predicates
+## Nesting Predicates
 
 Consider the following predicate:
 
@@ -401,7 +401,7 @@ outer = outer.And (inner);
 
 ~~Notice that with the inner expression, we start with PredicateBuilder.False (because we're using the Or operator). With the outer expression, however, we start with PredicateBuilder.True (because we're using the And operator).~~
 
-##Generic Predicates
+## Generic Predicates
 
 Suppose every table in your database has ValidFrom and ValidTo columns as follows:
 
