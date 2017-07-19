@@ -641,4 +641,3 @@ To compile the whole solution you may need .NET Core and Silverlight 5 SDK insta
 License
 =======
 LINQKit is free. The source code is issued under a permissive free license, which means you can modify it as you please, and incorporate it into your own commercial or non-commercial software.
-.
