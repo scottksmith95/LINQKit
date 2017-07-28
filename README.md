@@ -261,6 +261,22 @@ Here's how to solve the preceding example with PredicateBuilder:
 ```csharp
 IQueryable<Product> SearchProducts (params string[] keywords)
 {
+  var predicate = PredicateBuilder.New<Product>(true);
+
+  foreach (string keyword in keywords)
+  {
+    string temp = keyword;
+    predicate = predicate.And (p => p.Description.Contains (temp));
+  }
+  return dataContext.Products.Where (predicate);
+}
+```
+
+.. and to search for any keyword instead of all keywords (Or instead of And):
+
+```csharp
+IQueryable<Product> SearchProducts (params string[] keywords)
+{
   var predicate = PredicateBuilder.New<Product>();
 
   foreach (string keyword in keywords)
