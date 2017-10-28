@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>LinqKit.EntityFramework is a free set of extensions for LINQ to SQL and Entity Framework power users. Include(...) and IAsync are supported.</Description>
+    <AssemblyTitle>LinqKit for EntityFramework with Include(...) and IAsync support</AssemblyTitle>
+    <VersionPrefix>1.1.9.0</VersionPrefix>
+    <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
+    <TargetFramework>net45</TargetFramework>
+    <DefineConstants>$(DefineConstants);EF</DefineConstants>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>LinqKit.EntityFramework</AssemblyName>
+    <AssemblyOriginatorKeyFile>LinqKit.EntityFramework.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <PackageId>LinqKit.EntityFramework</PackageId>
+    <PackageTags>linq;EF;EntityFramework;Entity;Framework</PackageTags>
+    <PackageReleaseNotes>Rebind base parameter in PredicateBuilder instead of using Invoke.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/scottksmith95/LINQKit/master/license.txt</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
+    <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="10.0.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="EntityFramework" Version="6.1.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

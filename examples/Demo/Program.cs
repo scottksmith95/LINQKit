@@ -27,8 +27,8 @@ namespace Demo
             TestExpressionCombiner();
 
             Console.WriteLine();
-            Console.WriteLine("Done");
-            Console.ReadLine();
+            Console.WriteLine("Done, press any key to quit.");
+            Console.ReadKey();
         }
 
         /// <summary>

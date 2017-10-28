@@ -172,7 +172,7 @@ namespace LinqKit.Tests.Net452
 
             // Assert
             var items = list.Where(predicate).ToList();
-            Assert.Equal(0, items.Count);
+            Assert.Empty(items);
         }
     }
 }

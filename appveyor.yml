@@ -12,8 +12,9 @@ init:
 - ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
 
 install:
-- ps: Start-FileDownload 'https://download.microsoft.com/download/0/A/3/0A372822-205D-4A86-BFA7-084D2CBE9EDF/DotNetCore.1.0.1-SDK.1.0.0.Preview2-003133-x64.exe'
-- cmd: DotNetCore.1.0.1-SDK.1.0.0.Preview2-003133-x64 /quiet
+  - ps: Start-FileDownload 'https://download.microsoft.com/download/0/F/D/0FD852A4-7EA1-4E2A-983A-0484AC19B92C/dotnet-sdk-2.0.0-win-gs-x64.exe'
+  - cmd: dotnet-sdk-2.0.0-win-gs-x64.exe /quiet
+  - ps: $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = "true"
 
 environment:
   PATH: $(PATH);$(PROGRAMFILES)\dotnet\
@@ -22,16 +23,12 @@ environment:
 build_script:
 - appveyor-retry dotnet restore -v Minimal
 
-- dotnet build .\src\LinqKit\project.json -c %CONFIGURATION%
-- dotnet build .\src\LinqKit.EntityFramework\project.json -c %CONFIGURATION%
-- dotnet build .\src\LinqKit.Microsoft.EntityFrameworkCore\project.json -c %CONFIGURATION%
+- dotnet build .\src\LinqKit\LinqKit.csproj -c %CONFIGURATION%
+- dotnet build .\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj -c %CONFIGURATION%
+- dotnet build .\src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj -c %CONFIGURATION%
 
-- dotnet build .\tests\LinqKit.Tests\project.json -c %CONFIGURATION%
-- dotnet build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests\project.json -c %CONFIGURATION%
-
-- dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\LinqKit\project.json
-- dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\LinqKit.EntityFramework\project.json
-- dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\LinqKit.Microsoft.EntityFrameworkCore\project.json
+- dotnet build .\tests\LinqKit.Tests\LinqKit.Tests.csproj -c %CONFIGURATION%
+- dotnet build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests\LinqKit.Microsoft.EntityFrameworkCore.Tests.csproj -c %CONFIGURATION%
 
 
 test_script:

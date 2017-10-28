@@ -109,7 +109,7 @@ namespace LinqKit
         public Func<T, bool> Compile() { return Predicate.Compile(); }
 #endif
 
-#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE40 || UAP)
+#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE40 || UAP)
         /// <summary></summary>
         public Func<T, bool> Compile(DebugInfoGenerator debugInfoGenerator) { return Predicate.Compile(debugInfoGenerator); }
 
@@ -144,7 +144,7 @@ namespace LinqKit
         public bool TailCall { get { return Predicate.TailCall; } }
 #endif
 
-#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE40 || UAP)
+#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE40 || UAP)
         /// <summary></summary>
         public void CompileToMethod(MethodBuilder method) { Predicate.CompileToMethod(method); }
 

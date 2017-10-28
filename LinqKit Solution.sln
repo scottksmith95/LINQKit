@@ -1,17 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2F7F283D-5576-417F-A467-EC210226AC3B}"
-	ProjectSection(SolutionItems) = preProject
-		src\_build nuget.cmd = src\_build nuget.cmd
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FC09568-C879-47D8-9D28-E736B8A84C95}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
-		global.json = global.json
 		README.md = README.md
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
@@ -20,11 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0BE21A11
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{4521E792-157C-4049-ADF0-CDA31EFC3CC7}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinqKit", "src\LinqKit\LinqKit.xproj", "{667345EE-B154-432F-A908-CB6374805C20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit", "src\LinqKit\LinqKit.csproj", "{667345EE-B154-432F-A908-CB6374805C20}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinqKit.EntityFramework", "src\LinqKit.EntityFramework\LinqKit.EntityFramework.xproj", "{CFF0D30F-9AF2-4F3D-8458-167C5CC430FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.EntityFramework", "src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj", "{CFF0D30F-9AF2-4F3D-8458-167C5CC430FD}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinqKit.Microsoft.EntityFrameworkCore", "src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.xproj", "{F9861A91-C2E4-4D20-B486-89272898FE23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFrameworkCore", "src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj", "{F9861A91-C2E4-4D20-B486-89272898FE23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqKit.Tests.Net452", "tests\LinqKit.Tests.Net452\LinqKit.Tests.Net452.csproj", "{A8A8E0D9-CC31-4B84-9ED2-2B808C9F0B09}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -41,9 +37,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "examples\Demo\Demo.
 		{667345EE-B154-432F-A908-CB6374805C20} = {667345EE-B154-432F-A908-CB6374805C20}
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinqKit.Microsoft.EntityFrameworkCore.Tests", "tests\LinqKit.Microsoft.EntityFrameworkCore.Tests\LinqKit.Microsoft.EntityFrameworkCore.Tests.xproj", "{1C9B4645-B402-437F-8B89-DBCAFCB5C55F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFrameworkCore.Tests", "tests\LinqKit.Microsoft.EntityFrameworkCore.Tests\LinqKit.Microsoft.EntityFrameworkCore.Tests.csproj", "{1C9B4645-B402-437F-8B89-DBCAFCB5C55F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinqKit.Tests", "tests\LinqKit.Tests\LinqKit.Tests.xproj", "{9A0FD84C-83E3-47CA-9F60-E9FD27CCA259}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Tests", "tests\LinqKit.Tests\LinqKit.Tests.csproj", "{9A0FD84C-83E3-47CA-9F60-E9FD27CCA259}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqKit.Net45", "src\LinqKit.Net45\LinqKit.Net45.csproj", "{AEC98F52-83F5-488D-99EF-8AFFE7C9F6E6}"
 EndProject
@@ -54,7 +50,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWPExampleApp", "examples\U
 		{FC735DB2-5419-4CF3-8AEA-8231330A4D85} = {FC735DB2-5419-4CF3-8AEA-8231330A4D85}
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LinqKit.Core", "src\LinqKit.Core\LinqKit.Core.xproj", "{FC735DB2-5419-4CF3-8AEA-8231330A4D85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Core", "src\LinqKit.Core\LinqKit.Core.csproj", "{FC735DB2-5419-4CF3-8AEA-8231330A4D85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -280,5 +276,8 @@ Global
 		{E6DA2678-2910-4EA4-B9F8-180E6BFD87B0} = {2F7F283D-5576-417F-A467-EC210226AC3B}
 		{84B37321-4C7F-4060-9E94-61E86F524B54} = {4521E792-157C-4049-ADF0-CDA31EFC3CC7}
 		{FC735DB2-5419-4CF3-8AEA-8231330A4D85} = {2F7F283D-5576-417F-A467-EC210226AC3B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F6283C5-9029-434E-BD90-E95FB377DA9B}
 	EndGlobalSection
 EndGlobal

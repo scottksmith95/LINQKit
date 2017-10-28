@@ -1,10 +1,14 @@
 # LinqKit Release Notes
 
+#### 1.1.x.x (28 October 2017)
+* LinqKit.Core supports NET Standard 2.0
+* LinqKit.EntityFrameworkCore depends on Microsoft.EntityFrameworkCore 2.0.0 when used in NET Standard 2.0 
+
 #### 1.1.8.0 (27 October 2016)
 * LinqKit is now reverted to use dependency on EntityFramework 6.x
 * LinqKit.Core is a new package which does not have any dependency on EntityFramework or EntityFrameworkCore
 * LinqKit.EntityFramework has been updated to a newer version, but no structural changes
-* LinqKitEntityFrameworkCore has been updated to a newer version, but no structural changes
+* LinqKit.EntityFrameworkCore has been updated to a newer version, but no structural changes
 
 #### 1.1.7.1 (28 July 2016)
 * Added ExpressionStarter logic
