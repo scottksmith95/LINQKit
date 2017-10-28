@@ -15,7 +15,7 @@
     <PackageTags>linq;EF;EntityFramework;Entity;Framework;EntityFrameworkCore</PackageTags>
     <PackageReleaseNotes>netstandard2.0.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/scottksmith95/LINQKit/master/license.txt</PackageLicenseUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/scottksmith95/LINQKit/master/license.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>

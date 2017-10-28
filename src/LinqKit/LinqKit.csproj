@@ -16,7 +16,7 @@
     <PackageTags>linq;EF;EntityFramework;Entity;Framework</PackageTags>
     <PackageReleaseNotes>Rebind base parameter in PredicateBuilder instead of using Invoke.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/scottksmith95/LINQKit/master/license.txt</PackageLicenseUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/scottksmith95/LINQKit/master/license.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
