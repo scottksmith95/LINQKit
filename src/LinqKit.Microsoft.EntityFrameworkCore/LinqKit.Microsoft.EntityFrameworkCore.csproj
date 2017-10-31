@@ -37,26 +37,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
-  <!--<ItemGroup Condition=" '$(TargetFramework)' == 'dnx451' ">
-    <PackageReference Include="JetBrains.Annotations" Version="10.1.4">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcore50' ">
-    <PackageReference Include="JetBrains.Annotations" Version="10.1.4">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
-    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
-  </ItemGroup>-->
-
-  <!--<PropertyGroup Condition=" '$(TargetFramework)' == 'netcore50' ">
-    <DefineConstants>$(DefineConstants);WINDOWS_APP</DefineConstants>
-  </PropertyGroup>-->
-
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' or '$(TargetFramework)' == 'netstandard2.0'">
     <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>

@@ -21,19 +21,17 @@ environment:
 
 
 build_script:
-- appveyor-retry dotnet restore -v Minimal
+- dotnet build .\src\LinqKit\LinqKit.csproj -f net45 -c %CONFIGURATION% 
+- dotnet build .\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj -f net45 -c %CONFIGURATION%
+- dotnet build .\src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj -f netstandard2.0 -c %CONFIGURATION%
 
-- dotnet build .\src\LinqKit\LinqKit.csproj -c %CONFIGURATION%
-- dotnet build .\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj -c %CONFIGURATION%
-- dotnet build .\src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj -c %CONFIGURATION%
-
-- dotnet build .\tests\LinqKit.Tests\LinqKit.Tests.csproj -c %CONFIGURATION%
+- dotnet build .\tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj -c %CONFIGURATION% 
 - dotnet build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests\LinqKit.Microsoft.EntityFrameworkCore.Tests.csproj -c %CONFIGURATION%
 
 
 test_script:
-- dotnet test -c %CONFIGURATION% --no-build .\tests\LinqKit.Tests
-- dotnet test -c %CONFIGURATION% --no-build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests
+- dotnet test --no-build .\tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj -c %CONFIGURATION% 
+- dotnet test --no-build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests -c %CONFIGURATION% 
 
 
 artifacts:
