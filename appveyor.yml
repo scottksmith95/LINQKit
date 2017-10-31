@@ -25,12 +25,12 @@ build_script:
 - dotnet build .\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj -f net45 -c %CONFIGURATION%
 - dotnet build .\src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj -f netstandard2.0 -c %CONFIGURATION%
 
-- dotnet build .\tests\LinqKit.Tests.Net452\LinqKit.Tests.Net452.csproj
+- dotnet build .\tests\LinqKit.Tests\LinqKit.Tests.csproj
 - dotnet build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests\LinqKit.Microsoft.EntityFrameworkCore.Tests.csproj -c %CONFIGURATION%
 
 
 test_script:
-- dotnet test --no-build .\tests\LinqKit.Tests.Net452\LinqKit.Tests.Net452.csproj
+- dotnet test --no-build .\tests\LinqKit.Tests\LinqKit.Tests.csproj
 - dotnet test --no-build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests -c %CONFIGURATION% 
 
 

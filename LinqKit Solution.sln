@@ -23,9 +23,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFrameworkCore", "src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj", "{F9861A91-C2E4-4D20-B486-89272898FE23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqKit.Tests.Net452", "tests\LinqKit.Tests.Net452\LinqKit.Tests.Net452.csproj", "{A8A8E0D9-CC31-4B84-9ED2-2B808C9F0B09}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FC735DB2-5419-4CF3-8AEA-8231330A4D85} = {FC735DB2-5419-4CF3-8AEA-8231330A4D85}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqKit.EntityFramework.Tests.Net452", "tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj", "{A8A8E0D9-CC31-4B84-9ED2-2B808C9F0123}"
 	ProjectSection(ProjectDependencies) = postProject

@@ -13,11 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\LinqKit.Tests.Net452\*.cs" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
+    <Compile Include="..\LinqKit.Tests.Net452\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LinqKit.Core\LinqKit.Core.csproj" />
+    <ProjectReference Include="..\..\src\LinqKit\LinqKit.csproj" />
   </ItemGroup>
 
   <ItemGroup>
