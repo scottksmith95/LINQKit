@@ -2,10 +2,10 @@
 
 | Project | NuGet | Dependency | Frameworks |
 | ------- | ----- | -----------| ---------- | 
-| LinqKit | [![Version](https://img.shields.io/nuget/v/LinqKit.svg)](https://www.nuget.org/packages/LinqKit) | EntityFramework | <ul><li>net45 and up</li></ul> |
-| LinqKit.Core | [![Version](https://img.shields.io/nuget/v/LinqKit.Core.svg)](https://www.nuget.org/packages/LinqKit.Core) | | <ul><li>net35</li><li>net40</li><li>net45 and up</li><li>.NETPortable Profile 259</li><li>.NETPortable Profile 328</li><li>netstandard1.3</li><li>netstandard2.0</li><li>uap10</li></ul>|
-| LinqKit.EntityFramework | [![Version](https://img.shields.io/nuget/v/LinqKit.EntityFramework.svg)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework | <ul><li>net451 and up</li></ul> |
-| LinqKit.Microsoft.EntityFrameworkCore | [![Version](https://img.shields.io/nuget/v/LinqKit.Microsoft.EntityFrameworkCore.svg)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>net451 and up</li><li>netstandard1.3</li><li>netstandard2.0</li></ul>|
+| LinqKit | [![NuGet Badge](https://buildstats.info/nuget/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework | <ul><li>net45 and up</li></ul> |
+| LinqKit.Core | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Core)](https://www.nuget.org/packages/LinqKit.Core) | | <ul><li>net35</li><li>net40</li><li>net45 and up</li><li>.NETPortable Profile 259</li><li>.NETPortable Profile 328</li><li>netstandard1.3</li><li>netstandard2.0</li><li>uap10</li></ul>|
+| LinqKit.EntityFramework | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.EntityFramework)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework | <ul><li>net451 and up</li></ul> |
+| LinqKit.Microsoft.EntityFrameworkCore | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>net451 and up</li><li>netstandard1.3</li><li>netstandard2.0</li></ul>|
 
 
 Table of Contents

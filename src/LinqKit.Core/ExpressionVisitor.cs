@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
+// ReSharper disable once CheckNamespace
 namespace LinqKit
 {
     /// <summary>
@@ -19,42 +16,46 @@ namespace LinqKit
 		public virtual Expression Visit(Expression exp)
         {
             if (exp == null)
+            {
                 return null;
+            }
 
             switch (exp.NodeType)
             {
+                case ExpressionType.ArrayLength:
+                case ExpressionType.Convert:
+                case ExpressionType.ConvertChecked:
                 case ExpressionType.Negate:
                 case ExpressionType.NegateChecked:
                 case ExpressionType.Not:
-                case ExpressionType.Convert:
-                case ExpressionType.ConvertChecked:
-                case ExpressionType.ArrayLength:
                 case ExpressionType.Quote:
                 case ExpressionType.TypeAs:
+                case ExpressionType.UnaryPlus:
                     return VisitUnary((UnaryExpression)exp);
                 case ExpressionType.Add:
                 case ExpressionType.AddChecked:
-                case ExpressionType.Subtract:
-                case ExpressionType.SubtractChecked:
-                case ExpressionType.Multiply:
-                case ExpressionType.MultiplyChecked:
-                case ExpressionType.Divide:
-                case ExpressionType.Modulo:
                 case ExpressionType.And:
                 case ExpressionType.AndAlso:
-                case ExpressionType.Or:
-                case ExpressionType.OrElse:
-                case ExpressionType.LessThan:
-                case ExpressionType.LessThanOrEqual:
+                case ExpressionType.ArrayIndex:
+                case ExpressionType.Coalesce:
+                case ExpressionType.Divide:
+                case ExpressionType.Equal:
+                case ExpressionType.ExclusiveOr:
                 case ExpressionType.GreaterThan:
                 case ExpressionType.GreaterThanOrEqual:
-                case ExpressionType.Equal:
-                case ExpressionType.NotEqual:
-                case ExpressionType.Coalesce:
-                case ExpressionType.ArrayIndex:
-                case ExpressionType.RightShift:
                 case ExpressionType.LeftShift:
-                case ExpressionType.ExclusiveOr:
+                case ExpressionType.LessThan:
+                case ExpressionType.LessThanOrEqual:
+                case ExpressionType.Modulo:
+                case ExpressionType.Multiply:
+                case ExpressionType.MultiplyChecked:
+                case ExpressionType.NotEqual:
+                case ExpressionType.Or:
+                case ExpressionType.OrElse:
+                case ExpressionType.Power:
+                case ExpressionType.RightShift:
+                case ExpressionType.Subtract:
+                case ExpressionType.SubtractChecked:
                     return VisitBinary((BinaryExpression)exp);
                 case ExpressionType.TypeIs:
                     return VisitTypeIs((TypeBinaryExpression)exp);
@@ -82,7 +83,7 @@ namespace LinqKit
                 case ExpressionType.ListInit:
                     return VisitListInit((ListInitExpression)exp);
                 default:
-                    throw new Exception(string.Format("Unhandled expression type: '{0}'", exp.NodeType));
+                    throw new Exception($"Unhandled expression type: '{exp.NodeType}'");
             }
         }
 
@@ -98,7 +99,7 @@ namespace LinqKit
                 case MemberBindingType.ListBinding:
                     return VisitMemberListBinding((MemberListBinding)binding);
                 default:
-                    throw new Exception(string.Format("Unhandled binding type '{0}'", binding.BindingType));
+                    throw new Exception($"Unhandled binding type '{binding.BindingType}'");
             }
         }
 
@@ -133,9 +134,11 @@ namespace LinqKit
             if (left != b.Left || right != b.Right || conversion != b.Conversion)
             {
                 if (b.NodeType == ExpressionType.Coalesce && b.Conversion != null)
+                {
                     return Expression.Coalesce(left, right, conversion as LambdaExpression);
-                else
-                    return Expression.MakeBinary(b.NodeType, left, right, b.IsLiftedToNull, b.Method);
+                }
+
+                return Expression.MakeBinary(b.NodeType, left, right, b.IsLiftedToNull, b.Method);
             }
             return b;
         }
@@ -162,15 +165,14 @@ namespace LinqKit
         {
             Expression test = Visit(c.Test);
             var checkbool = test as ConstantExpression;
-            if (checkbool != null && checkbool.Value is bool) {
-                if((bool)checkbool.Value)
+            if (checkbool?.Value is bool)
+            {
+                if ((bool)checkbool.Value)
                 {
                     return Visit(c.IfTrue);
                 }
-                else
-                {
-                    return Visit(c.IfFalse);
-                }
+
+                return Visit(c.IfFalse);
             }
             Expression ifTrue = Visit(c.IfTrue);
             Expression ifFalse = Visit(c.IfFalse);
