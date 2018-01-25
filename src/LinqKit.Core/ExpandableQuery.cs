@@ -23,36 +23,44 @@ namespace LinqKit
     /// This is based on the excellent work of Tomas Petricek: http://tomasp.net/blog/linq-expand.aspx
     /// </summary>
 #if (NET35 || NOEF)
-    public sealed class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable
+    internal sealed class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable
 #elif EFCORE
-    public class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IAsyncEnumerable<T>
+    internal class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IAsyncEnumerable<T>
 #else
-    public class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IDbAsyncEnumerable<T>
+    internal class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IDbAsyncEnumerable<T>
 #endif
     {
         readonly ExpandableQueryProvider<T> _provider;
         readonly IQueryable<T> _inner;
 
-        internal IQueryable<T> InnerQuery { get { return _inner; } }			// Original query, that we're wrapping
+        internal IQueryable<T> InnerQuery => _inner; // Original query, that we're wrapping
 
-        internal ExpandableQuery(IQueryable<T> inner)
+        internal ExpandableQuery(IQueryable<T> inner, Func<Expression, Expression> queryOptimizer)
         {
             _inner = inner;
-            _provider = new ExpandableQueryProvider<T>(this);
+            _provider = new ExpandableQueryProvider<T>(this, queryOptimizer);
         }
 
-        Expression IQueryable.Expression { get { return _inner.Expression; } }
+        Expression IQueryable.Expression => _inner.Expression;
 
-        Type IQueryable.ElementType { get { return typeof(T); } }
+        Type IQueryable.ElementType => typeof(T);
 
-        IQueryProvider IQueryable.Provider { get { return _provider; } }
+        IQueryProvider IQueryable.Provider => _provider;
 
         /// <summary> IQueryable enumeration </summary>
-        public IEnumerator<T> GetEnumerator() { return _inner.GetEnumerator(); }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _inner.GetEnumerator();
+        }
 
-        IEnumerator IEnumerable.GetEnumerator() { return _inner.GetEnumerator(); }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _inner.GetEnumerator();
+        }
 
-        /// <summary> IQueryable string presentation.  </summary>
+        /// <summary>
+        /// IQueryable string presentation.
+        /// </summary>
         public override string ToString() { return _inner.ToString(); }
 
 #if !(NET35 || NOEF)
@@ -60,7 +68,9 @@ namespace LinqKit
         IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
         {
             if (_inner is IAsyncEnumerable<T>)
+            {
                 return ((IAsyncEnumerable<T>)_inner).GetEnumerator();
+            }
 
             return (_inner as IAsyncEnumerableAccessor<T>)?.AsyncEnumerable.GetEnumerator();
         }
@@ -70,7 +80,9 @@ namespace LinqKit
         {
             var asyncEnumerable = _inner as IDbAsyncEnumerable<T>;
             if (asyncEnumerable != null)
+            {
                 return asyncEnumerable.GetAsyncEnumerator();
+            }
             return new ExpandableDbAsyncEnumerator<T>(_inner.GetEnumerator());
         }
 
@@ -86,7 +98,7 @@ namespace LinqKit
     internal class ExpandableQueryOfClass<T> : ExpandableQuery<T>
         where T : class
     {
-        public ExpandableQueryOfClass(IQueryable<T> inner) : base(inner)
+        public ExpandableQueryOfClass(IQueryable<T> inner, Func<Expression, Expression> queryOptimizer) : base(inner, queryOptimizer)
         {
         }
 
@@ -113,10 +125,12 @@ namespace LinqKit
 #endif
     {
         readonly ExpandableQuery<T> _query;
+        readonly Func<Expression, Expression> _queryOptimizer;
 
-        internal ExpandableQueryProvider(ExpandableQuery<T> query)
+        internal ExpandableQueryProvider(ExpandableQuery<T> query, Func<Expression, Expression> queryOptimizer)
         {
             _query = query;
+            _queryOptimizer = queryOptimizer;
         }
 
         // The following four methods first call ExpressionExpander to visit the expression tree, then call
@@ -124,7 +138,7 @@ namespace LinqKit
         IQueryable<TElement> IQueryProvider.CreateQuery<TElement>(Expression expression)
         {
             var expanded = expression.Expand();
-            var optimized = LinqKitExtension.QueryOptimizer(expanded);
+            var optimized = _queryOptimizer(expanded);
             return _query.InnerQuery.Provider.CreateQuery<TElement>(optimized).AsExpandable();
         }
 
@@ -136,14 +150,14 @@ namespace LinqKit
         TResult IQueryProvider.Execute<TResult>(Expression expression)
         {
             var expanded = expression.Expand();
-            var optimized = LinqKitExtension.QueryOptimizer(expanded);
+            var optimized = _queryOptimizer(expanded);
             return _query.InnerQuery.Provider.Execute<TResult>(optimized);
         }
 
         object IQueryProvider.Execute(Expression expression)
         {
             var expanded = expression.Expand();
-            var optimized = LinqKitExtension.QueryOptimizer(expanded);
+            var optimized = _queryOptimizer(expanded);
             return _query.InnerQuery.Provider.Execute(optimized);
         }
 
@@ -159,9 +173,11 @@ namespace LinqKit
         {
             var asyncProvider = _query.InnerQuery.Provider as IDbAsyncQueryProvider;
             var expanded = expression.Expand();
-            var optimized = LinqKitExtension.QueryOptimizer(expanded);
+            var optimized = _queryOptimizer(expanded);
             if (asyncProvider != null)
+            {
                 return asyncProvider.ExecuteAsync(optimized, cancellationToken);
+            }
             return Task.FromResult(_query.InnerQuery.Provider.Execute(optimized));
         }
 #endif
@@ -174,9 +190,11 @@ namespace LinqKit
             var asyncProvider = _query.InnerQuery.Provider as IDbAsyncQueryProvider;
 #endif
             var expanded = expression.Expand();
-            var optimized = LinqKitExtension.QueryOptimizer(expanded);
+            var optimized = _queryOptimizer(expanded);
             if (asyncProvider != null)
+            {
                 return asyncProvider.ExecuteAsync<TResult>(optimized, cancellationToken);
+            }
 
             return Task.FromResult(_query.InnerQuery.Provider.Execute<TResult>(optimized));
         }

@@ -13,7 +13,8 @@ namespace Demo
         static void Main()
         {
             Console.WriteLine("Customers who have made purchases over $1000");
-            QueryCustomers(p => p.Price > 1000);
+            int seven = 7;
+            QueryCustomers(p => p.Price > 1000 && seven == 7);
 
             Console.WriteLine();
             Console.WriteLine("Customers who have made purchases over $1000 (manual join)");
@@ -45,7 +46,7 @@ namespace Demo
             // AsExpandable() returns a wrapper that strips away the call to Compile when the query is run.
 
             var query =
-                from c in data.Customers.AsExpandable()
+                from c in data.Customers.AsExpandable(ExpressionOptimizer.visit)
                 where c.Purchases.Any(purchasePredicate.Compile())
                 select new
                 {
@@ -59,7 +60,9 @@ namespace Demo
             {
                 Console.WriteLine(customerResult.Name);
                 foreach (decimal price in customerResult.FilteredPurchases)
+                {
                     Console.WriteLine("   $" + price);
+                }
             }
         }
 

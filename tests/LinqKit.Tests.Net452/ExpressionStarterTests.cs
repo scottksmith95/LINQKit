@@ -29,7 +29,7 @@ namespace LinqKit.Tests.Net452
         [Fact]
         public void ExpressionStarter_CanBeAssignedFromExpression()
         {
-            ExpressionStarter<string> predicate = (Expression<Func<string, bool>>)((s) => s == "a");
+            ExpressionStarter<string> predicate = (Expression<Func<string, bool>>)(s => s == "a");
             Assert.Equal("s => (s == \"a\")", predicate.Expand().ToString());
         }
 

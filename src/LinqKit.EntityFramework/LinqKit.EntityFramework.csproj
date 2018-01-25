@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>LinqKit.EntityFramework is a free set of extensions for LINQ to SQL and Entity Framework power users. Include(...) and IAsync are supported.</Description>
     <AssemblyTitle>LinqKit for EntityFramework with Include(...) and IAsync support</AssemblyTitle>
-    <VersionPrefix>1.1.12</VersionPrefix>
+    <VersionPrefix>1.1.13</VersionPrefix>
     <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
     <TargetFramework>net45</TargetFramework>
     <DefineConstants>$(DefineConstants);EF</DefineConstants>
@@ -14,7 +14,7 @@
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>LinqKit.EntityFramework</PackageId>
     <PackageTags>linq;EF;EntityFramework;Entity;Framework</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>See ReleaseNotes.md</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/scottksmith95/LINQKit/master/license.txt</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
@@ -22,6 +22,10 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
