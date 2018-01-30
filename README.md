@@ -82,7 +82,7 @@ static string[] QueryCustomers (Expression<Func<Purchase, bool>> purchaseCriteri
 
   var query =
     from c in data.Customers
-    where c.Purchases.Any (purchaseCriteria)  // will not compile
+    where c.Purchases.Any(purchaseCriteria)  // will not compile
     select c.Name;
 
   return query.ToArray();
@@ -94,7 +94,7 @@ But there's a problem: Customer.Purchases is of type EntitySet<> (or EntityColle
 It would be a different story if we were querying the Purchases table directly (rather the via the Customer.Purchases association property). The Purchases property is of type Table<Purchase> which implements IQueryable, allowing us to do the following:
 
 ```csharp
-bool any = data.Purchases.Any (purchaseCriteria);
+bool any = data.Purchases.Any(purchaseCriteria);
 ```
 
 Of course, we could rewrite QueryCustomers to accept a Func<Purchase,bool> instead:
@@ -343,11 +343,10 @@ public partial class Product
 
 We can extend this by adding a method that uses PredicateBuilder:
 
-```csharp
+``` csharp
 public partial class Product
 {
-  public static Expression<Func<Product, bool>> ContainsInDescription (
-                                                params string[] keywords)
+  public static Expression<Func<Product, bool>> ContainsInDescription (params string[] keywords)
   {
     var predicate = PredicateBuilder.New<Product>();
     foreach (string keyword in keywords)
@@ -407,12 +406,12 @@ The answer is to build the parenthesised expression first, and then consume it i
 ```csharp
 var inner = PredicateBuilder.New<Product>();
 inner = inner.Start(p => p.Description.Contains ("foo"));
-inner = inner.Or (p => p.Description.Contains ("far"));
+inner = inner.Or(p => p.Description.Contains ("far"));
 
 var outer = PredicateBuilder.New<Product>();
 outer = outer.Start(p => p.Price > 100);
-outer = outer.And (p => p.Price < 1000);
-outer = outer.And (inner);
+outer = outer.And(p => p.Price < 1000);
+outer = outer.And(inner);
 ```
 
 ~~Notice that with the inner expression, we start with PredicateBuilder.False (because we're using the Or operator). With the outer expression, however, we start with PredicateBuilder.True (because we're using the And operator).~~
@@ -534,9 +533,14 @@ using LinqKit;
 
 public class Order
 {
-    [Key] public int Id { get; set; }
-    [Required] public int Amount { get; set; }
-    [Required] public DateTime OrderDate { get; set; }
+    [Key]
+    public int Id { get; set; }
+
+    [Required]
+    public int Amount { get; set; }
+
+    [Required]
+    public DateTime OrderDate { get; set; }
 }
 
 /// <summary> Some simple EF DBContext item for this example</summary>
@@ -623,7 +627,11 @@ SELECT
 
 As you noticed, there are lot of dynamic parameters. This is good if the parameters vary a lot, but here they are pretty static so SQL-server will not be able to perform all caching optimizations. We could optimize away these variables by runtime when LinqKit forms the query.
 
-There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit. Install the nuget package (and add reference to F#-core library), and make this static call once before executing your queries (e.g. to your app startup or static class constructor or Application_Start):
+There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit.
+Install this nuget package (and add reference to F#-core library if required).
+
+### Use the static option (all calls)
+Make this static call once before executing your queries (e.g. to your app startup or static class constructor or Application_Start):
 
 ```csharp
 LinqkitExtension.QueryOptimizer = ExpressionOptimizer.visit;
@@ -631,7 +639,7 @@ LinqkitExtension.QueryOptimizer = ExpressionOptimizer.visit;
 
 And run your query as usual. Observe the difference, now the same query is:
 
-```
+```sql
 SELECT 
     [Extent1].[Amount] AS [Amount], 
     [Extent1].[OrderDate] AS [OrderDate], 
@@ -640,7 +648,38 @@ SELECT
     WHERE ([Extent1].[Amount] - 10) < 100
 ```
 
-If your IQueryable has dynamic parameters from other IQueryables, it can still be complex.
+### Use the dynamic option (each call separate)
+It's also possible to use the expression optimizer for specific calls only.
+
+``` csharp
+// define the optimizer you want to use
+var optimizer = ExpressionOptimizer.visit;
+
+// simulate some dynamic non-database-parameter
+var t = DateTime.Now.Month % 3; 
+
+// provide the optimizer in the AsExpandable call
+var qry1 =
+    from o in context.Orders.AsExpandable(optimizer)
+    let myTemp = 
+        t == 1 ? o.Amount + 10 :
+        t == 2 ? o.Amount - 10 :
+        o.Amount
+    select new
+    {
+        OrderDate = o.OrderDate,
+        FixedAmount = myTemp
+    };
+
+var qry2 = 
+    from x in qry1
+    where x.FixedAmount < 100
+    select x;
+
+var res = qry2.ToList();
+```
+
+Note that if your IQueryable has dynamic parameters from other IQueryables, it can still be complex.
 
 Original source and author
 =======
@@ -652,7 +691,7 @@ Permission has been granted to have this repo be the official source for this pr
 Contributing
 =======
 Just send PullRequests to the this repository.
-To compile the whole solution you may need .NET Core and Silverlight 5 SDK installed.
+To compile the whole solution you may need .NET Core and UAP installed.
 
 License
 =======
