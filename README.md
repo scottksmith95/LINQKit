@@ -634,7 +634,7 @@ Install this nuget package (and add reference to F#-core library if required).
 Make this static call once before executing your queries (e.g. to your app startup or static class constructor or Application_Start):
 
 ```csharp
-LinqkitExtension.QueryOptimizer = ExpressionOptimizer.visit;
+LinqKitExtension.QueryOptimizer = ExpressionOptimizer.visit;
 ```
 
 And run your query as usual. Observe the difference, now the same query is:
