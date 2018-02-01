@@ -45,16 +45,10 @@ namespace LinqKit
         }
 #endif
         /// <summary> Enumerator-pattern: Current item </summary>
-        public T Current
-        {
-            get { return _inner.Current; }
-        }
+        public T Current => _inner.Current;
 
 #if !EFCORE
-        object IDbAsyncEnumerator.Current
-        {
-            get { return Current; }
-        }
+        object IDbAsyncEnumerator.Current => Current;
 #endif
     }
 }

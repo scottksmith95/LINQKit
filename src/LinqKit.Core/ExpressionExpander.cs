@@ -12,7 +12,7 @@ namespace LinqKit
     class ExpressionExpander : ExpressionVisitor
     {
         // Replacement parameters - for when invoking a lambda expression.
-        readonly Dictionary<ParameterExpression, Expression> _replaceVars = null;
+        readonly Dictionary<ParameterExpression, Expression> _replaceVars;
 
         internal ExpressionExpander() { }
 
@@ -23,7 +23,7 @@ namespace LinqKit
 
         protected override Expression VisitParameter(ParameterExpression p)
         {
-            return (_replaceVars != null) && (_replaceVars.ContainsKey(p)) ? _replaceVars[p] : base.VisitParameter(p);
+            return _replaceVars != null && _replaceVars.ContainsKey(p) ? _replaceVars[p] : base.VisitParameter(p);
         }
 
         /// <summary>
@@ -45,7 +45,9 @@ namespace LinqKit
             try
             {
                 for (int i = 0; i < lambda.Parameters.Count; i++)
-                    replaceVars.Add(lambda.Parameters[i], this.Visit(iv.Arguments[i]));
+                {
+                    replaceVars.Add(lambda.Parameters[i], Visit(iv.Arguments[i]));
+                }
             }
             catch (ArgumentException ex)
             {
@@ -60,23 +62,31 @@ namespace LinqKit
             if (m.Method.Name == "Invoke" && m.Method.DeclaringType == typeof(Extensions))
             {
                 var target = m.Arguments[0];
-                if (target is MemberExpression) target = TransformExpr((MemberExpression)target);
-                if (target is ConstantExpression) target = ((ConstantExpression)target).Value as Expression;
-                if (target is UnaryExpression) target = ((UnaryExpression)target).Operand as Expression;
+                if (target is MemberExpression)
+                {
+                    target = TransformExpr((MemberExpression)target);
+                }
+                if (target is ConstantExpression)
+                {
+                    target = ((ConstantExpression)target).Value as Expression;
+                }
+                if (target is UnaryExpression)
+                {
+                    target = ((UnaryExpression)target).Operand;
+                }
 
                 var lambda = (LambdaExpression)target;
 
                 if (lambda != null)
                 {
-
-                    var replaceVars = _replaceVars == null ?
-                    new Dictionary<ParameterExpression, Expression>()
-                    : new Dictionary<ParameterExpression, Expression>(_replaceVars);
+                    var replaceVars = _replaceVars == null ? new Dictionary<ParameterExpression, Expression>() : new Dictionary<ParameterExpression, Expression>(_replaceVars);
 
                     try
                     {
                         for (int i = 0; i < lambda.Parameters.Count; i++)
-                            replaceVars.Add(lambda.Parameters[i], this.Visit(m.Arguments[i + 1]));
+                        {
+                            replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i + 1]));
+                        }
                     }
                     catch (ArgumentException ex)
                     {
@@ -92,12 +102,17 @@ namespace LinqKit
             {
                 var me = (MemberExpression)m.Object;
                 var newExpr = TransformExpr(me);
-                if (newExpr != me) return newExpr;
+                if (newExpr != me)
+                {
+                    return newExpr;
+                }
             }
 
             // Strip out any nested calls to AsExpandable():
             if (m.Method.Name == "AsExpandable" && m.Method.DeclaringType == typeof(Extensions))
+            {
                 return m.Arguments[0];
+            }
 
             return base.VisitMethodCall(m);
         }
@@ -113,20 +128,20 @@ namespace LinqKit
         Expression TransformExpr(MemberExpression input)
         {
             if (input == null)
+            {
                 return null;
+            }
 
             var field = input.Member as FieldInfo;
 
             if (field == null)
             {
-                if ((_replaceVars != null) && (input.Expression is ParameterExpression) && (_replaceVars.ContainsKey(input.Expression as ParameterExpression)))
+                if (_replaceVars != null && input.Expression is ParameterExpression && _replaceVars.ContainsKey(input.Expression as ParameterExpression))
                 {
                     return base.VisitMemberAccess(input);
                 }
-                else
-                {
-                    return input;
-                }
+
+                return input;
             }
 #if EFCORE || NETSTANDARD || WINDOWS_APP || PORTABLE || UAP
             //Collapse captured outer variables
@@ -148,25 +163,36 @@ namespace LinqKit
             if (expression != null)
             {
                 var obj = expression.Value;
-                if (obj == null) return input;
+                if (obj == null)
+                {
+                    return input;
+                }
+
                 var t = obj.GetType();
-                if (!t.GetTypeInfo().IsNestedPrivate || !t.Name.StartsWith("<>")) return input;
+                if (!t.GetTypeInfo().IsNestedPrivate || !t.Name.StartsWith("<>"))
+                {
+                    return input;
+                }
+
                 var fi = (FieldInfo)input.Member;
                 var result = fi.GetValue(obj);
                 var exp = result as Expression;
-                if (exp != null) return Visit(exp);
+                if (exp != null)
+                {
+                    return Visit(exp);
+                }
             }
 
             return TryVisitExpressionFunc(input, field);
-
         }
 
         private Expression TryVisitExpressionFunc(MemberExpression input, FieldInfo field)
         {
-            var prope = input.Member as PropertyInfo;
-            if ((field.FieldType.GetTypeInfo().IsSubclassOf(typeof(Expression))) ||
-                (prope != null && prope.PropertyType.GetTypeInfo().IsSubclassOf(typeof(Expression))))
+            var propertyInfo = input.Member as PropertyInfo;
+            if (field.FieldType.GetTypeInfo().IsSubclassOf(typeof(Expression)) || propertyInfo != null && propertyInfo.PropertyType.GetTypeInfo().IsSubclassOf(typeof(Expression)))
+            {
                 return Visit(Expression.Lambda<Func<Expression>>(input).Compile()());
+            }
 
             return input;
         }

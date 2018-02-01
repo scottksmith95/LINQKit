@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Moq;
 using Xunit;
 
 #if EFCORE
@@ -114,6 +115,32 @@ namespace LinqKit.EntityFramework.Tests.Net452
 
             Assert.Equal(2, res.Count);
             Assert.Equal(67, res.First().Value);
+        }
+
+        [Fact]
+        public async Task DbAsync_ExpressionStarter_With_Optimizer()
+        {
+            // Assign
+            var optimizerMock = new Mock<Func<Expression, Expression>>();
+            optimizerMock.Setup(o => o(It.IsAny<Expression>())).Returns((Expression e) => e);
+
+            var combined = PredicateBuilder.New<Entity>();
+            foreach (int i in new[] { 10, 20, 30, 80 })
+            {
+                var predicate = PredicateBuilder.New<Entity>(e => e.Value < i);
+                combined = combined.Extend(predicate);
+            }
+
+            // Act
+            var q = _db.Entities.AsExpandable(optimizerMock.Object).Where(combined);
+            var res = await q.ToListAsync().ConfigureAwait(false);
+
+            // Assert
+            Assert.Equal(2, res.Count);
+            Assert.Equal(67, res.First().Value);
+
+            // Verify
+            optimizerMock.Verify(o => o(It.IsAny<Expression>()), Times.Once);
         }
     }
 }
