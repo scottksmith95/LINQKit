@@ -626,7 +626,7 @@ As you noticed, there are lot of dynamic parameters. This is good if the paramet
 There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit. Install the nuget package (and add reference to F#-core library), and make this static call once before executing your queries (e.g. to your app startup or static class constructor or Application_Start):
 
 ```csharp
-LinqkitExtension.QueryOptimizer = ExpressionOptimizer.visit;
+LinqKitExtension.QueryOptimizer = ExpressionOptimizer.visit;
 ```
 
 And run your query as usual. Observe the difference, now the same query is:
