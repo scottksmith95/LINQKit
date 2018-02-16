@@ -1,5 +1,5 @@
 https://github.com/GitTools/GitReleaseNotes
 
-GitReleaseNotes.exe . /OutputFile CHANGELOG.md /Version 1.1.14
+GitReleaseNotes.exe . /OutputFile ReleaseNotes.md /Version 1.1.14
 
-GitReleaseNotes.exe . /OutputFile CHANGELOG.md /allTags
+GitReleaseNotes.exe . /OutputFile ReleaseNotes.md /allTags
