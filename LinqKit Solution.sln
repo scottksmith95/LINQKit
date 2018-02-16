@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2F7F283D-5576-417F-A467-EC210226AC3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FC09568-C879-47D8-9D28-E736B8A84C95}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		GitReleaseNotes.txt = GitReleaseNotes.txt
 		README.md = README.md
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
@@ -24,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqKit.Tests.Net452", "tests\LinqKit.Tests.Net452\LinqKit.Tests.Net452.csproj", "{A8A8E0D9-CC31-4B84-9ED2-2B808C9F0B09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqKit.EntityFramework.Tests.Net452", "tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj", "{A8A8E0D9-CC31-4B84-9ED2-2B808C9F0123}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.EntityFramework.Tests.Net452", "tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj", "{A8A8E0D9-CC31-4B84-9ED2-2B808C9F0123}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CFF0D30F-9AF2-4F3D-8458-167C5CC430FD} = {CFF0D30F-9AF2-4F3D-8458-167C5CC430FD}
 	EndProjectSection

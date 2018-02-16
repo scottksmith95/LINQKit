@@ -23,7 +23,7 @@ namespace LinqKit
     /// This is based on the excellent work of Tomas Petricek: http://tomasp.net/blog/linq-expand.aspx
     /// </summary>
 #if (NET35 || NOEF)
-    internal sealed class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable
+    public sealed class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable
 #elif EFCORE
     internal class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IAsyncEnumerable<T>
 #else
