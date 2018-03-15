@@ -304,7 +304,7 @@ PredicateBuilder.New() creates an object called ExpressionStarter<T>, which acts
 So the following:
 
 ```csharp
-var predicate = PredicateBuilder.New() <Product> ();
+var predicate = PredicateBuilder.New<Product>();
 ```
 
 Would be a shortcut for this:
