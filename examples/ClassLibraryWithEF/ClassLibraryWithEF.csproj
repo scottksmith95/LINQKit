@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GenericClassLibrary\GenericClassLibrary.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <LibraryType>EF</LibraryType>
+    <StartupObject>ClassLibraryWithEF.Program</StartupObject>
+  </PropertyGroup>
+
+</Project>
