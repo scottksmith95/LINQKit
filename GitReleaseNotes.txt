@@ -1,5 +1,0 @@
-https://github.com/GitTools/GitReleaseNotes
-
-GitReleaseNotes.exe . /OutputFile ReleaseNotes.md /Version 1.1.15
-
-GitReleaseNotes.exe . /OutputFile ReleaseNotes.md /allTags
