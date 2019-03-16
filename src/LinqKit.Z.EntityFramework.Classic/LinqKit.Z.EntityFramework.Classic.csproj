@@ -13,7 +13,7 @@
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>LinqKit.Z.EntityFramework.Classic</PackageId>
-    <PackageTags>linq;EF;EntityFramework;Entity;Framework;Z.EntityFramework.EntityFramework.Classic;Classic;Classic</PackageTags>
+    <PackageTags>linq;EF;EntityFramework;Entity;Framework;Z.EntityFramework.Classic;EntityFramework.Classic</PackageTags>
     <PackageReleaseNotes>See ReleaseNotes.md</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/scottksmith95/LINQKit/master/license.txt</PackageLicenseUrl>
@@ -22,6 +22,7 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <PackageIconUrl>https://zzzprojects.github.io/images/logo/logo-64.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -42,7 +43,7 @@
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Z.EntityFramework.Classic" Version="7.0.38" />
+    <PackageReference Include="Z.EntityFramework.Classic" Version="7.0.39" />
   </ItemGroup>
 
 </Project>
