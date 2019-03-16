@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>LinqKit.EntityFramework contains extensions for LINQ to SQL and Entity Framework. Include(...) and IAsync are supported.</Description>
-    <AssemblyTitle>LinqKit for EntityFramework with Include(...) and IAsync support.</AssemblyTitle>
-    <!--<VersionPrefix>1.1.15</VersionPrefix>-->
-    <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
-    <TargetFramework>net45</TargetFramework>
+    <Description>LinqKit.Z.EntityFramework.Classic contains extensions for LINQ to SQL and Z.EntityFramework.Classic. Include(...) and IAsync are supported.</Description>
+    <AssemblyTitle>LinqKit for Z.EntityFramework.Classic with Include(...) and IAsync support.</AssemblyTitle>
+    <!--<VersionPrefix>1.0.0</VersionPrefix>-->
+    <Authors>Stef Heyenrath</Authors>
+    <TargetFrameworks>net40;net45;netstandard20</TargetFrameworks>
     <DefineConstants>$(DefineConstants);EF</DefineConstants>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>LinqKit.EntityFramework</AssemblyName>
-    <AssemblyOriginatorKeyFile>LinqKit.EntityFramework.snk</AssemblyOriginatorKeyFile>
+    <AssemblyName>LinqKit.Z.EntityFramework.Classic</AssemblyName>
+    <AssemblyOriginatorKeyFile>LinqKit.Z.EntityFramework.Classic.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-    <PackageId>LinqKit.EntityFramework</PackageId>
-    <PackageTags>linq;EF;EntityFramework;Entity;Framework</PackageTags>
+    <PackageId>LinqKit.Z.EntityFramework.Classic</PackageId>
+    <PackageTags>linq;EF;EntityFramework;Entity;Framework;Z.EntityFramework.EntityFramework.Classic;Classic;Classic</PackageTags>
     <PackageReleaseNotes>See ReleaseNotes.md</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/scottksmith95/LINQKit/master/license.txt</PackageLicenseUrl>
@@ -29,21 +29,20 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <DefineConstants>$(DefineConstants);NOASYNCPROVIDER</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
     <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="10.0.0">
+    <PackageReference Include="JetBrains.Annotations" Version="10.4.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
+    <PackageReference Include="Z.EntityFramework.Classic" Version="7.0.38" />
   </ItemGroup>
 
 </Project>

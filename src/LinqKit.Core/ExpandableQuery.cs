@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Collections;
 
-#if !(NET35 || NOEF)
+#if !(NET35 || NOEF || NOASYNCPROVIDER)
 using System.Threading;
 using System.Threading.Tasks;
 #if EFCORE
@@ -22,7 +22,7 @@ namespace LinqKit
     /// An IQueryable wrapper that allows us to visit the query's expression tree just before LINQ to SQL gets to it.
     /// This is based on the excellent work of Tomas Petricek: http://tomasp.net/blog/linq-expand.aspx
     /// </summary>
-#if (NET35 || NOEF)
+#if (NET35 || NOEF || NOASYNCPROVIDER)
     public sealed class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable
 #elif EFCORE
     public class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IAsyncEnumerable<T>
@@ -63,7 +63,7 @@ namespace LinqKit
         /// </summary>
         public override string ToString() { return _inner.ToString(); }
 
-#if !(NET35 || NOEF)
+#if !(NET35 || NOEF || NOASYNCPROVIDER)
 #if EFCORE
         IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
         {
@@ -94,7 +94,7 @@ namespace LinqKit
 #endif
     }
 
-#if !(NET35 || NOEF)
+#if !(NET35 || NOEF || NOASYNCPROVIDER)
     internal class ExpandableQueryOfClass<T> : ExpandableQuery<T>
         where T : class
     {
@@ -117,7 +117,7 @@ namespace LinqKit
 #endif
 
     class ExpandableQueryProvider<T> : IQueryProvider
-#if (NET35 || NOEF)
+#if (NET35 || NOEF || NOASYNCPROVIDER)
 #elif EFCORE
         , IAsyncQueryProvider
 #else
@@ -161,7 +161,7 @@ namespace LinqKit
             return _query.InnerQuery.Provider.Execute(optimized);
         }
 
-#if !(NET35 || NOEF)
+#if !(NET35 || NOEF || NOASYNCPROVIDER)
 #if EFCORE
         public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
         {
