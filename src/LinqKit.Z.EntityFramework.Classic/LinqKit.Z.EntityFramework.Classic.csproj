@@ -3,7 +3,6 @@
   <PropertyGroup>
     <Description>LinqKit.Z.EntityFramework.Classic contains extensions for LINQ to SQL and Z.EntityFramework.Classic. Include(...) and IAsync are supported.</Description>
     <AssemblyTitle>LinqKit for Z.EntityFramework.Classic with Include(...) and IAsync support.</AssemblyTitle>
-    <!--<VersionPrefix>1.0.0</VersionPrefix>-->
     <Authors>Stef Heyenrath</Authors>
     <TargetFrameworks>net40;net45;netstandard20</TargetFrameworks>
     <DefineConstants>$(DefineConstants);EF</DefineConstants>
@@ -43,7 +42,7 @@
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Z.EntityFramework.Classic" Version="7.0.39" />
+    <PackageReference Include="Z.EntityFramework.Classic" Version="7.0.40" />
   </ItemGroup>
 
 </Project>

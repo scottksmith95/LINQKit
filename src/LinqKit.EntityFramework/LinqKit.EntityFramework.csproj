@@ -3,7 +3,6 @@
   <PropertyGroup>
     <Description>LinqKit.EntityFramework contains extensions for LINQ to SQL and Entity Framework. Include(...) and IAsync are supported.</Description>
     <AssemblyTitle>LinqKit for EntityFramework with Include(...) and IAsync support.</AssemblyTitle>
-    <!--<VersionPrefix>1.1.15</VersionPrefix>-->
     <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
     <TargetFramework>net45</TargetFramework>
     <DefineConstants>$(DefineConstants);EF</DefineConstants>

@@ -3,7 +3,6 @@
   <PropertyGroup>
     <Description>LinqKit.Core contains extensions for LINQ to SQL and Entity Framework. Note that Include(...), IAsync and IDbAsync are not supported.</Description>
     <AssemblyTitle>LinqKit.Core</AssemblyTitle>
-    <!--<VersionPrefix>1.1.15</VersionPrefix>-->
     <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
     <TargetFrameworks>net35;net40;net45;portable-net40+win8+wpa81+wp8+sl5;portable-net45+win8+wpa81+wp8;uap10.0;netstandard1.3;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
