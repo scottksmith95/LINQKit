@@ -4,7 +4,7 @@
     <Description>LinqKit.Z.EntityFramework.Classic contains extensions for LINQ to SQL and Z.EntityFramework.Classic. Include(...) and IAsync are supported.</Description>
     <AssemblyTitle>LinqKit for Z.EntityFramework.Classic with Include(...) and IAsync support.</AssemblyTitle>
     <Authors>Stef Heyenrath</Authors>
-    <TargetFrameworks>net40;net45;netstandard20</TargetFrameworks>
+    <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
     <DefineConstants>$(DefineConstants);EF</DefineConstants>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>LinqKit.Z.EntityFramework.Classic</AssemblyName>
