@@ -1,77 +1,82 @@
+# 1.1.16 (20 March 2019)
+- [#77](https://github.com/scottksmith95/LINQKit/pull/77) - Fix for small typo in PredicateBuilder section contributed by [tiesont](https://github.com/tiesont)
+- [#92](https://github.com/scottksmith95/LINQKit/pull/92) - Support Z.Entity.Framework.Classic contributed by [StefH](https://github.com/StefH)
+- [#46](https://github.com/scottksmith95/LINQKit/issues/46) - Compile time error on Expand method in 1.1.7.1 version, Linq To Entities? [question]
+- [#79](https://github.com/scottksmith95/LINQKit/issues/79) - Reference Linqkit.Core and LinqKit.Microsoft.EntityFrameworkCore  in 1 solution
+- [#80](https://github.com/scottksmith95/LINQKit/issues/80) - Feature: Release for latest version EF Core 2? [feature]
+- [#81](https://github.com/scottksmith95/LINQKit/issues/81) - Change namespace of LinqKit.Microsoft.EntityFrameworkCore
+- [#90](https://github.com/scottksmith95/LINQKit/issues/90) - Can't get simplest possible example to add where clause to SQL
+- [#91](https://github.com/scottksmith95/LINQKit/issues/91) - Entity Framework Classic - Support
+
 # 1.1.15 (21 February 2018)
-
- - [#76](https://github.com/scottksmith95/LINQKit/issues/76) - Regression: ExpandableQuery<T> is inaccessible due to its protection level
- - [#75](https://github.com/scottksmith95/LINQKit/issues/75) - Question: Missing release notes for 1.1.12 and 1.1.13
-
-Commits: c048b99a03...c048b99a03
-
-
-# 1.1.14 (16 February 2018)
-
- - [#74](https://github.com/scottksmith95/LINQKit/pull/74) - Update README.md contributed by ([claudiocantalupo-spotsoftware](https://github.com/claudiocantalupo-spotsoftware))
- - [#76](https://github.com/scottksmith95/LINQKit/issues/76) - Regression: ExpandableQuery<T> is inaccessible due to its protection level
-
-Commits: f5a53a4513...f5a53a4513
-
+- [#75](https://github.com/scottksmith95/LINQKit/issues/75) - Question: Missing release notes for 1.1.12 and 1.1.13 [question]
+- [#76](https://github.com/scottksmith95/LINQKit/issues/76) - Regression: ExpandableQuery&lt;T&gt; is inaccessible due to its protection level
 
 # 1.1.13 (01 February 2018)
+- [#61](https://github.com/scottksmith95/LINQKit/issues/61) - ExpressionVisitor doesn't handle all expression Types [bug]
+- [#70](https://github.com/scottksmith95/LINQKit/issues/70) - selectively apply QueryOptimizer [question]
+- [#72](https://github.com/scottksmith95/LINQKit/issues/72) - PredicateBuilder failing to build correct expression
 
- - [#72](https://github.com/scottksmith95/LINQKit/issues/72) - PredicateBuilder failing to build correct expression
- - [#70](https://github.com/scottksmith95/LINQKit/issues/70) - selectively apply QueryOptimizer
- - [#61](https://github.com/scottksmith95/LINQKit/issues/61) - ExpressionVisitor doesn't handle all expression Types +fix
+# 1.1.12 (31 December 2017)
+- [#54](https://github.com/scottksmith95/LINQKit/pull/54) - Rebind base parameter in PredicateBuilder instead of using Invoke contributed by [EdwardBlair](https://github.com/EdwardBlair)
+- [#64](https://github.com/scottksmith95/LINQKit/pull/64) - Fix Markdown in Readme.md contributed by [leotsarev](https://github.com/leotsarev)
+- [#65](https://github.com/scottksmith95/LINQKit/pull/65) - remove unnecessary dot in README.md contributed by [YuriiPovkh](https://github.com/YuriiPovkh)
+- [#66](https://github.com/scottksmith95/LINQKit/pull/66) - Added example for &quot;.And&quot; predicatebuilder to readme.md contributed by [rsuk](https://github.com/rsuk)
+- [#32](https://github.com/scottksmith95/LINQKit/issues/32) - Is it possible to support PCL and will it work with AsyncTableQuery&lt;T&gt; for SQLite queries?
+- [#34](https://github.com/scottksmith95/LINQKit/issues/34) - .NET Core? [feature]
+- [#47](https://github.com/scottksmith95/LINQKit/issues/47) - .NET Native Compiler error
+- [#56](https://github.com/scottksmith95/LINQKit/issues/56) - Update LinqKit.Microsoft.EntityFrameworkCore to use Microsoft.EntityFrameworkCore to 1.1.0 [feature]
+- [#57](https://github.com/scottksmith95/LINQKit/issues/57) - PCL Compatibility
+- [#58](https://github.com/scottksmith95/LINQKit/issues/58) - When predicate is too long,it throws System.StackOverflowException
+- [#60](https://github.com/scottksmith95/LINQKit/issues/60) - Support for .NET 4.6.2?
+- [#63](https://github.com/scottksmith95/LINQKit/issues/63) - Upgrade projects to VS2017 csproj format and add support for NetStandard 2.0 [feature]
+- [#67](https://github.com/scottksmith95/LINQKit/issues/67) - License information [bug]
+- [#69](https://github.com/scottksmith95/LINQKit/issues/69) - missing licensingUrl node from nuspec in .NET45
 
-Commits: 01ede9c131...79aa90243c
+# 1.1.9.0 (17 November 2016)
+- [#1](https://github.com/scottksmith95/LINQKit/pull/1) - .NET 4.5.1 and EntityFramework 6: Async-await -support contributed by [Thorium](https://github.com/Thorium)
+- [#6](https://github.com/scottksmith95/LINQKit/pull/6) - Incorrect parameters when using PredicateBuilder extension methods with Invoke() contributed by [dolly22](https://github.com/dolly22)
+- [#10](https://github.com/scottksmith95/LINQKit/pull/10) - AggregateBalanced to fix issue #9 contributed by [Thorium](https://github.com/Thorium)
+- [#11](https://github.com/scottksmith95/LINQKit/pull/11) - Run async EF6 queries async contributed by [axelheer](https://github.com/axelheer)
+- [#18](https://github.com/scottksmith95/LINQKit/pull/18) - Add support for a .NET 3.5 version of the library. contributed by [david-garcia-garcia](https://github.com/david-garcia-garcia)
+- [#19](https://github.com/scottksmith95/LINQKit/pull/19) - Allow Include to be invoked after AsExpandable (when EF is used). contributed by [artelk](https://github.com/artelk)
+- [#20](https://github.com/scottksmith95/LINQKit/pull/20) - Linking to the EF UserVoice request  contributed by [alexdresko](https://github.com/alexdresko)
+- [#24](https://github.com/scottksmith95/LINQKit/pull/24) - - added additional Invoke() overloads to support up to 16 parameters &#8230; contributed by [ViRuSTriNiTy](https://github.com/ViRuSTriNiTy)
+- [#25](https://github.com/scottksmith95/LINQKit/pull/25) - Fix for issue #22. Proper expanding of arguments in method calls. contributed by [AndreyYurashevich](https://github.com/AndreyYurashevich)
+- [#27](https://github.com/scottksmith95/LINQKit/pull/27) - LeftJoin contributed by [TanielianVB](https://github.com/TanielianVB)
+- [#29](https://github.com/scottksmith95/LINQKit/pull/29) - Add Invoke method with five parameters contributed by [osjimenez](https://github.com/osjimenez)
+- [#33](https://github.com/scottksmith95/LINQKit/pull/33) - Add dotnet core rc2 support and split into multiple versions/flavors contributed by [StefH](https://github.com/StefH)
+- [#42](https://github.com/scottksmith95/LINQKit/pull/42) - Implemented ExpressionStarter&lt;T&gt; to eliminate the default 1=0 or 1=1 stub expressions [feature] contributed by [rhyous](https://github.com/rhyous)
+- [#45](https://github.com/scottksmith95/LINQKit/pull/45) - Merge Development into Master contributed by [StefH](https://github.com/StefH)
+- [#52](https://github.com/scottksmith95/LINQKit/pull/52) - Refactor projects contributed by [StefH](https://github.com/StefH)
+- [#53](https://github.com/scottksmith95/LINQKit/pull/53) - LinqKit.Utitilies -&gt; LinqKit.Utilities contributed by [EdwardBlair](https://github.com/EdwardBlair)
+- [#2](https://github.com/scottksmith95/LINQKit/issues/2) - Expand incorrectly handles nested expressions with anonymous type parameters
+- [#3](https://github.com/scottksmith95/LINQKit/issues/3) - ExpressionExpander.VisitMethodCall(..) throws Exception: Cannot cast MethodCallExpressionN to LambdaExpression
+- [#4](https://github.com/scottksmith95/LINQKit/issues/4) - How to accept arguments inside predicate?
+- [#5](https://github.com/scottksmith95/LINQKit/issues/5) - Why own implementation of ExpressionVisitor?
+- [#7](https://github.com/scottksmith95/LINQKit/issues/7) - queries that use AsExpandable and .ToListAsync() do NOT run asynchronously
+- [#8](https://github.com/scottksmith95/LINQKit/issues/8) - Refactor to segregate EntityFramework dependencies
+- [#9](https://github.com/scottksmith95/LINQKit/issues/9) - Too much parenthesis leads to stack overflow.
+- [#12](https://github.com/scottksmith95/LINQKit/issues/12) - using AsExpandable() cause AsNoTracking doesn't work.
+- [#13](https://github.com/scottksmith95/LINQKit/issues/13) - Unable to cast object of type 'System.Linq.Expressions.InstanceMethodCallExpressionN' to type 'System.Linq.Expressions.LambdaExpression' [question]
+- [#15](https://github.com/scottksmith95/LINQKit/issues/15) - Nuget issue on OS with case-sensitive filesystem
+- [#16](https://github.com/scottksmith95/LINQKit/issues/16) - Nuget-version is not up-to-date
+- [#17](https://github.com/scottksmith95/LINQKit/issues/17) - Xml docs for IntelliSense [feature]
+- [#21](https://github.com/scottksmith95/LINQKit/issues/21) - AsExpandable() causes &quot;new transaction is not allowed because there are other threads running in the session..&quot;
+- [#22](https://github.com/scottksmith95/LINQKit/issues/22) - Predicate.Invoke(Predicate.Invoke(..)) does not work
+- [#23](https://github.com/scottksmith95/LINQKit/issues/23) - Unbounded variable in expanded predicate
+- [#26](https://github.com/scottksmith95/LINQKit/issues/26) - Unnecessary include of entity framework in nuget package
+- [#28](https://github.com/scottksmith95/LINQKit/issues/28) - Does not support dnxcore50 [question]
+- [#31](https://github.com/scottksmith95/LINQKit/issues/31) - Missing Not() method in Predicate Builder [feature]
+- [#35](https://github.com/scottksmith95/LINQKit/issues/35) - Update project to the .NET Core RTM [feature]
+- [#36](https://github.com/scottksmith95/LINQKit/issues/36) - System.Interactive.Async load failure
+- [#37](https://github.com/scottksmith95/LINQKit/issues/37) - Nuget package Upgrade 1.1.3.1 to 1.1.4 failed to add reference
+- [#38](https://github.com/scottksmith95/LINQKit/issues/38) - NuGet binaries not strong named any more [feature]
+- [#39](https://github.com/scottksmith95/LINQKit/issues/39) - The source IQueryable doesn't implement IDbAsyncEnumerable
+- [#40](https://github.com/scottksmith95/LINQKit/issues/40) - Sign the library (strong name) for use in projects signed [feature]
+- [#41](https://github.com/scottksmith95/LINQKit/issues/41) - Unable to restore packages
+- [#43](https://github.com/scottksmith95/LINQKit/issues/43) - Unable to build the project
+- [#48](https://github.com/scottksmith95/LINQKit/issues/48) - Performance optimization [feature]
+- [#49](https://github.com/scottksmith95/LINQKit/issues/49) - Running FirstOrDefaultAsync with AsExpandable gives the error
+- [#50](https://github.com/scottksmith95/LINQKit/issues/50) - Using the Linq.Expression.Optimizer with LinqKit in an ASP.NET (MVC) Application
 
-
-# 1.1.x.x (28 October 2017)
-
- - LinqKit.Core supports NET Standard 2.0
- - LinqKit.EntityFrameworkCore depends on Microsoft.EntityFrameworkCore 2.0.0 when used in NET Standard 2.0 
-
-Commits: ...
-
-
-# 1.1.8.0 (27 October 2016)
-
- - LinqKit is now reverted to use dependency on EntityFramework 6.x
- - LinqKit.Core is a new package which does not have any dependency on EntityFramework or EntityFrameworkCore
- - LinqKit.EntityFramework has been updated to a newer version, but no structural changes
- - LinqKit.EntityFrameworkCore has been updated to a newer version, but no structural changes
-
-Commits: ...
-
-
-# 1.1.7.1 (28 July 2016)
-
- - Added ExpressionStarter logic
-
-Commits: ...
-
-
-# 1.1.7.0 (29 June 2016)
-
- - Added strong name signing for LinqKit.dll
-
-Commits: ...
-
-
-# 1.1.6.0 (28 June 2016)
-
- - Removed portable target to fix issues with .Net Core 1.0 RTM when using this project
-
-Commits: ...
-
-
-# 1.1.5.0 (28 June 2016)
-
- - .Net Core 1.0 RTM
- - Changed dependency from JetBrains.Annotations to fix issues with System.Runtime
-
-Commits: ...
-
-
-# 1.1.4.0 (27 June 2016)
-
- - Update to dotnet rc2removed dependency on EntityFramework
-
-Commits: ...
