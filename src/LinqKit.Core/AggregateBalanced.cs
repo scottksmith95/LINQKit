@@ -1,4 +1,4 @@
-﻿#if !(NET35)
+﻿#if !(NET35 || NOASYNCPROVIDER)
 using LinqKit.Utilities;
 using System.Linq.Expressions;
 using System.Threading.Tasks;

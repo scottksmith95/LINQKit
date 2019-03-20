@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FC09568-C879-47D8-9D28-E736B8A84C95}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		Directory.Build.props = Directory.Build.props
 		GitReleaseNotes.txt = GitReleaseNotes.txt
 		README.md = README.md
 		ReleaseNotes.md = ReleaseNotes.md
@@ -50,11 +51,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWPExampleApp", "examples\U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Core", "src\LinqKit.Core\LinqKit.Core.csproj", "{FC735DB2-5419-4CF3-8AEA-8231330A4D85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryWithEF", "examples\ClassLibraryWithEF\ClassLibraryWithEF.csproj", "{59E05D41-F1FD-4CF0-804A-581893850464}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibraryWithEF", "examples\ClassLibraryWithEF\ClassLibraryWithEF.csproj", "{59E05D41-F1FD-4CF0-804A-581893850464}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericClassLibrary", "examples\GenericClassLibrary\GenericClassLibrary.csproj", "{F43DE19E-12C9-4778-953B-DBE7BB8467C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryNoEF", "examples\ClassLibraryNoEF\ClassLibraryNoEF.csproj", "{958708BB-D352-4FD0-A02A-002F34DA0681}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibraryNoEF", "examples\ClassLibraryNoEF\ClassLibraryNoEF.csproj", "{958708BB-D352-4FD0-A02A-002F34DA0681}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Z.EntityFramework.Classic", "src\LinqKit.Z.EntityFramework.Classic\LinqKit.Z.EntityFramework.Classic.csproj", "{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -311,6 +314,22 @@ Global
 		{958708BB-D352-4FD0-A02A-002F34DA0681}.Release|x64.Build.0 = Release|Any CPU
 		{958708BB-D352-4FD0-A02A-002F34DA0681}.Release|x86.ActiveCfg = Release|Any CPU
 		{958708BB-D352-4FD0-A02A-002F34DA0681}.Release|x86.Build.0 = Release|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Debug|x64.Build.0 = Debug|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Release|ARM.Build.0 = Release|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Release|x64.ActiveCfg = Release|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Release|x64.Build.0 = Release|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -331,6 +350,7 @@ Global
 		{59E05D41-F1FD-4CF0-804A-581893850464} = {4521E792-157C-4049-ADF0-CDA31EFC3CC7}
 		{F43DE19E-12C9-4778-953B-DBE7BB8467C5} = {4521E792-157C-4049-ADF0-CDA31EFC3CC7}
 		{958708BB-D352-4FD0-A02A-002F34DA0681} = {4521E792-157C-4049-ADF0-CDA31EFC3CC7}
+		{FB29D0D9-6F3C-4966-8665-98CD6F6D263F} = {2F7F283D-5576-417F-A467-EC210226AC3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F6283C5-9029-434E-BD90-E95FB377DA9B}

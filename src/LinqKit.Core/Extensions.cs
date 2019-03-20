@@ -41,7 +41,7 @@ namespace LinqKit
                 return query;
             }
 
-#if !(NET35 || NOEF)
+#if !(NET35 || NOEF || NOASYNCPROVIDER)
             return ExpandableQueryFactory<T>.Create(query, queryOptimizer);
 #else
             return new ExpandableQuery<T>(query, queryOptimizer);
