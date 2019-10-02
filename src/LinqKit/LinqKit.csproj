@@ -4,7 +4,7 @@
     <Description>LinqKit.EntityFramework contains extensions for LINQ to SQL and Entity Framework. Include(...) and IAsync are supported.</Description>
     <AssemblyTitle>LinqKit for EntityFramework with Include(...) and IAsync support.</AssemblyTitle>
     <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFrameworks>net45;netstandard2.1</TargetFrameworks>
     <DefineConstants>$(DefineConstants);EF</DefineConstants>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>LinqKit</AssemblyName>
@@ -37,12 +37,16 @@
     <PackageReference Include="JetBrains.Annotations" Version="10.0.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+    <PackageReference Include="EntityFramework" Version="6.3.0" />
   </ItemGroup>
 
 </Project>
