@@ -65,6 +65,17 @@ namespace LinqKit
 
 #if !(NET35 || NOEF || NOASYNCPROVIDER)
 #if EFCORE
+#if NETSTANDARD2_1
+        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetAsyncEnumerator(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (_inner is IAsyncEnumerable<T>)
+            {
+                return ((IAsyncEnumerable<T>)_inner).GetAsyncEnumerator(cancellationToken);
+            }
+
+            throw new InvalidOperationException();
+        }
+#else
         IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
         {
             if (_inner is IAsyncEnumerable<T>)
@@ -74,6 +85,7 @@ namespace LinqKit
 
             return (_inner as IAsyncEnumerableAccessor<T>)?.AsyncEnumerable.GetEnumerator();
         }
+#endif
 #else
         /// <summary> Enumerator for async-await </summary>
         public IDbAsyncEnumerator<T> GetAsyncEnumerator()
@@ -163,12 +175,54 @@ namespace LinqKit
 
 #if !(NET35 || NOEF || NOASYNCPROVIDER)
 #if EFCORE
+#if NETSTANDARD2_1
+        public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+        {
+            var asyncProvider = _query.InnerQuery.Provider as IAsyncQueryProvider;
+            var expanded = expression.Expand();
+            var optimized = _queryOptimizer(expanded);
+            if (asyncProvider != null)
+            {
+                return asyncProvider.ExecuteAsync<TResult>(optimized, cancellationToken);
+            }
+
+            return _query.InnerQuery.Provider.Execute<TResult>(optimized);
+        }
+#else
         public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
         {
             var asyncProvider = _query.InnerQuery.Provider as IAsyncQueryProvider;
             return asyncProvider.ExecuteAsync<TResult>(expression.Expand());
         }
+
+        public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+        {
+            var asyncProvider = _query.InnerQuery.Provider as IAsyncQueryProvider;
+            var expanded = expression.Expand();
+            var optimized = _queryOptimizer(expanded);
+            if (asyncProvider != null)
+            {
+                return asyncProvider.ExecuteAsync<TResult>(optimized, cancellationToken);
+            }
+
+            return Task.FromResult(_query.InnerQuery.Provider.Execute<TResult>(optimized));
+        }
+#endif
 #else
+        public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+        {
+            var asyncProvider = _query.InnerQuery.Provider as IDbAsyncQueryProvider;
+
+            var expanded = expression.Expand();
+            var optimized = _queryOptimizer(expanded);
+            if (asyncProvider != null)
+            {
+                return asyncProvider.ExecuteAsync<TResult>(optimized, cancellationToken);
+            }
+
+            return Task.FromResult(_query.InnerQuery.Provider.Execute<TResult>(optimized));
+        }
+
         public Task<object> ExecuteAsync(Expression expression, CancellationToken cancellationToken)
         {
             var asyncProvider = _query.InnerQuery.Provider as IDbAsyncQueryProvider;
@@ -182,22 +236,7 @@ namespace LinqKit
         }
 #endif
 
-        public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
-        {
-#if EFCORE
-            var asyncProvider = _query.InnerQuery.Provider as IAsyncQueryProvider;
-#else
-            var asyncProvider = _query.InnerQuery.Provider as IDbAsyncQueryProvider;
-#endif
-            var expanded = expression.Expand();
-            var optimized = _queryOptimizer(expanded);
-            if (asyncProvider != null)
-            {
-                return asyncProvider.ExecuteAsync<TResult>(optimized, cancellationToken);
-            }
 
-            return Task.FromResult(_query.InnerQuery.Provider.Execute<TResult>(optimized));
-        }
 #endif
     }
 }
