@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Authors>Stef Heyenrath</Authors>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFrameworks>net452;netcoreapp3.0</TargetFrameworks>
     <AssemblyName>LinqKit.Microsoft.EntityFrameworkCore.Tests</AssemblyName>
     <PackageId>LinqKit.Microsoft.EntityFrameworkCore.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -28,6 +28,10 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <PackageReference Include="EntityFramework" Version="6.2.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+    <PackageReference Include="EntityFramework" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>
