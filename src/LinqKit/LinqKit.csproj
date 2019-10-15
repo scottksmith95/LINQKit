@@ -31,6 +31,7 @@
   <ItemGroup>
     <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
     <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+    <Compile Include="..\LinqKit.EntityFramework\ExtensionsEF.cs" />
   </ItemGroup>
 
   <ItemGroup>
