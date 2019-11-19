@@ -35,13 +35,6 @@ jobs:
         dotnet test ./tests/LinqKit.EntityFramework.Tests.Net452/LinqKit.EntityFramework.Tests.Net452.csproj -c Release
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore.Tests -c Release
         
-    - name: Upload the artifacts
-      uses: skx/github-action-publish-binaries@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        args: '*.nupkg'
-        
     - name: Publish to Github
       uses: actions/upload-artifact@master
       with:
