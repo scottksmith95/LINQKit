@@ -6,6 +6,9 @@ jobs:
   build:
 
     runs-on: windows-latest
+    
+    env:
+      Prerelease: ci
 
     steps:
     - name: Generate build number
