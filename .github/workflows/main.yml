@@ -39,5 +39,5 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: LinqKit
-        path: d:\a\LINQKit\LINQKit\src\LinqKit\bin\Release\*.nupkg
+        path: './src/LinqKit/bin/Release/LinqKit.1.1.16-ci-${{steps.buildnumber.outputs.build_number}}.nupkg'
         
