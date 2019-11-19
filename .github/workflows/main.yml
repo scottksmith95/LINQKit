@@ -14,7 +14,7 @@ jobs:
         token: ${{secrets.github_token}}   
     
     - name: Print new build number
-      run: echo "Build number is ${{steps.buildnumber.outputs.build_number}}"
+      run: echo "Build number is ${{ steps.buildnumber.outputs.build_number }}"
           
     - uses: actions/checkout@v1
       
