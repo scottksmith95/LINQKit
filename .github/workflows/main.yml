@@ -33,4 +33,8 @@ jobs:
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore.Tests -c Release
         
     - name: Publish to Github
-      run: echo "hello!"
+      uses: actions/upload-artifact@master
+      with:
+        name: LinqKit
+        path: ${GITHUB_WORKSPACE}
+        
