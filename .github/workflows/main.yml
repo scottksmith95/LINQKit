@@ -33,4 +33,4 @@ jobs:
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore.Tests -c Release
         
     - name: Publish to Github
-      run: echo "hello"
+      run: echo "hello!"
