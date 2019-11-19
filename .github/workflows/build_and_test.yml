@@ -1,0 +1,21 @@
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    - name: Build projects
+      run: |
+        dotnet build .\src\LinqKit\LinqKit.csproj -c Release
+        dotnet build .\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj -c Release
+        dotnet build .\src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
+        dotnet build .\src\LinqKit.Z.EntityFramework.Classic\LinqKit.Z.EntityFramework.Classic.csproj -c Release
