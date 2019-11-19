@@ -39,5 +39,5 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: LinqKit
-        path: ${GITHUB_WORKSPACE}
+        path: d:\a\LINQKit\LINQKit\src\LinqKit\bin\Release\*.nupkg
         
