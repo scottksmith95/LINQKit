@@ -1,5 +1,11 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/srwru0a96rw9v7dn?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
+### Build
+| | |
+|-|-|
+| AppVeyor | [![AppVeyor](https://ci.appveyor.com/api/projects/status/srwru0a96rw9v7dn?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
+| Github Actions | [![Actions](https://github.com/scottksmith95/LINQKit/workflows/Main%20workflow/badge.svg)](https://github.com/scottksmith95/LINQKit/actions?query=workflow%3A%22Main+workflow%22) |
 
+
+### Projects
 | Project | NuGet | Dependency | Frameworks |
 | ------- | ----- | -----------| ---------- | 
 | LinqKit | [![NuGet Badge](https://buildstats.info/nuget/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework | <ul><li>net45 and up</li></ul> |
