@@ -1,7 +1,15 @@
+# 1.1.17 (26 November 2019)
+- [#94](https://github.com/scottksmith95/LINQKit/pull/94) - Update README.md contributed by [fkorak](https://github.com/fkorak)
+- [#103](https://github.com/scottksmith95/LINQKit/pull/103) - EntityFramework 6.3.0 and Microsoft.EntityFrameworkCore 3.0.0 [bug, feature] contributed by [StefH](https://github.com/StefH)
+- [#109](https://github.com/scottksmith95/LINQKit/pull/109) - Create build_and_test.yml [feature] contributed by [StefH](https://github.com/StefH)
+- [#110](https://github.com/scottksmith95/LINQKit/pull/110) - Bump Microsoft.NETCore.UniversalWindowsPlatform from 5.2.2 to 5.2.4 in /examples/UWPExampleApp [dependencies] contributed by [dependabot[bot]](https://github.com/apps/dependabot)
+- [#98](https://github.com/scottksmith95/LINQKit/issues/98) - Clearer license sated in repo? [feature]
+- [#101](https://github.com/scottksmith95/LINQKit/issues/101) - Support for EF 6.3, targeting net45 and netstandard2.1 [feature]
+- [#102](https://github.com/scottksmith95/LINQKit/issues/102) - EF6 and EF Core version controversy [feature]
+
 # 1.1.16 (20 March 2019)
 - [#77](https://github.com/scottksmith95/LINQKit/pull/77) - Fix for small typo in PredicateBuilder section contributed by [tiesont](https://github.com/tiesont)
 - [#92](https://github.com/scottksmith95/LINQKit/pull/92) - Support Z.Entity.Framework.Classic contributed by [StefH](https://github.com/StefH)
-- [#46](https://github.com/scottksmith95/LINQKit/issues/46) - Compile time error on Expand method in 1.1.7.1 version, Linq To Entities? [question]
 - [#79](https://github.com/scottksmith95/LINQKit/issues/79) - Reference Linqkit.Core and LinqKit.Microsoft.EntityFrameworkCore  in 1 solution
 - [#80](https://github.com/scottksmith95/LINQKit/issues/80) - Feature: Release for latest version EF Core 2? [feature]
 - [#81](https://github.com/scottksmith95/LINQKit/issues/81) - Change namespace of LinqKit.Microsoft.EntityFrameworkCore
@@ -9,29 +17,29 @@
 - [#91](https://github.com/scottksmith95/LINQKit/issues/91) - Entity Framework Classic - Support
 
 # 1.1.15 (21 February 2018)
-- [#75](https://github.com/scottksmith95/LINQKit/issues/75) - Question: Missing release notes for 1.1.12 and 1.1.13 [question]
 - [#76](https://github.com/scottksmith95/LINQKit/issues/76) - Regression: ExpandableQuery&lt;T&gt; is inaccessible due to its protection level
 
-# 1.1.13 (01 February 2018)
+# 1.1.13.0 (01 February 2018)
 - [#61](https://github.com/scottksmith95/LINQKit/issues/61) - ExpressionVisitor doesn't handle all expression Types [bug]
-- [#70](https://github.com/scottksmith95/LINQKit/issues/70) - selectively apply QueryOptimizer [question]
 - [#72](https://github.com/scottksmith95/LINQKit/issues/72) - PredicateBuilder failing to build correct expression
 
-# 1.1.12 (31 December 2017)
+# 1.1.12.0 (31 December 2017)
+- [#32](https://github.com/scottksmith95/LINQKit/issues/32) - Is it possible to support PCL and will it work with AsyncTableQuery&lt;T&gt; for SQLite queries?
+- [#47](https://github.com/scottksmith95/LINQKit/issues/47) - .NET Native Compiler error
+- [#63](https://github.com/scottksmith95/LINQKit/issues/63) - Upgrade projects to VS2017 csproj format and add support for NetStandard 2.0 [feature]
+- [#67](https://github.com/scottksmith95/LINQKit/issues/67) - License information [bug]
+- [#69](https://github.com/scottksmith95/LINQKit/issues/69) - missing licensingUrl node from nuspec in .NET45
+
+# 1.1.11.0 (28 October 2017)
 - [#54](https://github.com/scottksmith95/LINQKit/pull/54) - Rebind base parameter in PredicateBuilder instead of using Invoke contributed by [EdwardBlair](https://github.com/EdwardBlair)
 - [#64](https://github.com/scottksmith95/LINQKit/pull/64) - Fix Markdown in Readme.md contributed by [leotsarev](https://github.com/leotsarev)
 - [#65](https://github.com/scottksmith95/LINQKit/pull/65) - remove unnecessary dot in README.md contributed by [YuriiPovkh](https://github.com/YuriiPovkh)
 - [#66](https://github.com/scottksmith95/LINQKit/pull/66) - Added example for &quot;.And&quot; predicatebuilder to readme.md contributed by [rsuk](https://github.com/rsuk)
-- [#32](https://github.com/scottksmith95/LINQKit/issues/32) - Is it possible to support PCL and will it work with AsyncTableQuery&lt;T&gt; for SQLite queries?
 - [#34](https://github.com/scottksmith95/LINQKit/issues/34) - .NET Core? [feature]
-- [#47](https://github.com/scottksmith95/LINQKit/issues/47) - .NET Native Compiler error
 - [#56](https://github.com/scottksmith95/LINQKit/issues/56) - Update LinqKit.Microsoft.EntityFrameworkCore to use Microsoft.EntityFrameworkCore to 1.1.0 [feature]
 - [#57](https://github.com/scottksmith95/LINQKit/issues/57) - PCL Compatibility
 - [#58](https://github.com/scottksmith95/LINQKit/issues/58) - When predicate is too long,it throws System.StackOverflowException
 - [#60](https://github.com/scottksmith95/LINQKit/issues/60) - Support for .NET 4.6.2?
-- [#63](https://github.com/scottksmith95/LINQKit/issues/63) - Upgrade projects to VS2017 csproj format and add support for NetStandard 2.0 [feature]
-- [#67](https://github.com/scottksmith95/LINQKit/issues/67) - License information [bug]
-- [#69](https://github.com/scottksmith95/LINQKit/issues/69) - missing licensingUrl node from nuspec in .NET45
 
 # 1.1.9.0 (17 November 2016)
 - [#1](https://github.com/scottksmith95/LINQKit/pull/1) - .NET 4.5.1 and EntityFramework 6: Async-await -support contributed by [Thorium](https://github.com/Thorium)
@@ -58,7 +66,6 @@
 - [#8](https://github.com/scottksmith95/LINQKit/issues/8) - Refactor to segregate EntityFramework dependencies
 - [#9](https://github.com/scottksmith95/LINQKit/issues/9) - Too much parenthesis leads to stack overflow.
 - [#12](https://github.com/scottksmith95/LINQKit/issues/12) - using AsExpandable() cause AsNoTracking doesn't work.
-- [#13](https://github.com/scottksmith95/LINQKit/issues/13) - Unable to cast object of type 'System.Linq.Expressions.InstanceMethodCallExpressionN' to type 'System.Linq.Expressions.LambdaExpression' [question]
 - [#15](https://github.com/scottksmith95/LINQKit/issues/15) - Nuget issue on OS with case-sensitive filesystem
 - [#16](https://github.com/scottksmith95/LINQKit/issues/16) - Nuget-version is not up-to-date
 - [#17](https://github.com/scottksmith95/LINQKit/issues/17) - Xml docs for IntelliSense [feature]
@@ -66,7 +73,6 @@
 - [#22](https://github.com/scottksmith95/LINQKit/issues/22) - Predicate.Invoke(Predicate.Invoke(..)) does not work
 - [#23](https://github.com/scottksmith95/LINQKit/issues/23) - Unbounded variable in expanded predicate
 - [#26](https://github.com/scottksmith95/LINQKit/issues/26) - Unnecessary include of entity framework in nuget package
-- [#28](https://github.com/scottksmith95/LINQKit/issues/28) - Does not support dnxcore50 [question]
 - [#31](https://github.com/scottksmith95/LINQKit/issues/31) - Missing Not() method in Predicate Builder [feature]
 - [#35](https://github.com/scottksmith95/LINQKit/issues/35) - Update project to the .NET Core RTM [feature]
 - [#36](https://github.com/scottksmith95/LINQKit/issues/36) - System.Interactive.Async load failure
