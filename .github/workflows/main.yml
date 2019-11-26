@@ -35,11 +35,4 @@ jobs:
       run: |
         dotnet test ./tests/LinqKit.Tests/LinqKit.Tests.csproj -c Release
         dotnet test ./tests/LinqKit.EntityFramework.Tests.Net452/LinqKit.EntityFramework.Tests.Net452.csproj -c Release
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore.Tests -c Release
-        
-    - name: Publish to Github
-      uses: actions/upload-artifact@master
-      with:
-        name: LinqKit
-        path: './src/LinqKit/bin/Release/LinqKit.1.1.16-ci-${{steps.buildnumber.outputs.build_number}}.nupkg'
-        
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore.Tests -c Release    

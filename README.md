@@ -8,9 +8,9 @@
 ### Projects
 | Project | NuGet | Dependency | Frameworks |
 | ------- | ----- | -----------| ---------- | 
-| LinqKit | [![NuGet Badge](https://buildstats.info/nuget/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework | <ul><li>net45 and up</li></ul> |
-| LinqKit.Core | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Core)](https://www.nuget.org/packages/LinqKit.Core) | - | <ul><li>net35</li><li>net40</li><li>net45 and up</li><li>.NETPortable Profile 259</li><li>.NETPortable Profile 328</li><li>netstandard1.3</li><li>netstandard2.0</li><li>uap10</li></ul>|
-| LinqKit.EntityFramework | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.EntityFramework)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework | <ul><li>net45 and up</li></ul> |
+| LinqKit | [![NuGet Badge](https://buildstats.info/nuget/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework | <ul><li>net45 and up</li><li>netstandard2.1</li></ul> |
+| LinqKit.Core | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Core)](https://www.nuget.org/packages/LinqKit.Core) | - | <ul><li>net35</li><li>net40</li><li>net45 and up</li><li>.NETPortable Profile</li><li>netstandard1.3</li><li>netstandard2.0</li><li>netstandard2.1</li><li>uap10</li></ul>|
+| LinqKit.EntityFramework | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.EntityFramework)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework | <ul><li>net45 and up</li><li>netstandard2.1</li></ul> |
 | LinqKit.Microsoft.EntityFrameworkCore | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>net451 and up</li><li>netstandard1.3</li><li>netstandard2.0</li></ul>|
 | LinqKit.Z.EntityFramework.Classic | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Z.EntityFramework.Classic)](https://www.nuget.org/packages/LinqKit.Z.EntityFramework.Classic) | Z.EntityFramework.Classic | <ul><li>net40</li><li>net45</li><li>netstandard2.0</li></ul>|
 
