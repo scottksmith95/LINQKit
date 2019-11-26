@@ -1,0 +1,45 @@
+name: Main workflow
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    
+    env:
+      Prerelease: ci
+
+    steps:
+    - name: Generate build number
+      uses: einaregilsson/build-number@v1
+      id: buildnumber
+      with:
+        token: ${{secrets.github_token}}   
+    
+    - name: Print new build number
+      run: |
+        echo "Build number is ${{ steps.buildnumber.outputs.build_number }}"
+        echo "Build number is ${env:BUILD_NUMBER}"
+          
+    - uses: actions/checkout@v1
+      
+    - name: Build Projects
+      run: |
+        dotnet build ./src/LinqKit/LinqKit.csproj -c Release
+        dotnet build ./src/LinqKit.EntityFramework/LinqKit.EntityFramework.csproj -c Release
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
+        dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c Release
+    
+    - name: Run Tests
+      run: |
+        dotnet test ./tests/LinqKit.Tests/LinqKit.Tests.csproj -c Release
+        dotnet test ./tests/LinqKit.EntityFramework.Tests.Net452/LinqKit.EntityFramework.Tests.Net452.csproj -c Release
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore.Tests -c Release
+        
+    - name: Publish to Github
+      uses: actions/upload-artifact@master
+      with:
+        name: LinqKit
+        path: './src/LinqKit/bin/Release/LinqKit.1.1.16-ci-${{steps.buildnumber.outputs.build_number}}.nupkg'
+        

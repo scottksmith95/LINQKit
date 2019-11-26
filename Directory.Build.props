@@ -6,4 +6,14 @@
   <PropertyGroup>
     <VersionPrefix>1.1.17-preview-04</VersionPrefix>
   </PropertyGroup>
+
+  <Choose>
+    <!-- The environment variable `Prerelease` is set in the main.yml file. -->
+    <When Condition=" '$(Prerelease)' != '' ">
+      <PropertyGroup>
+        <!-- Set the version to x.x.x.x-{Prerelease}-{BUILD_NUMBER} (this is same BUILD_NUMBER as defined in the main.yml file). -->
+        <VersionSuffix>$(Prerelease)-$(BUILD_NUMBER)</VersionSuffix>
+      </PropertyGroup>
+    </When>
+  </Choose>
 </Project>
