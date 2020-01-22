@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using ConsoleAppNetCore3Ef3.EntityFrameworkCore;
+using ConsoleAppNetCore3Ef3.EntityFrameworkCore.Entities;
 using LinqKit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebApplicationNetCore3WithEFCore3.EntityFrameworkCore;
-using WebApplicationNetCore3WithEFCore3.EntityFrameworkCore.Entities;
 
 namespace WebApplicationNetCore3WithEFCore3.Controllers
 {
@@ -25,7 +25,7 @@ namespace WebApplicationNetCore3WithEFCore3.Controllers
         [HttpGet]
         public string Get()
         {
-            Expression<Func<Guest, bool>> purchasePredicate = g => g.Name.StartsWith("G");
+            Expression<Func<Guest, bool>> namePredicate = g => g.Name.StartsWith("G");
             var query = _context.Guests.AsExpandable().ToList();
 
             return string.Join(",", query.Select(g => g.Name));
