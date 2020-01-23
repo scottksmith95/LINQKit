@@ -38,7 +38,7 @@ namespace LinqKit
         }
 
 #if EFCORE
-#if NETSTANDARD2_1
+#if EFCORE3
         /// <summary>Enumerator-pattern: MoveNextAsync</summary>
         public ValueTask<bool> MoveNextAsync()
         {
