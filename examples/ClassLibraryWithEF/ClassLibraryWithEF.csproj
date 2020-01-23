@@ -6,10 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.15" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj" />
     <ProjectReference Include="..\GenericClassLibrary\GenericClassLibrary.csproj" />
   </ItemGroup>
 

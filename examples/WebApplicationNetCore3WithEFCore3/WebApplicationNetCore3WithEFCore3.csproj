@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore3\LinqKit.Microsoft.EntityFrameworkCore3.csproj" />
   </ItemGroup>
 
   <ItemGroup>

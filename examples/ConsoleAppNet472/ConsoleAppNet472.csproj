@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LinqKit.Microsoft.EntityFrameworkCore, Version=1.1.17.0, Culture=neutral, PublicKeyToken=a5e68054d5e7f94b, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\LinqKit.Microsoft.EntityFrameworkCore.1.1.17\lib\net451\LinqKit.Microsoft.EntityFrameworkCore.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -139,6 +136,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\Guest.cs">
+      <Link>EntityFrameworkCore\Entities\Guest.cs</Link>
+    </Compile>
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\Reservation.cs">
+      <Link>EntityFrameworkCore\Entities\Reservation.cs</Link>
+    </Compile>
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\Room.cs">
+      <Link>EntityFrameworkCore\Entities\Room.cs</Link>
+    </Compile>
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\RoomDetail.cs">
+      <Link>EntityFrameworkCore\Entities\RoomDetail.cs</Link>
+    </Compile>
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\RoomStatus.cs">
+      <Link>EntityFrameworkCore\Entities\RoomStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\MyHotelDbContext.cs">
+      <Link>EntityFrameworkCore\MyHotelDbContext.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -147,11 +162,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore3\LinqKit.Microsoft.EntityFrameworkCore3.csproj">
+      <Project>{f1a582ae-9c3d-4f45-a007-53eb80035704}</Project>
+      <Name>LinqKit.Microsoft.EntityFrameworkCore3</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClassLibraryStandard20\ClassLibraryStandard20.csproj">
       <Project>{5b617a20-19af-4546-9ad5-16b671878305}</Project>
       <Name>ClassLibraryStandard20</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Data.SqlClient.SNI.1.0.19235.1\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\..\packages\Microsoft.Data.SqlClient.SNI.1.0.19235.1\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
