@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\Guest.cs" Link="EntityFrameworkCore\Entities\Guest.cs" />
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\Reservation.cs" Link="EntityFrameworkCore\Entities\Reservation.cs" />
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\Room.cs" Link="EntityFrameworkCore\Entities\Room.cs" />
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\RoomDetail.cs" Link="EntityFrameworkCore\Entities\RoomDetail.cs" />
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\RoomStatus.cs" Link="EntityFrameworkCore\Entities\RoomStatus.cs" />
+    <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\MyHotelDbContext.cs" Link="EntityFrameworkCore\MyHotelDbContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EntityFrameworkCore\Entities\" />
+  </ItemGroup>
+</Project>
