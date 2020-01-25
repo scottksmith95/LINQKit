@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.1.18-preview-01</Version>
+    <Version>1.1.18</Version>
     <DefineConstants>$(DefineConstants);EFCORE</DefineConstants>
     <Description>LinqKit.Microsoft.EntityFrameworkCore contains extensions for LINQ to SQL and EntityFrameworkCore. With Include(...) and IDbAsync support.</Description>
     <AssemblyTitle>LinqKit for Microsoft.EntityFrameworkCore with Include(...) and IAsync support.</AssemblyTitle>

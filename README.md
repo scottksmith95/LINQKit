@@ -11,13 +11,13 @@ The base project-name is "LinqKit". And the table below lists all other packages
 
 | Postfix | NuGet | Dependency | Frameworks |
 | ------- | ----- | -----------| ---------- | 
-| - | [![NuGet Badge](https://buildstats.info/nuget/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework | <ul><li>net45 and up</li><li>netstandard2.1</li></ul> |
-| Core | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Core)](https://www.nuget.org/packages/LinqKit.Core) | - | <ul><li>net35</li><li>net40</li><li>net45 and up</li><li>.NETPortable Profile</li><li>netstandard1.3</li><li>netstandard2.0</li><li>netstandard2.1</li><li>uap10</li></ul>|
-| EntityFramework | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.EntityFramework)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework | <ul><li>net45 and up</li><li>netstandard2.1</li></ul> |
-| Microsoft.EntityFrameworkCore | [NuGet v1.1.17](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/1.1.17) | EntityFrameworkCore | <ul><li>net451 and up</li><li>netstandard1.3</li></ul>|
-| Microsoft.EntityFrameworkCore | [NuGet v2.0.0](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/2.0.0) | EntityFrameworkCore | <ul><li>netstandard2.0</li></ul>|
-| Microsoft.EntityFrameworkCore | [NuGet v3.0.0](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/3.0.0) | EntityFrameworkCore | <ul><li>netstandard2.0</li><li>netstandard2.1</li></ul>|
-| Z.EntityFramework.Classic | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Z.EntityFramework.Classic)](https://www.nuget.org/packages/LinqKit.Z.EntityFramework.Classic) | Z.EntityFramework.Classic | <ul><li>net40</li><li>net45</li><li>netstandard2.0</li></ul>|
+| - | [![Nuget](https://img.shields.io/nuget/v/LinqKit)![Nuget](https://img.shields.io/nuget/dt/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework | <ul><li>net45 and up</li><li>netstandard2.1</li></ul> |
+| Core | [![Nuget](https://img.shields.io/nuget/v/LinqKit.Core)![Nuget](https://img.shields.io/nuget/dt/LinqKit.Core)](https://www.nuget.org/packages/LinqKit.Core) | - | <ul><li>net35</li><li>net40</li><li>net45 and up</li><li>.NETPortable Profile</li><li>netstandard1.3</li><li>netstandard2.0</li><li>netstandard2.1</li><li>uap10</li></ul>|
+| EntityFramework | [![Nuget](https://img.shields.io/nuget/v/LinqKit.EntityFramework)![Nuget](https://img.shields.io/nuget/dt/LinqKit.EntityFramework)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework | <ul><li>net45 and up</li><li>netstandard2.1</li></ul> |
+| Microsoft.EntityFrameworkCore | [NuGet v1.1.18](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/1.1.18) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>net451 and up</li><li>netstandard1.3</li></ul>|
+| Microsoft.EntityFrameworkCore | [NuGet v2.0.0](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/2.0.0) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>netstandard2.0</li></ul>|
+| Microsoft.EntityFrameworkCore | [NuGet v3.0.0](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/3.0.0) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>netstandard2.0</li><li>netstandard2.1</li></ul>|
+| Z.EntityFramework.Classic | [![Nuget](https://img.shields.io/nuget/v/Z.EntityFramework.Classic)![Nuget](https://img.shields.io/nuget/dt/Z.EntityFramework.Classic)](https://www.nuget.org/packages/LinqKit.Z.EntityFramework.Classic) | Z.EntityFramework.Classic | <ul><li>net40</li><li>net45</li><li>netstandard2.0</li></ul>|
 
 
 Table of Contents
