@@ -1,3 +1,8 @@
+# 1.1.18 (02 February 2020)
+- [#115](https://github.com/scottksmith95/LINQKit/pull/115) - Restructure EFCore dependencies [feature] contributed by [StefH](https://github.com/StefH)
+- [#95](https://github.com/scottksmith95/LINQKit/issues/95) - Support .NET Core 3 [bug]
+- [#114](https://github.com/scottksmith95/LINQKit/issues/114) - Restructure dependencies for LinqKit.Microsoft.EntityFrameworkCore for better support EFCore3 [feature]
+
 # 1.1.17 (26 November 2019)
 - [#94](https://github.com/scottksmith95/LINQKit/pull/94) - Update README.md contributed by [fkorak](https://github.com/fkorak)
 - [#103](https://github.com/scottksmith95/LINQKit/pull/103) - EntityFramework 6.3.0 and Microsoft.EntityFrameworkCore 3.0.0 [bug, feature] contributed by [StefH](https://github.com/StefH)
