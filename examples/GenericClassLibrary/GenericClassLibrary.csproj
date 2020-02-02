@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(LibraryType)' == 'EF'">
-    <PackageReference Include="LinqKit.Core" Version="1.1.15" />
+    <PackageReference Include="LinqKit.Core" Version="1.1.17" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(LibraryType)' != 'EF'">
-    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.15" />
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.17" />
   </ItemGroup>
 
 </Project>

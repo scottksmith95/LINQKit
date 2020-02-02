@@ -12,6 +12,7 @@
     <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\RoomDetail.cs" Link="EntityFrameworkCore\Entities\RoomDetail.cs" />
     <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\Entities\RoomStatus.cs" Link="EntityFrameworkCore\Entities\RoomStatus.cs" />
     <Compile Include="..\ConsoleAppNetCore3Ef3\EntityFrameworkCore\MyHotelDbContext.cs" Link="EntityFrameworkCore\MyHotelDbContext.cs" />
+    <Compile Include="..\ConsoleAppNetCore3Ef3\Program.cs" Link="Program.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore3\LinqKit.Microsoft.EntityFrameworkCore3.csproj" />
   </ItemGroup>
 
   <ItemGroup>

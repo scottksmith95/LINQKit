@@ -61,9 +61,6 @@
     <Reference Include="Linq.Expression.Optimizer, Version=1.0.6.0, Culture=neutral, PublicKeyToken=34b6af2337893e15, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Linq.Expression.Optimizer.1.0.11\lib\net45\Linq.Expression.Optimizer.dll</HintPath>
     </Reference>
-    <Reference Include="LinqKit">
-      <HintPath>..\..\src\LinqKit\bin\$(Configuration)\net45\LinqKit.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -160,6 +157,12 @@
       <DependentUpon>DemoData.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj">
+      <Project>{cff0d30f-9af2-4f3d-8458-167c5cc430fd}</Project>
+      <Name>LinqKit.EntityFramework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

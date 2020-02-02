@@ -65,7 +65,7 @@ namespace LinqKit
 
 #if !(NET35 || NOEF || NOASYNCPROVIDER)
 #if EFCORE
-#if NETSTANDARD2_1
+#if EFCORE3
         IAsyncEnumerator<T> IAsyncEnumerable<T>.GetAsyncEnumerator(CancellationToken cancellationToken = default(CancellationToken))
         {
             if (_inner is IAsyncEnumerable<T>)
@@ -175,7 +175,7 @@ namespace LinqKit
 
 #if !(NET35 || NOEF || NOASYNCPROVIDER)
 #if EFCORE
-#if NETSTANDARD2_1
+#if EFCORE3
         public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {
             var asyncProvider = _query.InnerQuery.Provider as IAsyncQueryProvider;
