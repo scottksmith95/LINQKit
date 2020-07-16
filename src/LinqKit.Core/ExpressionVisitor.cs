@@ -83,7 +83,7 @@ namespace LinqKit
                 case ExpressionType.ListInit:
                     return VisitListInit((ListInitExpression)exp);
                 case ExpressionType.Extension:
-                    return exp;
+                    return VisitExtension(exp);
                 default:
                     throw new Exception($"Unhandled expression type: '{exp.NodeType}'");
             }
