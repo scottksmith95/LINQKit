@@ -19,10 +19,13 @@ namespace ConsoleAppNetCore3Ef3
             context.Database.EnsureCreated();
 
             var predicate = PredicateBuilder.New<Guest>().Or(asset => asset.Name.Contains("e"));
-            var predicateResult = context.Guests.AsExpandable()
-                .Where(predicate)
-                .Select(z => z.Name)
-                .ToArray();
+            var predicateQueryable = context.Guests.AsExpandable().Where(predicate);
+            Console.WriteLine($"predicateQueryable = '{predicateQueryable}'");
+
+            foreach (var result in predicateQueryable.ToArray())
+            {
+                Console.WriteLine($"predicateResult: {result.Name}");
+            }
 
 
             Expression<Func<Guest, bool>> criteria1 = guest => guest.Name.Contains("af");
