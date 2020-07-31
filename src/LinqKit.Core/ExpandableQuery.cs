@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Collections;
-
 #if !(NET35 || NOEF || NOASYNCPROVIDER)
 using System.Threading;
 using System.Threading.Tasks;
 #if EFCORE
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 #else
 using System.Data.Entity;

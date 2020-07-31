@@ -17,11 +17,14 @@
     <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <PackageIconUrl>https://zzzprojects.github.io/images/logo/logo-64.png</PackageIconUrl>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(TargetFramework)' != 'net40' ">
+    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -35,7 +38,7 @@
 
   <ItemGroup>
     <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
-    <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+    <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\**\*AssemblyInfo*.cs;bin\**;obj\**;**\*.xproj;packages\**" />
   </ItemGroup>
 
   <ItemGroup>

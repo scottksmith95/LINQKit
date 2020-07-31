@@ -82,9 +82,27 @@ namespace LinqKit
                     return VisitMemberInit((MemberInitExpression)exp);
                 case ExpressionType.ListInit:
                     return VisitListInit((ListInitExpression)exp);
+#if !NET35
+                case ExpressionType.Extension:
+                    return VisitExtension(exp);
+#endif
                 default:
                     throw new Exception($"Unhandled expression type: '{exp.NodeType}'");
             }
+        }
+
+        /// <summary>
+        /// Visit Extension expression to fix bugs:
+        /// - https://github.com/scottksmith95/LINQKit/issues/116
+        /// - https://github.com/scottksmith95/LINQKit/issues/118
+        /// 
+        /// TODO (2020-07-16) I'm not sure if just returning the expression will work in all cases...
+        /// 
+        /// See also https://nejcskofic.github.io/2017/07/30/extending-linq-expressions/
+        /// </summary>
+        protected virtual Expression VisitExtension(Expression extensionExpression)
+        {
+            return extensionExpression;
         }
 
         /// <summary> Visit member binding </summary>
