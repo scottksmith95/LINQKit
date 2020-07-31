@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>5.0.0-preview.6</Version>
+    <Version>5.0.0-preview.7</Version>
 	  <DefineConstants>$(DefineConstants);EFCORE;EFCORE3;EFCORE5</DefineConstants>
     <Description>LinqKit.Microsoft.EntityFrameworkCore contains extensions for LINQ to SQL and EntityFrameworkCore. With Include(...) and IDbAsync support.</Description>
     <AssemblyTitle>LinqKit for Microsoft.EntityFrameworkCore with Include(...) and IAsync support.</AssemblyTitle>
@@ -36,7 +36,7 @@
     <PackageReference Include="JetBrains.Annotations" Version="2020.1.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-preview.6.20312.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-preview.7.20365.15" />
   </ItemGroup>
 
 </Project>
