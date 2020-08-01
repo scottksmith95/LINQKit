@@ -6,7 +6,7 @@ using System.Reflection;
 namespace LinqKit
 {
     /// <summary>
-    /// Custom expresssion visitor for ExpandableQuery. This expands calls to Expression.Compile() and
+    /// Custom ExpressionVisitor for ExpandableQuery. This expands calls to Expression.Compile() and
     /// collapses captured lambda references in subqueries which LINQ to SQL can't otherwise handle.
     /// </summary>
     class ExpressionExpander : ExpressionVisitor
@@ -117,12 +117,22 @@ namespace LinqKit
             return base.VisitMethodCall(m);
         }
 
-        protected override Expression VisitMemberAccess(MemberExpression m)
+        protected Expression VisitMemberAccess(MemberExpression m)
         {
             // Strip out any references to expressions captured by outer variables - LINQ to SQL can't handle these:
             return m.Member.DeclaringType != null && m.Member.DeclaringType.Name.StartsWith("<>") ?
                 TransformExpr(m)
-                : base.VisitMemberAccess(m);
+                : VisitMemberAccessBase(m);
+        }
+
+        protected virtual Expression VisitMemberAccessBase(MemberExpression m)
+        {
+            Expression exp = Visit(m.Expression);
+            if (exp != m.Expression)
+            {
+                return Expression.MakeMemberAccess(exp, m.Member);
+            }
+            return m;
         }
 
         Expression TransformExpr(MemberExpression input)
@@ -138,7 +148,7 @@ namespace LinqKit
             {
                 if (_replaceVars != null && input.Expression is ParameterExpression && _replaceVars.ContainsKey(input.Expression as ParameterExpression))
                 {
-                    return base.VisitMemberAccess(input);
+                    return VisitMemberAccessBase(input);
                 }
 
                 return input;
