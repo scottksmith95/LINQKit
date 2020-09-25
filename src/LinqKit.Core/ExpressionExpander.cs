@@ -132,17 +132,12 @@ namespace LinqKit
                 return null;
             }
 
-            var field = input.Member as FieldInfo;
-            var prop = input.Member as PropertyInfo;
-
-            if (field == null && prop == null)
+            if (_replaceVars != null && input.Expression is ParameterExpression && _replaceVars.ContainsKey(input.Expression as ParameterExpression))
             {
-                if (_replaceVars != null && input.Expression is ParameterExpression && _replaceVars.ContainsKey(input.Expression as ParameterExpression))
-                {
-                    return base.VisitMemberAccess(input);
-                }
-
-                return input;
+                var newExpr = base.VisitMemberAccess(input);
+                if (!(newExpr is MemberExpression newInput))
+                    return newExpr;
+                input = newInput;
             }
 #if EFCORE || NETSTANDARD || WINDOWS_APP || PORTABLE || UAP
             //Collapse captured outer variables
@@ -177,8 +172,12 @@ namespace LinqKit
 
                 var fi = (FieldInfo)input.Member;
                 var result = fi.GetValue(obj);
-                var exp = result as Expression;
-                if (exp != null)
+                if (result is LambdaExpression lexp)
+                {
+                    // LambdaExpressions may need replacement of captured variables, so return back to the caller without visiting here
+                    return lexp;
+                }
+                if (result is Expression exp)
                 {
                     return Visit(exp);
                 }

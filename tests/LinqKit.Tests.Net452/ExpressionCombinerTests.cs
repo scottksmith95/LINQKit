@@ -97,6 +97,42 @@ namespace LinqKit.Tests.Net452
                 criteria2.Expand().ToString());
         }
 
+        private class _ExpressionAsProperty_FromExpressionVariable_criteria1
+        {
+            public Expression<Func<Tuple<int, string>, bool>> Expr => x => x.Item1 > 1000;
+        }
+
+        [Fact]
+        public void ExpressionCombiner_ExpressionAsProperty_FromExpressionVariable()
+        {
+            var criteria1obj = new _ExpressionAsProperty_FromExpressionVariable_criteria1();
+            Expression<Func<_ExpressionAsProperty_FromExpressionVariable_criteria1, Tuple<int, string>, bool>> getCriteria1 = (c, x) => c.Expr.Invoke(x);
+            Expression<Func<Tuple<int, string>, bool>> criteria2 =
+                x => getCriteria1.Invoke(criteria1obj, x) || x.Item2.Contains("a");
+
+            Assert.Equal(
+                "x => ((x.Item1 > 1000) OrElse x.Item2.Contains(\"a\"))",
+                criteria2.Expand().ToString());
+        }
+
+        private class _ExpressionAsField_FromExpressionVariable_criteria1
+        {
+            public Expression<Func<Tuple<int, string>, bool>> Expr = x => x.Item1 > 1000;
+        }
+
+        [Fact]
+        public void ExpressionCombiner_ExpressionAsField_FromExpressionVariable()
+        {
+            var criteria1obj = new _ExpressionAsField_FromExpressionVariable_criteria1();
+            Expression<Func<_ExpressionAsField_FromExpressionVariable_criteria1, Tuple<int, string>, bool>> getCriteria1 = (c, x) => c.Expr.Invoke(x);
+            Expression<Func<Tuple<int, string>, bool>> criteria2 =
+                x => getCriteria1.Invoke(criteria1obj, x) || x.Item2.Contains("a");
+
+            Assert.Equal(
+                "x => ((x.Item1 > 1000) OrElse x.Item2.Contains(\"a\"))",
+                criteria2.Expand().ToString());
+        }
+
         [Fact]
         public void ExpressionCombiner_ExpressionAsParam()
         {
