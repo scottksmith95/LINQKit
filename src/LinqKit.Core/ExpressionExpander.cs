@@ -133,8 +133,9 @@ namespace LinqKit
             }
 
             var field = input.Member as FieldInfo;
+            var prop = input.Member as PropertyInfo;
 
-            if (field == null)
+            if (field == null && prop == null)
             {
                 if (_replaceVars != null && input.Expression is ParameterExpression && _replaceVars.ContainsKey(input.Expression as ParameterExpression))
                 {
@@ -148,14 +149,14 @@ namespace LinqKit
             if (input.Member.DeclaringType != null && (!input.Member.DeclaringType.GetTypeInfo().IsNestedPrivate
                 || !input.Member.DeclaringType.Name.StartsWith("<>"))) // captured outer variable
             {
-                return TryVisitExpressionFunc(input, field);
+                return TryVisitExpressionFunc(input);
             }
 #else
             // Collapse captured outer variables
             if (input.Member.ReflectedType != null && (!input.Member.ReflectedType.IsNestedPrivate
                 || !input.Member.ReflectedType.Name.StartsWith("<>"))) // captured outer variable
             {
-                return TryVisitExpressionFunc(input, field);
+                return TryVisitExpressionFunc(input);
             }
 #endif
 
@@ -183,13 +184,15 @@ namespace LinqKit
                 }
             }
 
-            return TryVisitExpressionFunc(input, field);
+            return TryVisitExpressionFunc(input);
         }
 
-        private Expression TryVisitExpressionFunc(MemberExpression input, FieldInfo field)
+        private Expression TryVisitExpressionFunc(MemberExpression input)
         {
+            var fieldInfo = input.Member as FieldInfo;
             var propertyInfo = input.Member as PropertyInfo;
-            if (field.FieldType.GetTypeInfo().IsSubclassOf(typeof(Expression)) || propertyInfo != null && propertyInfo.PropertyType.GetTypeInfo().IsSubclassOf(typeof(Expression)))
+            if ((fieldInfo != null && fieldInfo.FieldType.GetTypeInfo().IsSubclassOf(typeof(Expression))) ||
+                (propertyInfo != null && propertyInfo.PropertyType.GetTypeInfo().IsSubclassOf(typeof(Expression))))
             {
                 return Visit(Expression.Lambda<Func<Expression>>(input).Compile()());
             }
