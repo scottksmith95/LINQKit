@@ -47,5 +47,111 @@ namespace LinqKit.Tests.Net452
             // Verify
             optimizerMock.Verify(o => o(It.IsAny<Expression>()), Times.Once);
         }
+
+        Expression<Func<int, int>> FunctionToExpand()
+        {
+            return i => i * 2;
+        }
+
+        Expression<Func<int, int>> FunctionToExpandWithParameter(int multiplier)
+        {
+            return i => i * multiplier;
+        }
+
+        Expression<Func<int, int>> PropertyToExpand
+        {
+           get { return i => i * 2; }
+        }
+
+        [Fact]
+        public void AsExpandable_Method_Invoke()
+        {
+            // Assign
+            var query = new[] { 1, 2 }.AsQueryable();
+
+            // Act
+            var result = query.AsExpandable()
+                .Select(i => FunctionToExpand().Invoke(i)).ToArray();
+
+            // Assert
+            Assert.Equal(2, result[0]);
+            Assert.Equal(4, result[1]);
+        }
+
+        [Fact]
+        public void AsExpandable_MethodWithParameter_Invoke()
+        {
+            // Assign
+            var query = new[] { 1, 2 }.AsQueryable();
+
+            // Act
+            var result = query.AsExpandable()
+                .Select(i => FunctionToExpandWithParameter(3).Invoke(i)).ToArray();
+
+            // Assert
+            Assert.Equal(3, result[0]);
+            Assert.Equal(6, result[1]);
+        }
+
+        [Fact]
+        public void AsExpandable_Property_Invoke()
+        {
+            // Assign
+            var query = new[] { 1, 2 }.AsQueryable();
+
+            // Act
+            var result = query.AsExpandable()
+                .Select(i => PropertyToExpand.Invoke(i)).ToArray();
+
+            // Assert
+            Assert.Equal(2, result[0]);
+            Assert.Equal(4, result[1]);
+        }
+
+        [Fact]
+        public void AsExpandable_Method_Compile()
+        {
+            // Assign
+            var query = new[] { 1, 2 }.AsQueryable();
+
+            // Act
+            var result = query.AsExpandable()
+                .Select(i => FunctionToExpand().Compile()(i)).ToArray();
+
+            // Assert
+            Assert.Equal(2, result[0]);
+            Assert.Equal(4, result[1]);
+        }
+
+        [Fact]
+        public void AsExpandable_MethodWithParameter_Compile()
+        {
+            // Assign
+            var query = new[] { 1, 2 }.AsQueryable();
+
+            // Act
+            var result = query.AsExpandable()
+                .Select(i => FunctionToExpandWithParameter(3).Compile()(i)).ToArray();
+
+            // Assert
+            Assert.Equal(3, result[0]);
+            Assert.Equal(6, result[1]);
+        }
+
+        [Fact]
+        public void AsExpandable_Property_Compile()
+        {
+            // Assign
+            var query = new[] { 1, 2 }.AsQueryable();
+
+            // Act
+            var result = query.AsExpandable()
+                .Select(i => PropertyToExpand.Compile()(i)).ToArray();
+
+            // Assert
+            Assert.Equal(2, result[0]);
+            Assert.Equal(4, result[1]);
+        }
+
     }
 }

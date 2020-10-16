@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using LinqKit.Utilities;
 
 namespace LinqKit
 {
@@ -26,6 +27,28 @@ namespace LinqKit
             return _replaceVars != null && _replaceVars.ContainsKey(p) ? _replaceVars[p] : base.VisitParameter(p);
         }
 
+        protected LambdaExpression EvaluateTarget(Expression target)
+        {
+            if (target.NodeType == ExpressionType.Call)
+            {
+                var mc = (MethodCallExpression) target;
+                if (mc.Method.Name == "Compile" &&
+                    mc.Method.DeclaringType?.GetGenericTypeDefinition() == typeof(Expression<>))
+                {
+                    target = mc.Object;
+                }
+            }
+
+            var lambda = target.EvaluateExpression() as LambdaExpression;
+
+            if (lambda == null)
+            {
+                throw new InvalidOperationException($"Invoke cannot evaluate LambdaExpression from '{target}'. Ensure that your function/property/member returns LambdaExpression");
+            }
+
+            return lambda;
+        }
+
         /// <summary>
         /// Flatten calls to Invoke so that Entity Framework can understand it. Calls to Invoke are generated
         /// by PredicateBuilder.
@@ -33,10 +56,8 @@ namespace LinqKit
         protected override Expression VisitInvocation(InvocationExpression iv)
         {
             var target = iv.Expression;
-            if (target is MemberExpression) target = TransformExpr((MemberExpression)target);
-            if (target is ConstantExpression) target = ((ConstantExpression)target).Value as Expression;
 
-            var lambda = (LambdaExpression)target;
+            var lambda = EvaluateTarget(target);
 
             var replaceVars = _replaceVars == null ?
                 new Dictionary<ParameterExpression, Expression>()
@@ -62,39 +83,26 @@ namespace LinqKit
             if (m.Method.Name == "Invoke" && m.Method.DeclaringType == typeof(Extensions))
             {
                 var target = m.Arguments[0];
-                if (target is MemberExpression)
-                {
-                    target = TransformExpr((MemberExpression)target);
-                }
-                if (target is ConstantExpression)
-                {
-                    target = ((ConstantExpression)target).Value as Expression;
-                }
-                if (target is UnaryExpression)
-                {
-                    target = ((UnaryExpression)target).Operand;
-                }
+                var lambda = EvaluateTarget(target);
 
-                var lambda = (LambdaExpression)target;
+                var replaceVars = _replaceVars == null
+                    ? new Dictionary<ParameterExpression, Expression>()
+                    : new Dictionary<ParameterExpression, Expression>(_replaceVars);
 
-                if (lambda != null)
+                try
                 {
-                    var replaceVars = _replaceVars == null ? new Dictionary<ParameterExpression, Expression>() : new Dictionary<ParameterExpression, Expression>(_replaceVars);
-
-                    try
+                    for (int i = 0; i < lambda.Parameters.Count; i++)
                     {
-                        for (int i = 0; i < lambda.Parameters.Count; i++)
-                        {
-                            replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i + 1]));
-                        }
+                        replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i + 1]));
                     }
-                    catch (ArgumentException ex)
-                    {
-                        throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
-                    }
-
-                    return new ExpressionExpander(replaceVars).Visit(lambda.Body);
                 }
+                catch (ArgumentException ex)
+                {
+                    throw new InvalidOperationException(
+                        "Invoke cannot be called recursively - try using a temporary variable.", ex);
+                }
+
+                return new ExpressionExpander(replaceVars).Visit(lambda.Body);
             }
 
             // Expand calls to an expression's Compile() method:
