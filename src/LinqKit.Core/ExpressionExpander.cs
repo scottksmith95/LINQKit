@@ -32,8 +32,7 @@ namespace LinqKit
             if (target.NodeType == ExpressionType.Call)
             {
                 var mc = (MethodCallExpression) target;
-                if (mc.Method.Name == "Compile" &&
-                    mc.Method.DeclaringType?.GetGenericTypeDefinition() == typeof(Expression<>))
+                if (mc.Method.Name == "Compile" && mc.Method.DeclaringType?.GetGenericTypeDefinition() == typeof(Expression<>))
                 {
                     target = mc.Object;
                 }
@@ -98,8 +97,7 @@ namespace LinqKit
                 }
                 catch (ArgumentException ex)
                 {
-                    throw new InvalidOperationException(
-                        "Invoke cannot be called recursively - try using a temporary variable.", ex);
+                    throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
                 }
 
                 return new ExpressionExpander(replaceVars).Visit(lambda.Body);

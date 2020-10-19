@@ -9,7 +9,9 @@ namespace LinqKit.Utilities
         public static object EvaluateExpression(this Expression expr)
         {
             if (expr == null)
+            {
                 return null;
+            }
 
             switch (expr.NodeType)
             {
@@ -21,10 +23,14 @@ namespace LinqKit.Utilities
                     var member = (MemberExpression) expr;
 
                     if (member.Member is FieldInfo field)
+                    {
                         return field.GetValue(member.Expression.EvaluateExpression());
+                    }
 
                     if (member.Member is PropertyInfo property)
+                    {
                         return property.GetValue(member.Expression.EvaluateExpression(), null);
+                    }
 
                     break;
                 }
@@ -37,8 +43,7 @@ namespace LinqKit.Utilities
                 }
             }
 
-            var value = Expression.Lambda(expr).Compile().DynamicInvoke();
-            return value;
+            return Expression.Lambda(expr).Compile().DynamicInvoke();
         }
         
     }
