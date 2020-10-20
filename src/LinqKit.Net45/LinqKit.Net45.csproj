@@ -87,6 +87,9 @@
     <Compile Include="..\LinqKit.Core\AggregateBalanced.cs">
       <Link>AggregateBalanced.cs</Link>
     </Compile>
+    <Compile Include="..\LinqKit.Core\ExpandableAttribute.cs">
+      <Link>ExpandableAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\LinqKit.Core\ExpandableDbAsyncEnumerator.cs">
       <Link>ExpandableDbAsyncEnumerator.cs</Link>
     </Compile>

@@ -79,6 +79,9 @@
     <Compile Include="..\LinqKit.Core\AggregateBalanced.cs">
       <Link>AggregateBalanced.cs</Link>
     </Compile>
+    <Compile Include="..\LinqKit.Core\ExpandableAttribute.cs">
+      <Link>ExpandableAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\LinqKit.Core\ExpandableQuery.cs">
       <Link>ExpandableQuery.cs</Link>
     </Compile>
@@ -102,6 +105,9 @@
     </Compile>
     <Compile Include="..\LinqKit.Core\PredicateBuilder.cs">
       <Link>PredicateBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\LinqKit.Core\Utilities\ExpressionHelpers.cs">
+      <Link>Utilities\ExpressionHelpers.cs</Link>
     </Compile>
     <Compile Include="..\LinqKit.Core\Utilities\IntrospectionExtensions.cs">
       <Link>Utilities\IntrospectionExtensions.cs</Link>

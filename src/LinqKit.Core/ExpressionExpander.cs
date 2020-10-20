@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using LinqKit.Utilities;
@@ -7,13 +8,15 @@ using LinqKit.Utilities;
 namespace LinqKit
 {
     /// <summary>
-    /// Custom expresssion visitor for ExpandableQuery. This expands calls to Expression.Compile() and
+    /// Custom expression visitor for ExpandableQuery. This expands calls to Expression.Compile() and
     /// collapses captured lambda references in subqueries which LINQ to SQL can't otherwise handle.
     /// </summary>
     class ExpressionExpander : ExpressionVisitor
     {
         // Replacement parameters - for when invoking a lambda expression.
         readonly Dictionary<ParameterExpression, Expression> _replaceVars;
+
+        readonly Dictionary<MemberInfo, LambdaExpression> _expandableCache = new Dictionary<MemberInfo, LambdaExpression>();
 
         internal ExpressionExpander() { }
 
@@ -77,6 +80,44 @@ namespace LinqKit
             return new ExpressionExpander(replaceVars).Visit(lambda.Body);
         }
 
+        protected bool GetExpandLambda(MemberInfo memberInfo, out LambdaExpression expandLambda)
+        {
+            if (_expandableCache.TryGetValue(memberInfo, out expandLambda))
+            {
+                return expandLambda != null;
+            }
+
+            var attr = memberInfo.GetCustomAttributes(typeof(ExpandableAttribute), true).FirstOrDefault() as ExpandableAttribute;
+
+            if (attr != null && !string.IsNullOrEmpty(attr.MethodName) && memberInfo.DeclaringType != null)
+            {
+                Expression expr;
+
+                if (memberInfo is MethodInfo method && method.IsGenericMethod)
+                {
+                    var args = method.GetGenericArguments();
+
+                    expr = Expression.Call(memberInfo.DeclaringType, attr.MethodName, args);
+                }
+                else
+                {
+                    expr = Expression.Call(memberInfo.DeclaringType, attr.MethodName, Type.EmptyTypes);
+                }
+
+                expandLambda = expr.EvaluateExpression() as LambdaExpression;
+                if (expandLambda == null)
+                {
+                    throw new InvalidOperationException($"Expandable method from '{memberInfo.DeclaringType}.{attr.MethodName}()' have returned not a LambdaExpression.");
+                }
+
+                _expandableCache.Add(memberInfo, expandLambda);
+                return true;
+            }
+
+            _expandableCache.Add(memberInfo, null);
+            return false;
+        }
+
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
             if (m.Method.Name == "Invoke" && m.Method.DeclaringType == typeof(Extensions))
@@ -103,6 +144,31 @@ namespace LinqKit
                 return new ExpressionExpander(replaceVars).Visit(lambda.Body);
             }
 
+            if (GetExpandLambda(m.Method, out var methodLambda))
+            {
+                var replaceVars = new Dictionary<ParameterExpression, Expression>();
+
+                if (m.Method.IsStatic)
+                {
+                    for (int i = 0; i < methodLambda.Parameters.Count; i++)
+                    {
+                        replaceVars.Add(methodLambda.Parameters[i], m.Arguments[i]);
+                    }
+                }
+                else
+                {
+                    replaceVars.Add(methodLambda.Parameters[0], m.Object);
+                    for (int i = 1; i < methodLambda.Parameters.Count; i++)
+                    {
+                        replaceVars.Add(methodLambda.Parameters[i], m.Arguments[i - 1]);
+                    }
+                }
+
+                var newExpr = new ExpressionExpander(replaceVars).Visit(methodLambda.Body);
+
+                return Visit(newExpr);
+            }
+
             // Expand calls to an expression's Compile() method:
             if (m.Method.Name == "Compile" && m.Object is MemberExpression)
             {
@@ -125,6 +191,19 @@ namespace LinqKit
 
         protected override Expression VisitMemberAccess(MemberExpression m)
         {
+            if (GetExpandLambda(m.Member, out var methodLambda))
+            {
+                var replaceVars = new Dictionary<ParameterExpression, Expression>
+                {
+                    { methodLambda.Parameters[0], m.Expression }
+                };
+
+                var newExpr = new ExpressionExpander(replaceVars).Visit(methodLambda.Body);
+
+                return Visit(newExpr);
+            }
+
+
             // Strip out any references to expressions captured by outer variables - LINQ to SQL can't handle these:
             return m.Member.DeclaringType != null && m.Member.DeclaringType.Name.StartsWith("<>") ?
                 TransformExpr(m)
