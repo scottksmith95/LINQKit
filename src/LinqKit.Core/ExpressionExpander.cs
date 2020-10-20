@@ -87,31 +87,43 @@ namespace LinqKit
                 return expandLambda != null;
             }
 
-            var attr = memberInfo.GetCustomAttributes(typeof(ExpandableAttribute), true).FirstOrDefault() as ExpandableAttribute;
-
-            if (attr != null && !string.IsNullOrEmpty(attr.MethodName) && memberInfo.DeclaringType != null)
+            var canExpand = memberInfo.DeclaringType != null;
+            if (canExpand)
             {
-                Expression expr;
+                // shortcut for standard methods
+                canExpand = memberInfo.DeclaringType != typeof(Enumerable) &&
+                            memberInfo.DeclaringType != typeof(Queryable);
+            }
 
-                if (memberInfo is MethodInfo method && method.IsGenericMethod)
+            if (canExpand)
+            {
+                var attr = memberInfo.GetCustomAttributes(typeof(ExpandableAttribute), true).FirstOrDefault() as ExpandableAttribute;
+
+                if (attr != null && !string.IsNullOrEmpty(attr.MethodName))
                 {
-                    var args = method.GetGenericArguments();
+                    Expression expr;
 
-                    expr = Expression.Call(memberInfo.DeclaringType, attr.MethodName, args);
-                }
-                else
-                {
-                    expr = Expression.Call(memberInfo.DeclaringType, attr.MethodName, Type.EmptyTypes);
-                }
+                    if (memberInfo is MethodInfo method && method.IsGenericMethod)
+                    {
+                        var args = method.GetGenericArguments();
 
-                expandLambda = expr.EvaluateExpression() as LambdaExpression;
-                if (expandLambda == null)
-                {
-                    throw new InvalidOperationException($"Expandable method from '{memberInfo.DeclaringType}.{attr.MethodName}()' have returned not a LambdaExpression.");
-                }
+                        expr = Expression.Call(memberInfo.DeclaringType, attr.MethodName, args);
+                    }
+                    else
+                    {
+                        expr = Expression.Call(memberInfo.DeclaringType, attr.MethodName, Type.EmptyTypes);
+                    }
 
-                _expandableCache.Add(memberInfo, expandLambda);
-                return true;
+                    expandLambda = expr.EvaluateExpression() as LambdaExpression;
+                    if (expandLambda == null)
+                    {
+                        throw new InvalidOperationException(
+                            $"Expandable method from '{memberInfo.DeclaringType}.{attr.MethodName}()' have returned not a LambdaExpression.");
+                    }
+
+                    _expandableCache.Add(memberInfo, expandLambda);
+                    return true;
+                }
             }
 
             _expandableCache.Add(memberInfo, null);
