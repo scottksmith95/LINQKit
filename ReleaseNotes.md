@@ -1,3 +1,9 @@
+# 1.1.19 (21 October 2020)
+- [#121](https://github.com/scottksmith95/LINQKit/pull/121) - EntityFramework Core 5 fix [bug] contributed by [StefH](https://github.com/StefH)
+- [#126](https://github.com/scottksmith95/LINQKit/pull/126) - Improved handling target Lambda from Property, Method, Compile() method. contributed by [sdanyliv](https://github.com/sdanyliv)
+- [#116](https://github.com/scottksmith95/LINQKit/issues/116) - LinqKit fails with Entity Framework Core 5 [bug]
+- [#118](https://github.com/scottksmith95/LINQKit/issues/118) - PredicateBuilder failed on EF Core 5.x [bug]
+
 # 1.1.18 (02 February 2020)
 - [#115](https://github.com/scottksmith95/LINQKit/pull/115) - Restructure EFCore dependencies [feature] contributed by [StefH](https://github.com/StefH)
 - [#95](https://github.com/scottksmith95/LINQKit/issues/95) - Support .NET Core 3 [bug]
