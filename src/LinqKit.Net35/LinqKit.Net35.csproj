@@ -103,6 +103,9 @@
     <Compile Include="..\LinqKit.Core\PredicateBuilder.cs">
       <Link>PredicateBuilder.cs</Link>
     </Compile>
+    <Compile Include="..\LinqKit.Core\Utilities\ExpressionHelpers.cs">
+      <Link>Utilities\ExpressionHelpers.cs</Link>
+    </Compile>
     <Compile Include="..\LinqKit.Core\Utilities\IntrospectionExtensions.cs">
       <Link>Utilities\IntrospectionExtensions.cs</Link>
     </Compile>
