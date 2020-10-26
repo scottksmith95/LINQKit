@@ -29,20 +29,30 @@ namespace LinqKit
 
         protected LambdaExpression EvaluateTarget(Expression target)
         {
-            if (target.NodeType == ExpressionType.Call)
+            LambdaExpression lambda;
+            if (target.NodeType == ExpressionType.Lambda)
             {
-                var mc = (MethodCallExpression) target;
-                if (mc.Method.Name == "Compile" && mc.Method.DeclaringType?.GetGenericTypeDefinition() == typeof(Expression<>))
+                lambda = (LambdaExpression) target;
+            }           
+            else
+            {
+                if (target.NodeType == ExpressionType.Call)
                 {
-                    target = mc.Object;
+                    var mc = (MethodCallExpression) target;
+                    if (mc.Method.Name == "Compile" &&
+                        mc.Method.DeclaringType?.GetGenericTypeDefinition() == typeof(Expression<>))
+                    {
+                        target = mc.Object;
+                    }
                 }
-            }
 
-            var lambda = target.EvaluateExpression() as LambdaExpression;
+                lambda = target.EvaluateExpression() as LambdaExpression;
 
-            if (lambda == null)
-            {
-                throw new InvalidOperationException($"Invoke cannot evaluate LambdaExpression from '{target}'. Ensure that your function/property/member returns LambdaExpression");
+                if (lambda == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Invoke cannot evaluate LambdaExpression from '{target}'. Ensure that your function/property/member returns LambdaExpression");
+                }
             }
 
             return lambda;
