@@ -29,9 +29,14 @@ namespace LinqKit
 
         protected LambdaExpression EvaluateTarget(Expression target)
         {
+            if (target is LambdaExpression lambdaExpression)
+            {
+                return lambdaExpression;
+            }
+
             if (target.NodeType == ExpressionType.Call)
             {
-                var mc = (MethodCallExpression) target;
+                var mc = (MethodCallExpression)target;
                 if (mc.Method.Name == "Compile" && mc.Method.DeclaringType?.GetGenericTypeDefinition() == typeof(Expression<>))
                 {
                     target = mc.Object;
