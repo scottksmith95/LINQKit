@@ -1,3 +1,8 @@
+# 1.1.20 (29 October 2020)
+- [#131](https://github.com/scottksmith95/LINQKit/pull/131) - Fix bug in version 1.1.19 (#129) contributed by [StefH](https://github.com/StefH)
+- [#132](https://github.com/scottksmith95/LINQKit/pull/132) - Add PatchVersion to projects contributed by [StefH](https://github.com/StefH)
+- [#129](https://github.com/scottksmith95/LINQKit/issues/129) - Version 1.1.19 introduces a breaking change to ExpressionExpander.Visit [bug]
+
 # 1.1.19 (21 October 2020)
 - [#121](https://github.com/scottksmith95/LINQKit/pull/121) - EntityFramework Core 5 fix [bug] contributed by [StefH](https://github.com/StefH)
 - [#126](https://github.com/scottksmith95/LINQKit/pull/126) - Improved handling target Lambda from Property, Method, Compile() method. contributed by [sdanyliv](https://github.com/sdanyliv)
