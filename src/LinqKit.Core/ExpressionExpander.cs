@@ -13,22 +13,10 @@ namespace LinqKit
     /// </summary>
     class ExpressionExpander : ExpressionVisitor
     {
-        // Replacement parameters - for when invoking a lambda expression.
-        readonly Dictionary<ParameterExpression, Expression> _replaceVars;
 
         readonly Dictionary<MemberInfo, LambdaExpression> _expandableCache = new Dictionary<MemberInfo, LambdaExpression>();
 
         internal ExpressionExpander() { }
-
-        private ExpressionExpander(Dictionary<ParameterExpression, Expression> replaceVars)
-        {
-            _replaceVars = replaceVars;
-        }
-
-        protected override Expression VisitParameter(ParameterExpression p)
-        {
-            return _replaceVars != null && _replaceVars.ContainsKey(p) ? _replaceVars[p] : base.VisitParameter(p);
-        }
 
         protected LambdaExpression EvaluateTarget(Expression target)
         {
@@ -61,23 +49,9 @@ namespace LinqKit
 
             var lambda = EvaluateTarget(target);
 
-            var replaceVars = _replaceVars == null ?
-                new Dictionary<ParameterExpression, Expression>()
-                : new Dictionary<ParameterExpression, Expression>(_replaceVars);
+            var body = ExpressionReplacer.GetBody(lambda, iv.Arguments);
 
-            try
-            {
-                for (int i = 0; i < lambda.Parameters.Count; i++)
-                {
-                    replaceVars.Add(lambda.Parameters[i], Visit(iv.Arguments[i]));
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
-            }
-
-            return new ExpressionExpander(replaceVars).Visit(lambda.Body);
+            return Visit(body);
         }
 
         protected bool GetExpandLambda(MemberInfo memberInfo, out LambdaExpression expandLambda)
@@ -137,28 +111,20 @@ namespace LinqKit
                 var target = m.Arguments[0];
                 var lambda = EvaluateTarget(target);
 
-                var replaceVars = _replaceVars == null
-                    ? new Dictionary<ParameterExpression, Expression>()
-                    : new Dictionary<ParameterExpression, Expression>(_replaceVars);
-
-                try
+                var replaceVars = new Dictionary<Expression, Expression>();
+                for (int i = 0; i < lambda.Parameters.Count; i++)
                 {
-                    for (int i = 0; i < lambda.Parameters.Count; i++)
-                    {
-                        replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i + 1]));
-                    }
-                }
-                catch (ArgumentException ex)
-                {
-                    throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
+                    replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i + 1]));
                 }
 
-                return new ExpressionExpander(replaceVars).Visit(lambda.Body);
+                var body = ExpressionReplacer.Replace(lambda.Body, replaceVars);
+
+                return Visit(body);
             }
 
             if (GetExpandLambda(m.Method, out var methodLambda))
             {
-                var replaceVars = new Dictionary<ParameterExpression, Expression>();
+                var replaceVars = new Dictionary<Expression, Expression>();
 
                 if (m.Method.IsStatic)
                 {
@@ -176,7 +142,7 @@ namespace LinqKit
                     }
                 }
 
-                var newExpr = new ExpressionExpander(replaceVars).Visit(methodLambda.Body);
+                var newExpr = ExpressionReplacer.Replace(methodLambda.Body, replaceVars);
 
                 return Visit(newExpr);
             }
@@ -188,7 +154,7 @@ namespace LinqKit
                 var newExpr = TransformExpr(me);
                 if (newExpr != me)
                 {
-                    return newExpr;
+                    return Visit(newExpr);
                 }
             }
 
@@ -205,16 +171,10 @@ namespace LinqKit
         {
             if (GetExpandLambda(m.Member, out var methodLambda))
             {
-                var replaceVars = new Dictionary<ParameterExpression, Expression>
-                {
-                    { methodLambda.Parameters[0], m.Expression }
-                };
-
-                var newExpr = new ExpressionExpander(replaceVars).Visit(methodLambda.Body);
+                var newExpr = ExpressionReplacer.GetBody(methodLambda, m.Expression);
 
                 return Visit(newExpr);
             }
-
 
             // Strip out any references to expressions captured by outer variables - LINQ to SQL can't handle these:
             return m.Member.DeclaringType != null && m.Member.DeclaringType.Name.StartsWith("<>") ?
@@ -233,11 +193,6 @@ namespace LinqKit
 
             if (field == null)
             {
-                if (_replaceVars != null && input.Expression is ParameterExpression && _replaceVars.ContainsKey(input.Expression as ParameterExpression))
-                {
-                    return base.VisitMemberAccess(input);
-                }
-
                 return input;
             }
 #if EFCORE || NETSTANDARD || WINDOWS_APP || PORTABLE || UAP
