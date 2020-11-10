@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsExpandableTests.cs" />
+    <Compile Include="DeepInvocationTests.cs" />
     <Compile Include="ExpandableAttributeTests.cs" />
     <Compile Include="ExpressionExpanderTests.cs" />
     <Compile Include="PredicateBuilderTests.cs" />
