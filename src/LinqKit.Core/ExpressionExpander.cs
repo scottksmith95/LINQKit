@@ -7,25 +7,13 @@ using LinqKit.Utilities;
 namespace LinqKit
 {
     /// <summary>
-    /// Custom expresssion visitor for ExpandableQuery. This expands calls to Expression.Compile() and
+    /// Custom expression visitor for ExpandableQuery. This expands calls to Expression.Compile() and
     /// collapses captured lambda references in subqueries which LINQ to SQL can't otherwise handle.
     /// </summary>
     class ExpressionExpander : ExpressionVisitor
     {
-        // Replacement parameters - for when invoking a lambda expression.
-        readonly Dictionary<ParameterExpression, Expression> _replaceVars;
-
+       
         internal ExpressionExpander() { }
-
-        private ExpressionExpander(Dictionary<ParameterExpression, Expression> replaceVars)
-        {
-            _replaceVars = replaceVars;
-        }
-
-        protected override Expression VisitParameter(ParameterExpression p)
-        {
-            return _replaceVars != null && _replaceVars.ContainsKey(p) ? _replaceVars[p] : base.VisitParameter(p);
-        }
 
         protected LambdaExpression EvaluateTarget(Expression target)
         {
@@ -58,23 +46,9 @@ namespace LinqKit
 
             var lambda = EvaluateTarget(target);
 
-            var replaceVars = _replaceVars == null ?
-                new Dictionary<ParameterExpression, Expression>()
-                : new Dictionary<ParameterExpression, Expression>(_replaceVars);
+            var body = ExpressionReplacer.GetBody(lambda, iv.Arguments);
 
-            try
-            {
-                for (int i = 0; i < lambda.Parameters.Count; i++)
-                {
-                    replaceVars.Add(lambda.Parameters[i], Visit(iv.Arguments[i]));
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
-            }
-
-            return new ExpressionExpander(replaceVars).Visit(lambda.Body);
+            return Visit(body);
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression m)
@@ -84,23 +58,15 @@ namespace LinqKit
                 var target = m.Arguments[0];
                 var lambda = EvaluateTarget(target);
 
-                var replaceVars = _replaceVars == null
-                    ? new Dictionary<ParameterExpression, Expression>()
-                    : new Dictionary<ParameterExpression, Expression>(_replaceVars);
-
-                try
+                var replaceVars = new Dictionary<Expression, Expression>();
+                for (int i = 0; i < lambda.Parameters.Count; i++)
                 {
-                    for (int i = 0; i < lambda.Parameters.Count; i++)
-                    {
-                        replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i + 1]));
-                    }
-                }
-                catch (ArgumentException ex)
-                {
-                    throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
+                    replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i + 1]));
                 }
 
-                return new ExpressionExpander(replaceVars).Visit(lambda.Body);
+                var body = ExpressionReplacer.Replace(lambda.Body, replaceVars);
+
+                return Visit(body);
             }
 
             // Expand calls to an expression's Compile() method:
@@ -110,7 +76,7 @@ namespace LinqKit
                 var newExpr = TransformExpr(me);
                 if (newExpr != me)
                 {
-                    return newExpr;
+                    return Visit(newExpr);
                 }
             }
 
@@ -142,11 +108,6 @@ namespace LinqKit
 
             if (field == null)
             {
-                if (_replaceVars != null && input.Expression is ParameterExpression && _replaceVars.ContainsKey(input.Expression as ParameterExpression))
-                {
-                    return base.VisitMemberAccess(input);
-                }
-
                 return input;
             }
 #if EFCORE || NETSTANDARD || WINDOWS_APP || PORTABLE || UAP
