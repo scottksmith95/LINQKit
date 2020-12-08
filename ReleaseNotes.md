@@ -1,3 +1,6 @@
+# 1.1.21 (14 November 2020)
+- [#133](https://github.com/scottksmith95/LINQKit/pull/133) - Add support for EntityFramework 5.0.0 contributed by [StefH](https://github.com/StefH)
+
 # 1.1.20 (29 October 2020)
 - [#131](https://github.com/scottksmith95/LINQKit/pull/131) - Fix bug in version 1.1.19 (#129) contributed by [StefH](https://github.com/StefH)
 - [#132](https://github.com/scottksmith95/LINQKit/pull/132) - Add PatchVersion to projects contributed by [StefH](https://github.com/StefH)
