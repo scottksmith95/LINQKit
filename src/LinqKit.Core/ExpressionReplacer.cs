@@ -22,9 +22,9 @@ namespace LinqKit
             return base.Visit(exp);
         }
 
-        public static Expression Replace(Expression expr, Expression toExpr)
+        public static Expression Replace(Expression expr, Expression fromExpr, Expression toExpr)
         {
-            return new ExpressionReplacer(new Dictionary<Expression, Expression> {{expr, toExpr}}).Visit(expr);
+            return new ExpressionReplacer(new Dictionary<Expression, Expression> {{fromExpr, toExpr}}).Visit(expr);
         }
 
         public static Expression Replace(Expression expr, [NotNull] IDictionary<Expression, Expression> replaceMap)

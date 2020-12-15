@@ -78,26 +78,28 @@ namespace LinqKit
             {
                 var attr = memberInfo.GetCustomAttributes(typeof(ExpandableAttribute), true).FirstOrDefault() as ExpandableAttribute;
 
-                if (attr != null && !string.IsNullOrEmpty(attr.MethodName))
+                if (attr != null)
                 {
+                    var methodName = string.IsNullOrEmpty(attr.MethodName) ? memberInfo.Name : attr.MethodName;
+                    
                     Expression expr;
 
                     if (memberInfo is MethodInfo method && method.IsGenericMethod)
                     {
                         var args = method.GetGenericArguments();
 
-                        expr = Expression.Call(memberInfo.DeclaringType, attr.MethodName, args);
+                        expr = Expression.Call(memberInfo.DeclaringType, methodName, args);
                     }
                     else
                     {
-                        expr = Expression.Call(memberInfo.DeclaringType, attr.MethodName, Type.EmptyTypes);
+                        expr = Expression.Call(memberInfo.DeclaringType, methodName, new Type[0]);
                     }
 
                     expandLambda = expr.EvaluateExpression() as LambdaExpression;
                     if (expandLambda == null)
                     {
                         throw new InvalidOperationException(
-                            $"Expandable method from '{memberInfo.DeclaringType}.{attr.MethodName}()' have returned not a LambdaExpression.");
+                            $"Expandable method from '{memberInfo.DeclaringType}.{methodName}()' have returned not a LambdaExpression.");
                     }
 
                     _expandableCache.Add(memberInfo, expandLambda);
