@@ -87,6 +87,9 @@
     <Compile Include="..\LinqKit.Core\AggregateBalanced.cs">
       <Link>AggregateBalanced.cs</Link>
     </Compile>
+    <Compile Include="..\LinqKit.Core\ExpandableAttribute.cs">
+      <Link>ExpandableAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\LinqKit.Core\ExpandableDbAsyncEnumerator.cs">
       <Link>ExpandableDbAsyncEnumerator.cs</Link>
     </Compile>
@@ -95,6 +98,9 @@
     </Compile>
     <Compile Include="..\LinqKit.Core\ExpressionExpander.cs">
       <Link>ExpressionExpander.cs</Link>
+    </Compile>
+    <Compile Include="..\LinqKit.Core\ExpressionReplacer.cs">
+      <Link>ExpressionReplacer.cs</Link>
     </Compile>
     <Compile Include="..\LinqKit.Core\ExpressionStarter.cs">
       <Link>ExpressionStarter.cs</Link>

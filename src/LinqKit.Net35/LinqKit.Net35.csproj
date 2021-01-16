@@ -79,6 +79,9 @@
     <Compile Include="..\LinqKit.Core\AggregateBalanced.cs">
       <Link>AggregateBalanced.cs</Link>
     </Compile>
+    <Compile Include="..\LinqKit.Core\ExpandableAttribute.cs">
+      <Link>ExpandableAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\LinqKit.Core\ExpandableQuery.cs">
       <Link>ExpandableQuery.cs</Link>
     </Compile>

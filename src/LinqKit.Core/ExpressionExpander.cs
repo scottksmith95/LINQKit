@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using LinqKit.Utilities;
@@ -7,25 +8,15 @@ using LinqKit.Utilities;
 namespace LinqKit
 {
     /// <summary>
-    /// Custom expresssion visitor for ExpandableQuery. This expands calls to Expression.Compile() and
+    /// Custom expression visitor for ExpandableQuery. This expands calls to Expression.Compile() and
     /// collapses captured lambda references in subqueries which LINQ to SQL can't otherwise handle.
     /// </summary>
     class ExpressionExpander : ExpressionVisitor
     {
-        // Replacement parameters - for when invoking a lambda expression.
-        readonly Dictionary<ParameterExpression, Expression> _replaceVars;
+
+        readonly Dictionary<MemberInfo, LambdaExpression> _expandableCache = new Dictionary<MemberInfo, LambdaExpression>();
 
         internal ExpressionExpander() { }
-
-        private ExpressionExpander(Dictionary<ParameterExpression, Expression> replaceVars)
-        {
-            _replaceVars = replaceVars;
-        }
-
-        protected override Expression VisitParameter(ParameterExpression p)
-        {
-            return _replaceVars != null && _replaceVars.ContainsKey(p) ? _replaceVars[p] : base.VisitParameter(p);
-        }
 
         protected LambdaExpression EvaluateTarget(Expression target)
         {
@@ -63,23 +54,61 @@ namespace LinqKit
 
             var lambda = EvaluateTarget(target);
 
-            var replaceVars = _replaceVars == null ?
-                new Dictionary<ParameterExpression, Expression>()
-                : new Dictionary<ParameterExpression, Expression>(_replaceVars);
+            var body = ExpressionReplacer.GetBody(lambda, iv.Arguments);
 
-            try
+            return Visit(body);
+        }
+
+        protected bool GetExpandLambda(MemberInfo memberInfo, out LambdaExpression expandLambda)
+        {
+            if (_expandableCache.TryGetValue(memberInfo, out expandLambda))
             {
-                for (int i = 0; i < lambda.Parameters.Count; i++)
+                return expandLambda != null;
+            }
+
+            var canExpand = memberInfo.DeclaringType != null;
+            if (canExpand)
+            {
+                // shortcut for standard methods
+                canExpand = memberInfo.DeclaringType != typeof(Enumerable) &&
+                            memberInfo.DeclaringType != typeof(Queryable);
+            }
+
+            if (canExpand)
+            {
+                var attr = memberInfo.GetCustomAttributes(typeof(ExpandableAttribute), true).FirstOrDefault() as ExpandableAttribute;
+
+                if (attr != null)
                 {
-                    replaceVars.Add(lambda.Parameters[i], Visit(iv.Arguments[i]));
+                    var methodName = string.IsNullOrEmpty(attr.MethodName) ? memberInfo.Name : attr.MethodName;
+                    
+                    Expression expr;
+
+                    if (memberInfo is MethodInfo method && method.IsGenericMethod)
+                    {
+                        var args = method.GetGenericArguments();
+
+                        expr = Expression.Call(memberInfo.DeclaringType, methodName, args);
+                    }
+                    else
+                    {
+                        expr = Expression.Call(memberInfo.DeclaringType, methodName, new Type[0]);
+                    }
+
+                    expandLambda = expr.EvaluateExpression() as LambdaExpression;
+                    if (expandLambda == null)
+                    {
+                        throw new InvalidOperationException(
+                            $"Expandable method from '{memberInfo.DeclaringType}.{methodName}()' have returned not a LambdaExpression.");
+                    }
+
+                    _expandableCache.Add(memberInfo, expandLambda);
+                    return true;
                 }
             }
-            catch (ArgumentException ex)
-            {
-                throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
-            }
 
-            return new ExpressionExpander(replaceVars).Visit(lambda.Body);
+            _expandableCache.Add(memberInfo, null);
+            return false;
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression m)
@@ -89,23 +118,40 @@ namespace LinqKit
                 var target = m.Arguments[0];
                 var lambda = EvaluateTarget(target);
 
-                var replaceVars = _replaceVars == null
-                    ? new Dictionary<ParameterExpression, Expression>()
-                    : new Dictionary<ParameterExpression, Expression>(_replaceVars);
-
-                try
+                var replaceVars = new Dictionary<Expression, Expression>();
+                for (int i = 0; i < lambda.Parameters.Count; i++)
                 {
-                    for (int i = 0; i < lambda.Parameters.Count; i++)
+                    replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i + 1]));
+                }
+
+                var body = ExpressionReplacer.Replace(lambda.Body, replaceVars);
+
+                return Visit(body);
+            }
+
+            if (GetExpandLambda(m.Method, out var methodLambda))
+            {
+                var replaceVars = new Dictionary<Expression, Expression>();
+
+                if (m.Method.IsStatic)
+                {
+                    for (int i = 0; i < methodLambda.Parameters.Count; i++)
                     {
-                        replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i + 1]));
+                        replaceVars.Add(methodLambda.Parameters[i], m.Arguments[i]);
                     }
                 }
-                catch (ArgumentException ex)
+                else
                 {
-                    throw new InvalidOperationException("Invoke cannot be called recursively - try using a temporary variable.", ex);
+                    replaceVars.Add(methodLambda.Parameters[0], m.Object);
+                    for (int i = 1; i < methodLambda.Parameters.Count; i++)
+                    {
+                        replaceVars.Add(methodLambda.Parameters[i], m.Arguments[i - 1]);
+                    }
                 }
 
-                return new ExpressionExpander(replaceVars).Visit(lambda.Body);
+                var newExpr = ExpressionReplacer.Replace(methodLambda.Body, replaceVars);
+
+                return Visit(newExpr);
             }
 
             // Expand calls to an expression's Compile() method:
@@ -115,7 +161,7 @@ namespace LinqKit
                 var newExpr = TransformExpr(me);
                 if (newExpr != me)
                 {
-                    return newExpr;
+                    return Visit(newExpr);
                 }
             }
 
@@ -130,6 +176,13 @@ namespace LinqKit
 
         protected override Expression VisitMemberAccess(MemberExpression m)
         {
+            if (GetExpandLambda(m.Member, out var methodLambda))
+            {
+                var newExpr = ExpressionReplacer.GetBody(methodLambda, m.Expression);
+
+                return Visit(newExpr);
+            }
+
             // Strip out any references to expressions captured by outer variables - LINQ to SQL can't handle these:
             return m.Member.DeclaringType != null && m.Member.DeclaringType.Name.StartsWith("<>") ?
                 TransformExpr(m)
@@ -147,11 +200,6 @@ namespace LinqKit
 
             if (field == null)
             {
-                if (_replaceVars != null && input.Expression is ParameterExpression && _replaceVars.ContainsKey(input.Expression as ParameterExpression))
-                {
-                    return base.VisitMemberAccess(input);
-                }
-
                 return input;
             }
 #if EFCORE || NETSTANDARD || WINDOWS_APP || PORTABLE || UAP
