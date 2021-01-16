@@ -85,6 +85,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppNetCore5Ef5", "ex
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFrameworkCore5", "src\LinqKit.Microsoft.EntityFrameworkCore5\LinqKit.Microsoft.EntityFrameworkCore5.csproj", "{660DA417-55A4-4171-9329-1C45B7E24FED}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFrameworkCore31", "src\LinqKit.Microsoft.EntityFrameworkCore31\LinqKit.Microsoft.EntityFrameworkCore31.csproj", "{FCD65032-6289-465A-9230-DD6BD2FFB376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -532,6 +534,22 @@ Global
 		{660DA417-55A4-4171-9329-1C45B7E24FED}.Release|x64.Build.0 = Release|Any CPU
 		{660DA417-55A4-4171-9329-1C45B7E24FED}.Release|x86.ActiveCfg = Release|Any CPU
 		{660DA417-55A4-4171-9329-1C45B7E24FED}.Release|x86.Build.0 = Release|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Debug|x64.Build.0 = Debug|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Debug|x86.Build.0 = Debug|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Release|ARM.Build.0 = Release|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Release|x64.ActiveCfg = Release|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Release|x64.Build.0 = Release|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Release|x86.ActiveCfg = Release|Any CPU
+		{FCD65032-6289-465A-9230-DD6BD2FFB376}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -564,6 +582,7 @@ Global
 		{5324A388-FBAA-4F96-B348-C00EAE66C1D3} = {4521E792-157C-4049-ADF0-CDA31EFC3CC7}
 		{C7642256-0B6C-4BE8-9EB1-937B3F4F19D2} = {4521E792-157C-4049-ADF0-CDA31EFC3CC7}
 		{660DA417-55A4-4171-9329-1C45B7E24FED} = {2F7F283D-5576-417F-A467-EC210226AC3B}
+		{FCD65032-6289-465A-9230-DD6BD2FFB376} = {2F7F283D-5576-417F-A467-EC210226AC3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F6283C5-9029-434E-BD90-E95FB377DA9B}
