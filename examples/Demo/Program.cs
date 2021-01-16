@@ -54,9 +54,7 @@ namespace Demo
                 select new
                 {
                     c.Name,
-                    FilteredPurchases =
-                        from p in c.Purchases.Where(purchasePredicate.Compile())
-                        select p.Price
+                    FilteredPurchases = from p in c.Purchases.Where(purchasePredicate.Compile()) select p.Price
                 };
 
             foreach (var customerResult in query)
@@ -89,16 +87,16 @@ namespace Demo
                 select new
                 {
                     c.Name,
-                    FilteredPurchases =
-                        from p in custPurchases.Where(purchasePredicate)
-                        select p.Price
+                    FilteredPurchases = from p in custPurchases.Where(purchasePredicate) select p.Price
                 };
 
             foreach (var customerResult in query)
             {
                 Console.WriteLine(customerResult.Name);
                 foreach (decimal price in customerResult.FilteredPurchases)
+                {
                     Console.WriteLine("   $" + price);
+                }
             }
         }
 
@@ -116,22 +114,21 @@ namespace Demo
 
             var query =
                 from c in data.Customers.AsExpandable()
-                let filteredPurchases = data.Purchases.Where(
-                    p => p.CustomerID == c.ID && purchasePredicate.Invoke(p))
+                let filteredPurchases = data.Purchases.Where(p => p.CustomerID == c.ID && purchasePredicate.Invoke(p))
                 where filteredPurchases.Any()
                 select new
                 {
                     c.Name,
-                    FilteredPurchases =
-                        from p in filteredPurchases
-                        select p.Price
+                    FilteredPurchases = from p in filteredPurchases select p.Price
                 };
 
             foreach (var customerResult in query)
             {
                 Console.WriteLine(customerResult.Name);
                 foreach (decimal price in customerResult.FilteredPurchases)
+                {
                     Console.WriteLine("   $" + price);
+                }
             }
         }
 
@@ -168,6 +165,7 @@ namespace Demo
             {
                 _priceGreaterThanOrContains = PriceGreaterThanOrContains().Compile();
             }
+
             return _priceGreaterThanOrContains(price, value, str);
         }
 
@@ -192,6 +190,5 @@ namespace Demo
             query = data.Purchases.AsExpandable().Where(p => PriceGreaterThanOrContains(p.Price, 1000, p.Description));
             Console.WriteLine("Count: " + query.Count());
         }
-
     }
 }

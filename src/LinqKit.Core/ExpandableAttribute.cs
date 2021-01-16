@@ -32,15 +32,8 @@ namespace LinqKit
         /// <summary>
         /// Creates instance of attribute.
         /// </summary>
-        public ExpandableAttribute()
-        {
-        }
-        
-        /// <summary>
-        /// Creates instance of attribute.
-        /// </summary>
-        /// <param name="methodName">Name of method in the same class that returns substitution expression.</param>
-        public ExpandableAttribute(string methodName)
+        /// <param name="methodName">Name of method in the same class that returns substitution expression. [Optional]</param>
+        public ExpandableAttribute(string methodName = null)
         {
             MethodName = methodName;
         }
@@ -48,7 +41,6 @@ namespace LinqKit
         /// <summary>
         /// Name of method in the same class that returns substitution expression.
         /// </summary>
-        public string MethodName    { get; set; }
-
+        public string MethodName { get; set; }
     }
 }

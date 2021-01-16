@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using ConsoleAppNetCore3Ef3.EntityFrameworkCore;
 using ConsoleAppNetCore3Ef3.EntityFrameworkCore.Entities;
 using LinqKit;

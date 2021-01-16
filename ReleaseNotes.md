@@ -1,3 +1,7 @@
+# 1.1.22 (16 January 2021)
+- [#127](https://github.com/scottksmith95/LINQKit/pull/127) - Added ExpandableAttribute for easy injecting expressions without Invoke. contributed by [sdanyliv](https://github.com/sdanyliv)
+- [#124](https://github.com/scottksmith95/LINQKit/issues/124) - LINQKit does not support referencing expressions stored in properties (InvalidCastException) [bug]
+
 # 1.1.21 (14 November 2020)
 - [#133](https://github.com/scottksmith95/LINQKit/pull/133) - Add support for EntityFramework 5.0.0 contributed by [StefH](https://github.com/StefH)
 

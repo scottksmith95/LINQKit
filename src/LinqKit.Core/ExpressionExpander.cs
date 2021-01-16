@@ -81,7 +81,7 @@ namespace LinqKit
                 if (attr != null)
                 {
                     var methodName = string.IsNullOrEmpty(attr.MethodName) ? memberInfo.Name : attr.MethodName;
-                    
+
                     Expression expr;
 
                     if (memberInfo is MethodInfo method && method.IsGenericMethod)

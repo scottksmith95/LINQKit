@@ -8,7 +8,7 @@ namespace LinqKit
 {
     class ExpressionReplacer : ExpressionVisitor
     {
-        readonly IDictionary<Expression, Expression> _replaceMap;
+        private readonly IDictionary<Expression, Expression> _replaceMap;
 
         public ExpressionReplacer([NotNull] IDictionary<Expression, Expression> replaceMap)
         {
@@ -18,13 +18,16 @@ namespace LinqKit
         public override Expression Visit(Expression exp)
         {
             if (exp != null && _replaceMap.TryGetValue(exp, out var replacement))
+            {
                 return replacement;
+            }
+
             return base.Visit(exp);
         }
 
         public static Expression Replace(Expression expr, Expression fromExpr, Expression toExpr)
         {
-            return new ExpressionReplacer(new Dictionary<Expression, Expression> {{fromExpr, toExpr}}).Visit(expr);
+            return new ExpressionReplacer(new Dictionary<Expression, Expression> { { fromExpr, toExpr } }).Visit(expr);
         }
 
         public static Expression Replace(Expression expr, [NotNull] IDictionary<Expression, Expression> replaceMap)
@@ -35,7 +38,9 @@ namespace LinqKit
         public static Expression GetBody(LambdaExpression lambda, params Expression[] toExpressions)
         {
             if (lambda.Parameters.Count != toExpressions.Length)
+            {
                 throw new InvalidOperationException("Wrong parameter replacement count.");
+            }
 
             var dictionary = new Dictionary<Expression, Expression>();
             for (int i = 0; i < lambda.Parameters.Count; i++)
@@ -49,7 +54,9 @@ namespace LinqKit
         public static Expression GetBody(LambdaExpression lambda, ReadOnlyCollection<Expression> toExpressions)
         {
             if (lambda.Parameters.Count != toExpressions.Count)
+            {
                 throw new InvalidOperationException("Wrong parameter replacement count.");
+            }
 
             var dictionary = new Dictionary<Expression, Expression>();
             for (int i = 0; i < lambda.Parameters.Count; i++)
