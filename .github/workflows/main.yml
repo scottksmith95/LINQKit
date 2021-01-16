@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Print GITHUB_RUN_NUMBER
       run: |
-        echo "GITHUB_RUN_NUMBER is ${GITHUB_RUN_NUMBER}"
+        echo "GITHUB_RUN_NUMBER is ${env:GITHUB_RUN_NUMBER}"
           
     - uses: actions/checkout@v1
       
