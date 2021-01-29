@@ -174,5 +174,54 @@ namespace LinqKit.Tests.Net452
             var items = list.Where(predicate).ToList();
             Assert.Empty(items);
         }
+
+        [Fact]
+        public void PredicateBuilder_PredicateNot()
+        {
+            // Arrange
+            Expression<Func<string, bool>> expectedPredicate = s => s == "a";
+            expectedPredicate = expectedPredicate.Not();
+            var predicate = PredicateBuilder.New<string>(s => s == "a");
+
+            // Act
+            predicate.Not();
+
+            // Assert
+            var expected = expectedPredicate.Expand().ToString();
+            var actual = predicate.Expand().ToString();
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void PredicateBuilder_PredicateNotAssignment()
+        {
+            // Arrange
+            Expression<Func<string, bool>> expectedPredicate = s => s == "a";
+            expectedPredicate = expectedPredicate.Not();
+            var predicate = PredicateBuilder.New<string>(s => s == "a");
+
+            // Act
+            predicate = predicate.Not();
+
+            // Assert
+            var expected = expectedPredicate.Expand().ToString();
+            var actual = predicate.Expand().ToString();
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void PredicateBuilder_PredicateNotUsage()
+        {
+            // Arrange
+            var list = new List<string> { "a", "b", "c" };
+            var predicate = PredicateBuilder.New<string>(s => s == "a");
+
+            // Act
+            predicate = predicate.Not();
+
+            // Assert
+            var items = list.Where(predicate).ToList();
+            Assert.Equal(new[] { "b", "c", }, items);
+        }
     }
 }

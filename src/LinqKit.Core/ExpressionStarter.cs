@@ -67,6 +67,16 @@ namespace LinqKit
             return (IsStarted) ? _predicate = Predicate.And(expr2) : Start(expr2);
         }
 
+        /// <summary>Not</summary>
+        public Expression<Func<T, bool>> Not()
+        {
+            if (IsStarted)
+                _predicate = Predicate.Not();
+            else
+                Start(x => false);
+            return _predicate;
+        }
+
         /// <summary> Show predicate string </summary>
         public override string ToString()
         {
