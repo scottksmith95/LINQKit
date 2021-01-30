@@ -71,9 +71,13 @@ namespace LinqKit
         public Expression<Func<T, bool>> Not()
         {
             if (IsStarted)
+            {
                 _predicate = Predicate.Not();
+            }
             else
+            {
                 Start(x => false);
+            }
             return _predicate;
         }
 
