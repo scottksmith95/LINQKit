@@ -15,6 +15,51 @@ namespace LinqKit.Tests.Net452
         }
 
         [Fact]
+        public void PredicateBuilder_Create()
+        {
+            var ienumerable = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, }
+                .Select(x => new
+                {
+                    number = x,
+                    squared = x * x,
+                });
+            var predicate = PredicateBuilder.Create(ienumerable);
+            predicate = predicate.Or(x => x.number <= 2);
+            predicate = predicate.Or(x => x.squared >= 64);
+            Assert.Equal("x => ((x.number <= 2) OrElse (x.squared >= 64))", predicate.Expand().ToString());
+        }
+
+        [Fact]
+        public void PredicateBuilder_Create_expr()
+        {
+            var ienumerable = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, }
+                .Select(x => new
+                {
+                    number = x,
+                    squared = x * x,
+                });
+            var predicate = PredicateBuilder.Create(ienumerable, expr: x => false);
+            predicate = predicate.Or(x => x.number <= 2);
+            predicate = predicate.Or(x => x.squared >= 64);
+            Assert.Equal("x => ((x.number <= 2) OrElse (x.squared >= 64))", predicate.Expand().ToString());
+        }
+
+        [Fact]
+        public void PredicateBuilder_Create_defaultExpression()
+        {
+            var ienumerable = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, }
+                .Select(x => new
+                {
+                    number = x,
+                    squared = x * x,
+                });
+            var predicate = PredicateBuilder.Create(ienumerable, defaultExpression: false);
+            predicate = predicate.Or(x => x.number <= 2);
+            predicate = predicate.Or(x => x.squared >= 64);
+            Assert.Equal("x => ((x.number <= 2) OrElse (x.squared >= 64))", predicate.Expand().ToString());
+        }
+
+        [Fact]
         public void PredicateBuilder_Extend()
         {
             Expression<Func<User, bool>> first = x => x.Id1 > 1;
