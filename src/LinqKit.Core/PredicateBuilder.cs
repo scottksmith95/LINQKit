@@ -90,10 +90,6 @@ namespace LinqKit
             return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(expr1.Body, expr2Body), expr1.Parameters);
         }
 
-        /// <summary> NOT </summary>
-        public static Expression<Func<T, bool>> Not<T>(this Expression<Func<T, bool>> expr)
-            => Expression.Lambda<Func<T, bool>>(Expression.Not(expr.Body), expr.Parameters);
-
         /// <summary>
         /// Extends the specified source Predicate with another Predicate and the specified PredicateOperator.
         /// </summary>
