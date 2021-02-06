@@ -1,3 +1,7 @@
+# 1.1.23 (06 February 2021)
+- [#135](https://github.com/scottksmith95/LINQKit/pull/135) - GITHUB_RUN_NUMBER contributed by [StefH](https://github.com/StefH)
+- [#136](https://github.com/scottksmith95/LINQKit/pull/136) - Not(). Possibility to negate the whole predicate. contributed by [LucasDiogoDeon](https://github.com/LucasDiogoDeon)
+
 # 1.1.22 (16 January 2021)
 - [#127](https://github.com/scottksmith95/LINQKit/pull/127) - Added ExpandableAttribute for easy injecting expressions without Invoke. contributed by [sdanyliv](https://github.com/sdanyliv)
 - [#124](https://github.com/scottksmith95/LINQKit/issues/124) - LINQKit does not support referencing expressions stored in properties (InvalidCastException) [bug]
