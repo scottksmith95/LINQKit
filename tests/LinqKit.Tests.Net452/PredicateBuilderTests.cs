@@ -15,45 +15,45 @@ namespace LinqKit.Tests.Net452
         }
 
         [Fact]
-        public void PredicateBuilder_Create()
+        public void PredicateBuilder_New()
         {
-            var ienumerable = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, }
+            var ienumerable = Enumerable.Range(1, 9)
                 .Select(x => new
                 {
                     number = x,
                     squared = x * x,
                 });
-            var predicate = PredicateBuilder.Create(ienumerable);
+            var predicate = PredicateBuilder.New(ienumerable);
             predicate = predicate.Or(x => x.number <= 2);
             predicate = predicate.Or(x => x.squared >= 64);
             Assert.Equal("x => ((x.number <= 2) OrElse (x.squared >= 64))", predicate.Expand().ToString());
         }
 
         [Fact]
-        public void PredicateBuilder_Create_expr()
+        public void PredicateBuilder_New_expr()
         {
-            var ienumerable = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, }
+            var ienumerable = Enumerable.Range(1, 9)
                 .Select(x => new
                 {
                     number = x,
                     squared = x * x,
                 });
-            var predicate = PredicateBuilder.Create(ienumerable, expr: x => false);
+            var predicate = PredicateBuilder.New(ienumerable, expr: x => false);
             predicate = predicate.Or(x => x.number <= 2);
             predicate = predicate.Or(x => x.squared >= 64);
             Assert.Equal("x => ((x.number <= 2) OrElse (x.squared >= 64))", predicate.Expand().ToString());
         }
 
         [Fact]
-        public void PredicateBuilder_Create_defaultExpression()
+        public void PredicateBuilder_New_defaultExpression()
         {
-            var ienumerable = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, }
+            var ienumerable = Enumerable.Range(1, 9)
                 .Select(x => new
                 {
                     number = x,
                     squared = x * x,
                 });
-            var predicate = PredicateBuilder.Create(ienumerable, defaultExpression: false);
+            var predicate = PredicateBuilder.New(ienumerable, defaultExpression: false);
             predicate = predicate.Or(x => x.number <= 2);
             predicate = predicate.Or(x => x.squared >= 64);
             Assert.Equal("x => ((x.number <= 2) OrElse (x.squared >= 64))", predicate.Expand().ToString());

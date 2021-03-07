@@ -48,24 +48,22 @@ namespace LinqKit
         /// <summary> Create an expression with a stub expression true or false to use when the expression is not yet started. </summary>
         public static ExpressionStarter<T> New<T>(bool defaultExpression) { return new ExpressionStarter<T>(defaultExpression); }
 
-        // TODO: Possible better method names : New , NewBy , CreateBy etc.
         /// <summary>
         /// Create an expression using an ienumerable.
         /// May be used to instantiate ExpressionStarter objects with anonymous types.
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
         /// <param name="ienumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
-        public static ExpressionStarter<T> Create<T>(IEnumerable<T> ienumerable, Expression<Func<T, bool>> expr = null)
+        public static ExpressionStarter<T> New<T>(IEnumerable<T> ienumerable, Expression<Func<T, bool>> expr = null)
             => PredicateBuilder.New<T>();
 
-        // TODO: Possible better method names : New , NewBy , CreateBy etc.
         /// <summary>
         /// Create an expression using an ienumerable with a stub expression true or false to use when the expression is not yet started.
         /// May be used to instantiate ExpressionStarter objects with anonymous types.
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
         /// <param name="ienumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
-        public static ExpressionStarter<T> Create<T>(IEnumerable<T> ienumerable, bool defaultExpression)
+        public static ExpressionStarter<T> New<T>(IEnumerable<T> ienumerable, bool defaultExpression)
             => PredicateBuilder.New<T>(defaultExpression);
 
         /// <summary> Always true </summary>
