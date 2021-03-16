@@ -1,3 +1,6 @@
+# 1.1.24 (16 March 2021)
+- [#138](https://github.com/scottksmith95/LINQKit/pull/138) - PredicateBuilder.New&lt;T&gt;(IEnumerable&lt;T&gt;) contributed by [LucasDiogoDeon](https://github.com/LucasDiogoDeon)
+
 # 1.1.23 (06 February 2021)
 - [#135](https://github.com/scottksmith95/LINQKit/pull/135) - GITHUB_RUN_NUMBER contributed by [StefH](https://github.com/StefH)
 - [#136](https://github.com/scottksmith95/LINQKit/pull/136) - Not(). Possibility to negate the whole predicate. contributed by [LucasDiogoDeon](https://github.com/LucasDiogoDeon)
