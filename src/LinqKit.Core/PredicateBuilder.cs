@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace LinqKit
@@ -46,6 +47,24 @@ namespace LinqKit
 
         /// <summary> Create an expression with a stub expression true or false to use when the expression is not yet started. </summary>
         public static ExpressionStarter<T> New<T>(bool defaultExpression) { return new ExpressionStarter<T>(defaultExpression); }
+
+        /// <summary>
+        /// Create an expression using an ienumerable.
+        /// May be used to instantiate ExpressionStarter objects with anonymous types.
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
+        /// <param name="ienumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
+        public static ExpressionStarter<T> New<T>(IEnumerable<T> ienumerable, Expression<Func<T, bool>> expr = null)
+            => PredicateBuilder.New<T>();
+
+        /// <summary>
+        /// Create an expression using an ienumerable with a stub expression true or false to use when the expression is not yet started.
+        /// May be used to instantiate ExpressionStarter objects with anonymous types.
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
+        /// <param name="ienumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
+        public static ExpressionStarter<T> New<T>(IEnumerable<T> ienumerable, bool defaultExpression)
+            => PredicateBuilder.New<T>(defaultExpression);
 
         /// <summary> Always true </summary>
         [Obsolete("Use PredicateBuilder.New() instead.")]
