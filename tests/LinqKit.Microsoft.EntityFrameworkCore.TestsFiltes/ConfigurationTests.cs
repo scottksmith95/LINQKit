@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using FluentAssertions;
 using LinqKit.Microsoft.EntityFrameworkCore.Tests.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace LinqKit.Microsoft.EntityFrameworkCore.Tests
@@ -66,6 +67,31 @@ namespace LinqKit.Microsoft.EntityFrameworkCore.Tests
                     .Throw<InvalidOperationException>();
             }
 
+        }
+
+        [Fact]
+        public void ServiceCollectionWithExpressionExpandingTest()
+        {
+            var serviceCollection = new ServiceCollection();
+
+            serviceCollection.AddDbContext<TestContext>(builder =>
+                builder
+                    .UseSqlite("DataSource=testdb;mode=memory;cache=shared")
+                    .WithExpressionExpanding()
+            );
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            var context = serviceProvider.GetService<TestContext>();
+
+            context.Database.OpenConnection();
+            context.Database.EnsureCreated();
+
+            context.TestEntities.Add(new TestEntity {Id = 1, Value = "One"});
+            context.SaveChanges();
+
+            context.TestEntities.Where(e => FilterTrue(e)).Should().HaveCount(1);
+            context.TestEntities.Where(e => FilterFalse(e)).Should().HaveCount(0);
         }
 
     }
