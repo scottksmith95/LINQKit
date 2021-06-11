@@ -54,8 +54,9 @@ namespace LinqKit
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
         /// <param name="ienumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
+        /// <param name="expr">Optional initialization expression.</param>
         public static ExpressionStarter<T> New<T>(IEnumerable<T> ienumerable, Expression<Func<T, bool>> expr = null)
-            => PredicateBuilder.New<T>();
+            => PredicateBuilder.New<T>(expr);
 
         /// <summary>
         /// Create an expression using an ienumerable with a stub expression true or false to use when the expression is not yet started.
@@ -63,6 +64,7 @@ namespace LinqKit
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
         /// <param name="ienumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
+        /// <param name="defaultExpression">Initialization value.</param>
         public static ExpressionStarter<T> New<T>(IEnumerable<T> ienumerable, bool defaultExpression)
             => PredicateBuilder.New<T>(defaultExpression);
 

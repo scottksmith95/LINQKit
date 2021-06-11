@@ -41,7 +41,7 @@ namespace LinqKit.Tests.Net452
             var predicate = PredicateBuilder.New(ienumerable, expr: x => false);
             predicate = predicate.Or(x => x.number <= 2);
             predicate = predicate.Or(x => x.squared >= 64);
-            Assert.Equal("x => ((x.number <= 2) OrElse (x.squared >= 64))", predicate.Expand().ToString());
+            Assert.Equal("x => ((False OrElse (x.number <= 2)) OrElse (x.squared >= 64))", predicate.Expand().ToString());
         }
 
         [Fact]
