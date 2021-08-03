@@ -16,15 +16,22 @@ namespace LinqKit
         public void ApplyServices(IServiceCollection services)
         {
             if (services is null)
+            {
                 throw new ArgumentNullException(nameof(services));
+            }
 
             for (var index = services.Count - 1; index >= 0; index--)
             {
                 var descriptor = services[index];
                 if (descriptor.ServiceType != typeof(IQueryTranslationPreprocessorFactory))
+                {
                     continue;
+                }
+
                 if (descriptor.ImplementationType is null)
+                {
                     continue;
+                }
 
                 // Add Injectable factory for actual implementation
                 services[index] = new ServiceDescriptor(
