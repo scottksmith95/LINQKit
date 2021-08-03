@@ -1,3 +1,6 @@
+# 1.1.25 (03 August 2021)
+- [#143](https://github.com/scottksmith95/LINQKit/pull/143) - fix: New&lt;T&gt; predicate overload missing. [feature] contributed by [MarcelRoozekrans](https://github.com/MarcelRoozekrans)
+
 # 1.1.24 (16 March 2021)
 - [#138](https://github.com/scottksmith95/LINQKit/pull/138) - PredicateBuilder.New&lt;T&gt;(IEnumerable&lt;T&gt;) contributed by [LucasDiogoDeon](https://github.com/LucasDiogoDeon)
 
