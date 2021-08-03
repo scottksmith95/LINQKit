@@ -2,8 +2,5 @@
 {
     internal class ExpandableQueryTranslationPreprocessorOptions
     {
-        public ExpandableQueryTranslationPreprocessorOptions()
-        {
-        }
     }
 }

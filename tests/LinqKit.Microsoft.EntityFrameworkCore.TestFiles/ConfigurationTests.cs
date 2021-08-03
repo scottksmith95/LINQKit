@@ -29,7 +29,7 @@ namespace LinqKit.Microsoft.EntityFrameworkCore.Tests
         {
             var builder = new DbContextOptionsBuilder<TestContext>();
             builder
-                .UseSqlite("DataSource=testdb;mode=memory;cache=shared")
+                .UseSqlite("DataSource=testdb;mode=memory")
                 .WithExpressionExpanding();
 
             using (var context = new TestContext(builder.Options))
@@ -50,11 +50,10 @@ namespace LinqKit.Microsoft.EntityFrameworkCore.Tests
         {
             var builder = new DbContextOptionsBuilder<TestContext>();
             builder
-                .UseSqlite("DataSource=testdb;mode=memory;cache=shared");
+                .UseSqlite("DataSource=testdb;mode=memory");
 
             using (var context = new TestContext(builder.Options))
             {
-
                 context.Database.OpenConnection();
                 context.Database.EnsureCreated();
 

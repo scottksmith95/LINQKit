@@ -29,8 +29,7 @@ namespace LinqKit
                 // Add Injectable factory for actual implementation
                 services[index] = new ServiceDescriptor(
                     descriptor.ServiceType,
-                    typeof(ExpandableQueryTranslationPreprocessorFactory<>)
-                        .MakeGenericType(descriptor.ImplementationType),
+                    typeof(ExpandableQueryTranslationPreprocessorFactory<>).MakeGenericType(descriptor.ImplementationType),
                     descriptor.Lifetime
                 );
 
@@ -53,6 +52,8 @@ namespace LinqKit
 
         private class ExtensionInfo : DbContextOptionsExtensionInfo
         {
+            private const string EntensionName = "LINQKitExpandable";
+
             public ExtensionInfo(IDbContextOptionsExtension extension)
                 : base(extension)
             {
@@ -62,10 +63,10 @@ namespace LinqKit
                 => false;
 
             public override string LogFragment
-                => "LINQKitExpandable";
+                => EntensionName;
 
             public override long GetServiceProviderHashCode()
-                => "LINQKitExpandable".GetHashCode();
+                => EntensionName.GetHashCode();
 
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
             {

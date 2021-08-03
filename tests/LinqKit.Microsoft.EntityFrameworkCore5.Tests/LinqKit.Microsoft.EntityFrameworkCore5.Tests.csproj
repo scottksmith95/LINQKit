@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore.TestsFiltes\**">
+    <Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore.TestFiles\**">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Compile>
   </ItemGroup>  

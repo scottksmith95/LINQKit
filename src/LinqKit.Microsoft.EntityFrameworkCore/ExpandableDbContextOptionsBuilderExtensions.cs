@@ -19,7 +19,9 @@ namespace LinqKit
         public static DbContextOptionsBuilder WithExpressionExpanding(this DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder is null)
+            {
                 throw new ArgumentNullException(nameof(optionsBuilder));
+            }
 
             var extension = GetOrCreateExtension(optionsBuilder);
             ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
@@ -28,8 +30,7 @@ namespace LinqKit
         }
 
         private static ExpandableDbContextOptionsExtension GetOrCreateExtension(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.Options.FindExtension<ExpandableDbContextOptionsExtension>()
-               ?? new ExpandableDbContextOptionsExtension();
+            => optionsBuilder.Options.FindExtension<ExpandableDbContextOptionsExtension>() ?? new ExpandableDbContextOptionsExtension();
     }
 }
 
