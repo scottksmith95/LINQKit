@@ -43,28 +43,43 @@ namespace LinqKit
         }
 
         /// <summary> Start an expression </summary>
-        public static ExpressionStarter<T> New<T>(Expression<Func<T, bool>> expr = null) { return new ExpressionStarter<T>(expr); }
-
+        public static ExpressionStarter<T> New<T>() { return new ExpressionStarter<T>(); }
+        
+        /// <summary> Start an expression </summary>
+        /// <param name="expression">Expression to be used when starting the builder.</param>
+        public static ExpressionStarter<T> New<T>(Expression<Func<T, bool>> expression) { return new ExpressionStarter<T>(expression); }
+        
         /// <summary> Create an expression with a stub expression true or false to use when the expression is not yet started. </summary>
         public static ExpressionStarter<T> New<T>(bool defaultExpression) { return new ExpressionStarter<T>(defaultExpression); }
 
         /// <summary>
-        /// Create an expression using an ienumerable.
+        /// Create an expression using an <see cref="IEnumerable{T}"/>.
         /// May be used to instantiate ExpressionStarter objects with anonymous types.
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
-        /// <param name="ienumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
-        public static ExpressionStarter<T> New<T>(IEnumerable<T> ienumerable, Expression<Func<T, bool>> expr = null)
-            => PredicateBuilder.New<T>();
+        /// <param name="enumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
+        public static ExpressionStarter<T> New<T>(IEnumerable<T> enumerable)
+            => New<T>();
+        
+        /// <summary>
+        /// Create an expression using an <see cref="IEnumerable{T}"/>.
+        /// May be used to instantiate ExpressionStarter objects with anonymous types.
+        /// </summary>
+        /// <typeparam name="T">The type</typeparam>
+        /// <param name="enumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
+        /// <param name="expression">Expression to be used when starting the builder.</param>
+        public static ExpressionStarter<T> New<T>(IEnumerable<T> enumerable, Expression<Func<T, bool>> expression)
+            => New(expression);
 
         /// <summary>
-        /// Create an expression using an ienumerable with a stub expression true or false to use when the expression is not yet started.
+        /// Create an expression using an <see cref="IEnumerable{T}"/> with default starting state.
         /// May be used to instantiate ExpressionStarter objects with anonymous types.
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
-        /// <param name="ienumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
-        public static ExpressionStarter<T> New<T>(IEnumerable<T> ienumerable, bool defaultExpression)
-            => PredicateBuilder.New<T>(defaultExpression);
+        /// <param name="enumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
+        /// <param name="state">Boolean state used when there is not starting expression yet.</param>
+        public static ExpressionStarter<T> New<T>(IEnumerable<T> enumerable, bool state)
+            => New<T>(state);
 
         /// <summary> Always true </summary>
         [Obsolete("Use PredicateBuilder.New() instead.")]
