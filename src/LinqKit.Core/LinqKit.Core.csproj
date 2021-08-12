@@ -15,7 +15,6 @@
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>LinqKit.Core</PackageId>
     <PackageTags>linq;EF;EntityFramework;Entity;Framework;EntityFrameworkCore</PackageTags>
-    <PackageReleaseNotes>See ReleaseNotes.md</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>

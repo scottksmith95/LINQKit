@@ -1,3 +1,6 @@
+# 1.1.26 (12 August 2021)
+- [#142](https://github.com/scottksmith95/LINQKit/pull/142) - Added WithExpressionExpanding configuration extension for EF Core. contributed by [sdanyliv](https://github.com/sdanyliv)
+
 # 1.1.25 (03 August 2021)
 - [#143](https://github.com/scottksmith95/LINQKit/pull/143) - fix: New&lt;T&gt; predicate overload missing. [feature] contributed by [MarcelRoozekrans](https://github.com/MarcelRoozekrans)
 
