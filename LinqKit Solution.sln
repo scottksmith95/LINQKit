@@ -12,7 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 		Generate ReleaseNotes.bat = Generate ReleaseNotes.bat
 		LICENSE = LICENSE
-		.github\workflows\main.yml = .github\workflows\main.yml
 		PackageReleaseNotes.template = PackageReleaseNotes.template
 		PackageReleaseNotes.txt = PackageReleaseNotes.txt
 		README.md = README.md
@@ -92,6 +91,17 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFrameworkCore5.Tests", "tests\LinqKit.Microsoft.EntityFrameworkCore5.Tests\LinqKit.Microsoft.EntityFrameworkCore5.Tests.csproj", "{4931C08A-96EA-4311-BF18-E89EBAC32AF7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFrameworkCore31.Tests", "tests\LinqKit.Microsoft.EntityFrameworkCore31.Tests\LinqKit.Microsoft.EntityFrameworkCore31.Tests.csproj", "{4FD0A2B1-B136-4E2C-B1BE-0E55D0619C79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{C922EF4A-F2E6-4C7C-B0F7-E109CE17471C}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\CreateRelease.yml = .github\workflows\CreateRelease.yml
+		.github\workflows\main.yml = .github\workflows\main.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure Pipelines", "Azure Pipelines", "{13CE5DB5-58FA-4AD8-AD0E-40721703DA84}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines-nuget.yml = azure-pipelines-nuget.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -623,6 +633,8 @@ Global
 		{FCD65032-6289-465A-9230-DD6BD2FFB376} = {2F7F283D-5576-417F-A467-EC210226AC3B}
 		{4931C08A-96EA-4311-BF18-E89EBAC32AF7} = {0BE21A11-8EF0-404B-AFC0-533A62386C4C}
 		{4FD0A2B1-B136-4E2C-B1BE-0E55D0619C79} = {0BE21A11-8EF0-404B-AFC0-533A62386C4C}
+		{C922EF4A-F2E6-4C7C-B0F7-E109CE17471C} = {9FC09568-C879-47D8-9D28-E736B8A84C95}
+		{13CE5DB5-58FA-4AD8-AD0E-40721703DA84} = {9FC09568-C879-47D8-9D28-E736B8A84C95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F6283C5-9029-434E-BD90-E95FB377DA9B}
