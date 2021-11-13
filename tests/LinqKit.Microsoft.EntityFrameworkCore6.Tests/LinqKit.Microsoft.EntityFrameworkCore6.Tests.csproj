@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <Authors>Stef Heyenrath</Authors>
-    <TargetFramework>netcoreapp5</TargetFramework>
-    <AssemblyName>LinqKit.Microsoft.EntityFrameworkCore5.Tests</AssemblyName>
-    <PackageId>LinqKit.Microsoft.EntityFrameworkCore5.Tests</PackageId>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>LinqKit.Microsoft.EntityFrameworkCore6.Tests</AssemblyName>
+    <PackageId>LinqKit.Microsoft.EntityFrameworkCore6.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore5\LinqKit.Microsoft.EntityFrameworkCore5.csproj" />
+    <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore6\LinqKit.Microsoft.EntityFrameworkCore6.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="Moq" Version="4.8.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">

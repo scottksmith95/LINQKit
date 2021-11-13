@@ -26,6 +26,7 @@ jobs:
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore3/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore31/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore5/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore6/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
         dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c Release
     
     - name: Run Tests
