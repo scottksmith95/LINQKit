@@ -1,3 +1,6 @@
+# 1.1.27 (13 November 2021)
+- [#151](https://github.com/scottksmith95/LINQKit/pull/151) - Added support for EF Core 6 [feature] contributed by [sdanyliv](https://github.com/sdanyliv)
+
 # 1.1.26 (12 August 2021)
 - [#142](https://github.com/scottksmith95/LINQKit/pull/142) - Added WithExpressionExpanding configuration extension for EF Core. contributed by [sdanyliv](https://github.com/sdanyliv)
 
@@ -87,7 +90,7 @@
 - [#20](https://github.com/scottksmith95/LINQKit/pull/20) - Linking to the EF UserVoice request  contributed by [alexdresko](https://github.com/alexdresko)
 - [#24](https://github.com/scottksmith95/LINQKit/pull/24) - - added additional Invoke() overloads to support up to 16 parameters &#8230; contributed by [ViRuSTriNiTy](https://github.com/ViRuSTriNiTy)
 - [#25](https://github.com/scottksmith95/LINQKit/pull/25) - Fix for issue #22. Proper expanding of arguments in method calls. contributed by [AndreyYurashevich](https://github.com/AndreyYurashevich)
-- [#27](https://github.com/scottksmith95/LINQKit/pull/27) - LeftJoin contributed by [TanielianVB](https://github.com/TanielianVB)
+- [#27](https://github.com/scottksmith95/LINQKit/pull/27) - LeftJoin [feature] contributed by [TanielianVB](https://github.com/TanielianVB)
 - [#29](https://github.com/scottksmith95/LINQKit/pull/29) - Add Invoke method with five parameters contributed by [osjimenez](https://github.com/osjimenez)
 - [#33](https://github.com/scottksmith95/LINQKit/pull/33) - Add dotnet core rc2 support and split into multiple versions/flavors contributed by [StefH](https://github.com/StefH)
 - [#42](https://github.com/scottksmith95/LINQKit/pull/42) - Implemented ExpressionStarter&lt;T&gt; to eliminate the default 1=0 or 1=1 stub expressions [feature] contributed by [rhyous](https://github.com/rhyous)
