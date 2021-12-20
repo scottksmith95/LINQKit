@@ -15,7 +15,7 @@ jobs:
       run: |
         echo "GITHUB_RUN_NUMBER is ${env:GITHUB_RUN_NUMBER}"
           
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
       
     - name: Build Projects
       run: |
