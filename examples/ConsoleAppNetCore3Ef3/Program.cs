@@ -27,7 +27,6 @@ namespace ConsoleAppNetCore3Ef3
                 Console.WriteLine($"predicateResult: {result.Name}");
             }
 
-
             Expression<Func<Guest, bool>> criteria1 = guest => guest.Name.Contains("af");
             Expression<Func<Guest, bool>> criteria2 = guest => criteria1.Invoke(guest) || guest.Id > 1;
 
