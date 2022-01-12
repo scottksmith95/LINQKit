@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿#if NOEF
+using JetBrains.Annotations;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
@@ -73,7 +74,7 @@ namespace LinqKit
             return Predicate == null ? null : Predicate.ToString();
         }
 
-        #region Implicit Operators
+#region Implicit Operators
         /// <summary>
         /// Allows this object to be implicitely converted to an Expression{Func{T, bool}}.
         /// </summary>
@@ -100,9 +101,9 @@ namespace LinqKit
         {
             return right == null ? null : new ExpressionStarter<T>(right);
         }
-        #endregion
+#endregion
 
-        #region Implement Expression<TDelagate> methods and properties
+#region Implement Expression<TDelagate> methods and properties
 #if !(NET35)
 
         /// <summary></summary>
@@ -116,9 +117,9 @@ namespace LinqKit
         /// <summary></summary>
         public Expression<Func<T, bool>> Update(Expression body, IEnumerable<ParameterExpression> parameters) { return Predicate.Update(body, parameters); }
 #endif
-        #endregion
+#endregion
 
-        #region Implement LamdaExpression methods and properties
+#region Implement LamdaExpression methods and properties
 
         /// <summary></summary>
         public Expression Body => Predicate.Body;
@@ -152,13 +153,14 @@ namespace LinqKit
         public void CompileToMethod(MethodBuilder method, DebugInfoGenerator debugInfoGenerator) { Predicate.CompileToMethod(method, debugInfoGenerator); }
 
 #endif
-        #endregion
+#endregion
 
-        #region Implement Expression methods and properties
+#region Implement Expression methods and properties
 #if !(NET35)
         /// <summary></summary>
         public virtual bool CanReduce => Predicate.CanReduce;
 #endif
-        #endregion
+#endregion
     }
 }
+#endif

@@ -16,7 +16,11 @@ using System.Data.Entity.Infrastructure;
 #endif
 #endif
 
+#if NOEF
+namespace LinqKit.Core
+#else
 namespace LinqKit
+#endif
 {
     /// <summary>
     /// An IQueryable wrapper that allows us to visit the query's expression tree just before LINQ to SQL gets to it.

@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿#if NOEF
+using JetBrains.Annotations;
 using System;
 using System.Linq.Expressions;
 
@@ -96,3 +97,4 @@ namespace LinqKit
         }
     }
 }
+#endif

@@ -139,6 +139,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj">
+      <Project>{fc735db2-5419-4cf3-8aea-8231330a4d85}</Project>
+      <Name>LinqKit.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

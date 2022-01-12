@@ -52,4 +52,8 @@
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
+  </ItemGroup>
+
 </Project>

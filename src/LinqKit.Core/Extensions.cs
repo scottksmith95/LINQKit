@@ -1,10 +1,16 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Linq;
+using System.Linq.Expressions;
+#if !NOEF
 using System.Reflection;
+#endif
 using JetBrains.Annotations;
 
+#if NOEF
+namespace LinqKit.Core
+#else
 namespace LinqKit
+#endif
 {
     /// <summary>
     /// Refer to http://www.albahari.com/nutshell/linqkit.html and http://tomasp.net/blog/linq-expand.aspx for more information.
@@ -48,6 +54,45 @@ namespace LinqKit
 #endif
         }
 
+#if !(NET35 || NOEF || NOASYNCPROVIDER)
+        private static class ExpandableQueryFactory<T>
+        {
+            public static readonly Func<IQueryable<T>, Func<Expression, Expression>, ExpandableQuery<T>> Create;
+
+            static ExpandableQueryFactory()
+            {
+                if (!typeof(T).GetTypeInfo().IsClass)
+                {
+                    Create = (query, optimizer) => new ExpandableQuery<T>(query, optimizer);
+                    return;
+                }
+
+                Type queryType = typeof(IQueryable<T>);
+                Type optimizerType = typeof(Func<Expression, Expression>);
+
+                var ctorInfo = typeof(ExpandableQueryOfClass<>).MakeGenericType(typeof(T)).GetConstructor(new[] { queryType, optimizerType });
+
+                var queryParam = Expression.Parameter(queryType);
+                var optimizerParam = Expression.Parameter(optimizerType);
+
+                var newExpr = Expression.New(ctorInfo, queryParam, optimizerParam);
+                var createExpr = Expression.Lambda<Func<IQueryable<T>, Func<Expression, Expression>, ExpandableQuery<T>>>(newExpr, queryParam, optimizerParam);
+
+                Create = createExpr.Compile();
+            }
+        }
+#endif
+    }
+}
+
+#if NOEF
+namespace LinqKit
+{
+    /// <summary>
+    /// Refer to http://www.albahari.com/nutshell/linqkit.html and http://tomasp.net/blog/linq-expand.aspx for more information.
+    /// </summary>
+    public static class ExtensionsCore
+    {
         /// <summary> LinqKit: Expands expression </summary>
         public static Expression<TDelegate> Expand<TDelegate>(this Expression<TDelegate> expr)
         {
@@ -193,35 +238,7 @@ namespace LinqKit
         {
             return expr.Compile().Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16);
         }
-
-#if !NOEF
-        private static class ExpandableQueryFactory<T>
-        {
-            public static readonly Func<IQueryable<T>, Func<Expression, Expression>, ExpandableQuery<T>> Create;
-
-            static ExpandableQueryFactory()
-            {
-                if (!typeof(T).GetTypeInfo().IsClass)
-                {
-                    Create = (query, optimizer) => new ExpandableQuery<T>(query, optimizer);
-                    return;
-                }
-
-                Type queryType = typeof(IQueryable<T>);
-                Type optimizerType = typeof(Func<Expression, Expression>);
-
-                var ctorInfo = typeof(ExpandableQueryOfClass<>).MakeGenericType(typeof(T)).GetConstructor(new[] { queryType, optimizerType });
-
-                var queryParam = Expression.Parameter(queryType);
-                var optimizerParam = Expression.Parameter(optimizerType);
-
-                var newExpr = Expression.New(ctorInfo, queryParam, optimizerParam);
-                var createExpr = Expression.Lambda<Func<IQueryable<T>, Func<Expression, Expression>, ExpandableQuery<T>>>(newExpr, queryParam, optimizerParam);
-
-                Create = createExpr.Compile();
-            }
-        }
-#endif
 #endif
     }
 }
+#endif

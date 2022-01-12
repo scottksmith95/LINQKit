@@ -1,15 +1,17 @@
-﻿using System;
+﻿#if NOEF
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace LinqKit
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     /// <summary>
     /// Custom expresssion visitor for ExpandableQuery. This expands calls to Expression.Compile() and
     /// collapses captured lambda references in subqueries which LINQ to SQL can't otherwise handle.
     /// </summary>
-    class ExpressionExpander : ExpressionVisitor
+    public class ExpressionExpander : ExpressionVisitor
     {
         // Replacement parameters - for when invoking a lambda expression.
         readonly Dictionary<ParameterExpression, Expression> _replaceVars;
@@ -59,7 +61,7 @@ namespace LinqKit
 
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
-            if (m.Method.Name == "Invoke" && m.Method.DeclaringType == typeof(Extensions))
+            if (m.Method.Name == nameof(ExtensionsCore.Invoke) && m.Method.DeclaringType == typeof(ExtensionsCore))
             {
                 var target = m.Arguments[0];
                 if (target is MemberExpression)
@@ -98,7 +100,7 @@ namespace LinqKit
             }
 
             // Expand calls to an expression's Compile() method:
-            if (m.Method.Name == "Compile" && m.Object is MemberExpression)
+            if (m.Method.Name == nameof(LambdaExpression.Compile) && m.Object is MemberExpression)
             {
                 var me = (MemberExpression)m.Object;
                 var newExpr = TransformExpr(me);
@@ -109,7 +111,7 @@ namespace LinqKit
             }
 
             // Strip out any nested calls to AsExpandable():
-            if (m.Method.Name == "AsExpandable" && m.Method.DeclaringType == typeof(Extensions))
+            if (m.Method.Name == nameof(Core.Extensions.AsExpandable) && m.Method.DeclaringType.Name == nameof(Core.Extensions) && m.Method.DeclaringType.Namespace.StartsWith("LinqKit"))
             {
                 return m.Arguments[0];
             }
@@ -197,4 +199,6 @@ namespace LinqKit
             return input;
         }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
+#endif

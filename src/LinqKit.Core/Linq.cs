@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NOEF
+using System;
 using System.Linq.Expressions;
 
 namespace LinqKit
@@ -58,3 +59,4 @@ namespace LinqKit
         }
     }
 }
+#endif
