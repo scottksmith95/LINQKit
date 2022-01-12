@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NOEF
+using System;
 using JetBrains.Annotations;
 
 namespace LinqKit
@@ -44,3 +45,4 @@ namespace LinqKit
         public string MethodName { get; set; }
     }
 }
+#endif

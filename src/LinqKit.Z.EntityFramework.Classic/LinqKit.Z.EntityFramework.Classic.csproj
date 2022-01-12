@@ -49,4 +49,8 @@
     <PackageReference Include="Z.EntityFramework.Classic" Version="7.0.40" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
+  </ItemGroup>
+
   </Project>

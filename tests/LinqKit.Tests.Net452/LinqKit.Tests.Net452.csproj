@@ -89,6 +89,10 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\LinqKit.Core\LinqKit.Core.csproj">
+      <Project>{fc735db2-5419-4cf3-8aea-8231330a4d85}</Project>
+      <Name>LinqKit.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\LinqKit\LinqKit.csproj">
       <Project>{667345ee-b154-432f-a908-cb6374805c20}</Project>
       <Name>LinqKit</Name>

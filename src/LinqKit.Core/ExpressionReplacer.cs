@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NOEF
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
@@ -6,7 +7,7 @@ using JetBrains.Annotations;
 
 namespace LinqKit
 {
-    class ExpressionReplacer : ExpressionVisitor
+    internal class ExpressionReplacer : ExpressionVisitor
     {
         private readonly IDictionary<Expression, Expression> _replaceMap;
 
@@ -68,3 +69,4 @@ namespace LinqKit
         }
     }
 }
+#endif

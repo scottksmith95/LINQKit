@@ -162,6 +162,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\LinqKit.Core\LinqKit.Core.csproj">
+      <Project>{fc735db2-5419-4cf3-8aea-8231330a4d85}</Project>
+      <Name>LinqKit.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore3\LinqKit.Microsoft.EntityFrameworkCore3.csproj">
       <Project>{f1a582ae-9c3d-4f45-a007-53eb80035704}</Project>
       <Name>LinqKit.Microsoft.EntityFrameworkCore3</Name>
