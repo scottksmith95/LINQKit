@@ -141,18 +141,6 @@ namespace LinqKit.Tests.Net452
                 ExpressionCombiner_ExpressionAsParam_Method(x => x.Item1 > 1000));
         }
 
-        Expression<Func<Tuple<int, string>, int>> _ExpressionAsProperty_UsedAsParam_valueExpr => x => x.Item1;
-
-        [Fact]
-        public void ExpressionCombiner_ExpressionAsProperty_UsedAsParam()
-        {
-            Expression<Func<Tuple<int, string>, bool>> criteria = x => _possibleValues.Contains(_ExpressionAsProperty_UsedAsParam_valueExpr.Invoke(x));
-
-            Assert.Equal(
-                "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
-                criteria.Expand().ToString());
-        }
-
         private string ExpressionCombiner_ExpressionAsParam_Method(Expression<Func<Tuple<int, string>, bool>> criteria1)
         {
             Expression<Func<Tuple<int, string>, bool>> criteria2 =
@@ -180,6 +168,18 @@ namespace LinqKit.Tests.Net452
         public void ExpressionCombiner_ExpressionAsField_UsedAsParam()
         {
             Expression<Func<Tuple<int, string>, bool>> criteria = x => _possibleValues.Contains(_ExpressionAsVariable_UsedAsParam_valueExpr.Invoke(x));
+
+            Assert.Equal(
+                "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
+                criteria.Expand().ToString());
+        }
+
+        Expression<Func<Tuple<int, string>, int>> _ExpressionAsProperty_UsedAsParam_valueExpr => x => x.Item1;
+
+        [Fact]
+        public void ExpressionCombiner_ExpressionAsProperty_UsedAsParam()
+        {
+            Expression<Func<Tuple<int, string>, bool>> criteria = x => _possibleValues.Contains(_ExpressionAsProperty_UsedAsParam_valueExpr.Invoke(x));
 
             Assert.Equal(
                 "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
