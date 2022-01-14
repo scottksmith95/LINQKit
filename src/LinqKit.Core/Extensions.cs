@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 using LinqKit.Utilities;
 
 #if NOEF
-namespace LinqKit
+namespace LinqKit.Core
 #else
 namespace LinqKit
 #endif

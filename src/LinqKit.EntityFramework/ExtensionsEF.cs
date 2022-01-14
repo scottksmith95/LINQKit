@@ -3,6 +3,7 @@ using System;
 using System.Linq.Expressions;
 using System.Linq;
 using JetBrains.Annotations;
+using LinqKit.Core;
 
 // ReSharper disable once CheckNamespace
 namespace LinqKit
@@ -27,7 +28,7 @@ namespace LinqKit
         [PublicAPI]
         public static IQueryable<T> AsExpandableEF<T>(this IQueryable<T> query, Func<Expression, Expression> queryOptimizer)
         {
-            return query.AsExpandable(queryOptimizer);
+            return Extensions.AsExpandable(query, queryOptimizer);
         }
 
         /// <summary>LinqKit: Compile and invoke</summary>

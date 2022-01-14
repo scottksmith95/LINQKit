@@ -17,7 +17,7 @@ using System.Data.Entity.Infrastructure;
 #endif
 
 #if NOEF
-namespace LinqKit
+namespace LinqKit.Core
 #else
 namespace LinqKit
 #endif

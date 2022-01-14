@@ -166,7 +166,7 @@ namespace LinqKit
             }
 
             // Strip out any nested calls to AsExpandable():
-            if (m.Method.Name == nameof(Extensions.AsExpandable) && m.Method.DeclaringType.Name == nameof(Extensions) && m.Method.DeclaringType.Namespace.StartsWith("LinqKit"))
+            if (m.Method.Name == nameof(Core.Extensions.AsExpandable) && m.Method.DeclaringType.Name == nameof(Core.Extensions) && m.Method.DeclaringType.Namespace.StartsWith("LinqKit"))
             {
                 return m.Arguments[0];
             }
