@@ -159,6 +159,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\LinqKit.Core\LinqKit.Core.csproj">
+      <Project>{fc735db2-5419-4cf3-8aea-8231330a4d85}</Project>
+      <Name>LinqKit.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj">
       <Project>{cff0d30f-9af2-4f3d-8458-167c5cc430fd}</Project>
       <Name>LinqKit.EntityFramework</Name>

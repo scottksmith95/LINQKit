@@ -43,6 +43,10 @@
 	</ItemGroup>-->
 
 	<ItemGroup>
+		<Compile Include="..\LinqKit.EntityFramework\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
 			<PrivateAssets>All</PrivateAssets>
 		</PackageReference>

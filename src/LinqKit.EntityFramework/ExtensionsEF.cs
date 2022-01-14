@@ -27,7 +27,7 @@ namespace LinqKit
         [PublicAPI]
         public static IQueryable<T> AsExpandableEF<T>(this IQueryable<T> query, Func<Expression, Expression> queryOptimizer)
         {
-            return Extensions.AsExpandable(query, queryOptimizer);
+            return query.AsExpandable(queryOptimizer);
         }
 
         /// <summary>LinqKit: Compile and invoke</summary>

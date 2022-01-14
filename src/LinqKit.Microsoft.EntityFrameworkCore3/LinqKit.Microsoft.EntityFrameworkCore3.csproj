@@ -27,11 +27,11 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
-	<!--<ItemGroup>
+	<ItemGroup>
 		<Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
-		<Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+		<!--<Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />-->
 		<Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore\ExtensionsEFCore.cs" Link="ExtensionsEFCore.cs" />
-	</ItemGroup>-->
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
