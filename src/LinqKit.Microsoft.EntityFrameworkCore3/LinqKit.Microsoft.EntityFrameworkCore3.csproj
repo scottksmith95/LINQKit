@@ -1,54 +1,54 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../../version.xml" />
+  <Import Project="../../version.xml" />
 
-	<PropertyGroup>
-		<Version>3.1.$(PatchVersion)</Version>
-		<DefineConstants>$(DefineConstants);EFCORE;EFCORE3</DefineConstants>
-		<Description>LinqKit.Microsoft.EntityFrameworkCore contains extensions for LINQ to SQL and EntityFrameworkCore. With Include(...) and IDbAsync support.</Description>
-		<AssemblyTitle>LinqKit for Microsoft.EntityFrameworkCore with Include(...) and IAsync support.</AssemblyTitle>
-		<Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
-		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<AssemblyName>LinqKit.Microsoft.EntityFrameworkCore</AssemblyName>
-		<AssemblyOriginatorKeyFile>../LinqKit.Microsoft.EntityFrameworkCore/LinqKit.Microsoft.EntityFrameworkCore.snk</AssemblyOriginatorKeyFile>
-		<SignAssembly>true</SignAssembly>
-		<PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-		<PackageId>LinqKit.Microsoft.EntityFrameworkCore</PackageId>
-		<PackageTags>linq;EF;EntityFramework;Entity;Framework;Core;EntityFrameworkCore</PackageTags>
-		<PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
-		<RootNamespace>LinqKit</RootNamespace>
-	</PropertyGroup>
+  <PropertyGroup>
+    <Version>3.1.$(PatchVersion)</Version>
+    <DefineConstants>$(DefineConstants);EFCORE;EFCORE3</DefineConstants>
+    <Description>LinqKit.Microsoft.EntityFrameworkCore contains extensions for LINQ to SQL and EntityFrameworkCore. With Include(...) and IDbAsync support.</Description>
+    <AssemblyTitle>LinqKit for Microsoft.EntityFrameworkCore with Include(...) and IAsync support.</AssemblyTitle>
+    <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>LinqKit.Microsoft.EntityFrameworkCore</AssemblyName>
+    <AssemblyOriginatorKeyFile>../LinqKit.Microsoft.EntityFrameworkCore/LinqKit.Microsoft.EntityFrameworkCore.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <PackageId>LinqKit.Microsoft.EntityFrameworkCore</PackageId>
+    <PackageTags>linq;EF;EntityFramework;Entity;Framework;Core;EntityFrameworkCore</PackageTags>
+    <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
+    <RootNamespace>LinqKit</RootNamespace>
+  </PropertyGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions'  ">
-		<PathMap>$(MSBuildProjectDirectory)=/</PathMap>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	</PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions'  ">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
-		<!--<Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />-->
-		<Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore\ExtensionsEFCore.cs" Link="ExtensionsEFCore.cs" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
+    <!--<Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />-->
+    <Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore\ExtensionsEFCore.cs" Link="ExtensionsEFCore.cs" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
-			<PrivateAssets>All</PrivateAssets>
-		</PackageReference>
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
-	</ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+  </ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
-	</ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
+  </ItemGroup>
 
 </Project>

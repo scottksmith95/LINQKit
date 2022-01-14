@@ -1,60 +1,60 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../../version.xml" />
+  <Import Project="../../version.xml" />
 
-	<PropertyGroup>
-		<Version>1.2.$(PatchVersion)</Version>
-		<Description>LinqKit.Z.EntityFramework.Classic contains extensions for LINQ to SQL and Z.EntityFramework.Classic. Include(...) and IAsync are supported.</Description>
-		<AssemblyTitle>LinqKit for Z.EntityFramework.Classic with Include(...) and IAsync support.</AssemblyTitle>
-		<Authors>Stef Heyenrath</Authors>
-		<TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
-		<DefineConstants>$(DefineConstants);EF</DefineConstants>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<AssemblyName>LinqKit.Z.EntityFramework.Classic</AssemblyName>
-		<AssemblyOriginatorKeyFile>LinqKit.Z.EntityFramework.Classic.snk</AssemblyOriginatorKeyFile>
-		<SignAssembly>true</SignAssembly>
-		<PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-		<PackageId>LinqKit.Z.EntityFramework.Classic</PackageId>
-		<PackageTags>linq;EF;EntityFramework;Entity;Framework;Z.EntityFramework.Classic;EntityFramework.Classic</PackageTags>
-		<PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<RepositoryType>git</RepositoryType>
-		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-		<PackageIconUrl>https://zzzprojects.github.io/images/logo/logo-64.png</PackageIconUrl>
-	</PropertyGroup>
+  <PropertyGroup>
+    <Version>1.2.$(PatchVersion)</Version>
+    <Description>LinqKit.Z.EntityFramework.Classic contains extensions for LINQ to SQL and Z.EntityFramework.Classic. Include(...) and IAsync are supported.</Description>
+    <AssemblyTitle>LinqKit for Z.EntityFramework.Classic with Include(...) and IAsync support.</AssemblyTitle>
+    <Authors>Stef Heyenrath</Authors>
+    <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);EF</DefineConstants>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>LinqKit.Z.EntityFramework.Classic</AssemblyName>
+    <AssemblyOriginatorKeyFile>LinqKit.Z.EntityFramework.Classic.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <PackageId>LinqKit.Z.EntityFramework.Classic</PackageId>
+    <PackageTags>linq;EF;EntityFramework;Entity;Framework;Z.EntityFramework.Classic;EntityFramework.Classic</PackageTags>
+    <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <PackageIconUrl>https://zzzprojects.github.io/images/logo/logo-64.png</PackageIconUrl>
+  </PropertyGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions' ">
-		<PathMap>$(MSBuildProjectDirectory)=/</PathMap>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	</PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions' ">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
 
-	<PropertyGroup Condition=" '$(TargetFramework)' != 'net40' ">
-		<RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
-	</PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' != 'net40' ">
+    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
+  </PropertyGroup>
 
-	<PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
-		<DefineConstants>$(DefineConstants);NOASYNCPROVIDER</DefineConstants>
-	</PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <DefineConstants>$(DefineConstants);NOASYNCPROVIDER</DefineConstants>
+  </PropertyGroup>
 
-	<!--<ItemGroup>
-		<Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
-		<Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\**\*AssemblyInfo*.cs;bin\**;obj\**;**\*.xproj;packages\**" />
-	</ItemGroup>-->
+  <!--<ItemGroup>
+    <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
+    <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\**\*AssemblyInfo*.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+  </ItemGroup>-->
 
-	<ItemGroup>
-		<Compile Include="..\LinqKit.EntityFramework\*.cs" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\LinqKit.EntityFramework\*.cs" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
-			<PrivateAssets>All</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="Z.EntityFramework.Classic" Version="7.0.40" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Z.EntityFramework.Classic" Version="7.0.40" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
+  </ItemGroup>
 
 </Project>
