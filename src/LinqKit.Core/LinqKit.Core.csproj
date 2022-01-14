@@ -24,6 +24,10 @@
 		<DefineConstants>$(DefineConstants);NOEF</DefineConstants>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(Configuration)' == 'ReleaseForGithubActions' ">
+		<TargetFrameworks>net40;net45;netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
+	</PropertyGroup>
+
 	<PropertyGroup Condition=" '$(TargetFramework)' != 'portable-net40+win8+wpa81+wp8+sl5' ">
 		<!-- error CS0122: 'AssemblyMetadataAttribute' is inaccessible due to its protection level -->
 		<RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>

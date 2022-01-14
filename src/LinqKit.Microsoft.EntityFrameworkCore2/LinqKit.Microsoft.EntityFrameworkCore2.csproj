@@ -22,7 +22,7 @@
 		<DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions'  ">
 		<PathMap>$(MSBuildProjectDirectory)=/</PathMap>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>

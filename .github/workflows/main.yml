@@ -16,26 +16,22 @@ jobs:
         echo "GITHUB_RUN_NUMBER is ${env:GITHUB_RUN_NUMBER}"
           
     - uses: actions/checkout@v2
-
-    - uses: actions/setup-dotnet@v1
-      with:
-       dotnet-version: '6.0.x'
-      
+     
     - name: Build Projects
       run: |
-        dotnet build ./src/LinqKit.Core/LinqKit.Core.csproj -c Release
-        dotnet build ./src/LinqKit/LinqKit.csproj -c Release
-        dotnet build ./src/LinqKit.EntityFramework/LinqKit.EntityFramework.csproj -c Release
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore2/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore3/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore31/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore5/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore6/LinqKit.Microsoft.EntityFrameworkCore.csproj -c Release
-        dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c Release
+        dotnet build ./src/LinqKit.Core/LinqKit.Core.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit/LinqKit.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.EntityFramework/LinqKit.EntityFramework.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore/LinqKit.Microsoft.EntityFrameworkCore.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore2/LinqKit.Microsoft.EntityFrameworkCore.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore3/LinqKit.Microsoft.EntityFrameworkCore.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore31/LinqKit.Microsoft.EntityFrameworkCore.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore5/LinqKit.Microsoft.EntityFrameworkCore.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore6/LinqKit.Microsoft.EntityFrameworkCore.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c ReleaseForGithubActions
     
     - name: Run Tests
       run: |
-        dotnet test ./tests/LinqKit.Tests/LinqKit.Tests.csproj -c Release
-        dotnet test ./tests/LinqKit.EntityFramework.Tests.Net452/LinqKit.EntityFramework.Tests.Net452.csproj -c Release
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore.Tests -c Release    
+        dotnet test ./tests/LinqKit.Tests/LinqKit.Tests.csproj -c ReleaseForGithubActions
+        dotnet test ./tests/LinqKit.EntityFramework.Tests.Net452/LinqKit.EntityFramework.Tests.Net452.csproj -c ReleaseForGithubActions
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore.Tests -c ReleaseForGithubActions    

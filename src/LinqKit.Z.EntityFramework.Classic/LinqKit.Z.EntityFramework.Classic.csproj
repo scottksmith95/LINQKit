@@ -24,13 +24,13 @@
 		<PackageIconUrl>https://zzzprojects.github.io/images/logo/logo-64.png</PackageIconUrl>
 	</PropertyGroup>
 
-	<PropertyGroup Condition=" '$(TargetFramework)' != 'net40' ">
-		<RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions' ">
 		<PathMap>$(MSBuildProjectDirectory)=/</PathMap>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(TargetFramework)' != 'net40' ">
+		<RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
