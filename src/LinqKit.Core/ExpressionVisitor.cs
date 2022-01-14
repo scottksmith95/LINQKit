@@ -84,6 +84,8 @@ namespace LinqKit
                 case ExpressionType.ListInit:
                     return VisitListInit((ListInitExpression)exp);
 #if !NET35
+                case ExpressionType.Index:
+                    return VisitIndex((IndexExpression)exp);
                 case ExpressionType.Extension:
                     return VisitExtension(exp);
 #endif
@@ -400,6 +402,20 @@ namespace LinqKit
             Expression expr = Visit(iv.Expression);
             return args != iv.Arguments || expr != iv.Expression ? Expression.Invoke(expr, args) : iv;
         }
+
+#if !NET35
+        /// <summary> Visit index expression </summary>
+        protected virtual Expression VisitIndex(IndexExpression exp)
+        {
+            var obj = Visit(exp.Object);
+            var args = VisitExpressionList(exp.Arguments);
+            if (obj != exp.Object || args != exp.Arguments)
+            {
+                return Expression.MakeIndex(obj, exp.Indexer, args);
+            }
+            return exp;
+        }
+#endif
     }
 }
 #endif
