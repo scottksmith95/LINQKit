@@ -23,7 +23,7 @@ namespace System.Reflection
         }
 #endif
 
-        // This is for portable_net45_win8_wpa81_wp8 (Profile259)
+        // This is for portable-net45+win8+wpa81+wp8 (Profile259)
 #if PORTABLE
         public static IEnumerable<MethodInfo> GetMethods(this Type someType)
         {

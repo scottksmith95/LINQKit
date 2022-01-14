@@ -6,7 +6,7 @@
 		<Description>LinqKit.Core contains extensions for LINQ to SQL and Entity Framework. Note that Include(...), IAsync and IDbAsync are not supported.</Description>
 		<AssemblyTitle>LinqKit.Core</AssemblyTitle>
 		<Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
-		<TargetFrameworks>net35;net40;net45;portable_net40_win8_wpa81_wp8_sl5;portable_net45_win8_wpa81_wp8;uap10.0;netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
+		<TargetFrameworks>net35;net40;net45;portable-net40+win8+wpa81+wp8+sl5;portable-net45+win8+wpa81+wp8;uap10.0;netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<AssemblyName>LinqKit.Core</AssemblyName>
 		<RootNamespace>LinqKit</RootNamespace>
@@ -24,7 +24,7 @@
 		<DefineConstants>$(DefineConstants);NOEF</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition=" '$(TargetFramework)' != 'portable_net40_win8_wpa81_wp8_sl5' ">
+	<PropertyGroup Condition=" '$(TargetFramework)' != 'portable-net40+win8+wpa81+wp8+sl5' ">
 		<!-- error CS0122: 'AssemblyMetadataAttribute' is inaccessible due to its protection level -->
 		<RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
 	</PropertyGroup>
@@ -116,7 +116,7 @@
 		<Reference Include="Microsoft.CSharp" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'portable_net40_win8_wpa81_wp8_sl5' ">
+	<ItemGroup Condition=" '$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5' ">
 		<PackageReference Include="JetBrains.Annotations" Version="10.0.0">
 			<PrivateAssets>All</PrivateAssets>
 		</PackageReference>
@@ -126,7 +126,7 @@
 		<Reference Include="System.Core" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'portable_net45_win8_wpa81_wp8' ">
+	<ItemGroup Condition=" '$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8' ">
 		<PackageReference Include="JetBrains.Annotations" Version="10.0.0">
 			<PrivateAssets>All</PrivateAssets>
 		</PackageReference>
@@ -183,7 +183,7 @@
 		<LanguageTargets>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</LanguageTargets>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)' == 'portable_net40_win8_wpa81_wp8_sl5'">
+	<PropertyGroup Condition="'$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5'">
 		<DefineConstants>$(DefineConstants);PORTABLE40</DefineConstants>
 		<TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
 		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -192,7 +192,7 @@
 		<LanguageTargets>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</LanguageTargets>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)' == 'portable_net45_win8_wpa81_wp8'">
+	<PropertyGroup Condition="'$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8'">
 		<DefineConstants>$(DefineConstants);PORTABLE</DefineConstants>
 		<TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
 		<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
