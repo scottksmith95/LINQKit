@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NOEF
+using System;
 using System.Linq.Expressions;
 using JetBrains.Annotations;
 
@@ -18,3 +19,4 @@ namespace LinqKit
         public static Func<Expression, Expression> QueryOptimizer = e => e;
     }
 }
+#endif

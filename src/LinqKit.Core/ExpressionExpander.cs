@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NOEF
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -11,9 +12,8 @@ namespace LinqKit
     /// Custom expression visitor for ExpandableQuery. This expands calls to Expression.Compile() and
     /// collapses captured lambda references in subqueries which LINQ to SQL can't otherwise handle.
     /// </summary>
-    class ExpressionExpander : ExpressionVisitor
+    internal class ExpressionExpander : ExpressionVisitor
     {
-
         readonly Dictionary<MemberInfo, LambdaExpression> _expandableCache = new Dictionary<MemberInfo, LambdaExpression>();
 
         internal ExpressionExpander() { }
@@ -113,7 +113,7 @@ namespace LinqKit
 
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
-            if (m.Method.Name == "Invoke" && m.Method.DeclaringType == typeof(Extensions))
+            if (m.Method.Name == nameof(ExtensionsCore.Invoke) && m.Method.DeclaringType == typeof(ExtensionsCore))
             {
                 var target = m.Arguments[0];
                 var lambda = EvaluateTarget(target);
@@ -155,7 +155,7 @@ namespace LinqKit
             }
 
             // Expand calls to an expression's Compile() method:
-            if (m.Method.Name == "Compile" && m.Object is MemberExpression)
+            if (m.Method.Name == nameof(LambdaExpression.Compile) && m.Object is MemberExpression)
             {
                 var me = (MemberExpression)m.Object;
                 var newExpr = TransformExpr(me);
@@ -166,7 +166,7 @@ namespace LinqKit
             }
 
             // Strip out any nested calls to AsExpandable():
-            if (m.Method.Name == "AsExpandable" && m.Method.DeclaringType == typeof(Extensions))
+            if (m.Method.Name == nameof(Core.Extensions.AsExpandable) && m.Method.DeclaringType.Name == nameof(Core.Extensions) && m.Method.DeclaringType.Namespace.StartsWith("LinqKit"))
             {
                 return m.Arguments[0];
             }
@@ -257,3 +257,4 @@ namespace LinqKit
         }
     }
 }
+#endif

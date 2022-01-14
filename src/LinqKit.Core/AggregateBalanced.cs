@@ -1,4 +1,5 @@
-﻿#if !(NET35 || NOASYNCPROVIDER)
+﻿#if NOEF
+#if !(NET35 || NOASYNCPROVIDER)
 using LinqKit.Utilities;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -103,4 +104,5 @@ namespace System.Linq
         }
     }
 }
+#endif
 #endif

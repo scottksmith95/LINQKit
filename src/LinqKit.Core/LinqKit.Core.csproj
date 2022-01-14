@@ -34,6 +34,64 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit, PublicKey=002400000480000094000000060200000024000052534131000400000100010009af226acf80fc92af220b3e8080830297eeb9711ca1d8cf2a567c211dfdae8bd2fd7e37777b3d0368e8b6c4ed7252ad4f19f3eb38a3f26a0bbc7016d064bf0a111a40058e97239c11d8c2cdc1e93367f862a5e0166253463f90adba77c183cc8334d07198b8e80c69022f9bc6b260de3b1753c33b587e8c51175e1f6a1152d2
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.EntityFramework, PublicKey=00240000048000009400000006020000002400005253413100040000010001009520f2954a09e74f547e940936cfc0f56d807290d1294c235fd2013f1de9afd650da9e862e6349857c80e619b9ea119546b0e9a8cbd700d6f5cbbf5709a1fee527c9b6c1ece7ef6f1d45dcb5b8a23d3a9483ab49d5254affd7b894aaa494b28e8b98ae54dfc802737cf5c5035d3507f4bf8c3877d86709ae9c615ebe089621b5
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.Microsoft.EntityFrameworkCore, PublicKey=0024000004800000940000000602000000240000525341310004000001000100f77c6bb1a3b2c5b07d843b1c9b845dffcce043e3711d17877ed730ad2e53983b3ed7c1346673cc9d3953a430334fa3c8ce73430ef58a930de917f6d34251a145f4f267d535ea2f797e717d7ce9684711888cc788cf71b4c03b531f52a88ab70e52b6e1fb783f0ef8b0c6afe55b573bf3f4982088325448aef8f3b1fea5d5a7c8
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.Microsoft.EntityFrameworkCore2, PublicKey=0024000004800000940000000602000000240000525341310004000001000100f77c6bb1a3b2c5b07d843b1c9b845dffcce043e3711d17877ed730ad2e53983b3ed7c1346673cc9d3953a430334fa3c8ce73430ef58a930de917f6d34251a145f4f267d535ea2f797e717d7ce9684711888cc788cf71b4c03b531f52a88ab70e52b6e1fb783f0ef8b0c6afe55b573bf3f4982088325448aef8f3b1fea5d5a7c8
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.Microsoft.EntityFrameworkCore3, PublicKey=0024000004800000940000000602000000240000525341310004000001000100f77c6bb1a3b2c5b07d843b1c9b845dffcce043e3711d17877ed730ad2e53983b3ed7c1346673cc9d3953a430334fa3c8ce73430ef58a930de917f6d34251a145f4f267d535ea2f797e717d7ce9684711888cc788cf71b4c03b531f52a88ab70e52b6e1fb783f0ef8b0c6afe55b573bf3f4982088325448aef8f3b1fea5d5a7c8
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.Microsoft.EntityFrameworkCore31, PublicKey=0024000004800000940000000602000000240000525341310004000001000100f77c6bb1a3b2c5b07d843b1c9b845dffcce043e3711d17877ed730ad2e53983b3ed7c1346673cc9d3953a430334fa3c8ce73430ef58a930de917f6d34251a145f4f267d535ea2f797e717d7ce9684711888cc788cf71b4c03b531f52a88ab70e52b6e1fb783f0ef8b0c6afe55b573bf3f4982088325448aef8f3b1fea5d5a7c8
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.Microsoft.EntityFrameworkCore5, PublicKey=0024000004800000940000000602000000240000525341310004000001000100f77c6bb1a3b2c5b07d843b1c9b845dffcce043e3711d17877ed730ad2e53983b3ed7c1346673cc9d3953a430334fa3c8ce73430ef58a930de917f6d34251a145f4f267d535ea2f797e717d7ce9684711888cc788cf71b4c03b531f52a88ab70e52b6e1fb783f0ef8b0c6afe55b573bf3f4982088325448aef8f3b1fea5d5a7c8
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.Microsoft.EntityFrameworkCore6, PublicKey=0024000004800000940000000602000000240000525341310004000001000100f77c6bb1a3b2c5b07d843b1c9b845dffcce043e3711d17877ed730ad2e53983b3ed7c1346673cc9d3953a430334fa3c8ce73430ef58a930de917f6d34251a145f4f267d535ea2f797e717d7ce9684711888cc788cf71b4c03b531f52a88ab70e52b6e1fb783f0ef8b0c6afe55b573bf3f4982088325448aef8f3b1fea5d5a7c8
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.Net35, PublicKey=002400000480000094000000060200000024000052534131000400000100010009af226acf80fc92af220b3e8080830297eeb9711ca1d8cf2a567c211dfdae8bd2fd7e37777b3d0368e8b6c4ed7252ad4f19f3eb38a3f26a0bbc7016d064bf0a111a40058e97239c11d8c2cdc1e93367f862a5e0166253463f90adba77c183cc8334d07198b8e80c69022f9bc6b260de3b1753c33b587e8c51175e1f6a1152d2
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.Net45, PublicKey=002400000480000094000000060200000024000052534131000400000100010009af226acf80fc92af220b3e8080830297eeb9711ca1d8cf2a567c211dfdae8bd2fd7e37777b3d0368e8b6c4ed7252ad4f19f3eb38a3f26a0bbc7016d064bf0a111a40058e97239c11d8c2cdc1e93367f862a5e0166253463f90adba77c183cc8334d07198b8e80c69022f9bc6b260de3b1753c33b587e8c51175e1f6a1152d2
+      </_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>
+        LinqKit.Z.EntityFramework.Classic, PublicKey=00240000048000009400000006020000002400005253413100040000010001009520f2954a09e74f547e940936cfc0f56d807290d1294c235fd2013f1de9afd650da9e862e6349857c80e619b9ea119546b0e9a8cbd700d6f5cbbf5709a1fee527c9b6c1ece7ef6f1d45dcb5b8a23d3a9483ab49d5254affd7b894aaa494b28e8b98ae54dfc802737cf5c5035d3507f4bf8c3877d86709ae9c615ebe089621b5
+      </_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
     <PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
       <PrivateAssets>All</PrivateAssets>
