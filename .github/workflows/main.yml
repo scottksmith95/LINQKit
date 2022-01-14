@@ -16,6 +16,10 @@ jobs:
         echo "GITHUB_RUN_NUMBER is ${env:GITHUB_RUN_NUMBER}"
           
     - uses: actions/checkout@v2
+
+    - uses: actions/setup-dotnet@v1
+      with:
+       dotnet-version: '6.0.x'
       
     - name: Build Projects
       run: |
