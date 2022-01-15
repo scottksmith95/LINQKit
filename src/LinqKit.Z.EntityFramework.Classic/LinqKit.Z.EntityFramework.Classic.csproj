@@ -37,11 +37,6 @@
     <DefineConstants>$(DefineConstants);NOASYNCPROVIDER</DefineConstants>
   </PropertyGroup>
 
-  <!--<ItemGroup>
-    <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
-    <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\**\*AssemblyInfo*.cs;bin\**;obj\**;**\*.xproj;packages\**" />
-  </ItemGroup>-->
-
   <ItemGroup>
     <Compile Include="..\LinqKit.EntityFramework\*.cs" />
   </ItemGroup>

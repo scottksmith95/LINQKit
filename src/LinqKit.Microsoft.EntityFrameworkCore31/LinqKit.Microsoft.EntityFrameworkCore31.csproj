@@ -27,13 +27,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <!--<ItemGroup>
-    <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
-    <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
-  </ItemGroup>-->
-
   <ItemGroup>
-    <Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore\*.cs" />
+      <Compile Include="..\LinqKit.Core\Extensions.cs;..\LinqKit.Core\ExpandableQuery.cs" />
+      <Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore\ExtensionsEFCore.cs" />
   </ItemGroup>
 
   <ItemGroup>
