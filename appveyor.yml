@@ -1,20 +1,14 @@
-os: Visual Studio 2019 Preview
+os: Visual Studio 2022
 
-version: 1.1.19.{build}
+version: 1.0.0.{build}
 
 configuration:
-- Debug
-- Release
+- ReleaseForGithubActions
 
 platform: Any CPU
 
 init:
 - ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
-
-#install:
-#  - ps: Start-FileDownload 'https://download.visualstudio.microsoft.com/download/pr/8148cce0-196d-4634-86df-f3d4550b1a75/89ed68d0ecf6b1c62cc7b0d129fdf600/dotnet-sdk-2.2.105-win-x64.exe'
-#  - cmd: dotnet-sdk-2.2.105-win-x64.exe /quiet
-#  - ps: $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = "true"
 
 environment:
   PATH: $(PATH);$(PROGRAMFILES)\dotnet\

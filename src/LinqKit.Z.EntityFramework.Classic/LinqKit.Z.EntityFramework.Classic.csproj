@@ -2,7 +2,7 @@
   <Import Project="../../version.xml" />
 
   <PropertyGroup>
-    <Version>1.1.$(PatchVersion)</Version>
+    <Version>1.2.$(PatchVersion)</Version>
     <Description>LinqKit.Z.EntityFramework.Classic contains extensions for LINQ to SQL and Z.EntityFramework.Classic. Include(...) and IAsync are supported.</Description>
     <AssemblyTitle>LinqKit for Z.EntityFramework.Classic with Include(...) and IAsync support.</AssemblyTitle>
     <Authors>Stef Heyenrath</Authors>
@@ -23,14 +23,14 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <PackageIconUrl>https://zzzprojects.github.io/images/logo/logo-64.png</PackageIconUrl>
   </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(TargetFramework)' != 'net40' ">
-    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
-  </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions' ">
     <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' != 'net40' ">
+    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
@@ -38,8 +38,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
-    <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\**\*AssemblyInfo*.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+      <Compile Include="..\LinqKit.Core\Extensions.cs;..\LinqKit.Core\ExpandableQuery.cs;..\LinqKit.Core\ExpandableDbAsyncEnumerator.cs" />
+      <Compile Include="..\LinqKit.EntityFramework\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,4 +53,4 @@
     <ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
   </ItemGroup>
 
-  </Project>
+</Project>

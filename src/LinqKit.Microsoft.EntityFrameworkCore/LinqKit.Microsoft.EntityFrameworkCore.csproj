@@ -2,7 +2,7 @@
   <Import Project="../../version.xml" />
 
   <PropertyGroup>
-    <Version>1.1.$(PatchVersion)</Version>
+    <Version>1.2.$(PatchVersion)</Version>
     <DefineConstants>$(DefineConstants);EFCORE</DefineConstants>
     <Description>LinqKit.Microsoft.EntityFrameworkCore contains extensions for LINQ to SQL and EntityFrameworkCore. With Include(...) and IDbAsync support.</Description>
     <AssemblyTitle>LinqKit for Microsoft.EntityFrameworkCore with Include(...) and IAsync support.</AssemblyTitle>
@@ -22,14 +22,13 @@
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.3' ">$(PackageTargetFallback);dotnet5.4</PackageTargetFallback>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions' ">
     <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="..\LinqKit.Core\*\AssemblyInfo.cs" />
-    <Compile Include="..\LinqKit.Core\*.cs;..\LinqKit.Core\*\*.cs" Exclude="..\LinqKit.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+    <Compile Include="..\LinqKit.Core\Extensions.cs;..\LinqKit.Core\ExpandableQuery.cs" />
   </ItemGroup>
 
   <ItemGroup>

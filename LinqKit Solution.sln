@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2F7F283D-557
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FC09568-C879-47D8-9D28-E736B8A84C95}"
 	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
-		azure-pipelines-nuget.yml = azure-pipelines-nuget.yml
 		Directory.Build.props = Directory.Build.props
 		Generate ReleaseNotes.bat = Generate ReleaseNotes.bat
 		LICENSE = LICENSE
@@ -106,6 +104,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFrameworkCore6", "src\LinqKit.Microsoft.EntityFrameworkCore6\LinqKit.Microsoft.EntityFrameworkCore6.csproj", "{84FE1714-2551-4094-A4C1-1C1ADC16339D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinqKit.Microsoft.EntityFrameworkCore6.Tests", "tests\LinqKit.Microsoft.EntityFrameworkCore6.Tests\LinqKit.Microsoft.EntityFrameworkCore6.Tests.csproj", "{2D757B6D-C987-4832-94E2-E3D11A1B6D6D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppVeyor", "AppVeyor", "{EE0B5A0E-533F-47B7-8D42-4D7B0D3D78F3}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -673,6 +676,7 @@ Global
 		{13CE5DB5-58FA-4AD8-AD0E-40721703DA84} = {9FC09568-C879-47D8-9D28-E736B8A84C95}
 		{84FE1714-2551-4094-A4C1-1C1ADC16339D} = {2F7F283D-5576-417F-A467-EC210226AC3B}
 		{2D757B6D-C987-4832-94E2-E3D11A1B6D6D} = {0BE21A11-8EF0-404B-AFC0-533A62386C4C}
+		{EE0B5A0E-533F-47B7-8D42-4D7B0D3D78F3} = {9FC09568-C879-47D8-9D28-E736B8A84C95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F6283C5-9029-434E-BD90-E95FB377DA9B}

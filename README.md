@@ -1,6 +1,7 @@
 ### Build
 | | |
 |-|-|
+| AppVeyor | [![AppVeyor](https://ci.appveyor.com/api/projects/status/srwru0a96rw9v7dn?svg=true)](https://ci.appveyor.com/project/Thorium/linqkit)
 | Github Actions | [![Actions](https://github.com/scottksmith95/LINQKit/workflows/Main%20workflow/badge.svg)](https://github.com/scottksmith95/LINQKit/actions?query=workflow%3A%22Main+workflow%22) |
 
 
