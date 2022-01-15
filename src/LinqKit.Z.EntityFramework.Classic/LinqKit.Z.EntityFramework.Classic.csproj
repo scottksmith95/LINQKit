@@ -38,7 +38,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\LinqKit.EntityFramework\*.cs" />
+      <Compile Include="..\LinqKit.Core\Extensions.cs;..\LinqKit.Core\ExpandableQuery.cs;..\LinqKit.Core\ExpandableDbAsyncEnumerator.cs" />
+      <Compile Include="..\LinqKit.EntityFramework\*.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -30,6 +30,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+      <Compile Include="..\LinqKit.Core\Extensions.cs;..\LinqKit.Core\ExpandableQuery.cs;..\LinqKit.Core\ExpandableDbAsyncEnumerator.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>

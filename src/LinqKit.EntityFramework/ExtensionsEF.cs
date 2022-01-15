@@ -3,7 +3,6 @@ using System;
 using System.Linq.Expressions;
 using System.Linq;
 using JetBrains.Annotations;
-using LinqKit.Core;
 
 // ReSharper disable once CheckNamespace
 namespace LinqKit
