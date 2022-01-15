@@ -29,7 +29,7 @@
 
   <ItemGroup>
       <Compile Include="..\LinqKit.Core\Extensions.cs;..\LinqKit.Core\ExpandableQuery.cs" />
-      <Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore\ExtensionsEFCore.cs" />
+      <Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
