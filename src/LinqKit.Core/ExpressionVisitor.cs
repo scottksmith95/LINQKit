@@ -86,6 +86,7 @@ namespace LinqKit
 #if !NET35
                 case ExpressionType.Index:
                     return VisitIndex((IndexExpression)exp);
+
                 case ExpressionType.Extension:
                     return VisitExtension(exp);
 #endif
