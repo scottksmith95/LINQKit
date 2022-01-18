@@ -126,7 +126,7 @@ namespace LinqKit
             }
             if (query.Provider is EntityQueryProvider)
             {
-                return (IQueryCompiler)typeof(EntityQueryProvider).GetField("_queryCompiler", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(query.Provider);
+                return (IQueryCompiler)typeof(EntityQueryProvider).GetField("_queryCompiler", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(query.Provider);
             }
             return null;
         }
