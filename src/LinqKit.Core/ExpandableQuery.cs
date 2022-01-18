@@ -128,7 +128,7 @@ namespace LinqKit
             {
                 return (IQueryCompiler)typeof(EntityQueryProvider).GetField("_queryCompiler", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(query.Provider);
             }
-            throw new InvalidOperationException();
+            return null;
         }
 #endif
     }
