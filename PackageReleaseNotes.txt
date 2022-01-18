@@ -1,4 +1,10 @@
-# 1.1.27 (13 November 2021)
-- #151 Added support for EF Core 6 [feature]
+# 1.2.0 (18 January 2022)
+- #144 Add LeftJoin extension method [feature]
+- #156 GitHub Actions: use actions/checkout@v2 [security]
+- #159 #154 Exclude LinqKit.Core implementation from LinqKit.EntityFramework&#8230; [feature]
+- #161 Refactor project structure. Fix Compile Remove / Compile Include [feature]
+- #162 #160 Unhandled expression type: 'Index' [bug]
+- #153 Predicate as class function not resolving correctly
+- #155 [Security] Workflow main.yml is using vulnerable action actions/checkout [security]
 
 The full release notes can be found here: https://github.com/scottksmith95/LINQKit/blob/master/ReleaseNotes.md

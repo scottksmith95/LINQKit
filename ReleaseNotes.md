@@ -1,3 +1,12 @@
+# 1.2.0 (18 January 2022)
+- [#144](https://github.com/scottksmith95/LINQKit/pull/144) - Add LeftJoin extension method [feature] contributed by [StefH](https://github.com/StefH)
+- [#156](https://github.com/scottksmith95/LINQKit/pull/156) - GitHub Actions: use actions/checkout@v2 [security] contributed by [StefH](https://github.com/StefH)
+- [#159](https://github.com/scottksmith95/LINQKit/pull/159) - #154 Exclude LinqKit.Core implementation from LinqKit.EntityFramework&#8230; [feature] contributed by [doboczyakos](https://github.com/doboczyakos)
+- [#161](https://github.com/scottksmith95/LINQKit/pull/161) - Refactor project structure. Fix Compile Remove / Compile Include [feature] contributed by [StefH](https://github.com/StefH)
+- [#162](https://github.com/scottksmith95/LINQKit/pull/162) - #160 Unhandled expression type: 'Index' [bug] contributed by [doboczyakos](https://github.com/doboczyakos)
+- [#153](https://github.com/scottksmith95/LINQKit/issues/153) - Predicate as class function not resolving correctly
+- [#155](https://github.com/scottksmith95/LINQKit/issues/155) - [Security] Workflow main.yml is using vulnerable action actions/checkout [security]
+
 # 1.1.27 (13 November 2021)
 - [#151](https://github.com/scottksmith95/LINQKit/pull/151) - Added support for EF Core 6 [feature] contributed by [sdanyliv](https://github.com/sdanyliv)
 
