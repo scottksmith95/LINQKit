@@ -44,13 +44,16 @@ namespace LinqKit
         }
 
         /// <summary> Start an expression </summary>
+        [Pure]
         public static ExpressionStarter<T> New<T>() { return new ExpressionStarter<T>(); }
         
         /// <summary> Start an expression </summary>
         /// <param name="expression">Expression to be used when starting the builder.</param>
+        [Pure]
         public static ExpressionStarter<T> New<T>(Expression<Func<T, bool>> expression) { return new ExpressionStarter<T>(expression); }
         
         /// <summary> Create an expression with a stub expression true or false to use when the expression is not yet started. </summary>
+        [Pure]
         public static ExpressionStarter<T> New<T>(bool defaultExpression) { return new ExpressionStarter<T>(defaultExpression); }
 
         /// <summary>
@@ -59,6 +62,7 @@ namespace LinqKit
         /// </summary>
         /// <typeparam name="T">The type</typeparam>
         /// <param name="enumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
+        [Pure]
         public static ExpressionStarter<T> New<T>(IEnumerable<T> enumerable)
             => New<T>();
         
@@ -69,6 +73,7 @@ namespace LinqKit
         /// <typeparam name="T">The type</typeparam>
         /// <param name="enumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
         /// <param name="expression">Expression to be used when starting the builder.</param>
+        [Pure]
         public static ExpressionStarter<T> New<T>(IEnumerable<T> enumerable, Expression<Func<T, bool>> expression)
             => New(expression);
 
@@ -79,6 +84,7 @@ namespace LinqKit
         /// <typeparam name="T">The type</typeparam>
         /// <param name="enumerable">The value is NOT used. Only serves as a way to provide the generic type.</param>
         /// <param name="state">Boolean state used when there is not starting expression yet.</param>
+        [Pure]
         public static ExpressionStarter<T> New<T>(IEnumerable<T> enumerable, bool state)
             => New<T>(state);
 
@@ -91,6 +97,7 @@ namespace LinqKit
         public static Expression<Func<T, bool>> False<T>() { return new ExpressionStarter<T>(false); }
 
         /// <summary> OR </summary>
+        [Pure]
         public static Expression<Func<T, bool>> Or<T>([NotNull] this Expression<Func<T, bool>> expr1, [NotNull] Expression<Func<T, bool>> expr2)
         {
             var expr2Body = new RebindParameterVisitor(expr2.Parameters[0], expr1.Parameters[0]).Visit(expr2.Body);
@@ -98,6 +105,7 @@ namespace LinqKit
         }
 
         /// <summary> AND </summary>
+        [Pure]
         public static Expression<Func<T, bool>> And<T>([NotNull] this Expression<Func<T, bool>> expr1, [NotNull] Expression<Func<T, bool>> expr2)
         {
             var expr2Body = new RebindParameterVisitor(expr2.Parameters[0], expr1.Parameters[0]).Visit(expr2.Body);
@@ -105,6 +113,7 @@ namespace LinqKit
         }
 
         /// <summary> NOT </summary>
+        [Pure]
         public static Expression<Func<T, bool>> Not<T>(this Expression<Func<T, bool>> expr)
             => Expression.Lambda<Func<T, bool>>(Expression.Not(expr.Body), expr.Parameters);
 
@@ -116,6 +125,7 @@ namespace LinqKit
         /// <param name="second">The second Predicate.</param>
         /// <param name="operator">The Operator (can be "And" or "Or").</param>
         /// <returns>Expression{Func{T, bool}}</returns>
+        [Pure]
         public static Expression<Func<T, bool>> Extend<T>([NotNull] this Expression<Func<T, bool>> first, [NotNull] Expression<Func<T, bool>> second, PredicateOperator @operator = PredicateOperator.Or)
         {
             return @operator == PredicateOperator.Or ? first.Or(second) : first.And(second);
@@ -129,6 +139,7 @@ namespace LinqKit
         /// <param name="second">The second Predicate.</param>
         /// <param name="operator">The Operator (can be "And" or "Or").</param>
         /// <returns>Expression{Func{T, bool}}</returns>
+        [Pure]
         public static Expression<Func<T, bool>> Extend<T>([NotNull] this ExpressionStarter<T> first, [NotNull] Expression<Func<T, bool>> second, PredicateOperator @operator = PredicateOperator.Or)
         {
             return @operator == PredicateOperator.Or ? first.Or(second) : first.And(second);
