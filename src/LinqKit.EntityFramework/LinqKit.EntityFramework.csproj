@@ -34,9 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
+      <PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
+          <PrivateAssets>All</PrivateAssets>
+      </PackageReference>
+      <PackageReference Include="Timestamp" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
