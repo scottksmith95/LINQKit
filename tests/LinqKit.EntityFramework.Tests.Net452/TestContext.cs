@@ -18,6 +18,7 @@ namespace LinqKit.EntityFramework.Tests
         }
 
         public DbSet<Entity> Entities { get; set; }
+        public DbSet<RelatedEntity> RelatedEntities { get; set; }
     }
 #else
     [DbConfigurationType(typeof(CodeConfig))]
@@ -31,6 +32,7 @@ namespace LinqKit.EntityFramework.Tests
         }
 
         public DbSet<Entity> Entities { get; set; }
+        public DbSet<RelatedEntity> RelatedEntities { get; set; }
     }
 
     public class CodeConfig : DbConfiguration
