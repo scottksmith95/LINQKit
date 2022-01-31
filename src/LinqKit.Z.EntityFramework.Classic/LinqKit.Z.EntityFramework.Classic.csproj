@@ -47,6 +47,7 @@
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Z.EntityFramework.Classic" Version="7.0.40" />
+    <PackageReference Include="Timestamp" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>

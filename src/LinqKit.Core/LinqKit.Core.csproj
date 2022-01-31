@@ -33,6 +33,10 @@
     <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
   </PropertyGroup>
 
+  <ItemGroup>
+      <PackageReference Include="Timestamp" Version="1.0.2" />
+  </ItemGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
