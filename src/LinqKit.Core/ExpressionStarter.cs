@@ -57,18 +57,21 @@ namespace LinqKit
         }
 
         /// <summary>Or</summary>
+        [Pure]
         public Expression<Func<T, bool>> Or([NotNull] Expression<Func<T, bool>> expr2)
         {
             return (IsStarted) ? _predicate = Predicate.Or(expr2) : Start(expr2);
         }
 
         /// <summary>And</summary>
+        [Pure]
         public Expression<Func<T, bool>> And([NotNull] Expression<Func<T, bool>> expr2)
         {
             return (IsStarted) ? _predicate = Predicate.And(expr2) : Start(expr2);
         }
 
         /// <summary>Not</summary>
+        [Pure]
         public Expression<Func<T, bool>> Not()
         {
             if (IsStarted)
@@ -121,14 +124,17 @@ namespace LinqKit
 #if !(NET35)
 
         /// <summary></summary>
+        [Pure]
         public Func<T, bool> Compile() { return Predicate.Compile(); }
 #endif
 
 #if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE40 || UAP)
         /// <summary></summary>
+        [Pure]
         public Func<T, bool> Compile(DebugInfoGenerator debugInfoGenerator) { return Predicate.Compile(debugInfoGenerator); }
 
         /// <summary></summary>
+        [Pure]
         public Expression<Func<T, bool>> Update(Expression body, IEnumerable<ParameterExpression> parameters) { return Predicate.Update(body, parameters); }
 #endif
 #endregion
@@ -161,9 +167,11 @@ namespace LinqKit
 
 #if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE40 || UAP || EFCORE6)
         /// <summary></summary>
+        [Pure]
         public void CompileToMethod(MethodBuilder method) { Predicate.CompileToMethod(method); }
 
         /// <summary></summary>
+        [Pure]
         public void CompileToMethod(MethodBuilder method, DebugInfoGenerator debugInfoGenerator) { Predicate.CompileToMethod(method, debugInfoGenerator); }
 
 #endif

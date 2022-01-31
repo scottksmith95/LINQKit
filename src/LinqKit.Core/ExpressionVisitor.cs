@@ -14,6 +14,7 @@ namespace LinqKit
     public abstract class ExpressionVisitor
     {
         /// <summary> Visit expression tree </summary>
+        [Pure]
 		public virtual Expression Visit(Expression exp)
         {
             if (exp == null)
