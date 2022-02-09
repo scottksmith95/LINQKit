@@ -36,6 +36,7 @@ namespace LinqKit.EntityFramework.Tests.Net452
             _db.Entities.RemoveRange(_db.Entities.ToList());
             _db.Entities.AddRange(new[]
             {
+                new Entity { Value = 1024, RelatedEntity = new RelatedEntity { Value = 2048 } },
                 new Entity { Value = 123 },
                 new Entity { Value = 67 },
                 new Entity { Value = 3 }
@@ -63,7 +64,7 @@ namespace LinqKit.EntityFramework.Tests.Net452
             var after = task.Status;
 
             Assert.Equal(TaskStatus.RanToCompletion, after);
-            Assert.Equal(3, result.Count);
+            Assert.Equal(4, result.Count);
         }
 
         [Fact]
@@ -141,6 +142,20 @@ namespace LinqKit.EntityFramework.Tests.Net452
 
             // Verify
             optimizerMock.Verify(o => o(It.IsAny<Expression>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task DbAsync_IncludeAfterAsExpandableShouldWorkAsync()
+        {
+            var entity = await _db.Entities.AsNoTracking().AsExpandable().Include(e => e.RelatedEntity).Where(e => e.Value == 1024).SingleAsync();
+            Assert.Equal(2048, entity.RelatedEntity?.Value);
+        }
+
+        [Fact]
+        public async Task DbAsync_IncludeBeforeAsExpandableShouldWorkAsync()
+        {
+            var entity = await _db.Entities.AsNoTracking().Include(e => e.RelatedEntity).AsExpandable().Where(e => e.Value == 1024).SingleAsync();
+            Assert.Equal(2048, entity.RelatedEntity?.Value);
         }
     }
 }
