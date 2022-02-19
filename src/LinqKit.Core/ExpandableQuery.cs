@@ -6,6 +6,7 @@ using System.Collections;
 #if !(NET35 || NOEF || NOASYNCPROVIDER)
 using System.Threading;
 using System.Threading.Tasks;
+using System.Reflection;
 #if EFCORE
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -34,7 +35,7 @@ namespace LinqKit
     public class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IDbAsyncEnumerable<T>
 #endif
     {
-        readonly ExpandableQueryProvider<T> _provider;
+        readonly IQueryProvider _provider;
         readonly IQueryable<T> _inner;
 
         internal IQueryable<T> InnerQuery => _inner; // Original query, that we're wrapping
@@ -42,7 +43,14 @@ namespace LinqKit
         internal ExpandableQuery(IQueryable<T> inner, Func<Expression, Expression> queryOptimizer)
         {
             _inner = inner;
-            _provider = new ExpandableQueryProvider<T>(this, queryOptimizer);
+#if EFCORE
+            var queryCompiler = GetQueryCompiler(inner);
+#endif
+            _provider =
+#if EFCORE
+                queryCompiler != null ? (IQueryProvider)new ExpandableIncludableQueryProvider<T>(this, queryOptimizer, queryCompiler) :
+#endif
+                new ExpandableQueryProvider<T>(this, queryOptimizer);
         }
 
         Expression IQueryable.Expression => _inner.Expression;
@@ -108,6 +116,21 @@ namespace LinqKit
         }
 #endif
 #endif
+
+#if EFCORE
+        private static IQueryCompiler GetQueryCompiler(IQueryable<T> query)
+        {
+            if (query is ExpandableQuery<T> expandableQuery)
+            {
+                return GetQueryCompiler(expandableQuery.InnerQuery);
+            }
+            if (query.Provider is EntityQueryProvider)
+            {
+                return (IQueryCompiler)typeof(EntityQueryProvider).GetField("_queryCompiler", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(query.Provider);
+            }
+            return null;
+        }
+#endif
     }
 
 #if !(NET35 || NOEF || NOASYNCPROVIDER)
@@ -128,6 +151,31 @@ namespace LinqKit
         {
             return InnerQuery.Include(path).AsExpandable();
         }
+#endif
+    }
+#endif
+
+#if EFCORE
+    class ExpandableIncludableQueryProvider<T> : EntityQueryProvider
+    {
+        private readonly IAsyncQueryProvider _innerProvider;
+
+        internal ExpandableIncludableQueryProvider(ExpandableQuery<T> query, Func<Expression, Expression> queryOptimizer, IQueryCompiler queryCompiler)
+            : base(queryCompiler)
+        {
+            _innerProvider = new ExpandableQueryProvider<T>(query, queryOptimizer);
+        }
+
+        public override IQueryable CreateQuery(Expression expression) => _innerProvider.CreateQuery(expression);
+        public override IQueryable<TElement> CreateQuery<TElement>(Expression expression) => _innerProvider.CreateQuery<TElement>(expression);
+        public override object Execute(Expression expression) => _innerProvider.Execute(expression);
+        public override TResult Execute<TResult>(Expression expression) => _innerProvider.Execute<TResult>(expression);
+
+#if EFCORE3
+        public override TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default) => _innerProvider.ExecuteAsync<TResult>(expression, cancellationToken);
+#else
+        public override IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression) => _innerProvider.ExecuteAsync<TResult>(expression);
+        public override Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken) => _innerProvider.ExecuteAsync<TResult>(expression, cancellationToken);
 #endif
     }
 #endif
