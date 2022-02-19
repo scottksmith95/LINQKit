@@ -34,4 +34,6 @@ jobs:
       run: |
         dotnet test ./tests/LinqKit.Tests/LinqKit.Tests.csproj -c ReleaseForGithubActions
         dotnet test ./tests/LinqKit.EntityFramework.Tests.Net452/LinqKit.EntityFramework.Tests.Net452.csproj -c ReleaseForGithubActions
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore.Tests -c ReleaseForGithubActions    
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore31.Tests -c ReleaseForGithubActions
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore5.Tests -c ReleaseForGithubActions
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore6.Tests -c ReleaseForGithubActions  
