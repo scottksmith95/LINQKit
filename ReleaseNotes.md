@@ -1,3 +1,11 @@
+# 1.2.1 (19 February 2022)
+- [#164](https://github.com/scottksmith95/LINQKit/pull/164) - #14 Include(...) after AsExpandable() contributed by [doboczyakos](https://github.com/doboczyakos)
+- [#165](https://github.com/scottksmith95/LINQKit/pull/165) - Tests for #14 Include(...) after AsExpandable() [test] contributed by [doboczyakos](https://github.com/doboczyakos)
+- [#166](https://github.com/scottksmith95/LINQKit/pull/166) - Add TimestampAtribute to assemblies [feature] contributed by [StefH](https://github.com/StefH)
+- [#167](https://github.com/scottksmith95/LINQKit/pull/167) - Add PureAttribute on suitable LinqKit.Core methods contributed by [Logerfo](https://github.com/Logerfo)
+- [#154](https://github.com/scottksmith95/LINQKit/issues/154) - Exclude LinqKit.Core implementation from LinqKit.EntityFramework etc. projects, use ProjectReference converted to package dependency instead [feature]
+- [#160](https://github.com/scottksmith95/LINQKit/issues/160) - Unhandled expression type: 'Index' [bug]
+
 # 1.2.0 (18 January 2022)
 - [#144](https://github.com/scottksmith95/LINQKit/pull/144) - Add LeftJoin extension method [feature] contributed by [StefH](https://github.com/StefH)
 - [#156](https://github.com/scottksmith95/LINQKit/pull/156) - GitHub Actions: use actions/checkout@v2 [security] contributed by [StefH](https://github.com/StefH)
