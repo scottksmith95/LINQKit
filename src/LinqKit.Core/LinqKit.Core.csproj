@@ -34,7 +34,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <PackageReference Include="Timestamp" Version="1.0.2" />
+      <PackageReference Include="Timestamp" Version="1.0.2">
+          <PrivateAssets>All</PrivateAssets>
+      </PackageReference>
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
