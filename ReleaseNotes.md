@@ -1,3 +1,7 @@
+# 1.2.2 (23 February 2022)
+- [#171](https://github.com/scottksmith95/LINQKit/pull/171) - Define dependency on Timestamp as PrivateAssets [bug] contributed by [StefH](https://github.com/StefH)
+- [#170](https://github.com/scottksmith95/LINQKit/issues/170) - Timestamp in nuget dependencies
+
 # 1.2.1 (19 February 2022)
 - [#164](https://github.com/scottksmith95/LINQKit/pull/164) - #14 Include(...) after AsExpandable() contributed by [doboczyakos](https://github.com/doboczyakos)
 - [#165](https://github.com/scottksmith95/LINQKit/pull/165) - Tests for #14 Include(...) after AsExpandable() [test] contributed by [doboczyakos](https://github.com/doboczyakos)

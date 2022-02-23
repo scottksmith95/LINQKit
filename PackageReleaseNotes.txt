@@ -1,9 +1,5 @@
-# 1.2.1 (19 February 2022)
-- #164 #14 Include(...) after AsExpandable()
-- #165 Tests for #14 Include(...) after AsExpandable() [test]
-- #166 Add TimestampAtribute to assemblies [feature]
-- #167 Add PureAttribute on suitable LinqKit.Core methods
-- #154 Exclude LinqKit.Core implementation from LinqKit.EntityFramework etc. projects, use ProjectReference converted to package dependency instead [feature]
-- #160 Unhandled expression type: 'Index' [bug]
+# 1.2.2 (23 February 2022)
+- #171 Define dependency on Timestamp as PrivateAssets [bug]
+- #170 Timestamp in nuget dependencies
 
 The full release notes can be found here: https://github.com/scottksmith95/LINQKit/blob/master/ReleaseNotes.md
