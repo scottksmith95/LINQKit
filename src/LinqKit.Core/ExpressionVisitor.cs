@@ -23,6 +23,7 @@ namespace LinqKit
                 return null;
             }
 
+#if NET35            
             switch (exp.NodeType)
             {
                 case ExpressionType.ArrayLength:
@@ -85,15 +86,69 @@ namespace LinqKit
                     return VisitMemberInit((MemberInitExpression)exp);
                 case ExpressionType.ListInit:
                     return VisitListInit((ListInitExpression)exp);
-#if !NET35
-                case ExpressionType.Index:
-                    return VisitIndex((IndexExpression)exp);
-
-                case ExpressionType.Extension:
-                    return VisitExtension(exp);
+#else
+            if (exp.NodeType == ExpressionType.Extension)
+            {
+                return VisitExtension(exp);
+            }
+            
+            switch (exp)
+            {
+                case UnaryExpression unaryExpression:
+                    return VisitUnary(unaryExpression);
+                case BinaryExpression binaryExpression:
+                    return VisitBinary(binaryExpression);
+                case BlockExpression blockExpression:
+                    return VisitBlock(blockExpression);
+                case TypeBinaryExpression typeBinaryExpression:
+                    return VisitTypeIs(typeBinaryExpression);
+                case ConditionalExpression conditionalExpression:
+                    return VisitConditional(conditionalExpression);
+                case ConstantExpression constantExpression:
+                    return VisitConstant(constantExpression);
+                case DebugInfoExpression debugInfoExpression:
+                    return VisitDebugInfo(debugInfoExpression);
+                case DefaultExpression defaultExpression:
+                    return VisitDefault(defaultExpression);
+#if !NETSTANDARD1_3
+                case DynamicExpression dynamicExpression:
+                    return VisitDynamic(dynamicExpression);
+#endif
+                case GotoExpression gotoExpression:
+                    return VisitGoto(gotoExpression);
+                case ParameterExpression parameterExpression:
+                    return VisitParameter(parameterExpression);
+                case RuntimeVariablesExpression runtimeVariablesExpression:
+                    return VisitRuntimeVariables(runtimeVariablesExpression);
+                case SwitchExpression switchExpression:
+                    return VisitSwitch(switchExpression);
+                case TryExpression tryExpression:
+                    return VisitTry(tryExpression);
+                case MemberExpression memberExpression:
+                    return VisitMemberAccess(memberExpression);
+                case MethodCallExpression methodCallExpression:
+                    return VisitMethodCall(methodCallExpression);
+                case LambdaExpression lambdaExpression:
+                    return VisitLambda(lambdaExpression);
+                case NewExpression newExpression:
+                    return VisitNew(newExpression);
+                case NewArrayExpression newArrayExpression:
+                    return VisitNewArray(newArrayExpression);
+                case InvocationExpression invocationExpression:
+                    return VisitInvocation(invocationExpression);
+                case LabelExpression labelExpression:
+                    return VisitLabel(labelExpression);
+                case MemberInitExpression memberInitExpression:
+                    return VisitMemberInit(memberInitExpression);
+                case ListInitExpression listInitExpression:
+                    return VisitListInit(listInitExpression);
+                case LoopExpression loopExpression:
+                    return VisitLoop(loopExpression);
+                case IndexExpression indexExpression:
+                    return VisitIndex(indexExpression);
 #endif
                 default:
-                    throw new Exception($"Unhandled expression type: '{exp.NodeType}'");
+                    throw new Exception($"Unhandled expression type: '{exp.GetType().Name}': '{exp.NodeType}'");
             }
         }
 
@@ -415,6 +470,200 @@ namespace LinqKit
             if (obj != exp.Object || args != exp.Arguments)
             {
                 return Expression.MakeIndex(obj, exp.Indexer, args);
+            }
+            return exp;
+        }
+
+        /// <summary>Visit Block expression</summary>
+        protected virtual Expression VisitBlock(BlockExpression exp)
+        {
+            var expressions = VisitExpressionList(exp.Expressions);
+            if (expressions != exp.Expressions)
+            {
+                return Expression.Block(exp.Type, exp.Variables, expressions);
+            }
+            return exp;
+        }
+
+        /// <summary>Visit DebugInfo expression</summary>
+        protected virtual Expression VisitDebugInfo(DebugInfoExpression exp)
+        {
+            return exp;
+        }
+
+        /// <summary>Visit Default expression</summary>
+        protected virtual Expression VisitDefault(DefaultExpression exp)
+        {
+            return exp;
+        }
+
+#if !NETSTANDARD1_3
+        /// <summary>Visit Dynamic expression</summary>
+        protected virtual Expression VisitDynamic(DynamicExpression exp)
+        {
+            var arguments = VisitExpressionList(exp.Arguments);
+            if (arguments != exp.Arguments)
+            {
+                return Expression.Dynamic(exp.Binder, exp.Type, arguments);
+            }
+            return exp;
+        }
+#endif
+
+        /// <summary>Visit Goto expression</summary>
+        protected virtual Expression VisitGoto(GotoExpression exp)
+        {
+            var value = Visit(exp.Value);
+            if (value != exp.Value)
+            {
+                return Expression.MakeGoto(exp.Kind, exp.Target, value, exp.Type);
+            }
+            return exp;
+        }
+
+        /// <summary>Visit RuntimeVariables expression</summary>
+        protected virtual Expression VisitRuntimeVariables(RuntimeVariablesExpression exp)
+        {
+            return exp;
+        }
+
+        /// <summary>Visit Switch expression</summary>
+        protected virtual Expression VisitSwitch(SwitchExpression exp)
+        {
+            var switchValue = Visit(exp.SwitchValue);
+            var defaultBody = Visit(exp.DefaultBody);
+            var cases = VisitSwitchCaseList(exp.Cases);
+            if (switchValue != exp.SwitchValue || defaultBody != exp.DefaultBody || cases != exp.Cases)
+            {
+                return Expression.Switch(exp.Type, switchValue, defaultBody, exp.Comparison, cases);
+            }
+            return exp;
+        }
+
+        /// <summary> Visit list of switch-cases </summary>
+        protected virtual ReadOnlyCollection<SwitchCase> VisitSwitchCaseList(ReadOnlyCollection<SwitchCase> original)
+        {
+            List<SwitchCase> list = null;
+            for (int i = 0, n = original.Count; i < n; i++)
+            {
+                SwitchCase p = VisitSwitchCase(original[i]);
+                if (list != null)
+                {
+                    list.Add(p);
+                }
+                else if (p != original[i])
+                {
+                    list = new List<SwitchCase>(n);
+                    for (int j = 0; j < i; j++)
+                    {
+                        list.Add(original[j]);
+                    }
+                    list.Add(p);
+                }
+            }
+
+            if (list != null)
+            {
+#if (PORTABLE || PORTABLE40)
+                return new ReadOnlyCollection<SwitchCase>(list);
+#else
+                return list.AsReadOnly();
+#endif
+            }
+
+            return original;
+        }
+
+        /// <summary>Visit SwitchCase</summary>
+        protected virtual SwitchCase VisitSwitchCase(SwitchCase exp)
+        {
+            var body = Visit(exp.Body);
+            var testValues = VisitExpressionList(exp.TestValues);
+            if (body != exp.Body || testValues != exp.TestValues)
+            {
+                return Expression.SwitchCase(body, testValues);
+            }
+            return exp;
+        }
+
+        /// <summary>Visit Try expression</summary>
+        protected virtual Expression VisitTry(TryExpression exp)
+        {
+            var body = Visit(exp.Body);
+            var fault = Visit(exp.Fault);
+            var @finally = Visit(exp.Finally);
+            var handlers = VisitCatchBlockList(exp.Handlers);
+            if (body != exp.Body || fault != exp.Fault || @finally != exp.Finally || handlers != exp.Handlers)
+            {
+                return Expression.MakeTry(exp.Type, body, @finally, fault, handlers);
+            }
+            return exp;
+        }
+
+        /// <summary> Visit list of catch-blocks </summary>
+        protected virtual ReadOnlyCollection<CatchBlock> VisitCatchBlockList(ReadOnlyCollection<CatchBlock> original)
+        {
+            List<CatchBlock> list = null;
+            for (int i = 0, n = original.Count; i < n; i++)
+            {
+                CatchBlock p = VisitCatchBlock(original[i]);
+                if (list != null)
+                {
+                    list.Add(p);
+                }
+                else if (p != original[i])
+                {
+                    list = new List<CatchBlock>(n);
+                    for (int j = 0; j < i; j++)
+                    {
+                        list.Add(original[j]);
+                    }
+                    list.Add(p);
+                }
+            }
+
+            if (list != null)
+            {
+#if (PORTABLE || PORTABLE40)
+                return new ReadOnlyCollection<CatchBlock>(list);
+#else
+                return list.AsReadOnly();
+#endif
+            }
+
+            return original;
+        }
+
+        /// <summary>Visit catch-block</summary>
+        protected virtual CatchBlock VisitCatchBlock(CatchBlock exp)
+        {
+            var body = Visit(exp.Body);
+            var filter = Visit(exp.Filter);
+            if (body != exp.Body || filter != exp.Filter)
+            {
+                return Expression.MakeCatchBlock(exp.Test, exp.Variable, body, filter);
+            }
+            return exp;
+        }
+
+        /// <summary>Visit Label expression</summary>
+        protected virtual Expression VisitLabel(LabelExpression exp)
+        {
+            var defaultValue = Visit(exp.DefaultValue);
+            if (defaultValue != exp.DefaultValue)
+            {
+                return Expression.Label(exp.Target, defaultValue);
+            }
+            return exp;
+        }
+
+        /// <summary>Visit Loop expression</summary>
+        protected virtual Expression VisitLoop(LoopExpression exp)
+        {
+            var body = Visit(exp.Body);
+            if (body != exp.Body)
+            {
+                return Expression.Loop(body, exp.BreakLabel, exp.ContinueLabel);
             }
             return exp;
         }
