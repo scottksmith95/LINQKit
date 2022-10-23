@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <PackageReference Include="JetBrains.Annotations" Version="2021.2.0">
+    <PackageReference Include="JetBrains.Annotations" Version="2022.1.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <Reference Include="System" />
