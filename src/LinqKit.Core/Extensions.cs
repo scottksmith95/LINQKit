@@ -181,117 +181,16 @@ namespace LinqKit
             Expression<Func<TInner, TKey>> innerKeySelector,
             Expression<Func<TOuter, TInner, TResult>> resultSelector)
         {
-            //+ Types
-            var typeOuter = typeof(TOuter);
-            var typeInner = typeof(TInner);
-            var typeKey = typeof(TKey);
-            var typeResult = typeof(TResult);
-            var typeIEnumerableInner = typeof(IEnumerable<TInner>);
+            var leftJoinedQueryable = outer
+                .GroupJoin(inner, outerKeySelector, innerKeySelector, (outerItem, innerItems) => new { Outer = outerItem, IEnumerableInner = innerItems })
+                .SelectMany(grouping => grouping.IEnumerableInner.DefaultIfEmpty(), (grouping, innerItem) => new { Outer = grouping.Outer, Inner = innerItem });
+            return ApplyExpandedSelect(leftJoinedQueryable, pair => resultSelector.Invoke(pair.Outer, pair.Inner));
+        }
 
-            // Dynamic Type: T<TOuter, IEnumerable<TInner>>
-            var typeGroupJoinResult = new { Outer = default(TOuter), IEnumerableInner = default(IEnumerable<TInner>) }.GetType();
-
-            // Dynamic Type: T<TOuter, TInner>
-            var typeSelectManyResult = new { Outer = default(TOuter), Inner = default(TInner) }.GetType();
-
-            //+ Methods
-            var methodsQueryable = typeof(Queryable).GetMethods();
-            var methodsEnumerable = typeof(Enumerable).GetMethods();
-
-            // Dynamic Type Constructor: T<TOuter, IEnumerable<TInner>>(TOuter outer, IEnumerable<TInner> IEnumerableInner)
-            var methodGroupJoinResultTypeConstructor = typeGroupJoinResult.GetConstructors().First();
-
-            // Dynamic Type Constructor: T<TOuter, TInner>(TOuter outer, TInner Inner)
-            var methodSelectManyResultTypeConstructor = typeSelectManyResult.GetConstructors().First();
-
-            // .GroupJoin<TOuter, TInner, TKey, T<TOuter, IEnumerable<TInner>>>(...)
-            var methodGroupJoin = methodsQueryable.First(m => m.Name == nameof(Queryable.GroupJoin) && m.GetParameters().Length == 5)
-                .MakeGenericMethod(typeOuter, typeInner, typeKey, typeGroupJoinResult);
-
-            // .DefaultIfEmpty<TInner>()
-            var methodDefaultIfEmpty = methodsEnumerable.First(m => m.Name == nameof(Enumerable.DefaultIfEmpty) && m.GetParameters().Length == 1)
-                .MakeGenericMethod(typeInner);
-
-            // .SelectMany<T<TOuter, IEnumerable<TInner>>, TInner, T<TOuter, TInner>>()
-            var methodSelectMany = methodsQueryable.Where(m => m.Name == nameof(Queryable.SelectMany) && m.GetParameters().Length == 2)
-                .OrderBy(m => m.ToString().Length).First().MakeGenericMethod(typeGroupJoinResult, typeSelectManyResult);
-
-            // .Select<TInner, T<TOuter, TInner>>()
-            var methodSelectIEnumerableInner = methodsEnumerable.Where(m => m.Name == nameof(Enumerable.Select) && m.GetParameters().Length == 2)
-                .OrderBy(m => m.ToString().Length).First().MakeGenericMethod(typeInner, typeSelectManyResult);
-
-            // .Select<T<TOuter, TInner>, TResult>()
-            var methodSelectResult = methodsQueryable.Where(m => m.Name == nameof(Queryable.Select) && m.GetParameters().Length == 2)
-                .OrderBy(m => m.ToString().Length).First().MakeGenericMethod(typeSelectManyResult, typeResult);
-
-            // .Invoke<TOuter, TInner, TResult>()
-            var methodInvoke = typeof(ExtensionsCore).GetMethods().First(m => m.Name == nameof(ExtensionsCore.Invoke) && m.GetParameters().Length == 3)
-                .MakeGenericMethod(typeOuter, typeInner, typeResult);
-
-            //+ GroupJoin Parameters
-            var parameterOuter = ExpressionHelpers.CreateParameterExpression(typeOuter);
-            var parameterIEnumerableInner = ExpressionHelpers.CreateParameterExpression(typeIEnumerableInner);
-
-            //+ GroupJoin Expressions
-            var expressionGroupJoinResultArguments = new Expression[]
-            {
-                parameterOuter,
-
-                // IEnumerableInner.DefaultIfEmpty()
-                Expression.Call(null, methodDefaultIfEmpty, parameterIEnumerableInner)
-            };
-
-            // new { Outer = Outer, IEnumerableInner = IEnumerableInner.DefaultIfEmpty()}
-            var expressionGroupJoinResult = Expression.New(methodGroupJoinResultTypeConstructor, expressionGroupJoinResultArguments, typeGroupJoinResult.GetProperties());
-
-            // (Outer, IEnumerableInner) = > new { Outer = Outer, IEnumerableInner = IEnumerableInner.DefaultIfEmpty()}
-            var groupJoinResult = Expression.Lambda(expressionGroupJoinResult, new[] { parameterOuter, parameterIEnumerableInner });
-
-            //+ GroupJoin Invoke
-            // outer.GroupJoin<TOuter, TInner, TKey, T<TOuter, IEnumerable<TInner>>>(inner, outerKeySelector, innerKeySelector, (o, i) => new { Outer = o, IEnumerableInner = i.DefaultIfEmpty() })
-            var groupJoin = methodGroupJoin.Invoke(null, new Object[] { outer, inner, outerKeySelector, innerKeySelector, groupJoinResult });
-
-            //+ SelectMany Parameters
-            var parameterGroupJoinResult = ExpressionHelpers.CreateParameterExpression(typeGroupJoinResult);
-            var parameterInner = ExpressionHelpers.CreateParameterExpression(typeInner);
-
-            //+ SelectMany Expressions
-            var expressionSelectResultArguments = new Expression[]
-            {
-                //groupJoinResult.Outer
-                Expression.MakeMemberAccess(parameterGroupJoinResult, typeGroupJoinResult.GetProperty("Outer")),
-
-                parameterInner
-            };
-
-            var expressionSelectManyResultArguments = new Expression[]
-            {
-                // groupJoinResult.IEnumerableInner
-                Expression.MakeMemberAccess(parameterGroupJoinResult, typeGroupJoinResult.GetProperty("IEnumerableInner")),
-                
-                // i => new { Outer = groupJoinResult.Outer, Inner = i }
-                Expression.Lambda(Expression.New(methodSelectManyResultTypeConstructor, expressionSelectResultArguments, typeSelectManyResult.GetProperties()), new [] { parameterInner })
-            };
-
-            // groupJoinResult => groupJoinResult.IEnumerableInner.Select(i => new { Outer = groupJoinResult.Outer, Inner = i })
-            var selectManyResult = Expression.Lambda(Expression.Call(null, methodSelectIEnumerableInner, expressionSelectManyResultArguments), new[] { parameterGroupJoinResult });
-
-            //+ SelectMany Invoke
-            // groupJoin.SelectMany<T<TOuter, IEnumerable<TInner>>, T<TOuter, TInner>>()
-            var selectMany = methodSelectMany.Invoke(null, new object[] { groupJoin, selectManyResult });
-
-            //+ Select Parameters
-            var parameterSelectManyResult = ExpressionHelpers.CreateParameterExpression(typeSelectManyResult);
-            var propOuter = Expression.MakeMemberAccess(parameterSelectManyResult, typeSelectManyResult.GetProperty("Outer"));
-            var propInner = Expression.MakeMemberAccess(parameterSelectManyResult, typeSelectManyResult.GetProperty("Inner"));
-
-            //+ Select Expressions
-            // resultSelector.Invoke(selectManyResult.Outer, selectManyResult.Inner)
-            var invokeResult = Expression.Lambda(Expression.Call(null, methodInvoke, new Expression[] { resultSelector, propOuter, propInner }), parameterSelectManyResult);
-
-            //+ Select Invoke
-            // selectMany.Select(selectManyResult => resultSelector.Invoke(selectManyResult.Outer, selectManyResult.Inner).Expand())
-            return methodSelectResult.Invoke(null, new object[] { selectMany, invokeResult.Expand() }) as IQueryable<TResult>;
+        [Pure]
+        private static IQueryable<TResult> ApplyExpandedSelect<TInput, TResult>(IQueryable<TInput> inputs, Expression<Func<TInput, TResult>> selector)
+        {
+            return inputs.Select(selector.Expand());
         }
 
 #if !(NET35 || NET40)
