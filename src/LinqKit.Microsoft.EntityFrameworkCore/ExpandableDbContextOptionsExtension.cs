@@ -1,5 +1,4 @@
-﻿#if EFCORE3 || EFCORE5 || EFCORE6
-
+﻿#if EFCORE3 || EFCORE5 || EFCORE6 || EFCORE7
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -59,7 +58,7 @@ namespace LinqKit
 
         private class ExtensionInfo : DbContextOptionsExtensionInfo
         {
-            private const string EntensionName = "LINQKitExpandable";
+            private const string ExtensionName = "LINQKitExpandable";
 
             public ExtensionInfo(IDbContextOptionsExtension extension)
                 : base(extension)
@@ -70,18 +69,18 @@ namespace LinqKit
                 => false;
 
             public override string LogFragment
-                => EntensionName;
+                => ExtensionName;
 
-#if EFCORE6
+#if EFCORE6 || EFCORE7
             public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo info)
                 => true;
 
             public override int GetServiceProviderHashCode()
-                => EntensionName.GetHashCode();    
+                => ExtensionName.GetHashCode();
 #else
 
             public override long GetServiceProviderHashCode()
-                => EntensionName.GetHashCode();
+                => ExtensionName.GetHashCode();
 #endif
 
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
@@ -90,5 +89,4 @@ namespace LinqKit
         }
     }
 }
-
 #endif

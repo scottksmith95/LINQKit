@@ -165,7 +165,7 @@ namespace LinqKit
         public bool TailCall => Predicate.TailCall;
 #endif
 
-#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE40 || UAP || EFCORE6)
+#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE40 || UAP || EFCORE6 || EFCORE7)
         /// <summary></summary>
         [Pure]
         public void CompileToMethod(MethodBuilder method) { Predicate.CompileToMethod(method); }
