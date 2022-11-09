@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Authors>Stef Heyenrath</Authors>
+		<TargetFramework>net7.0</TargetFramework>
+		<AssemblyName>LinqKit.Microsoft.EntityFrameworkCore6.Tests</AssemblyName>
+		<PackageId>LinqKit.Microsoft.EntityFrameworkCore6.Tests</PackageId>
+		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore6\LinqKit.Microsoft.EntityFrameworkCore6.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore.TestFiles\**">
+			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="5.10.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+		<PackageReference Include="Moq" Version="4.8.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="xunit" Version="2.4.1" />
+	</ItemGroup>
+
+</Project>
