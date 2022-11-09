@@ -1,3 +1,8 @@
+# 1.2.3 (09 November 2022)
+- [#174](https://github.com/scottksmith95/LINQKit/pull/174) - Simplify LeftJoin-extension [feature] contributed by [TheConstructor](https://github.com/TheConstructor)
+- [#179](https://github.com/scottksmith95/LINQKit/pull/179) - Update some NuGet packages [feature] contributed by [StefH](https://github.com/StefH)
+- [#180](https://github.com/scottksmith95/LINQKit/pull/180) - Add support for .NET 7 and EF Core 7 [feature] contributed by [StefH](https://github.com/StefH)
+
 # 1.2.2 (23 February 2022)
 - [#171](https://github.com/scottksmith95/LINQKit/pull/171) - Define dependency on Timestamp as PrivateAssets [bug] contributed by [StefH](https://github.com/StefH)
 - [#170](https://github.com/scottksmith95/LINQKit/issues/170) - Timestamp in nuget dependencies
