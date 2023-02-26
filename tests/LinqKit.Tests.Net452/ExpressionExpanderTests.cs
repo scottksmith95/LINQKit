@@ -46,5 +46,51 @@ namespace LinqKit.Tests.Net452
             var executed = Linq.Expr((List<string> l) => expression2.Invoke(expression1.Invoke(l))).Expand().ToString();
             Assert.Equal(expression1.ToString(), executed);
         }
+
+        [Fact]
+        public void ExpressionExpander_Expression_Block()
+        {
+            var objParameter = Expression.Parameter(typeof(object), "o");
+            var objVar = Expression.Variable(typeof(object));
+            
+            var lambda = Expression.Lambda<Func<object, string>>(Expression.Block(new[] {objVar},
+                    Expression.Assign(objVar, objParameter),
+                    Expression.Call(objVar, nameof(ToString), Type.EmptyTypes)),
+                objParameter);
+
+            var expandedLambda = Linq.Expr((object o) => lambda.Invoke(o))
+                .Expand();
+            Assert.Equal(lambda.ToString(), expandedLambda.ToString());
+            Assert.Equal(lambda.Invoke(42), expandedLambda.Invoke(42));
+        }
+
+        [Fact]
+        public void ExpressionExpander_Expression_Throw()
+        {
+            var objParameter = Expression.Parameter(typeof(object), "o");
+            var msgParameter = Expression.Parameter(typeof(string), "msg");
+
+            var exceptionConstructor = typeof(ArgumentNullException).GetConstructor(new []{typeof(string)});
+
+            var lambda = Expression.Lambda<Func<object, string, object>>(
+                Expression.Condition(
+                    Expression.Equal(objParameter, Expression.Constant(null)),
+                    Expression.Throw(Expression.New(exceptionConstructor, msgParameter), typeof(object)),
+                    objParameter),
+                objParameter,
+                msgParameter);
+
+            var expandedLambda = Linq.Expr((object o, string msg) => lambda.Invoke(o, msg))
+                .Expand();
+            Assert.Equal(lambda.ToString(), expandedLambda.ToString());
+            Assert.Equal("x",
+                Assert.Throws<ArgumentNullException>(() => lambda.Invoke(null, "x"))
+                    .ParamName);
+            Assert.Equal("x",
+                Assert.Throws<ArgumentNullException>(() => expandedLambda.Invoke(null, "x"))
+                    .ParamName);
+            var obj = new object();
+            Assert.Same(lambda.Invoke(obj, "x"), expandedLambda.Invoke(obj, "x"));
+        }
     }
 }
