@@ -92,7 +92,7 @@
     <Compile Include="..\LinqKit.Core\ExpressionStarter.cs">
       <Link>ExpressionStarter.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit.Core\ExpressionVisitor.cs">
+    <Compile Include="..\LinqKit.Core\Compatibility\ExpressionVisitor.cs">
       <Link>ExpressionVisitor.cs</Link>
     </Compile>
     <Compile Include="..\LinqKit.Core\Extensions.cs">

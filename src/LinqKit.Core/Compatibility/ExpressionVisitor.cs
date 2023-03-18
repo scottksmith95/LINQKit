@@ -1,18 +1,16 @@
-﻿#if NOEF
-using System;
+﻿#if NET35
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq.Expressions;
 using JetBrains.Annotations;
 
 // ReSharper disable once CheckNamespace
-namespace LinqKit
+namespace System.Linq.Expressions
 {
     /// <summary>
     /// This comes from Matt Warren's sample:
     /// http://blogs.msdn.com/mattwar/archive/2007/07/31/linq-building-an-iqueryable-provider-part-ii.aspx
     /// </summary>
-    public abstract class ExpressionVisitor
+    internal abstract class ExpressionVisitor
     {
         /// <summary> Visit expression tree </summary>
         [Pure]
@@ -69,7 +67,7 @@ namespace LinqKit
                 case ExpressionType.Parameter:
                     return VisitParameter((ParameterExpression)exp);
                 case ExpressionType.MemberAccess:
-                    return VisitMemberAccess((MemberExpression)exp);
+                    return VisitMember((MemberExpression)exp);
                 case ExpressionType.Call:
                     return VisitMethodCall((MethodCallExpression)exp);
                 case ExpressionType.Lambda:
@@ -85,30 +83,9 @@ namespace LinqKit
                     return VisitMemberInit((MemberInitExpression)exp);
                 case ExpressionType.ListInit:
                     return VisitListInit((ListInitExpression)exp);
-#if !NET35
-                case ExpressionType.Index:
-                    return VisitIndex((IndexExpression)exp);
-
-                case ExpressionType.Extension:
-                    return VisitExtension(exp);
-#endif
                 default:
                     throw new Exception($"Unhandled expression type: '{exp.NodeType}'");
             }
-        }
-
-        /// <summary>
-        /// Visit Extension expression to fix bugs:
-        /// - https://github.com/scottksmith95/LINQKit/issues/116
-        /// - https://github.com/scottksmith95/LINQKit/issues/118
-        /// 
-        /// TODO (2020-07-16) I'm not sure if just returning the expression will work in all cases...
-        /// 
-        /// See also https://nejcskofic.github.io/2017/07/30/extending-linq-expressions/
-        /// </summary>
-        protected virtual Expression VisitExtension(Expression extensionExpression)
-        {
-            return extensionExpression;
         }
 
         /// <summary> Visit member binding </summary>
@@ -214,7 +191,7 @@ namespace LinqKit
         }
 
         /// <summary> Visit member access </summary>
-        protected virtual Expression VisitMemberAccess(MemberExpression m)
+        protected virtual Expression VisitMember(MemberExpression m)
         {
             Expression exp = Visit(m.Expression);
             if (exp != m.Expression)
@@ -260,11 +237,7 @@ namespace LinqKit
 
             if (list != null)
             {
-#if (PORTABLE || PORTABLE40)
-                return new ReadOnlyCollection<Expression>(list);
-#else
                 return list.AsReadOnly();
-#endif
             }
 
             return original;
@@ -405,20 +378,6 @@ namespace LinqKit
             Expression expr = Visit(iv.Expression);
             return args != iv.Arguments || expr != iv.Expression ? Expression.Invoke(expr, args) : iv;
         }
-
-#if !NET35
-        /// <summary> Visit index expression </summary>
-        protected virtual Expression VisitIndex(IndexExpression exp)
-        {
-            var obj = Visit(exp.Object);
-            var args = VisitExpressionList(exp.Arguments);
-            if (obj != exp.Object || args != exp.Arguments)
-            {
-                return Expression.MakeIndex(obj, exp.Indexer, args);
-            }
-            return exp;
-        }
-#endif
     }
 }
 #endif

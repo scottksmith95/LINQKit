@@ -104,9 +104,6 @@
     <Compile Include="..\LinqKit.Core\ExpressionStarter.cs">
       <Link>ExpressionStarter.cs</Link>
     </Compile>
-    <Compile Include="..\LinqKit.Core\ExpressionVisitor.cs">
-      <Link>ExpressionVisitor.cs</Link>
-    </Compile>
     <Compile Include="..\LinqKit.Core\Extensions.cs">
       <Link>Extensions.cs</Link>
     </Compile>

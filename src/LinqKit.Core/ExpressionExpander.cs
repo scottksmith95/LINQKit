@@ -174,7 +174,7 @@ namespace LinqKit
             return base.VisitMethodCall(m);
         }
 
-        protected override Expression VisitMemberAccess(MemberExpression m)
+        protected override Expression VisitMember(MemberExpression m)
         {
             if (GetExpandLambda(m.Member, out var methodLambda))
             {
@@ -186,7 +186,7 @@ namespace LinqKit
             // Strip out any references to expressions captured by outer variables - LINQ to SQL can't handle these:
             return m.Member.DeclaringType != null && m.Member.DeclaringType.Name.StartsWith("<>") ?
                 TransformExpr(m)
-                : base.VisitMemberAccess(m);
+                : base.VisitMember(m);
         }
 
         Expression TransformExpr(MemberExpression input)
