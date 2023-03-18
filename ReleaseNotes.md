@@ -1,3 +1,8 @@
+# 1.2.4 (18 March 2023)
+- [#182](https://github.com/scottksmith95/LINQKit/pull/182) - Use System.Linq.Expressions.ExpressionVisitor where available [feature] contributed by [TheConstructor](https://github.com/TheConstructor)
+- [#184](https://github.com/scottksmith95/LINQKit/pull/184) - Bump Microsoft.Data.SqlClient from 1.0.19269.1 to 1.1.4 in /examples/ConsoleAppNet472 [dependencies] contributed by [dependabot[bot]](https://github.com/apps/dependabot)
+- [#122](https://github.com/scottksmith95/LINQKit/issues/122) - Only use custom ExpressionVisitor for .NET 3.5 [feature]
+
 # 1.2.3 (09 November 2022)
 - [#174](https://github.com/scottksmith95/LINQKit/pull/174) - Simplify LeftJoin-extension [feature] contributed by [TheConstructor](https://github.com/TheConstructor)
 - [#179](https://github.com/scottksmith95/LINQKit/pull/179) - Update some NuGet packages [feature] contributed by [StefH](https://github.com/StefH)

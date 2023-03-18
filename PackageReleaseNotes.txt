@@ -1,6 +1,6 @@
-# 1.2.3 (09 November 2022)
-- #174 Simplify LeftJoin-extension [feature]
-- #179 Update some NuGet packages [feature]
-- #180 Add support for .NET 7 and EF Core 7 [feature]
+# 1.2.4 (18 March 2023)
+- #182 Use System.Linq.Expressions.ExpressionVisitor where available [feature]
+- #184 Bump Microsoft.Data.SqlClient from 1.0.19269.1 to 1.1.4 in /examples/ConsoleAppNet472 [dependencies]
+- #122 Only use custom ExpressionVisitor for .NET 3.5 [feature]
 
 The full release notes can be found here: https://github.com/scottksmith95/LINQKit/blob/master/ReleaseNotes.md

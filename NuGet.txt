@@ -1,0 +1,9 @@
+Open Command Prompt
+
+LINQKit\src>
+
+del /S *.nupkg
+
+VS rebuild
+
+dotnet nuget push **\*.nupkg --source https://api.nuget.org/v3/index.json --api-key x
