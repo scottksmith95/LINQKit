@@ -65,6 +65,68 @@ namespace LinqKit.Tests.Net452
         }
 
         [Fact]
+        public void ExpressionExpander_Expression_InvokeExpressionRemoved()
+        {
+            Expression<Func<object, object>> lambda = o => o;
+
+            var expandedLambda = Linq.Expr((object o) => lambda.Invoke(o))
+                .Expand();
+            Assert.Equal(ExpressionType.Parameter, expandedLambda.Body.NodeType);
+            Assert.Equal(lambda.ToString(), expandedLambda.ToString());
+            Assert.Equal(lambda.Invoke(42), expandedLambda.Invoke(42));
+        }
+
+        [Fact]
+        public void ExpressionExpander_Expression_CompileAndInvokeExpressionRemoved()
+        {
+            Expression<Func<object, object>> lambda = o => o;
+
+            var expandedLambda = Linq.Expr((object o) => lambda.Compile()(o))
+                .Expand();
+            Assert.Equal(ExpressionType.Parameter, expandedLambda.Body.NodeType);
+            Assert.Equal(lambda.ToString(), expandedLambda.ToString());
+            Assert.Equal(lambda.Invoke(42), expandedLambda.Invoke(42));
+        }
+
+        [Fact]
+        public void ExpressionExpander_Expression_CompileAndInvokeOnExpressionRemoved()
+        {
+            Expression<Func<object, object>> lambda = o => o;
+
+            var expandedLambda = Linq.Expr((object o) => lambda.Compile().Invoke(o))
+                .Expand();
+            Assert.Equal(ExpressionType.Parameter, expandedLambda.Body.NodeType);
+            Assert.Equal(lambda.ToString(), expandedLambda.ToString());
+            Assert.Equal(lambda.Invoke(42), expandedLambda.Invoke(42));
+        }
+
+        [Fact]
+        public void ExpressionExpander_Expression_InvokeDelegate()
+        {
+            Func<object, string> func = o => o.ToString();
+
+            Expression<Func<object, string>> lambda = o => func(o);
+
+            var expandedLambda = Linq.Expr((object o) => lambda.Invoke(o))
+                .Expand();
+            Assert.Equal(lambda.ToString(), expandedLambda.ToString());
+            Assert.Equal(lambda.Invoke(42), expandedLambda.Invoke(42));
+        }
+
+        [Fact]
+        public void ExpressionExpander_Expression_InvokeOnDelegate()
+        {
+            Func<object, string> func = o => o.ToString();
+
+            Expression<Func<object, string>> lambda = o => func.Invoke(o);
+
+            var expandedLambda = Linq.Expr((object o) => lambda.Invoke(o))
+                .Expand();
+            Assert.Equal(lambda.ToString(), expandedLambda.ToString());
+            Assert.Equal(lambda.Invoke(42), expandedLambda.Invoke(42));
+        }
+
+        [Fact]
         public void ExpressionExpander_Expression_Throw()
         {
             var objParameter = Expression.Parameter(typeof(object), "o");

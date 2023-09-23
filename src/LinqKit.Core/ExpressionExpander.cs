@@ -34,14 +34,7 @@ namespace LinqKit
                 }
             }
 
-            var lambda = target.EvaluateExpression() as LambdaExpression;
-
-            if (lambda == null)
-            {
-                throw new InvalidOperationException($"Invoke cannot evaluate LambdaExpression from '{target}'. Ensure that your function/property/member returns LambdaExpression");
-            }
-
-            return lambda;
+            return target.EvaluateExpression() as LambdaExpression;
         }
 
         /// <summary>
@@ -53,6 +46,10 @@ namespace LinqKit
             var target = iv.Expression;
 
             var lambda = EvaluateTarget(target);
+            if (lambda == null)
+            {
+                return base.VisitInvocation(iv);
+            }
 
             var body = ExpressionReplacer.GetBody(lambda, iv.Arguments);
 
@@ -118,6 +115,11 @@ namespace LinqKit
                 var target = m.Arguments[0];
                 var lambda = EvaluateTarget(target);
 
+                if (lambda == null)
+                {
+                    throw new InvalidOperationException($"Invoke cannot evaluate LambdaExpression from '{target}'. Ensure that your function/property/member returns LambdaExpression");
+                }
+
                 var replaceVars = new Dictionary<Expression, Expression>();
                 for (int i = 0; i < lambda.Parameters.Count; i++)
                 {
@@ -127,6 +129,25 @@ namespace LinqKit
                 var body = ExpressionReplacer.Replace(lambda.Body, replaceVars);
 
                 return Visit(body);
+            }
+
+            if (m.Method.Name == nameof(Action.Invoke)
+                && m.Method.DeclaringType.GetTypeInfo().IsSubclassOf(typeof(Delegate)))
+            {
+                var lambda = EvaluateTarget(m.Object);
+
+                if (lambda != null)
+                {
+                    var replaceVars = new Dictionary<Expression, Expression>();
+                    for (int i = 0; i < lambda.Parameters.Count; i++)
+                    {
+                        replaceVars.Add(lambda.Parameters[i], Visit(m.Arguments[i]));
+                    }
+
+                    var body = ExpressionReplacer.Replace(lambda.Body, replaceVars);
+
+                    return Visit(body);
+                }
             }
 
             if (GetExpandLambda(m.Method, out var methodLambda))
