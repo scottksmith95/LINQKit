@@ -15,11 +15,14 @@ jobs:
       run: |
         echo "GITHUB_RUN_NUMBER is ${env:GITHUB_RUN_NUMBER}"
           
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
-    - uses: actions/setup-dotnet@v1
+    - uses: actions/setup-dotnet@v3
       with:
-       dotnet-version: '7.0.x'
+       dotnet-version: | 
+          6.0.x
+          7.0.x
+          8.0.x
      
     - name: Build Projects
       run: |
@@ -33,6 +36,7 @@ jobs:
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore5/LinqKit.Microsoft.EntityFrameworkCore5.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore6/LinqKit.Microsoft.EntityFrameworkCore6.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore7/LinqKit.Microsoft.EntityFrameworkCored7.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore8/LinqKit.Microsoft.EntityFrameworkCored8.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c ReleaseForGithubActions
     
     - name: Run Tests
@@ -43,3 +47,4 @@ jobs:
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore5.Tests -c ReleaseForGithubActions
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore6.Tests -c ReleaseForGithubActions
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore7.Tests -c ReleaseForGithubActions
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore8.Tests -c ReleaseForGithubActions
