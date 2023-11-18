@@ -33,6 +33,7 @@ jobs:
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore5/LinqKit.Microsoft.EntityFrameworkCore5.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore6/LinqKit.Microsoft.EntityFrameworkCore6.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore7/LinqKit.Microsoft.EntityFrameworkCored7.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore8/LinqKit.Microsoft.EntityFrameworkCored8.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c ReleaseForGithubActions
     
     - name: Run Tests
@@ -43,3 +44,4 @@ jobs:
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore5.Tests -c ReleaseForGithubActions
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore6.Tests -c ReleaseForGithubActions
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore7.Tests -c ReleaseForGithubActions
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore8.Tests -c ReleaseForGithubActions

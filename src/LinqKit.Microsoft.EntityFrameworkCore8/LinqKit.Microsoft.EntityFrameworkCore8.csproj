@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../version.xml" />
+
+  <PropertyGroup>
+    <Version>8.1.$(PatchVersion)</Version>
+    <DefineConstants>$(DefineConstants);EFCORE;EFCORE3;EFCORE5;EFCORE6;EFCORE7</DefineConstants>
+    <Description>LinqKit.Microsoft.EntityFrameworkCore contains extensions for LINQ to SQL and EntityFrameworkCore. With Include(...) and IDbAsync support.</Description>
+    <AssemblyTitle>LinqKit for Microsoft.EntityFrameworkCore with Include(...) and IAsync support.</AssemblyTitle>
+    <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>LinqKit.Microsoft.EntityFrameworkCore</AssemblyName>
+    <AssemblyOriginatorKeyFile>../LinqKit.Microsoft.EntityFrameworkCore/LinqKit.Microsoft.EntityFrameworkCore.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <PackageId>LinqKit.Microsoft.EntityFrameworkCore</PackageId>
+    <PackageTags>linq;EF;EntityFramework;Entity;Framework;Core;EntityFrameworkCore</PackageTags>
+    <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
+    <RootNamespace>LinqKit</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions' ">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <Compile Include="..\LinqKit.Core\Extensions.cs;..\LinqKit.Core\ExpandableQuery.cs" />
+      <Compile Include="..\LinqKit.Microsoft.EntityFrameworkCore\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2022.1.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Timestamp" Version="1.0.2">
+        <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
+  </ItemGroup>
+
+</Project>
