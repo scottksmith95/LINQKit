@@ -15,7 +15,7 @@ jobs:
       run: |
         echo "GITHUB_RUN_NUMBER is ${env:GITHUB_RUN_NUMBER}"
           
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - uses: actions/setup-dotnet@v3
       with:
