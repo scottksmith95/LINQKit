@@ -1,3 +1,6 @@
+# 1.2.5 (19 November 2023)
+- [#192](https://github.com/scottksmith95/LINQKit/pull/192) - Add .NET 8 [feature] contributed by [StefH](https://github.com/StefH)
+
 # 1.2.4 (18 March 2023)
 - [#182](https://github.com/scottksmith95/LINQKit/pull/182) - Use System.Linq.Expressions.ExpressionVisitor where available [feature] contributed by [TheConstructor](https://github.com/TheConstructor)
 - [#184](https://github.com/scottksmith95/LINQKit/pull/184) - Bump Microsoft.Data.SqlClient from 1.0.19269.1 to 1.1.4 in /examples/ConsoleAppNet472 [dependencies] contributed by [dependabot[bot]](https://github.com/apps/dependabot)
