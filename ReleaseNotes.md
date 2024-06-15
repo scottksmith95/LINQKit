@@ -1,4 +1,8 @@
-# 1.2.5 (19 November 2023)
+# 1.3.0 (15 June 2024)
+- [#200](https://github.com/scottksmith95/LINQKit/pull/200) - Update EntityFramework to version 6.5 to fix CVE [feature] contributed by [StefH](https://github.com/StefH)
+- [#199](https://github.com/scottksmith95/LINQKit/issues/199) - System.data.sqlclient 4.7.0 has high vulnerability CVE-2024-0056. [feature]
+
+# 1.2.5 (18 November 2023)
 - [#192](https://github.com/scottksmith95/LINQKit/pull/192) - Add .NET 8 [feature] contributed by [StefH](https://github.com/StefH)
 
 # 1.2.4 (18 March 2023)
