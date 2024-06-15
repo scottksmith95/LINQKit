@@ -1,40 +1,37 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <Authors>Stef Heyenrath</Authors>
-    <TargetFramework>net452</TargetFramework>
-    <AssemblyName>LinqKit.Microsoft.EntityFrameworkCore.Tests</AssemblyName>
-    <PackageId>LinqKit.Microsoft.EntityFrameworkCore.Tests</PackageId>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Authors>Stef Heyenrath</Authors>
+		<TargetFramework>net452</TargetFramework>
+		<AssemblyName>LinqKit.Microsoft.EntityFrameworkCore.Tests</AssemblyName>
+		<PackageId>LinqKit.Microsoft.EntityFrameworkCore.Tests</PackageId>
+		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="..\LinqKit.Tests.Net452\*.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Include="..\LinqKit.Tests.Net452\*.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-    <PackageReference Include="Moq" Version="4.8.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="xunit" Version="2.4.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+		<PackageReference Include="Moq" Version="4.8.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="EntityFramework" Version="6.5.0" />
+	</ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <PackageReference Include="EntityFramework" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Properties\" />
+	</ItemGroup>
 
 </Project>
