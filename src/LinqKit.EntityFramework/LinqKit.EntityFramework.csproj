@@ -1,59 +1,55 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="../../version.xml" />
+	<Import Project="../../version.xml" />
 
-  <PropertyGroup>
-    <Version>1.2.$(PatchVersion)</Version>
-    <Description>LinqKit.EntityFramework contains extensions for LINQ to SQL and Entity Framework. Include(...) and IAsync are supported.</Description>
-    <AssemblyTitle>LinqKit for EntityFramework with Include(...) and IAsync support.</AssemblyTitle>
-    <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
-    <TargetFrameworks>net45;netstandard2.1</TargetFrameworks>
-    <DefineConstants>$(DefineConstants);EF</DefineConstants>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>LinqKit.EntityFramework</AssemblyName>
-    <AssemblyOriginatorKeyFile>LinqKit.EntityFramework.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
-    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-    <PackageId>LinqKit.EntityFramework</PackageId>
-    <PackageTags>linq;EF;EntityFramework;Entity;Framework</PackageTags>
-    <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Version>1.2.$(PatchVersion)</Version>
+		<Description>LinqKit.EntityFramework contains extensions for LINQ to SQL and Entity Framework. Include(...) and IAsync are supported.</Description>
+		<AssemblyTitle>LinqKit for EntityFramework with Include(...) and IAsync support.</AssemblyTitle>
+		<Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
+		<TargetFrameworks>net45;netstandard2.1</TargetFrameworks>
+		<DefineConstants>$(DefineConstants);EF</DefineConstants>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<AssemblyName>LinqKit.EntityFramework</AssemblyName>
+		<AssemblyOriginatorKeyFile>LinqKit.EntityFramework.snk</AssemblyOriginatorKeyFile>
+		<SignAssembly>true</SignAssembly>
+		<PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+		<PackageId>LinqKit.EntityFramework</PackageId>
+		<PackageTags>linq;EF;EntityFramework;Entity;Framework</PackageTags>
+		<PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+	</PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions'  ">
-    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions'  ">
+		<PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup>
-      <Compile Include="..\LinqKit.Core\Extensions.cs;..\LinqKit.Core\ExpandableQuery.cs;..\LinqKit.Core\ExpandableDbAsyncEnumerator.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Include="..\LinqKit.Core\Extensions.cs;..\LinqKit.Core\ExpandableQuery.cs;..\LinqKit.Core\ExpandableDbAsyncEnumerator.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-      <PackageReference Include="JetBrains.Annotations" Version="2022.1.0">
-          <PrivateAssets>All</PrivateAssets>
-      </PackageReference>
-      <PackageReference Include="Timestamp" Version="1.0.2">
-          <PrivateAssets>All</PrivateAssets>
-      </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="JetBrains.Annotations" Version="2022.1.0">
+			<PrivateAssets>All</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Timestamp" Version="1.0.2">
+			<PrivateAssets>All</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="EntityFramework" Version="6.5.0" />
+	</ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
-  </ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+		<Reference Include="System" />
+		<Reference Include="Microsoft.CSharp" />
+	</ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
-    <PackageReference Include="EntityFramework" Version="6.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\LinqKit.Core\LinqKit.Core.csproj" />
+	</ItemGroup>
 
 </Project>
