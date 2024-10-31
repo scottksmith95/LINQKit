@@ -214,7 +214,7 @@ Console.WriteLine (criteria2.Expand().ToString());
 p => ((p.Price > 1000) || p.Description.Contains("a"))
 ```
 
-Notice that we have a nice clean expression: the call to Invoke has been stripped away.
+Notice that we have a nice, clean expression: the call to Invoke has been stripped away.
 
 If you're using an Invoked expression within a LINQ to SQL or Entity Framework query, and have called AsExpandable on the Table, you can optionally skip step 2. This is because AsExpandable automatically calls Expand on expressions. This means either of the following is valid:
 
@@ -264,9 +264,9 @@ IQueryable<Product> SearchProducts (params string[] keywords)
 
 The temporary variable in the loop is required to avoid the outer variable trap, where the same variable is captured for each iteration of the foreach loop.
 
-So far, so good. But this only handles the case where you want to match all of the specified keywords. Suppose instead, we wanted products whose description contains any of the supplied keywords. Our previous approach of chaining Where operators is completely useless! We could instead chain Union operators, but this would be inefficient. The ideal approach is to dynamically construct a lambda expression tree that performs an or-based predicate.
+So far, so good. But this only handles the case where you want to match all of the specified keywords. Suppose instead, we wanted products whose description contains any of the supplied keywords. Our previous approach of chaining Where operators, is completely useless! We could instead chain Union operators, but this would be inefficient. The ideal approach is to dynamically construct a lambda expression tree that performs an or-based predicate.
 
-Of all the things that will drive you to manually constructing expression trees, the need for dynamic predicates is the most common in a typical business application. Fortunately, it’s possible to write a set of simple and reusable extension methods that radically simplify this task. This is the role of our PredicateBuilder class.
+Of all the things that will drive you to manually construct expression trees, the need for dynamic predicates is the most common in a typical business application. Fortunately, it’s possible to write a set of simple and reusable extension methods that radically simplify this task. This is the role of our PredicateBuilder class.
 
 ## Using PredicateBuilder
 
@@ -327,13 +327,13 @@ Would be a shortcut for this:
 Expression<Func<Product, bool>> predicate = c => false;
 ```
 
-However, a default we don't want a stub expression. In Entity Framework, this would result in a query having a where statement starting with 1=0, so a if you were checking that value = 'abc', the query's where clause would look as follows;
+However, a default we don't want a stub expression. In Entity Framework, this would result in a query having a where statement starting with 1=0, so if you were checking that value = 'abc', the query's where clause would look as follows;
 
 ```
 WHERE 1=0 OR value = 'abc'
 ```
 
-ExpressionStarter fixes this. As soon as the first expression is added to ExpressionStarter, the default experssion is removed. You can add the first expression by calling ExpressionStarter's Start method. However, calling Start is not required. If no expression has been added to the ExpressionStarter, then calling And or Or will simply add the first expresion. This is usefull when using loops.
+ExpressionStarter fixes this. As soon as the first expression is added to ExpressionStarter, the default expression is removed. You can add the first expression by calling ExpressionStarter's Start method. However, calling Start is not required. If no expression has been added to the ExpressionStarter, then calling And or Or will simply add the first expression. This is useful when using loops.
 
 ~~When you’re building a predicate by repeatedly stacking and/or conditions, it’s useful to have a starting point of either true or false (respectively). Our SearchProducts method still works if no keywords are supplied.~~
 
@@ -509,7 +509,7 @@ public partial class Product   : IValidFromTo { }
 Complete Example, Getting Started...
 =======
 
-Create a database, let's say MyDatabase to your SQL server with script:
+Create a database, let's say MyDatabase to your SQL server with a script:
 
 ```sql
 CREATE TABLE [dbo].[Orders](
@@ -534,7 +534,7 @@ INSERT INTO [dbo].[Orders]([Amount],[OrderDate])
 GO
 ```
 
-Then create a new C# console application. Add references to nuget packages `EntityFramework` and `LinqKit`.
+Then, create a new C# console application. Add references to Nuget packages `EntityFramework` and `LinqKit`.
 
 ```csharp
 using System;
@@ -590,7 +590,7 @@ class Program
     }
 }
 ```
-Run. Observe with SQL profiler that your `expression` is coming outside the EF-context but still executed to the SQL-query. There are good tutorial videos and materials of SQL profiling in the internet and the profiling is highly recommended. SQL Server Management Studio includes SQL Server Profiler.
+Run. Observe with the SQL profiler that your `expression` is coming outside the EF-context but still executed to the SQL query. There are good tutorial videos and materials on SQL profiling on the internet, and the profiling is highly recommended. SQL Server Management Studio includes SQL Server Profiler.
 
 More optimized queries!
 =======
@@ -639,10 +639,10 @@ SELECT
 ',N'@p__linq__0 int,@p__linq__1 int',@p__linq__0=2,@p__linq__1=2
 ```
 
-As you noticed, there are lot of dynamic parameters. This is good if the parameters vary a lot, but here they are pretty static so SQL-server will not be able to perform all caching optimizations. We could optimize away these variables by runtime when LinqKit forms the query.
+As you noticed, there are a lot of dynamic parameters. This is good if the parameters vary a lot, but here, they are pretty static, so the SQL server will not be able to perform all caching optimizations. We could optimize away these variables by runtime when LinqKit forms the query.
 
 There is a project called [Linq.Expression.Optimizer](https://thorium.github.io/Linq.Expression.Optimizer/) and it is supported by LinqKit.
-Install this nuget package (and add reference to F#-core library if required).
+Install this Nuget package (and add a reference to F#-core library if required).
 
 ### Use the static option (all calls)
 Make this static call once before executing your queries (e.g. to your app startup or static class constructor or Application_Start):
@@ -704,7 +704,7 @@ Permission has been granted to have this repo be the official source for this pr
 
 Contributing
 =======
-Just send PullRequests to the this repository.
+Just send PullRequests to this repository.
 To compile the whole solution you may need .NET Core and UAP installed.
 
 License
