@@ -23,6 +23,7 @@ jobs:
           6.0.x
           7.0.x
           8.0.x
+          9.0.x
      
     - name: Build Projects
       run: |
@@ -37,6 +38,7 @@ jobs:
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore6/LinqKit.Microsoft.EntityFrameworkCore6.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore7/LinqKit.Microsoft.EntityFrameworkCored7.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore8/LinqKit.Microsoft.EntityFrameworkCored8.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore8/LinqKit.Microsoft.EntityFrameworkCored9.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c ReleaseForGithubActions
     
     - name: Run Tests
@@ -48,3 +50,4 @@ jobs:
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore6.Tests -c ReleaseForGithubActions
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore7.Tests -c ReleaseForGithubActions
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore8.Tests -c ReleaseForGithubActions
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore9.Tests -c ReleaseForGithubActions
