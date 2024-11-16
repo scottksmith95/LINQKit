@@ -2,7 +2,7 @@
     <Import Project="../../version.xml" />
 
     <PropertyGroup>
-        <Version>1.3.0</Version>
+        <Version>1.3.$(PatchVersion)</Version>
         <Description>LinqKit.EntityFramework contains extensions for LINQ to SQL and Entity Framework. Include(...) and IAsync are supported.</Description>
         <AssemblyTitle>LinqKit for EntityFramework with Include(...) and IAsync support.</AssemblyTitle>
         <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>

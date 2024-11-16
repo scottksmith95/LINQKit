@@ -1,5 +1,7 @@
-# 1.3.0 (15 June 2024)
-- #200 Update EntityFramework to version 6.5 to fix CVE [feature]
-- #199 System.data.sqlclient 4.7.0 has high vulnerability CVE-2024-0056. [feature]
+# 1.3.6 (16 November 2024)
+- #195 Bump Microsoft.Data.SqlClient from 1.1.4 to 2.1.7 in /examples/ConsoleAppNet472 [dependencies]
+- #203 Update README.md
+- #205 Add .NET 9 (#204) [feature]
+- #204 Add support for .Net 9 / EF 9 [feature]
 
 The full release notes can be found here: https://github.com/scottksmith95/LINQKit/blob/master/ReleaseNotes.md

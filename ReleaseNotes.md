@@ -1,3 +1,9 @@
+# 1.3.6 (16 November 2024)
+- [#195](https://github.com/scottksmith95/LINQKit/pull/195) - Bump Microsoft.Data.SqlClient from 1.1.4 to 2.1.7 in /examples/ConsoleAppNet472 [dependencies] contributed by [dependabot[bot]](https://github.com/apps/dependabot)
+- [#203](https://github.com/scottksmith95/LINQKit/pull/203) - Update README.md contributed by [Thorium](https://github.com/Thorium)
+- [#205](https://github.com/scottksmith95/LINQKit/pull/205) - Add .NET 9 (#204) [feature] contributed by [rizi](https://github.com/rizi)
+- [#204](https://github.com/scottksmith95/LINQKit/issues/204) - Add support for .Net 9 / EF 9 [feature]
+
 # 1.3.0 (15 June 2024)
 - [#200](https://github.com/scottksmith95/LINQKit/pull/200) - Update EntityFramework to version 6.5 to fix CVE [feature] contributed by [StefH](https://github.com/StefH)
 - [#199](https://github.com/scottksmith95/LINQKit/issues/199) - System.data.sqlclient 4.7.0 has high vulnerability CVE-2024-0056. [feature]
