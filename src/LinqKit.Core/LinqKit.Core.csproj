@@ -10,7 +10,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<AssemblyName>LinqKit.Core</AssemblyName>
 		<RootNamespace>LinqKit</RootNamespace>
-		<AssemblyOriginatorKeyFile>../LinqKit.Net45/LinqKit.snk</AssemblyOriginatorKeyFile>
+		<AssemblyOriginatorKeyFile>LinqKit.snk</AssemblyOriginatorKeyFile>
 		<SignAssembly>true</SignAssembly>
 		<PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
 		<PackageId>LinqKit.Core</PackageId>
@@ -168,7 +168,7 @@
 		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
 		<PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
 		<PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
-		<PackageReference Include="System.Runtime" Version="4.3.0" />
+		<!--<PackageReference Include="System.Runtime" Version="4.3.0" />-->
 		<PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
 		<PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
 	</ItemGroup>
@@ -187,7 +187,7 @@
 		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
 		<PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
 		<PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
-		<PackageReference Include="System.Runtime" Version="4.3.0" />
+		<!--<PackageReference Include="System.Runtime" Version="4.3.0" />-->
 		<PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
 		<PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
 	</ItemGroup>

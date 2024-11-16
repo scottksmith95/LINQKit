@@ -10,7 +10,7 @@
         <DefineConstants>$(DefineConstants);EF</DefineConstants>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <AssemblyName>LinqKit</AssemblyName>
-        <AssemblyOriginatorKeyFile>../LinqKit.Net45/LinqKit.snk</AssemblyOriginatorKeyFile>
+        <AssemblyOriginatorKeyFile>../LinqKit.Core/LinqKit.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
         <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
         <PackageId>LinqKit</PackageId>

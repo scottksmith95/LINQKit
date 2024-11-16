@@ -153,6 +153,12 @@ namespace LinqKit
             return expr.Compile().Invoke(arg1, arg2, arg3, arg4);
         }
 
+        /// <summary>
+        /// Performs the specified action on each element of the IEnumerable&lt;T&gt;.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of the source.</typeparam>
+        /// <param name="source">The IEnumerable&lt;T&gt; to perform the action on.</param>
+        /// <param name="action">The Action&lt;T&gt; delegate to perform on each element of the IEnumerable&lt;T&gt;.</param>
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
             foreach (var element in source)
