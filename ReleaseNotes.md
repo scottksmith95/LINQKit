@@ -1,3 +1,8 @@
+# 1.3.7 (19 November 2024)
+- [#206](https://github.com/scottksmith95/LINQKit/pull/206) - Update EntityFramework to version 8.0.11 to fix CVE-2024-43483 [bug] contributed by [michaelmairegger](https://github.com/michaelmairegger)
+- [#208](https://github.com/scottksmith95/LINQKit/pull/208) - Revert fixes for CVE's [bug] contributed by [StefH](https://github.com/StefH)
+- [#207](https://github.com/scottksmith95/LINQKit/issues/207) - LinqKit.Core 1.2.6 introduces a lot of legacy dependencies to modern consumers
+
 # 1.3.6 (16 November 2024)
 - [#195](https://github.com/scottksmith95/LINQKit/pull/195) - Bump Microsoft.Data.SqlClient from 1.1.4 to 2.1.7 in /examples/ConsoleAppNet472 [dependencies] contributed by [dependabot[bot]](https://github.com/apps/dependabot)
 - [#203](https://github.com/scottksmith95/LINQKit/pull/203) - Update README.md contributed by [Thorium](https://github.com/Thorium)
