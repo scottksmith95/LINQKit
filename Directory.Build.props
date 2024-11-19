@@ -13,12 +13,4 @@
       </PropertyGroup>
     </When>
   </Choose>
-
-  <!--CVE -->
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net35' and '$(TargetFramework)' != 'net40' and '$(TargetFramework)' != 'portable-net40+win8+wpa81+wp8+sl5' and '$(TargetFramework)' != 'portable-net45+win8+wpa81+wp8' " >
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <PackageReference Include="System.Private.Uri" Version="4.3.2" />
-    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
-  </ItemGroup>
-
 </Project>
