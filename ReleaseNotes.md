@@ -1,3 +1,6 @@
+# 1.3.8 (17 January 2025)
+- [#210](https://github.com/scottksmith95/LINQKit/pull/210) - Add net8.0 target to LinqKit.Microsoft.EntityFrameworkCore9 [feature] contributed by [aloraman](https://github.com/aloraman)
+
 # 1.3.7 (19 November 2024)
 - [#206](https://github.com/scottksmith95/LINQKit/pull/206) - Update EntityFramework to version 8.0.11 to fix CVE-2024-43483 [bug] contributed by [michaelmairegger](https://github.com/michaelmairegger)
 - [#208](https://github.com/scottksmith95/LINQKit/pull/208) - Revert fixes for CVE's [bug] contributed by [StefH](https://github.com/StefH)
