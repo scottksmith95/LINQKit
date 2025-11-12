@@ -37,10 +37,10 @@ jobs:
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore31/LinqKit.Microsoft.EntityFrameworkCore31.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore5/LinqKit.Microsoft.EntityFrameworkCore5.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore6/LinqKit.Microsoft.EntityFrameworkCore6.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore7/LinqKit.Microsoft.EntityFrameworkCored7.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore8/LinqKit.Microsoft.EntityFrameworkCored8.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore9/LinqKit.Microsoft.EntityFrameworkCored9.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore10/LinqKit.Microsoft.EntityFrameworkCored10.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore7/LinqKit.Microsoft.EntityFrameworkCore7.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore8/LinqKit.Microsoft.EntityFrameworkCore8.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore9/LinqKit.Microsoft.EntityFrameworkCore9.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore10/LinqKit.Microsoft.EntityFrameworkCore10.csproj -c ReleaseForGithubActions
         dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c ReleaseForGithubActions
     
     - name: Run Tests
