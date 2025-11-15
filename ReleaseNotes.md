@@ -1,3 +1,8 @@
+# 1.3.9 (15 November 2025)
+- [#212](https://github.com/scottksmith95/LINQKit/pull/212) - Upgrade EntityFramework to version 6.5.1 [feature] contributed by [StefH](https://github.com/StefH)
+- [#217](https://github.com/scottksmith95/LINQKit/pull/217) - Add support for .Net 10 [feature] contributed by [RIE-UPPERSOLUTIONS](https://github.com/RIE-UPPERSOLUTIONS)
+- [#216](https://github.com/scottksmith95/LINQKit/issues/216) - Add support for .Net 10
+
 # 1.3.8 (17 January 2025)
 - [#210](https://github.com/scottksmith95/LINQKit/pull/210) - Add net8.0 target to LinqKit.Microsoft.EntityFrameworkCore9 [feature] contributed by [aloraman](https://github.com/aloraman)
 
