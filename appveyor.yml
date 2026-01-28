@@ -13,6 +13,13 @@ init:
 environment:
   PATH: $(PATH);$(PROGRAMFILES)\dotnet\
 
+install:
+- ps: |
+    $ErrorActionPreference = 'Stop'
+    $dotnetVersion = '10.0.100'
+    Write-Host "Installing .NET SDK $dotnetVersion..."
+    iex "& { $(irm https://dot.net/v1/dotnet-install.ps1) } -Version $dotnetVersion -InstallDir '$Env:ProgramFiles\dotnet'"
+
 
 build_script:
 - dotnet build .\src\LinqKit\LinqKit.csproj -c %CONFIGURATION%
@@ -25,9 +32,10 @@ build_script:
 
 
 test_script:
+- dotnet test --no-build .\tests\LinqKit.Core.Tests\LinqKit.Core.Tests.csproj -c %CONFIGURATION%
 - dotnet test --no-build .\tests\LinqKit.Tests\LinqKit.Tests.csproj
 - dotnet test --no-build .\tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj
-- dotnet test --no-build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests -c %CONFIGURATION% 
+- dotnet test --no-build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests -c %CONFIGURATION%
 
 
 #artifacts:
