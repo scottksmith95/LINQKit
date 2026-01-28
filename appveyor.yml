@@ -13,21 +13,29 @@ init:
 environment:
   PATH: $(PATH);$(PROGRAMFILES)\dotnet\
 
+install:
+- ps: |
+    $ErrorActionPreference = 'Stop'
+    $dotnetVersion = '10.0.100'
+    Write-Host "Installing .NET SDK $dotnetVersion..."
+    iex "& { $(irm https://dot.net/v1/dotnet-install.ps1) } -Version $dotnetVersion -InstallDir '$Env:ProgramFiles\dotnet'"
+
 
 build_script:
 - dotnet build .\src\LinqKit\LinqKit.csproj -c %CONFIGURATION%
+- dotnet build .\src\LinqKit.Core\LinqKit.Core.csproj -c %CONFIGURATION%
 - dotnet build .\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj -c %CONFIGURATION%
 - dotnet build .\src\LinqKit.Microsoft.EntityFrameworkCore\LinqKit.Microsoft.EntityFrameworkCore.csproj -c %CONFIGURATION%
 - dotnet build .\src\LinqKit.Z.EntityFramework.Classic\LinqKit.Z.EntityFramework.Classic.csproj -c %CONFIGURATION%
-- dotnet build .\tests\LinqKit.Tests\LinqKit.Tests.csproj
-- dotnet build .\tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj
-- dotnet build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests\LinqKit.Microsoft.EntityFrameworkCore.Tests.csproj -c %CONFIGURATION%
 
 
 test_script:
-- dotnet test --no-build .\tests\LinqKit.Tests\LinqKit.Tests.csproj
-- dotnet test --no-build .\tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj
-- dotnet test --no-build .\tests\LinqKit.Microsoft.EntityFrameworkCore.Tests -c %CONFIGURATION% 
+- dotnet test .\tests\LinqKit.Tests\LinqKit.Tests.csproj
+- dotnet test .\tests\LinqKit.Core.Tests\LinqKit.Core.Tests.csproj -c %CONFIGURATION%
+- dotnet test .\tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj
+- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore8.Tests -c %CONFIGURATION%
+- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore9.Tests -c %CONFIGURATION%
+- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore10.Tests -c %CONFIGURATION%
 
 
 #artifacts:

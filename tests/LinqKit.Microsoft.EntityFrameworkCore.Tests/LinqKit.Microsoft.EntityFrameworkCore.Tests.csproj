@@ -3,6 +3,7 @@
   <PropertyGroup>
     <Authors>Stef Heyenrath</Authors>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <DefineConstants>$(DefineConstants);EFCORE</DefineConstants>
     <AssemblyName>LinqKit.Microsoft.EntityFrameworkCore.Tests</AssemblyName>
     <PackageId>LinqKit.Microsoft.EntityFrameworkCore.Tests</PackageId>
@@ -22,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="Moq" Version="4.8.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>

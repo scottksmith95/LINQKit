@@ -9,6 +9,7 @@ jobs:
     
     env:
       Prerelease: ci
+      CONFIGURATION: ReleaseForGithubActions
 
     steps:
     - name: Print GITHUB_RUN_NUMBER
@@ -28,29 +29,30 @@ jobs:
      
     - name: Build Projects
       run: |
-        dotnet build ./src/LinqKit.Core/LinqKit.Core.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit/LinqKit.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.EntityFramework/LinqKit.EntityFramework.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore/LinqKit.Microsoft.EntityFrameworkCore.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore2/LinqKit.Microsoft.EntityFrameworkCore2.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore3/LinqKit.Microsoft.EntityFrameworkCore3.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore31/LinqKit.Microsoft.EntityFrameworkCore31.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore5/LinqKit.Microsoft.EntityFrameworkCore5.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore6/LinqKit.Microsoft.EntityFrameworkCore6.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore7/LinqKit.Microsoft.EntityFrameworkCore7.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore8/LinqKit.Microsoft.EntityFrameworkCore8.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore9/LinqKit.Microsoft.EntityFrameworkCore9.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore10/LinqKit.Microsoft.EntityFrameworkCore10.csproj -c ReleaseForGithubActions
-        dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c ReleaseForGithubActions
+        dotnet build ./src/LinqKit.Core/LinqKit.Core.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit/LinqKit.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.EntityFramework/LinqKit.EntityFramework.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore/LinqKit.Microsoft.EntityFrameworkCore.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore2/LinqKit.Microsoft.EntityFrameworkCore2.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore3/LinqKit.Microsoft.EntityFrameworkCore3.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore31/LinqKit.Microsoft.EntityFrameworkCore31.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore5/LinqKit.Microsoft.EntityFrameworkCore5.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore6/LinqKit.Microsoft.EntityFrameworkCore6.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore7/LinqKit.Microsoft.EntityFrameworkCore7.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore8/LinqKit.Microsoft.EntityFrameworkCore8.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore9/LinqKit.Microsoft.EntityFrameworkCore9.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore10/LinqKit.Microsoft.EntityFrameworkCore10.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c $env:CONFIGURATION
     
     - name: Run Tests
       run: |
-        dotnet test ./tests/LinqKit.Tests/LinqKit.Tests.csproj -c ReleaseForGithubActions
-        dotnet test ./tests/LinqKit.EntityFramework.Tests.Net452/LinqKit.EntityFramework.Tests.Net452.csproj -c ReleaseForGithubActions
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore31.Tests -c ReleaseForGithubActions
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore5.Tests -c ReleaseForGithubActions
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore6.Tests -c ReleaseForGithubActions
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore7.Tests -c ReleaseForGithubActions
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore8.Tests -c ReleaseForGithubActions
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore9.Tests -c ReleaseForGithubActions
-        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore10.Tests -c ReleaseForGithubActions
+        dotnet test ./tests/LinqKit.Core.Tests/LinqKit.Core.Tests.csproj -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.Tests/LinqKit.Tests.csproj -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.EntityFramework.Tests.Net452/LinqKit.EntityFramework.Tests.Net452.csproj -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore31.Tests -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore5.Tests -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore6.Tests -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore7.Tests -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore8.Tests -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore9.Tests -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore10.Tests -c $env:CONFIGURATION

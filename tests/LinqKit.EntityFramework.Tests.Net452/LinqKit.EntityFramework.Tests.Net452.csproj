@@ -30,8 +30,4 @@
 		<PackageReference Include="EntityFramework" Version="6.5.1" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Properties\" />
-	</ItemGroup>
-
 </Project>
