@@ -33,9 +33,9 @@ test_script:
 - dotnet test .\tests\LinqKit.Tests\LinqKit.Tests.csproj
 - dotnet test .\tests\LinqKit.Core.Tests\LinqKit.Core.Tests.csproj -c %CONFIGURATION%
 - dotnet test .\tests\LinqKit.EntityFramework.Tests.Net452\LinqKit.EntityFramework.Tests.Net452.csproj
-- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore8.Tests -c -c %CONFIGURATION%
-- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore9.Tests -c -c %CONFIGURATION%
-- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore10.Tests -c -c %CONFIGURATION%
+- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore8.Tests -c %CONFIGURATION%
+- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore9.Tests -c %CONFIGURATION%
+- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore10.Tests -c %CONFIGURATION%
 
 
 #artifacts:
