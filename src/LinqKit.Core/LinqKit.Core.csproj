@@ -6,7 +6,7 @@
 		<Description>LinqKit.Core contains extensions for LINQ to SQL and Entity Framework. Note that Include(...), IAsync and IDbAsync are not supported.</Description>
 		<AssemblyTitle>LinqKit.Core</AssemblyTitle>
 		<Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
-		<TargetFrameworks>net35;net40;net45;portable-net40+win8+wpa81+wp8+sl5;portable-net45+win8+wpa81+wp8;uap10.0;netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
+		<TargetFrameworks>net35;net40;net45;portable-net40+win8+wpa81+wp8+sl5;portable-net45+win8+wpa81+wp8;uap10.0;netstandard1.3;netstandard2.0;netstandard2.1;net10.0</TargetFrameworks>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<AssemblyName>LinqKit.Core</AssemblyName>
 		<RootNamespace>LinqKit</RootNamespace>
@@ -25,7 +25,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'ReleaseForGithubActions' ">
-		<TargetFrameworks>net40;net45;netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
+		<TargetFrameworks>net40;net45;netstandard1.3;netstandard2.0;netstandard2.1;net10.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(TargetFramework)' != 'portable-net40+win8+wpa81+wp8+sl5' ">
@@ -173,12 +173,11 @@
 		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
 		<PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
 		<PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
-		<!--<PackageReference Include="System.Runtime" Version="4.3.0" />-->
 		<PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
 		<PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1' ">
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1' or '$(TargetFramework)' == 'net10.0' ">
 		<PackageReference Include="JetBrains.Annotations" Version="10.4.0">
 			<PrivateAssets>All</PrivateAssets>
 		</PackageReference>
@@ -192,7 +191,6 @@
 		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
 		<PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
 		<PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
-		<!--<PackageReference Include="System.Runtime" Version="4.3.0" />-->
 		<PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
 		<PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
 	</ItemGroup>

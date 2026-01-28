@@ -2,26 +2,15 @@
 
   <PropertyGroup>
     <Authors>Stef Heyenrath</Authors>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFrameworks>net452;net8.0;net9.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <DefineConstants>$(DefineConstants);NOEF</DefineConstants>
-    <AssemblyName>LinqKit.Tests</AssemblyName>
-    <PackageId>LinqKit.Tests</PackageId>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>LinqKitCoreTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\LinqKit.Tests.Net452\*.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\LinqKit\LinqKit.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Moq" Version="4.8.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
@@ -33,6 +22,10 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LinqKit.Core\LinqKit.Core.csproj" />
   </ItemGroup>
 
 </Project>
