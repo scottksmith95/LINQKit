@@ -43,10 +43,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2022.1.0">
+    <PackageReference Include="JetBrains.Annotations" Version="2025.2.4">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Z.EntityFramework.Classic" Version="7.0.40" />
+    <PackageReference Include="Z.EntityFramework.Classic" Version="7.2.36" />
     <PackageReference Include="Timestamp" Version="1.0.2">
         <PrivateAssets>All</PrivateAssets>
     </PackageReference>
