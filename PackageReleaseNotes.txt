@@ -1,6 +1,7 @@
-# 1.3.9 (15 November 2025)
-- #212 Upgrade EntityFramework to version 6.5.1 [feature]
-- #217 Add support for .Net 10 [feature]
-- #216 Add support for .Net 10
+# 1.3.10 (29 January 2026)
+- #220 Fix LeftJoin for .NET 10 [bug]
+- #221 Fix NU1902 and NU1903 for Linqkit.Core project
+- #209 Building LinqKit.Core shows high severity vulnerabilities [bug]
+- #218 LeftJoin could be removed from .Net 10 version [bug]
 
 The full release notes can be found here: https://github.com/scottksmith95/LINQKit/blob/master/ReleaseNotes.md

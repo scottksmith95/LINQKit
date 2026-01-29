@@ -1,3 +1,9 @@
+# 1.3.10 (29 January 2026)
+- [#220](https://github.com/scottksmith95/LINQKit/pull/220) - Fix LeftJoin for .NET 10 [bug] contributed by [StefH](https://github.com/StefH)
+- [#221](https://github.com/scottksmith95/LINQKit/pull/221) - Fix NU1902 and NU1903 for Linqkit.Core project contributed by [StefH](https://github.com/StefH)
+- [#209](https://github.com/scottksmith95/LINQKit/issues/209) - Building LinqKit.Core shows high severity vulnerabilities [bug]
+- [#218](https://github.com/scottksmith95/LINQKit/issues/218) - LeftJoin could be removed from .Net 10 version [bug]
+
 # 1.3.9 (15 November 2025)
 - [#212](https://github.com/scottksmith95/LINQKit/pull/212) - Upgrade EntityFramework to version 6.5.1 [feature] contributed by [StefH](https://github.com/StefH)
 - [#217](https://github.com/scottksmith95/LINQKit/pull/217) - Add support for .Net 10 [feature] contributed by [RIE-UPPERSOLUTIONS](https://github.com/RIE-UPPERSOLUTIONS)
