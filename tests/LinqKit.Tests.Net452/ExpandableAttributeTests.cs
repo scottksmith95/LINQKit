@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
 using Xunit;
@@ -246,5 +247,38 @@ namespace LinqKit.Tests.Net452
             Assert.Equal(2, actual.Length);
         }
 
+    }
+
+    public class MyEntity
+    {
+        public Guid ID { get; set; }
+        public string Code { get; set; }
+        public string Description { get; set; }
+        [NotMapped]
+        [Expandable(nameof(CodeAndDescriptionExpr))]
+        public string CodeAndDescription => Code + " / " + Description;
+        internal static Expression<Func<MyEntity, string>> CodeAndDescriptionExpr() => e => e.Code + " / " + e.Description;
+    }
+    
+    public class ExpressionBuilderTest {
+
+        [Fact]
+        public void ExpressionIsAppliedToMappedProperties()
+        {
+            var predicate = PredicateBuilder.New<MyEntity>(true);
+            var keywords = "?";
+
+            predicate = predicate.And(x => x.CodeAndDescription.ToLower().Replace("İ", "i").Replace("ı", "i").Contains(keywords));
+            predicate = predicate.Or(x => MyEntity.CodeAndDescriptionExpr().Invoke(x).ToLower().Contains(keywords));
+
+            Assert.Equal(
+                $"x => (x.CodeAndDescription.ToLower().Replace(\"İ\", \"i\").Replace(\"ı\", \"i\").Contains(value(LinqKit.Tests.Net452.ExpressionBuilderTest+<>c__DisplayClass0_0).keywords) OrElse CodeAndDescriptionExpr().Invoke(x).ToLower().Contains(value(LinqKit.Tests.Net452.ExpressionBuilderTest+<>c__DisplayClass0_0).keywords))",
+                predicate.ToString());
+
+            var expanded = predicate.Expand();
+            Assert.Equal(
+                $"x => (((x.Code + \" / \") + x.Description).ToLower().Replace(\"İ\", \"i\").Replace(\"ı\", \"i\").Contains(value({typeof(ExpressionBuilderTest).FullName}+<>c__DisplayClass0_0).keywords) OrElse ((x.Code + \" / \") + x.Description).ToLower().Contains(value({typeof(ExpressionBuilderTest).FullName}+<>c__DisplayClass0_0).keywords))",
+                expanded.ToString());
+        }
     }
 }
