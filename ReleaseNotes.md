@@ -1,6 +1,11 @@
+# 1.3.11 (07 February 2026)
+- [#188](https://github.com/scottksmith95/LINQKit/pull/188) - Improve invocation support [feature] contributed by [TheConstructor](https://github.com/TheConstructor)
+- [#222](https://github.com/scottksmith95/LINQKit/pull/222) - Upgrade dependeny on Z.EntityFramework.Classic to latest version [security] contributed by [StefH](https://github.com/StefH)
+- [#215](https://github.com/scottksmith95/LINQKit/issues/215) - Security vulnerabilities with System.Data.SqlClient 4.8.6 [security]
+
 # 1.3.10 (29 January 2026)
 - [#220](https://github.com/scottksmith95/LINQKit/pull/220) - Fix LeftJoin for .NET 10 [bug] contributed by [StefH](https://github.com/StefH)
-- [#221](https://github.com/scottksmith95/LINQKit/pull/221) - Fix NU1902 and NU1903 for Linqkit.Core project contributed by [StefH](https://github.com/StefH)
+- [#221](https://github.com/scottksmith95/LINQKit/pull/221) - Fix NU1902 and NU1903 for Linqkit.Core project [security] contributed by [StefH](https://github.com/StefH)
 - [#209](https://github.com/scottksmith95/LINQKit/issues/209) - Building LinqKit.Core shows high severity vulnerabilities [bug]
 - [#218](https://github.com/scottksmith95/LINQKit/issues/218) - LeftJoin could be removed from .Net 10 version [bug]
 

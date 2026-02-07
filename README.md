@@ -204,8 +204,8 @@ The AsExpandable wrapper also lets you write expressions that call other express
 For example:
 
 ```csharp
-Expression<Func<Purchase,bool>> criteria1 = p => p.Price > 1000;
-Expression<Func<Purchase,bool>> criteria2 = p => criteria1.Invoke (p) || p.Description.Contains ("a");
+Expression<Func<Purchase, bool>> criteria1 = p => p.Price > 1000;
+Expression<Func<Purchase, bool>> criteria2 = p => criteria1.Invoke(p) || p.Description.Contains("a");
 
 Console.WriteLine (criteria2.Expand().ToString());
 ```
@@ -221,11 +221,11 @@ Notice that we have a nice, clean expression: the call to Invoke has been stripp
 If you're using an Invoked expression within a LINQ to SQL or Entity Framework query, and have called AsExpandable on the Table, you can optionally skip step 2. This is because AsExpandable automatically calls Expand on expressions. This means either of the following is valid:
 
 ```csharp
-var query = data.Purchases.AsExpandable().Where (criteria2);
+var query = data.Purchases.AsExpandable().Where(criteria2);
 ```
 
 ```csharp
-var query = data.Purchases.Where (criteria2.Expand());
+var query = data.Purchases.Where(criteria2.Expand());
 ```
 
 Be sure to remember that AsExpandable() works on IQueryable<T> and Expand() works on Expression<TDelegate>
@@ -234,7 +234,7 @@ The one thing to watch is recursive expressions: these cannot be Expanded! Recur
 
 ```csharp
 Expression<Func<Purchase,bool>> criteria = p => p.Price > 1000;
-criteria = p => criteria.Invoke (p) || p.Description.Contains ("a");
+criteria = p => criteria.Invoke(p) || p.Description.Contains("a");
 ```
 
 That last line recursively calls itself and the original predicate (p.Price>1000) is lost!
@@ -258,7 +258,7 @@ IQueryable<Product> SearchProducts (params string[] keywords)
   foreach (string keyword in keywords)
   {
     string temp = keyword;
-    query = query.Where (p => p.Description.Contains (temp));
+    query = query.Where (p => p.Description.Contains(temp));
   }
   return query;
 }
@@ -282,7 +282,7 @@ IQueryable<Product> SearchProducts (params string[] keywords)
   foreach (string keyword in keywords)
   {
     string temp = keyword;
-    predicate = predicate.And (p => p.Description.Contains (temp));
+    predicate = predicate.And (p => p.Description.Contains(temp));
   }
   return dataContext.Products.Where (predicate);
 }
@@ -298,7 +298,7 @@ IQueryable<Product> SearchProducts (params string[] keywords)
   foreach (string keyword in keywords)
   {
     string temp = keyword;
-    predicate = predicate.Or (p => p.Description.Contains (temp));
+    predicate = predicate.Or (p => p.Description.Contains(temp));
   }
   return dataContext.Products.Where (predicate);
 }
@@ -368,7 +368,7 @@ public partial class Product
     foreach (string keyword in keywords)
     {
       string temp = keyword;
-      predicate = predicate.Or (p => p.Description.Contains (temp));
+      predicate = predicate.Or (p => p.Description.Contains(temp));
     }
     return predicate;
   }
@@ -412,7 +412,7 @@ Consider the following predicate:
 ```csharp
 p => p.Price > 100 &&
      p.Price < 1000 &&
-     (p.Description.Contains ("foo") || p.Description.Contains ("far"))
+     (p.Description.Contains("foo") || p.Description.Contains("far"))
 ```
 
 Let's say we wanted to build this dynamically. The question is, how do we deal with the parenthesis around the two expressions in the last line?
@@ -421,8 +421,8 @@ The answer is to build the parenthesised expression first, and then consume it i
 
 ```csharp
 var inner = PredicateBuilder.New<Product>();
-inner = inner.Start(p => p.Description.Contains ("foo"));
-inner = inner.Or(p => p.Description.Contains ("far"));
+inner = inner.Start(p => p.Description.Contains("foo"));
+inner = inner.Or(p => p.Description.Contains("far"));
 
 var outer = PredicateBuilder.New<Product>();
 outer = outer.Start(p => p.Price > 100);
