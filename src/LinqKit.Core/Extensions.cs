@@ -24,6 +24,12 @@ namespace LinqKit
         [Pure]
         public static IQueryable<T> AsExpandable<T>(this IQueryable<T> query)
         {
+            // Already wrapped: keep the existing wrapper (and whatever optimizer it was created with).
+            if (query is ExpandableQuery<T>)
+            {
+                return query;
+            }
+
             return AsExpandable(query, LinqKitExtension.QueryOptimizer);
         }
 
@@ -44,9 +50,15 @@ namespace LinqKit
                 throw new ArgumentNullException(nameof(queryOptimizer));
             }
 
-            if (query is ExpandableQuery<T>)
+            if (query is ExpandableQuery<T> expandable)
             {
-                return query;
+                if (ReferenceEquals(expandable.QueryOptimizer, queryOptimizer))
+                {
+                    return query;
+                }
+
+                // An explicitly requested optimizer differs from the wrapper's: rewrap the original query with it.
+                query = expandable.InnerQuery;
             }
 
 #if !(NET35 || NOEF || NOASYNCPROVIDER)
