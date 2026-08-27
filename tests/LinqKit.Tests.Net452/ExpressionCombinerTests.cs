@@ -227,6 +227,15 @@ namespace LinqKit.Tests.Net452
                 nestedExpression.Expand().Expand().ToString());
         }
 
+        [Fact]
+        public void ExpandProcessesInvokeAsMethodGroup()
+        {
+            Expression<Func<int, bool>> filter = p => p > 1000;
+            Expression<Func<int[], bool>> anyMeetsFilter = x => x.Any(filter.Invoke);
+
+            Assert.Equal("x => x.Any(p => (p > 1000))", anyMeetsFilter.Expand().ToString());
+        }
+
         private string ConstExpressionString<TResult>(Expression<Func<TResult>> expr)
         {
             return expr.ToString().Substring(6);

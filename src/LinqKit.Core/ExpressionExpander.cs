@@ -108,6 +108,28 @@ namespace LinqKit
             return false;
         }
 
+        protected override Expression VisitUnary(UnaryExpression node)
+        {
+            // When Invoke is called via a method group (e.g. x => x.Any(filter.Invoke)), it will be wrapped in Convert(CreateDelegate(...)).
+            if (
+                node.NodeType == ExpressionType.Convert
+                && node.Operand is MethodCallExpression methodCall
+                && methodCall.Method.Name == "CreateDelegate"
+                && methodCall.Method.DeclaringType == typeof(MethodInfo)
+                && methodCall.Object is ConstantExpression methodInfoConst
+                && methodCall.Arguments.Count == 2
+                && methodInfoConst.Value is MethodInfo methodInfo
+                && methodInfo.Name == nameof(ExtensionsCore.Invoke)
+                && methodInfo.DeclaringType == typeof(ExtensionsCore))
+            {
+                var target = methodCall.Arguments[1];
+
+                return Visit(target);
+            }
+
+            return base.VisitUnary(node);
+        }
+
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
             if (m.Method.Name == nameof(ExtensionsCore.Invoke) && m.Method.DeclaringType == typeof(ExtensionsCore))
