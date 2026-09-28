@@ -165,7 +165,7 @@ namespace LinqKit
         public bool TailCall => Predicate.TailCall;
 #endif
 
-#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE40 || UAP || EFCORE6 || EFCORE7 || NET10_0_OR_GREATER)
+#if NETFRAMEWORK // LambdaExpression.CompileToMethod exists only on .NET Framework
         /// <summary></summary>
         [Pure]
         public void CompileToMethod(MethodBuilder method) { Predicate.CompileToMethod(method); }

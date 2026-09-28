@@ -1,15 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(LibraryType)' == 'EF'">
-    <PackageReference Include="LinqKit.Core" Version="1.1.17" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(LibraryType)' != 'EF'">
-    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.17" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LinqKit.Microsoft.EntityFrameworkCore8\LinqKit.Microsoft.EntityFrameworkCore8.csproj" />
   </ItemGroup>
 
 </Project>
