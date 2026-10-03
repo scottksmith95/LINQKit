@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
-#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE40 || UAP)
+#if !NETSTANDARD
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
@@ -121,14 +121,12 @@ namespace LinqKit
 #endregion
 
 #region Implement Expression<TDelagate> methods and properties
-#if !(NET35)
 
         /// <summary></summary>
         [Pure]
         public Func<T, bool> Compile() { return Predicate.Compile(); }
-#endif
 
-#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE40 || UAP)
+#if !NETSTANDARD
         /// <summary></summary>
         [Pure]
         public Func<T, bool> Compile(DebugInfoGenerator debugInfoGenerator) { return Predicate.Compile(debugInfoGenerator); }
@@ -154,7 +152,6 @@ namespace LinqKit
         /// <summary></summary>
         public Type Type => Predicate.Type;
 
-#if !(NET35)
         /// <summary></summary>
         public string Name => Predicate.Name;
 
@@ -163,7 +160,6 @@ namespace LinqKit
 
         /// <summary></summary>
         public bool TailCall => Predicate.TailCall;
-#endif
 
 #if NETFRAMEWORK // LambdaExpression.CompileToMethod exists only on .NET Framework
         /// <summary></summary>
@@ -178,10 +174,8 @@ namespace LinqKit
 #endregion
 
 #region Implement Expression methods and properties
-#if !(NET35)
         /// <summary></summary>
         public virtual bool CanReduce => Predicate.CanReduce;
-#endif
 #endregion
     }
 }

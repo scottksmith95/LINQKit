@@ -18,12 +18,22 @@
 | LinqKit.Microsoft.EntityFrameworkCore 5 | [![Nuget](https://img.shields.io/badge/nuget-v5.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/5.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 5.0.0</li></ul> | <ul><li>netstandard2.1</li></ul>|
 | LinqKit.Microsoft.EntityFrameworkCore 6 | [![Nuget](https://img.shields.io/badge/nuget-v6.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/6.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 6.0.0</li></ul> | <ul><li>.NET 6.0</li></ul>|
 | LinqKit.Microsoft.EntityFrameworkCore 7 | [![Nuget](https://img.shields.io/badge/nuget-v7.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/7.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 7.0.0</li></ul> | <ul><li>.NET 6.0</li><li>.NET 7.0</li></ul>|
-| LinqKit.Microsoft.EntityFrameworkCore 8 | [![Nuget](https://img.shields.io/badge/nuget-v8.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/8.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 8.0.0</li></ul> | <ul><li>.NET 8.0</li></ul>|
+| LinqKit.Microsoft.EntityFrameworkCore 8 | [![Nuget](https://img.shields.io/badge/nuget-v8.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/8.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 8.0.11</li></ul> | <ul><li>.NET 8.0</li></ul>|
 | LinqKit.Microsoft.EntityFrameworkCore 9 | [![Nuget](https://img.shields.io/badge/nuget-v9.0.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/9.0.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 9.0.0</li></ul> | <ul><li>.NET 8.0</li></ul>|
 | LinqKit.Microsoft.EntityFrameworkCore 10 | [![Nuget](https://img.shields.io/badge/nuget-v10.0.0-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/10.0.0) | Microsoft.EntityFrameworkCore<ul><li>≥ 10.0.0</li></ul> | <ul><li>.NET 10.0</li></ul>|
 | LinqKit.Z.EntityFramework.Classic | [![Nuget](https://img.shields.io/nuget/v/LinqKit.Z.EntityFramework.Classic) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Z.EntityFramework.Classic)](https://www.nuget.org/packages/LinqKit.Z.EntityFramework.Classic) | Z.EntityFramework.Classic<ul><li>≥ 7.2.36</li></ul> | <ul><li>net462</li><li>netstandard2.0</li></ul>|
 
 The Microsoft.EntityFrameworkCore 1 to 7 packages above are earlier releases for out-of-support EF Core versions; they are no longer built from this repository.
+
+### Dropped frameworks (LinqKit 1.4, LinqKit.Core 1.3, LinqKit.Microsoft.EntityFrameworkCore 8.2 / 9.1 / 10.1)
+
+These releases build only for frameworks that are still supported. Older targets were removed:
+
+- .NET Framework 3.5, 4.0 and 4.5 (net35, net40, net45): the minimum is now .NET Framework 4.6.2.
+- Portable class libraries (portable-net40/net45), UWP (uap10.0) and netstandard1.3.
+- The net9.0 build of LinqKit.Microsoft.EntityFrameworkCore 9; .NET 9 projects use its net8.0 build.
+
+Projects that still target a removed framework can stay on the previous releases: LinqKit and LinqKit.EntityFramework 1.3.11, LinqKit.Core and LinqKit.Z.EntityFramework.Classic 1.2.11, LinqKit.Microsoft.EntityFrameworkCore 8.1.x, 9.0.x and 10.0.x.
 
 
 Table of Contents

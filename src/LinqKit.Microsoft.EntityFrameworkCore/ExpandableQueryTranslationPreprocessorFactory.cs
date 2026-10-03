@@ -1,4 +1,4 @@
-﻿#if EFCORE3 || EFCORE5
+﻿#if EFCORE
 
 using System;
 using Microsoft.EntityFrameworkCore.Query;

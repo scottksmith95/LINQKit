@@ -223,7 +223,7 @@ namespace LinqKit
             {
                 return input;
             }
-#if EFCORE || NETSTANDARD || WINDOWS_APP || PORTABLE || UAP
+#if EFCORE || NETSTANDARD
             //Collapse captured outer variables
             if (input.Member.DeclaringType != null && (!input.Member.DeclaringType.GetTypeInfo().IsNestedPrivate
                 || !input.Member.DeclaringType.Name.StartsWith("<>"))) // captured outer variable

@@ -1,4 +1,4 @@
-﻿#if !(NET35 || NET40 || NOEF)
+﻿#if !NOEF
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -38,7 +38,6 @@ namespace LinqKit
         }
 
 #if EFCORE
-#if EFCORE3
         /// <summary>Enumerator-pattern: MoveNextAsync</summary>
         public ValueTask<bool> MoveNextAsync()
         {
@@ -51,7 +50,6 @@ namespace LinqKit
             _inner.Dispose();
             return new ValueTask();
         }
-#endif
 
         /// <summary>Enumerator-pattern: MoveNext</summary>
         public Task<bool> MoveNext(CancellationToken cancellationToken)

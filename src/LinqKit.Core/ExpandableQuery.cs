@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Collections;
-#if !(NET35 || NOEF || NOASYNCPROVIDER)
+#if !NOEF
 using System.Threading;
 using System.Threading.Tasks;
 using System.Reflection;
@@ -27,7 +27,7 @@ namespace LinqKit
     /// An IQueryable wrapper that allows us to visit the query's expression tree just before LINQ to SQL gets to it.
     /// This is based on the excellent work of Tomas Petricek: http://tomasp.net/blog/linq-expand.aspx
     /// </summary>
-#if (NET35 || NOEF || NOASYNCPROVIDER)
+#if NOEF
     public sealed class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable
 #elif EFCORE
     public class ExpandableQuery<T> : IQueryable<T>, IOrderedQueryable<T>, IOrderedQueryable, IAsyncEnumerable<T>
@@ -75,9 +75,8 @@ namespace LinqKit
         /// </summary>
         public override string ToString() { return _inner.ToString(); }
 
-#if !(NET35 || NOEF || NOASYNCPROVIDER)
+#if !NOEF
 #if EFCORE
-#if EFCORE3
         IAsyncEnumerator<T> IAsyncEnumerable<T>.GetAsyncEnumerator(CancellationToken cancellationToken = default(CancellationToken))
         {
             if (_inner is IAsyncEnumerable<T>)
@@ -87,17 +86,6 @@ namespace LinqKit
 
             throw new InvalidOperationException();
         }
-#else
-        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
-        {
-            if (_inner is IAsyncEnumerable<T>)
-            {
-                return ((IAsyncEnumerable<T>)_inner).GetEnumerator();
-            }
-
-            return (_inner as IAsyncEnumerableAccessor<T>)?.AsyncEnumerable.GetEnumerator();
-        }
-#endif
 #else
         /// <summary> Enumerator for async-await </summary>
         public IDbAsyncEnumerator<T> GetAsyncEnumerator()
@@ -133,7 +121,7 @@ namespace LinqKit
 #endif
     }
 
-#if !(NET35 || NOEF || NOASYNCPROVIDER)
+#if !NOEF
     internal class ExpandableQueryOfClass<T> : ExpandableQuery<T>
         where T : class
     {
@@ -171,17 +159,12 @@ namespace LinqKit
         public override object Execute(Expression expression) => _innerProvider.Execute(expression);
         public override TResult Execute<TResult>(Expression expression) => _innerProvider.Execute<TResult>(expression);
 
-#if EFCORE3
         public override TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default) => _innerProvider.ExecuteAsync<TResult>(expression, cancellationToken);
-#else
-        public override IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression) => _innerProvider.ExecuteAsync<TResult>(expression);
-        public override Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken) => _innerProvider.ExecuteAsync<TResult>(expression, cancellationToken);
-#endif
     }
 #endif
 
     class ExpandableQueryProvider<T> : IQueryProvider
-#if (NET35 || NOEF || NOASYNCPROVIDER)
+#if NOEF
 #elif EFCORE
         , IAsyncQueryProvider
 #else
@@ -225,9 +208,8 @@ namespace LinqKit
             return _query.InnerQuery.Provider.Execute(optimized);
         }
 
-#if !(NET35 || NOEF || NOASYNCPROVIDER)
+#if !NOEF
 #if EFCORE
-#if EFCORE3
         public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {
             var asyncProvider = _query.InnerQuery.Provider as IAsyncQueryProvider;
@@ -240,26 +222,6 @@ namespace LinqKit
 
             return _query.InnerQuery.Provider.Execute<TResult>(optimized);
         }
-#else
-        public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
-        {
-            var asyncProvider = _query.InnerQuery.Provider as IAsyncQueryProvider;
-            return asyncProvider.ExecuteAsync<TResult>(expression.Expand());
-        }
-
-        public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
-        {
-            var asyncProvider = _query.InnerQuery.Provider as IAsyncQueryProvider;
-            var expanded = expression.Expand();
-            var optimized = _queryOptimizer(expanded);
-            if (asyncProvider != null)
-            {
-                return asyncProvider.ExecuteAsync<TResult>(optimized, cancellationToken);
-            }
-
-            return Task.FromResult(_query.InnerQuery.Provider.Execute<TResult>(optimized));
-        }
-#endif
 #else
         public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {

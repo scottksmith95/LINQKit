@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Xunit;
-#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE40 || UAP)
+#if !NETSTANDARD
 using System.Runtime.CompilerServices;
 #endif
 
