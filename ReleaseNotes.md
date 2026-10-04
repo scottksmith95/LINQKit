@@ -1,3 +1,6 @@
+# 1.4.0 (04 October 2026)
+- [#231](https://github.com/scottksmith95/LINQKit/pull/231) - LINQKit to support .NET Framework 4.6.2+, netstandard2.0/2.1, .NET 8 and .NET 10. [feature] contributed by [Thorium](https://github.com/Thorium)
+
 # 1.3.11 (07 February 2026)
 - [#188](https://github.com/scottksmith95/LINQKit/pull/188) - Improve invocation support [feature] contributed by [TheConstructor](https://github.com/TheConstructor)
 - [#222](https://github.com/scottksmith95/LINQKit/pull/222) - Upgrade dependeny on Z.EntityFramework.Classic to latest version [security] contributed by [StefH](https://github.com/StefH)
