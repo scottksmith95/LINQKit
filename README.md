@@ -9,19 +9,31 @@
 
 | Package | NuGet | Dependency | Frameworks |
 | ------- | ----- | -----------| ---------- | 
-| LinqKit | [![Nuget](https://img.shields.io/nuget/v/LinqKit) ![Nuget](https://img.shields.io/nuget/dt/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework<ul><li>≥ 6.2.0 (net45)</li><li>≥ 6.3.0 (netstandard2.1)</li></ul> | <ul><li>net45 and up</li><li>netstandard2.1</li><li>.NET 10.0</li></ul> |
-| LinqKit.Core | [![Nuget](https://img.shields.io/nuget/v/LinqKit.Core) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Core)](https://www.nuget.org/packages/LinqKit.Core) | - | <ul><li>net35</li><li>net40</li><li>net45 and up</li><li>.NETPortable Profile</li><li>netstandard1.3</li><li>netstandard2.0</li><li>netstandard2.1</li><li>uap10</li><li>.NET 10.0</li></ul>|
-| LinqKit.EntityFramework | [![Nuget](https://img.shields.io/nuget/v/LinqKit.EntityFramework) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.EntityFramework)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework<ul><li>≥ 6.2.0 (net45)</li><li>≥ 6.3.0 (netstandard2.1) | <ul><li>net45 and up</li><li>netstandard2.1</li></ul> |
+| LinqKit | [![Nuget](https://img.shields.io/nuget/v/LinqKit) ![Nuget](https://img.shields.io/nuget/dt/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework<ul><li>≥ 6.5.1</li></ul> | <ul><li>net462</li><li>netstandard2.1</li><li>.NET 8.0</li><li>.NET 10.0</li></ul> |
+| LinqKit.Core | [![Nuget](https://img.shields.io/nuget/v/LinqKit.Core) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Core)](https://www.nuget.org/packages/LinqKit.Core) | - | <ul><li>net462</li><li>netstandard2.0</li><li>netstandard2.1</li><li>.NET 8.0</li><li>.NET 10.0</li></ul>|
+| LinqKit.EntityFramework | [![Nuget](https://img.shields.io/nuget/v/LinqKit.EntityFramework) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.EntityFramework)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework<ul><li>≥ 6.5.1</li></ul> | <ul><li>net462</li><li>netstandard2.1</li><li>.NET 8.0</li><li>.NET 10.0</li></ul> |
 | LinqKit.Microsoft.EntityFrameworkCore 1 | [![Nuget](https://img.shields.io/badge/nuget-v1.3.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/1.3.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 1.1.1</li></ul> | <ul><li>net451</li><li>netstandard1.3</li></ul>|
 | LinqKit.Microsoft.EntityFrameworkCore 2 | [![Nuget](https://img.shields.io/badge/nuget-v2.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/2.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 2.0.1</li></ul> | <ul><li>netstandard2.0</li></ul> |
 | LinqKit.Microsoft.EntityFrameworkCore 3 | [![Nuget](https://img.shields.io/badge/nuget-v3.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/3.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 3.0.1 (netstandard2.0)</li><li>≥ 3.0.0 (netstandard2.1) | <ul><li>netstandard2.0</li><li>netstandard2.1</li></ul>|
 | LinqKit.Microsoft.EntityFrameworkCore 5 | [![Nuget](https://img.shields.io/badge/nuget-v5.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/5.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 5.0.0</li></ul> | <ul><li>netstandard2.1</li></ul>|
 | LinqKit.Microsoft.EntityFrameworkCore 6 | [![Nuget](https://img.shields.io/badge/nuget-v6.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/6.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 6.0.0</li></ul> | <ul><li>.NET 6.0</li></ul>|
 | LinqKit.Microsoft.EntityFrameworkCore 7 | [![Nuget](https://img.shields.io/badge/nuget-v7.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/7.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 7.0.0</li></ul> | <ul><li>.NET 6.0</li><li>.NET 7.0</li></ul>|
-| LinqKit.Microsoft.EntityFrameworkCore 8 | [![Nuget](https://img.shields.io/badge/nuget-v8.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/8.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 8.0.0</li></ul> | <ul><li>.NET 8.0</li></ul>|
-| LinqKit.Microsoft.EntityFrameworkCore 9 | [![Nuget](https://img.shields.io/badge/nuget-v9.0.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/9.0.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 9.0.0</li></ul> | <ul><li>.NET 8.0</li><li>.NET 9.0</li></ul>|
-| LinqKit.Microsoft.EntityFrameworkCore 10 | [![Nuget](https://img.shields.io/badge/nuget-v10.0.0-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/10.0.0) | Microsoft.EntityFrameworkCore<ul><li>≥ 10.0.0</li></ul> | <ul><li>.NET 8.0</li><li>.NET 9.0</li><li>.NET 10.0</li></ul>|
-| LinqKit.Z.EntityFramework.Classic | [![Nuget](https://img.shields.io/nuget/v/LinqKit.Z.EntityFramework.Classic) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Z.EntityFramework.Classic)](https://www.nuget.org/packages/LinqKit.Z.EntityFramework.Classic) | Z.EntityFramework.Classic<ul><li>≥ 7.2.36</li></ul> | <ul><li>net40</li><li>net45</li><li>netstandard2.0</li></ul>|
+| LinqKit.Microsoft.EntityFrameworkCore 8 | [![Nuget](https://img.shields.io/badge/nuget-v8.1.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/8.1.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 8.0.11</li></ul> | <ul><li>.NET 8.0</li></ul>|
+| LinqKit.Microsoft.EntityFrameworkCore 9 | [![Nuget](https://img.shields.io/badge/nuget-v9.0.6-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/9.0.6) | Microsoft.EntityFrameworkCore<ul><li>≥ 9.0.0</li></ul> | <ul><li>.NET 8.0</li></ul>|
+| LinqKit.Microsoft.EntityFrameworkCore 10 | [![Nuget](https://img.shields.io/badge/nuget-v10.0.0-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/10.0.0) | Microsoft.EntityFrameworkCore<ul><li>≥ 10.0.0</li></ul> | <ul><li>.NET 10.0</li></ul>|
+| LinqKit.Z.EntityFramework.Classic | [![Nuget](https://img.shields.io/nuget/v/LinqKit.Z.EntityFramework.Classic) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Z.EntityFramework.Classic)](https://www.nuget.org/packages/LinqKit.Z.EntityFramework.Classic) | Z.EntityFramework.Classic<ul><li>≥ 7.2.36</li></ul> | <ul><li>net462</li><li>netstandard2.0</li></ul>|
+
+The Microsoft.EntityFrameworkCore 1 to 7 packages above are earlier releases for out-of-support EF Core versions; they are no longer built from this repository.
+
+### Dropped frameworks (LinqKit 1.4, LinqKit.Core 1.3, LinqKit.Microsoft.EntityFrameworkCore 8.2 / 9.1 / 10.1)
+
+These releases build only for frameworks that are still supported. Older targets were removed:
+
+- .NET Framework 3.5, 4.0 and 4.5 (net35, net40, net45): the minimum is now .NET Framework 4.6.2.
+- Portable class libraries (portable-net40/net45), UWP (uap10.0) and netstandard1.3.
+- The net9.0 build of LinqKit.Microsoft.EntityFrameworkCore 9; .NET 9 projects use its net8.0 build.
+
+Projects that still target a removed framework can stay on the previous releases: LinqKit and LinqKit.EntityFramework 1.3.11, LinqKit.Core and LinqKit.Z.EntityFramework.Classic 1.2.11, LinqKit.Microsoft.EntityFrameworkCore 8.1.x, 9.0.x and 10.0.x.
 
 
 Table of Contents
@@ -707,7 +719,7 @@ Permission has been granted to have this repo be the official source for this pr
 Contributing
 =======
 Just send PullRequests to this repository.
-To compile the whole solution you may need .NET Core and UAP installed.
+To compile the whole solution you need the .NET 10 SDK (see global.json); the .NET 8 tests also need the .NET 8 runtime.
 
 License
 =======

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Xunit;
-#if !(NET35 || WINDOWS_APP || NETSTANDARD || PORTABLE40 || UAP)
+#if !NETSTANDARD
 using System.Runtime.CompilerServices;
 #endif
 
@@ -149,13 +149,14 @@ namespace LinqKit.Tests.Net452
             return criteria2.Expand().ToString();
         }
 
+        // Enumerable.Contains is spelled out: C# 14 would otherwise bind array.Contains to the span overload (op_Implicit) in expression trees.
         private int[] _possibleValues = new int[] { 1, 2, 3 };
 
         [Fact]
         public void ExpressionCombiner_ExpressionAsVariable_UsedAsParam()
         {
             Expression<Func<Tuple<int, string>, int>> valueExpr = x => x.Item1;
-            Expression<Func<Tuple<int, string>, bool>> criteria = x => _possibleValues.Contains(valueExpr.Invoke(x));
+            Expression<Func<Tuple<int, string>, bool>> criteria = x => Enumerable.Contains(_possibleValues, valueExpr.Invoke(x));
 
             Assert.Equal(
                 "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
@@ -167,7 +168,7 @@ namespace LinqKit.Tests.Net452
         [Fact]
         public void ExpressionCombiner_ExpressionAsField_UsedAsParam()
         {
-            Expression<Func<Tuple<int, string>, bool>> criteria = x => _possibleValues.Contains(_ExpressionAsVariable_UsedAsParam_valueExpr.Invoke(x));
+            Expression<Func<Tuple<int, string>, bool>> criteria = x => Enumerable.Contains(_possibleValues, _ExpressionAsVariable_UsedAsParam_valueExpr.Invoke(x));
 
             Assert.Equal(
                 "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
@@ -179,7 +180,7 @@ namespace LinqKit.Tests.Net452
         [Fact]
         public void ExpressionCombiner_ExpressionAsProperty_UsedAsParam()
         {
-            Expression<Func<Tuple<int, string>, bool>> criteria = x => _possibleValues.Contains(_ExpressionAsProperty_UsedAsParam_valueExpr.Invoke(x));
+            Expression<Func<Tuple<int, string>, bool>> criteria = x => Enumerable.Contains(_possibleValues, _ExpressionAsProperty_UsedAsParam_valueExpr.Invoke(x));
 
             Assert.Equal(
                 "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
@@ -196,7 +197,7 @@ namespace LinqKit.Tests.Net452
 
         private string ExpressionAsParam_UsedAsParam_Method(Expression<Func<Tuple<int, string>, int>> valueExpr)
         {
-            Expression<Func<Tuple<int, string>, bool>> criteria = x => _possibleValues.Contains(valueExpr.Invoke(x));
+            Expression<Func<Tuple<int, string>, bool>> criteria = x => Enumerable.Contains(_possibleValues, valueExpr.Invoke(x));
 
             return criteria.Expand().ToString();
         }

@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<Authors>Stef Heyenrath</Authors>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
     <LangVersion>latest</LangVersion>
 		<AssemblyName>LinqKit.Microsoft.EntityFrameworkCore9.Tests</AssemblyName>
 		<PackageId>LinqKit.Microsoft.EntityFrameworkCore9.Tests</PackageId>
@@ -25,13 +25,13 @@
 	<ItemGroup>
 		<PackageReference Include="FluentAssertions" Version="5.10.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-		<PackageReference Include="Moq" Version="4.8.1" />
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+		<PackageReference Include="Moq" Version="4.20.72" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="xunit" Version="2.9.3" />
 	</ItemGroup>
 
 </Project>

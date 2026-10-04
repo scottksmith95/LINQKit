@@ -67,7 +67,6 @@ namespace LinqKit
             return ExtensionsCore.Invoke(expr, arg1, arg2, arg3, arg4);
         }
 
-#if !(NET35 || NET40)
         /// <summary>LinqKit: Compile and invoke</summary>
         [PublicAPI]
         public static TResult InvokeEF<T1, T2, T3, T4, T5, TResult>(
@@ -174,7 +173,6 @@ namespace LinqKit
         {
             return ExtensionsCore.Invoke(expr, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16);
         }
-#endif
     }
 }
 #endif

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Authors>Stef Heyenrath</Authors>
+		<TargetFrameworks>net48;net8.0;net10.0</TargetFrameworks>
+		<AssemblyName>LinqKit.EntityFramework.Tests</AssemblyName>
+		<PackageId>LinqKit.EntityFramework.Tests</PackageId>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\LinqKit.Tests.Shared\*.cs" />
+	</ItemGroup>
+
+	<!-- The EF6 database tests attach a LocalDB file (AttachDbFilename), which System.Data.SqlClient supports only on .NET Framework. -->
+	<ItemGroup Condition=" '$(TargetFrameworkIdentifier)' != '.NETFramework' ">
+		<Compile Remove="DbAsyncTests.cs;Entity.cs;TestContext.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\LinqKit.EntityFramework\LinqKit.EntityFramework.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="EntityFramework" Version="6.5.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+		<PackageReference Include="Moq" Version="4.20.72" />
+		<PackageReference Include="xunit" Version="2.9.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+</Project>

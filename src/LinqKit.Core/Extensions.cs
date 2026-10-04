@@ -49,14 +49,14 @@ namespace LinqKit
                 return query;
             }
 
-#if !(NET35 || NOEF || NOASYNCPROVIDER)
+#if !NOEF
             return ExpandableQueryFactory<T>.Create(query, queryOptimizer);
 #else
             return new ExpandableQuery<T>(query, queryOptimizer);
 #endif
         }
 
-#if !(NET35 || NOEF || NOASYNCPROVIDER)
+#if !NOEF
         private static class ExpandableQueryFactory<T>
         {
             public static readonly Func<IQueryable<T>, Func<Expression, Expression>, ExpandableQuery<T>> Create;

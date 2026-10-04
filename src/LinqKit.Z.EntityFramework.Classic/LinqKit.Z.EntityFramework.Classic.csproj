@@ -2,11 +2,11 @@
   <Import Project="../../version.xml" />
 
   <PropertyGroup>
-    <Version>1.2.$(PatchVersion)</Version>
+    <Version>1.3.$(PatchVersion)</Version>
     <Description>LinqKit.Z.EntityFramework.Classic contains extensions for LINQ to SQL and Z.EntityFramework.Classic. Include(...) and IAsync are supported.</Description>
     <AssemblyTitle>LinqKit for Z.EntityFramework.Classic with Include(...) and IAsync support.</AssemblyTitle>
     <Authors>Stef Heyenrath</Authors>
-    <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <DefineConstants>$(DefineConstants);EF</DefineConstants>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>LinqKit.Z.EntityFramework.Classic</AssemblyName>
@@ -18,6 +18,7 @@
     <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -27,14 +28,6 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' or '$(Configuration)' == 'ReleaseForGithubActions' ">
     <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' != 'net40' ">
-    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <DefineConstants>$(DefineConstants);NOASYNCPROVIDER</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

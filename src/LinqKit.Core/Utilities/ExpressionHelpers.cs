@@ -51,11 +51,7 @@ namespace LinqKit.Utilities
 
         public static ParameterExpression CreateParameterExpression(Type type)
         {
-#if NET35
-            return Expression.Parameter(type, null);
-#else
             return Expression.Parameter(type);
-#endif
         }
     }
 }

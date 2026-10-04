@@ -1,4 +1,4 @@
-﻿#if EFCORE3 || EFCORE5 || EFCORE6 || EFCORE7
+﻿#if EFCORE
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -71,17 +71,11 @@ namespace LinqKit
             public override string LogFragment
                 => ExtensionName;
 
-#if EFCORE6 || EFCORE7
             public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo info)
                 => true;
 
             public override int GetServiceProviderHashCode()
                 => ExtensionName.GetHashCode();
-#else
-
-            public override long GetServiceProviderHashCode()
-                => ExtensionName.GetHashCode();
-#endif
 
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
             {
