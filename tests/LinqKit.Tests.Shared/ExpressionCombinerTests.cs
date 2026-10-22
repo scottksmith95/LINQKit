@@ -241,6 +241,7 @@ namespace LinqKit.Tests.Net452
         public void ExpandProcessesInvokeAsMethodGroupForPredicateDelegate()
         {
             Expression<Func<int, bool>> filter = p => p > 1000;
+            // Array.Exists takes System.Predicate<T>
             Expression<Func<int[], bool>> anyMeetsFilter = xs => Array.Exists(xs, filter.Invoke);
 
             Assert.Equal("xs => Exists(xs, p => (p > 1000))", anyMeetsFilter.Expand().ToString());
