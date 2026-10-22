@@ -125,9 +125,14 @@ namespace LinqKit
                 && methodInfo.Name == nameof(ExtensionsCore.Invoke)
                 && methodInfo.DeclaringType == typeof(ExtensionsCore))
             {
-                var target = methodCall.Arguments[1];
+                var target = EvaluateTarget(methodCall.Arguments[1]);
+                if (target == null)
+                {
+                    throw new InvalidOperationException($"Invoke cannot evaluate LambdaExpression from '{methodCall.Arguments[1]}'. Ensure that your function/property/member returns LambdaExpression");
+                }
 
-                return Visit(target);
+                var lambda = (LambdaExpression)Visit(target);
+                return Expression.Lambda(node.Type, lambda.Body, lambda.Parameters);
             }
 
             return base.VisitUnary(node);

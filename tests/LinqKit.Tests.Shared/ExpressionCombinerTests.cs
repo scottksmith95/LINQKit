@@ -229,12 +229,66 @@ namespace LinqKit.Tests.Net452
         }
 
         [Fact]
-        public void ExpandProcessesInvokeAsMethodGroup()
+        public void ExpandProcessesInvokeAsMethodGroupForFuncDelegate()
         {
             Expression<Func<int, bool>> filter = p => p > 1000;
             Expression<Func<int[], bool>> anyMeetsFilter = x => x.Any(filter.Invoke);
 
             Assert.Equal("x => x.Any(p => (p > 1000))", anyMeetsFilter.Expand().ToString());
+        }
+
+        [Fact]
+        public void ExpandProcessesInvokeAsMethodGroupForPredicateDelegate()
+        {
+            Expression<Func<int, bool>> filter = p => p > 1000;
+            Expression<Func<int[], bool>> anyMeetsFilter = xs => Array.Exists(xs, filter.Invoke);
+
+            Assert.Equal("xs => Exists(xs, p => (p > 1000))", anyMeetsFilter.Expand().ToString());
+        }
+
+        private readonly Expression<Func<int, bool>> _methodGroupField = p => p > 1000;
+
+        [Fact]
+        public void ExpandProcessesInvokeAsMethodGroupFromField()
+        {
+            Expression<Func<int[], bool>> anyMeetsFilter = x => x.Any(_methodGroupField.Invoke);
+
+            Assert.Equal("x => x.Any(p => (p > 1000))", anyMeetsFilter.Expand().ToString());
+        }
+
+        [Fact]
+        public void ExpandProcessesInvokeAsMethodGroupForPredicateDelegateFromField()
+        {
+            Expression<Func<int[], bool>> anyMeetsFilter = xs => Array.Exists(xs, _methodGroupField.Invoke);
+
+            Assert.Equal("xs => Exists(xs, p => (p > 1000))", anyMeetsFilter.Expand().ToString());
+        }
+
+        private Expression<Func<int, bool>> MethodGroupProperty => p => p > 1000;
+
+        [Fact]
+        public void ExpandProcessesInvokeAsMethodGroupFromProperty()
+        {
+            Expression<Func<int[], bool>> anyMeetsFilter = x => x.Any(MethodGroupProperty.Invoke);
+
+            Assert.Equal("x => x.Any(p => (p > 1000))", anyMeetsFilter.Expand().ToString());
+        }
+
+        [Fact]
+        public void ExpandProcessesInvokeAsMethodGroupForPredicateDelegateFromProperty()
+        {
+            Expression<Func<int[], bool>> anyMeetsFilter = xs => Array.Exists(xs, MethodGroupProperty.Invoke);
+
+            Assert.Equal("xs => Exists(xs, p => (p > 1000))", anyMeetsFilter.Expand().ToString());
+        }
+
+        [Fact]
+        public void ExpandProcessesInvokeAsMethodGroupWithContravariantDelegate()
+        {
+            Expression<Func<object, bool>> filter = value => value != null;
+            Expression<Func<string[], bool>> anyMeetsFilter = xs => Array.Exists(xs, filter.Invoke);
+
+            Assert.Equal("xs => Exists(xs, value => (value != null))", anyMeetsFilter.Expand().ToString());
         }
 
         private string ConstExpressionString<TResult>(Expression<Func<TResult>> expr)
