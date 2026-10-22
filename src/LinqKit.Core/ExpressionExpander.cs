@@ -28,7 +28,10 @@ namespace LinqKit
             if (target.NodeType == ExpressionType.Call)
             {
                 var mc = (MethodCallExpression)target;
-                if (mc.Method.Name == "Compile" && mc.Method.DeclaringType?.GetGenericTypeDefinition() == typeof(Expression<>))
+                if (mc.Method.Name == "Compile"
+                    && mc.Method.DeclaringType != null
+                    && mc.Method.DeclaringType.GetTypeInfo().IsGenericType
+                    && mc.Method.DeclaringType.GetGenericTypeDefinition() == typeof(Expression<>))
                 {
                     target = mc.Object;
                 }

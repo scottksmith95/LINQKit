@@ -78,6 +78,10 @@ namespace LinqKit
             {
                 _predicate = Predicate.Not();
             }
+            else if (UseDefaultExpression)
+            {
+                Start(DefaultExpression.Not());
+            }
             else
             {
                 Start(x => false);

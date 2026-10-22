@@ -34,12 +34,7 @@ namespace LinqKit
 
             protected override Expression VisitParameter(ParameterExpression node)
             {
-                if (node == _oldParameter)
-                {
-                    return _newParameter;
-                }
-
-                return base.VisitParameter(node);
+                return node == _oldParameter ? _newParameter : base.VisitParameter(node);
             }
         }
 

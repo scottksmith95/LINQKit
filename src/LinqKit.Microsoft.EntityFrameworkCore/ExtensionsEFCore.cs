@@ -17,7 +17,7 @@ namespace LinqKit
         [PublicAPI]
         public static IQueryable<T> AsExpandableEFCore<T>(this IQueryable<T> query)
         {
-            return AsExpandableEFCore(query, LinqKitExtension.QueryOptimizer);
+            return Extensions.AsExpandable(query);
         }
 
         /// <summary>

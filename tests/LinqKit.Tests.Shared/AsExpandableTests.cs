@@ -44,8 +44,29 @@ namespace LinqKit.Tests.Net452
             // Assert
             Assert.Equal(1, result);
 
-            // Verify
-            optimizerMock.Verify(o => o(It.IsAny<Expression>()), Times.Once);
+            // Verify: the optimizer runs when Where builds the query and again when First executes it
+            optimizerMock.Verify(o => o(It.IsAny<Expression>()), Times.Exactly(2));
+        }
+
+        [Fact]
+        public void AsExpandableEF_Without_Optimizer_Keeps_The_Custom_Optimizer()
+        {
+            // Assign
+            var optimizerMock = new Mock<Func<Expression, Expression>>();
+            optimizerMock.Setup(o => o(It.IsAny<Expression>())).Returns((Expression e) => e);
+
+            var expandable = new[] { 1, 2 }.AsQueryable().AsExpandableEF(optimizerMock.Object);
+
+            // Act
+            var again = expandable.AsExpandableEF();
+            int result = again.Where(i => i > 1).First();
+
+            // Assert
+            Assert.Same(expandable, again);
+            Assert.Equal(2, result);
+
+            // Verify: the optimizer runs when Where builds the query and again when First executes it
+            optimizerMock.Verify(o => o(It.IsAny<Expression>()), Times.Exactly(2));
         }
 
         Expression<Func<int, int>> FunctionToExpand()

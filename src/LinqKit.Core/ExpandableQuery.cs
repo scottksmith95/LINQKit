@@ -37,12 +37,16 @@ namespace LinqKit
     {
         readonly IQueryProvider _provider;
         readonly IQueryable<T> _inner;
+        readonly Func<Expression, Expression> _queryOptimizer;
 
         internal IQueryable<T> InnerQuery => _inner; // Original query, that we're wrapping
+
+        internal Func<Expression, Expression> QueryOptimizer => _queryOptimizer;
 
         internal ExpandableQuery(IQueryable<T> inner, Func<Expression, Expression> queryOptimizer)
         {
             _inner = inner;
+            _queryOptimizer = queryOptimizer;
 #if EFCORE
             var queryCompiler = GetQueryCompiler(inner);
 #endif
@@ -114,7 +118,8 @@ namespace LinqKit
             }
             if (query.Provider is EntityQueryProvider)
             {
-                return (IQueryCompiler)typeof(EntityQueryProvider).GetField("_queryCompiler", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(query.Provider);
+                var queryCompilerField = typeof(EntityQueryProvider).GetField("_queryCompiler", BindingFlags.Instance | BindingFlags.NonPublic);
+                return queryCompilerField?.GetValue(query.Provider) as IQueryCompiler;
             }
             return null;
         }
@@ -132,12 +137,12 @@ namespace LinqKit
 #if EFCORE
         public IQueryable<T> Include<TProperty>(Expression<Func<T, TProperty>> navigationPropertyPath)
         {
-            return ((IQueryable<T>)InnerQuery.Include(navigationPropertyPath)).AsExpandable();
+            return ((IQueryable<T>)InnerQuery.Include(navigationPropertyPath)).AsExpandable(QueryOptimizer);
         }
 #else
         public IQueryable<T> Include(string path)
         {
-            return InnerQuery.Include(path).AsExpandable();
+            return InnerQuery.Include(path).AsExpandable(QueryOptimizer);
         }
 #endif
     }
@@ -186,12 +191,14 @@ namespace LinqKit
         {
             var expanded = expression.Expand();
             var optimized = _queryOptimizer(expanded);
-            return _query.InnerQuery.Provider.CreateQuery<TElement>(optimized).AsExpandable();
+            return _query.InnerQuery.Provider.CreateQuery<TElement>(optimized).AsExpandable(_queryOptimizer);
         }
 
         IQueryable IQueryProvider.CreateQuery(Expression expression)
         {
-            return _query.InnerQuery.Provider.CreateQuery(expression.Expand());
+            var expanded = expression.Expand();
+            var optimized = _queryOptimizer(expanded);
+            return _query.InnerQuery.Provider.CreateQuery(optimized);
         }
 
         TResult IQueryProvider.Execute<TResult>(Expression expression)
