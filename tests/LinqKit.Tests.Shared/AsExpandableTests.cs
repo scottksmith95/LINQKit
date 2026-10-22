@@ -44,8 +44,8 @@ namespace LinqKit.Tests.Net452
             // Assert
             Assert.Equal(1, result);
 
-            // Verify
-            optimizerMock.Verify(o => o(It.IsAny<Expression>()), Times.Once);
+            // Verify: the optimizer runs when Where builds the query and again when First executes it
+            optimizerMock.Verify(o => o(It.IsAny<Expression>()), Times.Exactly(2));
         }
 
         Expression<Func<int, int>> FunctionToExpand()
