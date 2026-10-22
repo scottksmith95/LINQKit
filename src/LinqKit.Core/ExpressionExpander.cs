@@ -113,7 +113,7 @@ namespace LinqKit
 
         protected override Expression VisitUnary(UnaryExpression node)
         {
-            // When Invoke is called via a method group (e.g. x => x.Any(filter.Invoke)), it will be wrapped in Convert(CreateDelegate(...)).
+            // When Invoke is called via a method group (e.g. x => x.Any(filter.Invoke)), it will be wrapped in Convert(CreateDelegate(...)). Unwrap it.
             if (
                 node.NodeType == ExpressionType.Convert
                 && node.Operand is MethodCallExpression methodCall
