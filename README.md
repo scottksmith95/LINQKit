@@ -25,6 +25,8 @@
 
 The Microsoft.EntityFrameworkCore 1 to 7 packages above are earlier releases for out-of-support EF Core versions; they are no longer built from this repository.
 
+If you reference only LinqKit.Core, `AsExpandable()` is in the `LinqKit.Core` namespace: add `using LinqKit.Core;` beside `using LinqKit;`. With the LinqKit, LinqKit.EntityFramework or EF Core packages, `using LinqKit;` is enough; adding `using LinqKit.Core;` there makes `AsExpandable()` ambiguous.
+
 ### Dropped frameworks (LinqKit 1.4, LinqKit.Core 1.3, LinqKit.Microsoft.EntityFrameworkCore 8.2 / 9.1 / 10.1)
 
 These releases build only for frameworks that are still supported. Older targets were removed:
@@ -250,6 +252,25 @@ criteria = p => criteria.Invoke(p) || p.Description.Contains("a");
 ```
 
 That last line recursively calls itself and the original predicate (p.Price>1000) is lost!
+
+## Expressions with several parameters
+
+Invoke takes up to 16 arguments, so a reusable rule can compare two entities. The arguments can be range variables, `let` values or captured local variables, and an invoked expression can appear in `where`, `let`, `select` and join conditions:
+
+```csharp
+Expression<Func<Customer, Purchase, bool>> sameCurrency = (c, p) => c.Currency == p.Currency;
+Expression<Func<Purchase, Channel, bool>> soldVia = (p, channel) => p.Channel == channel;
+var web = Channel.Web;
+
+var query =
+  from c in data.Customers.AsExpandable()
+  from p in data.Purchases
+  where p.CustomerID == c.ID && soldVia.Invoke(p, web)
+  let status = !sameCurrency.Invoke(c, p) ? "currency differs" : "ok"
+  select new { c.Name, p.ID, status };
+```
+
+Expressions built at runtime with the `Expression` factory methods (for example from rules read from configuration) are invoked the same way.
 
 PredicateBuilder
 =======
@@ -708,6 +729,8 @@ var res = qry2.ToList();
 ```
 
 Note that if your IQueryable has dynamic parameters from other IQueryables, it can still be complex.
+
+The optimizer evaluates captured variables of primitive types, such as `int` and `bool`. A captured `string` stays a query parameter, so `name == null || c.Name == name` is not simplified.
 
 Original source and author
 =======
