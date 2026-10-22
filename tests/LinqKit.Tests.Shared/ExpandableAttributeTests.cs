@@ -256,7 +256,7 @@ namespace LinqKit.Tests.Net452
         public string Description { get; set; }
         [NotMapped]
         [Expandable(nameof(CodeAndDescriptionExpr))]
-        public string CodeAndDescription => Code + " / " + Description;
+        public string CodeAndDescription => $"{Code} / {Description}";
         internal static Expression<Func<MyEntity, string>> CodeAndDescriptionExpr() => e => e.Code + " / " + e.Description;
     }
     

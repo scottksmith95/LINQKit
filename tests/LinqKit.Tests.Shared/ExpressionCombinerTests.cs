@@ -159,7 +159,7 @@ namespace LinqKit.Tests.Net452
             Expression<Func<Tuple<int, string>, bool>> criteria = x => Enumerable.Contains(_possibleValues, valueExpr.Invoke(x));
 
             Assert.Equal(
-                "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
+                $"x => {ConstExpressionString(() => _possibleValues)}.Contains(x.Item1)",
                 criteria.Expand().ToString());
         }
 
@@ -171,7 +171,7 @@ namespace LinqKit.Tests.Net452
             Expression<Func<Tuple<int, string>, bool>> criteria = x => Enumerable.Contains(_possibleValues, _ExpressionAsVariable_UsedAsParam_valueExpr.Invoke(x));
 
             Assert.Equal(
-                "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
+                $"x => {ConstExpressionString(() => _possibleValues)}.Contains(x.Item1)",
                 criteria.Expand().ToString());
         }
 
@@ -183,7 +183,7 @@ namespace LinqKit.Tests.Net452
             Expression<Func<Tuple<int, string>, bool>> criteria = x => Enumerable.Contains(_possibleValues, _ExpressionAsProperty_UsedAsParam_valueExpr.Invoke(x));
 
             Assert.Equal(
-                "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
+                $"x => {ConstExpressionString(() => _possibleValues)}.Contains(x.Item1)",
                 criteria.Expand().ToString());
         }
 
@@ -191,7 +191,7 @@ namespace LinqKit.Tests.Net452
         public void ExpressionCombiner_ExpressionAsParam_UsedAsParam()
         {
             Assert.Equal(
-                "x => " + ConstExpressionString(() => _possibleValues) + ".Contains(x.Item1)",
+                $"x => {ConstExpressionString(() => _possibleValues)}.Contains(x.Item1)",
                 ExpressionAsParam_UsedAsParam_Method(x => x.Item1));
         }
 

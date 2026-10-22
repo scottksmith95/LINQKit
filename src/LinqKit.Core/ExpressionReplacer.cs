@@ -18,12 +18,7 @@ namespace LinqKit
 
         public override Expression Visit(Expression exp)
         {
-            if (exp != null && _replaceMap.TryGetValue(exp, out var replacement))
-            {
-                return replacement;
-            }
-
-            return base.Visit(exp);
+            return exp != null && _replaceMap.TryGetValue(exp, out var replacement) ? replacement : base.Visit(exp);
         }
 
         public static Expression Replace(Expression expr, Expression fromExpr, Expression toExpr)
