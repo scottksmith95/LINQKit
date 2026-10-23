@@ -292,6 +292,52 @@ namespace LinqKit.Tests.Net452
             Assert.Equal("xs => Exists(xs, value => (value != null))", anyMeetsFilter.Expand().ToString());
         }
 
+        [Fact]
+        public void AsExpandableRunsInvokeAsMethodGroup()
+        {
+            Expression<Func<int, bool>> filter = p => p > 1000;
+            var rows = new[] { new[] { 1 }, new[] { 2000 } }.AsQueryable();
+
+            Assert.Equal(1, rows.AsExpandable().Count(x => x.Any(filter.Invoke)));
+        }
+
+        private static Expression<Func<int, bool>> Same(Expression<Func<int, bool>> expression) => expression;
+
+        [Fact]
+        public void ExpandProcessesInvokeAsMethodGroupWhoseReceiverHasItsOwnLambda()
+        {
+            // the receiver's own lambda parameter `p` is bound inside the receiver, so the receiver can be evaluated
+            Expression<Func<int[], bool>> anyMeetsFilter = x => x.Any(Same(p => p > 1000).Invoke);
+
+            Assert.Equal("x => x.Any(p => (p > 1000))", anyMeetsFilter.Expand().ToString());
+        }
+
+        [Fact]
+        public void ExpandLeavesAnOpenInvokeMethodGroupAsADelegate()
+        {
+            // an open `ExtensionsCore.Invoke` group takes the expression as its first argument: nothing to inline
+            Expression<Func<Expression<Func<int, bool>>[], bool[]>> results =
+                filters => filters.Select<Expression<Func<int, bool>>, bool>(ExtensionsCore.Invoke).ToArray();
+            var filtersByIndex = new Expression<Func<int, bool>>[] { i => i > 0, i => i == 1 };
+
+            Assert.Equal(new[] { false, true }, results.Expand().Compile()(filtersByIndex));
+        }
+
+        private class FilteredValues
+        {
+            public int[] Values = { 1, 2000 };
+            public Expression<Func<int, bool>> Filter = p => p > 1000;
+        }
+
+        [Fact]
+        public void ExpandLeavesAnInvokeMethodGroupOnALambdaParameterAsADelegate()
+        {
+            // `row.Filter` is only known when the outer lambda runs
+            Expression<Func<FilteredValues[], bool>> anyRowMeetsItsFilter = rows => rows.Any(row => row.Values.Any(row.Filter.Invoke));
+
+            Assert.True(anyRowMeetsItsFilter.Expand().Compile()(new[] { new FilteredValues() }));
+        }
+
         private string ConstExpressionString<TResult>(Expression<Func<TResult>> expr)
         {
             return expr.ToString().Substring(6);

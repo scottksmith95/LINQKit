@@ -123,7 +123,12 @@ namespace LinqKit
                 && methodCall.Arguments.Count == 2
                 && methodInfoConst.Value is MethodInfo methodInfo
                 && methodInfo.Name == nameof(ExtensionsCore.Invoke)
-                && methodInfo.DeclaringType == typeof(ExtensionsCore))
+                && methodInfo.DeclaringType == typeof(ExtensionsCore)
+                // The delegate must be closed over the expression (an open `ExtensionsCore.Invoke` group takes
+                // the expression as its first argument), and the expression must not depend on a lambda
+                // parameter of the outer tree; other shapes stay delegates.
+                && node.Type.GetMethod(nameof(Action.Invoke))?.GetParameters().Length == methodInfo.GetParameters().Length - 1
+                && !FreeParameterFinder.Mentions(methodCall.Arguments[1]))
             {
                 var target = EvaluateTarget(methodCall.Arguments[1]);
                 if (target == null)
@@ -305,6 +310,37 @@ namespace LinqKit
             }
 
             return input;
+        }
+
+        /// <summary>
+        /// Finds a parameter that no lambda inside the expression binds: such an expression can only be
+        /// evaluated where the outer lambda runs, not while expanding.
+        /// </summary>
+        private sealed class FreeParameterFinder : ExpressionVisitor
+        {
+            readonly HashSet<ParameterExpression> _bound = new HashSet<ParameterExpression>();
+            bool _found;
+
+            public static bool Mentions(Expression expression)
+            {
+                var finder = new FreeParameterFinder();
+                finder.Visit(expression);
+                return finder._found;
+            }
+
+            protected override Expression VisitLambda<T>(Expression<T> node)
+            {
+                var added = node.Parameters.Where(_bound.Add).ToList();
+                Visit(node.Body);
+                added.ForEach(p => _bound.Remove(p));
+                return node;
+            }
+
+            protected override Expression VisitParameter(ParameterExpression node)
+            {
+                _found |= !_bound.Contains(node);
+                return node;
+            }
         }
     }
 }
