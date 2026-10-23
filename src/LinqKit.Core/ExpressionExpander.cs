@@ -111,6 +111,38 @@ namespace LinqKit
             return false;
         }
 
+        protected override Expression VisitUnary(UnaryExpression node)
+        {
+            // When Invoke is called via a method group (e.g. x => x.Any(filter.Invoke)), it will be wrapped in Convert(CreateDelegate(...)). Unwrap it.
+            if (
+                node.NodeType == ExpressionType.Convert
+                && node.Operand is MethodCallExpression methodCall
+                && methodCall.Method.Name == "CreateDelegate"
+                && methodCall.Method.DeclaringType == typeof(MethodInfo)
+                && methodCall.Object is ConstantExpression methodInfoConst
+                && methodCall.Arguments.Count == 2
+                && methodInfoConst.Value is MethodInfo methodInfo
+                && methodInfo.Name == nameof(ExtensionsCore.Invoke)
+                && methodInfo.DeclaringType == typeof(ExtensionsCore)
+                // The delegate must be closed over the expression (an open `ExtensionsCore.Invoke` group takes
+                // the expression as its first argument), and the expression must not depend on a lambda
+                // parameter of the outer tree; other shapes stay delegates.
+                && node.Type.GetMethod(nameof(Action.Invoke))?.GetParameters().Length == methodInfo.GetParameters().Length - 1
+                && !FreeParameterFinder.Mentions(methodCall.Arguments[1]))
+            {
+                var target = EvaluateTarget(methodCall.Arguments[1]);
+                if (target == null)
+                {
+                    throw new InvalidOperationException($"Invoke cannot evaluate LambdaExpression from '{methodCall.Arguments[1]}'. Ensure that your function/property/member returns LambdaExpression");
+                }
+
+                var lambda = (LambdaExpression)Visit(target);
+                return Expression.Lambda(node.Type, lambda.Body, lambda.Parameters);
+            }
+
+            return base.VisitUnary(node);
+        }
+
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
             if (m.Method.Name == nameof(ExtensionsCore.Invoke) && m.Method.DeclaringType == typeof(ExtensionsCore))
@@ -278,6 +310,37 @@ namespace LinqKit
             }
 
             return input;
+        }
+
+        /// <summary>
+        /// Finds a parameter that no lambda inside the expression binds: such an expression can only be
+        /// evaluated where the outer lambda runs, not while expanding.
+        /// </summary>
+        private sealed class FreeParameterFinder : ExpressionVisitor
+        {
+            readonly HashSet<ParameterExpression> _bound = new HashSet<ParameterExpression>();
+            bool _found;
+
+            public static bool Mentions(Expression expression)
+            {
+                var finder = new FreeParameterFinder();
+                finder.Visit(expression);
+                return finder._found;
+            }
+
+            protected override Expression VisitLambda<T>(Expression<T> node)
+            {
+                var added = node.Parameters.Where(_bound.Add).ToList();
+                Visit(node.Body);
+                added.ForEach(p => _bound.Remove(p));
+                return node;
+            }
+
+            protected override Expression VisitParameter(ParameterExpression node)
+            {
+                _found |= !_bound.Contains(node);
+                return node;
+            }
         }
     }
 }
