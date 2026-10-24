@@ -1,3 +1,8 @@
+# 1.4.1 (24 October 2026)
+- [#230](https://github.com/scottksmith95/LINQKit/pull/230) - Handle `Invoke` being called via a method group [feature] contributed by [simonmckenzie](https://github.com/simonmckenzie)
+- [#232](https://github.com/scottksmith95/LINQKit/pull/232) - Fix correctness and crash issues [feature] contributed by [Thorium](https://github.com/Thorium)
+- [#233](https://github.com/scottksmith95/LINQKit/pull/233) - Test and docs updates [test] contributed by [Thorium](https://github.com/Thorium)
+
 # 1.4.0 (04 October 2026)
 - [#231](https://github.com/scottksmith95/LINQKit/pull/231) - LINQKit to support .NET Framework 4.6.2+, netstandard2.0/2.1, .NET 8 and .NET 10. [feature] contributed by [Thorium](https://github.com/Thorium)
 
