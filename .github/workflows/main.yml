@@ -27,6 +27,7 @@ jobs:
        dotnet-version: | 
           8.0.x
           10.0.x
+          11.0.x
      
     - name: Build Projects
       run: |
@@ -36,6 +37,7 @@ jobs:
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore8/LinqKit.Microsoft.EntityFrameworkCore8.csproj -c $env:CONFIGURATION
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore9/LinqKit.Microsoft.EntityFrameworkCore9.csproj -c $env:CONFIGURATION
         dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore10/LinqKit.Microsoft.EntityFrameworkCore10.csproj -c $env:CONFIGURATION
+        dotnet build ./src/LinqKit.Microsoft.EntityFrameworkCore11/LinqKit.Microsoft.EntityFrameworkCore11.csproj -c $env:CONFIGURATION
         dotnet build ./src/LinqKit.Z.EntityFramework.Classic/LinqKit.Z.EntityFramework.Classic.csproj -c $env:CONFIGURATION
     
     - name: Run Tests
@@ -46,3 +48,4 @@ jobs:
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore8.Tests -c $env:CONFIGURATION
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore9.Tests -c $env:CONFIGURATION
         dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore10.Tests -c $env:CONFIGURATION
+        dotnet test ./tests/LinqKit.Microsoft.EntityFrameworkCore11.Tests -c $env:CONFIGURATION

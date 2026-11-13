@@ -16,7 +16,7 @@ environment:
 install:
 - ps: |
     $ErrorActionPreference = 'Stop'
-    $dotnetVersion = '10.0.100'
+    $dotnetVersion = '11.0.100'
     Write-Host "Installing .NET SDK $dotnetVersion..."
     iex "& { $(irm https://dot.net/v1/dotnet-install.ps1) } -Version $dotnetVersion -InstallDir '$Env:ProgramFiles\dotnet'"
 
@@ -38,6 +38,7 @@ test_script:
 - dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore8.Tests -c %CONFIGURATION%
 - dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore9.Tests -c %CONFIGURATION%
 - dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore10.Tests -c %CONFIGURATION%
+- dotnet test .\tests\LinqKit.Microsoft.EntityFrameworkCore11.Tests -c %CONFIGURATION%
 
 
 #artifacts:
