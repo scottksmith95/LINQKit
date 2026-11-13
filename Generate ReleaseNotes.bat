@@ -1,6 +1,6 @@
 rem https://github.com/StefH/GitHubReleaseNotes
 
-SET version=1.4.1
+SET version=1.4.2
 
 GitHubReleaseNotes --output ReleaseNotes.md --skip-empty-releases --exclude-labels wontfix question invalid documentation --version %version% --token %GH_TOKEN%
 

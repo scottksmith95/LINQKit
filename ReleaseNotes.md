@@ -1,3 +1,8 @@
+# 1.4.2 (13 November 2026)
+- [#235](https://github.com/scottksmith95/LINQKit/pull/235) - Add support for .Net 11 [feature] contributed by [RIE-UPPERSOLUTIONS](https://github.com/RIE-UPPERSOLUTIONS)
+- [#229](https://github.com/scottksmith95/LINQKit/issues/229) - Using Invoke via a method group produces a different expanded expression to an explicit call to Invoke,  `(x =&gt; func.Invoke(x))` [bug]
+- [#234](https://github.com/scottksmith95/LINQKit/issues/234) - Add support for .Net 11 [feature]
+
 # 1.4.1 (24 October 2026)
 - [#230](https://github.com/scottksmith95/LINQKit/pull/230) - Handle `Invoke` being called via a method group [feature] contributed by [simonmckenzie](https://github.com/simonmckenzie)
 - [#232](https://github.com/scottksmith95/LINQKit/pull/232) - Fix correctness and crash issues [feature] contributed by [Thorium](https://github.com/Thorium)
