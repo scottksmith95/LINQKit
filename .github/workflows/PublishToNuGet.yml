@@ -6,13 +6,18 @@ on:
 jobs:
   publish:
     name: Build, Pack, and Publish
-    runs-on: windows-2022
+    runs-on: windows-latest
     permissions:
       id-token: write # enable GitHub OIDC token issuance for this job
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+    - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+      with:
+       dotnet-version: | 
+          11.0.x
 
     - name: Build projects
       shell: pwsh
